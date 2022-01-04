@@ -1,0 +1,86 @@
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: helvetica neue, arial, hiragino sans gb, stheiti,
+        wenquanyi micro hei, \5fae\8f6f\96c5\9ed1, \5b8b\4f53, sans-serif;
+    color: #333333;
+    font-size: 14px;
+}
+pre,
+code {
+    font-family: "Iosevka Medium", HYZhengYuan, "JetBrains Mono", monaco, menlo,
+        consolas, courier new, courier, monospace;
+    line-height: 1.8;
+}
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: auto;
+}
+li {
+    list-style: none;
+}
+/*滚动条样式*/
+div::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width: 5px;
+    /*高宽分别对应横竖滚动条的尺寸*/
+    height: 5px;
+}
+div::-webkit-scrollbar-thumb {
+    /* 滚动条里面小方块 */
+    background: #eee;
+    border-radius: 5px;
+}
+div::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    background: #fff;
+}
+/*滚动条样式*/
+html::-webkit-scrollbar {
+    display: none;
+    /*滚动条整体样式*/
+    width: 7px !important;
+    /*高宽分别对应横竖滚动条的尺寸*/
+    height: 7px !important;
+}
+html::-webkit-scrollbar-thumb {
+    /* 滚动条里面小方块 */
+    background: #b6b6b6 !important;
+}
+html::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    background: #fff !important;
+}
+._title {
+    font-size: 22px;
+    font-weight: 400;
+    color: #1f2f3d;
+    margin: 55px 0 20px;
+}
+._descript {
+    font-size: 14px;
+    font-weight: 400;
+    color: #5e6d82;
+}
+.simple-title {
+    margin: 55px 0px 20px;
+    font-weight: 400;
+    color: #1f2f3d;
+    font-size: 22px;
+}
+.hljs-comment,
+.hljs-quote {
+    color: #00a09c !important;
+    font-style: normal !important;
+}
