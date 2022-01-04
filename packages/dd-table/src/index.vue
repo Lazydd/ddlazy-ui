@@ -15,11 +15,16 @@
                 >
                     <td
                         v-for="tbody in tableStore"
-                        :style="`width:${tbody.width}`"
-                        :class="{ isFix: thead[tbody.fixed] }"
+                        :style="tbody.width ? `width:${tbody.width}` : ''"
+                        :class="[tbody.fixed ? 'isFix' : '']"
                         :key="tbody.prop"
                     >
-                        {{ thead[tbody.prop] }}
+                        <span v-if="tbody.prop">
+                            {{ thead[tbody.prop] }}
+                        </span>
+                        <span v-else>
+                            <slot :scope="tbody"></slot>
+                        </span>
                     </td>
                 </tr>
             </tbody>
@@ -47,6 +52,7 @@ export default {
     data() {
         const slotList = this.$slots.default;
         let vnodeObj = {};
+        console.log(this.$slots);
         slotList.map((vnode, index) => {
             vnodeObj = vnode.componentOptions.propsData;
             vnodeObj["index"] = index;
@@ -77,7 +83,7 @@ export default {
     table {
         width: 100%;
         th {
-            background-color: #fff;
+            // background-color: #fff;
             -webkit-touch-callout: none;
             -moz-user-select: none; /*火狐*/
             -webkit-user-select: none; /*webkit浏览器*/
@@ -88,6 +94,7 @@ export default {
         td,
         th {
             padding: 15px 10px;
+            // background-color: #fff;
             border-bottom: 1px solid #ebeef5;
         }
         .dd-table_cell {
@@ -110,6 +117,7 @@ export default {
         position: sticky;
         left: 0px;
         background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
     }
 }
 </style>

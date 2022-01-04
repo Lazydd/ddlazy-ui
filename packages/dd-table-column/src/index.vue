@@ -13,17 +13,26 @@ export default {
         },
         fixed: {
             type: String,
-            default: "left",
         },
     },
     render: function (h) {
+        let isFixed = {};
+        if (this.fixed) {
+            isFixed.position = "sticky";
+            isFixed[this.fixed] = "0px";
+            isFixed["background-color"] = "#ffffff";
+            isFixed["box-shadow"] = "0 0 10px rgba(0,0,0,.12)";
+        }
         return h(
             "th",
             {
-                style: {
-                    "text-align": "left",
-                    color: "#909399",
-                },
+                style: [
+                    isFixed,
+                    {
+                        "text-align": "left",
+                        color: "#909399",
+                    },
+                ],
             },
             [
                 h(

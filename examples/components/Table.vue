@@ -1,22 +1,17 @@
 <template>
-    <div style="width:400px">
-        <dd-table stripe :data="tableData">
-            <dd-table-column
-                fixed
-                prop="date"
-                label="日期"
-                width="200"
-            ></dd-table-column>
-            <dd-table-column
-                prop="name"
-                label="姓名"
-                width="300"
-            ></dd-table-column>
-            <dd-table-column
-                prop="address"
-                label="地址"
-                width="400"
-            ></dd-table-column>
+    <div>
+        <dd-table :data="tableData">
+            <dd-table-column prop="date" label="日期"></dd-table-column>
+            <dd-table-column prop="name" label="姓名"></dd-table-column>
+            <dd-table-column prop="address" label="地址"></dd-table-column>
+            <dd-table-column label="操作">
+                <template slot-scope="scope">
+                    <div>
+                        <span @click="a(scope.row)">是</span>
+                        <span>否</span>
+                    </div>
+                </template>
+            </dd-table-column>
         </dd-table>
     </div>
 </template>
@@ -50,6 +45,11 @@ export default {
             ],
         };
     },
+    methods:{
+        a(item){
+            console.log(item);
+        }
+    }
 };
 </script>
 
