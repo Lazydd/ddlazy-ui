@@ -1,8 +1,9 @@
 <template>
-    <div>
-        <dd-table :data="tableData">
+    <div style="width:400px">
+        <dd-table stripe :data="tableData">
             <dd-table-column
-                prop="data"
+                fixed
+                prop="date"
                 label="日期"
                 width="200"
             ></dd-table-column>

@@ -1,15 +1,3 @@
-<template>
-    <div class="dd-table-column">
-        <thead>
-            <tr>
-                <td>
-                    {{ label }}
-                </td>
-            </tr>
-        </thead>
-    </div>
-</template>
-
 <script>
 export default {
     name: "ddTableColumn",
@@ -23,6 +11,32 @@ export default {
         width: {
             type: [Number, String],
         },
+        fixed: {
+            type: String,
+            default: "left",
+        },
+    },
+    render: function (h) {
+        return h(
+            "th",
+            {
+                style: {
+                    "text-align": "left",
+                    color: "#909399",
+                },
+            },
+            [
+                h(
+                    "div",
+                    {
+                        style: {
+                            width: this.width + "px",
+                        },
+                    },
+                    this.label
+                ),
+            ]
+        );
     },
 };
 </script>
