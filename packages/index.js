@@ -1,22 +1,26 @@
 import ddButton from "./dd-botton";
 import ddIcon from "./dd-icon";
+import ddLink from "./dd-link";
 import ddBlock from "./dd-block";
 import ddDescribe from "./dd-describe";
 import ddRow from "./dd-row";
 import ddCol from "./dd-col";
 import ddTable from "./dd-table";
 import ddTableColumn from "./dd-table-column";
+import ddRadio from "./dd-radio";
 import "./css/global.css";
 
 const components = [
     ddButton,
     ddIcon,
+    ddLink,
     ddBlock,
     ddDescribe,
     ddRow,
     ddCol,
     ddTable,
     ddTableColumn,
+    ddRadio,
 ];
 
 const install = function (Vue) {
@@ -34,12 +38,14 @@ export {
     install,
     ddButton,
     ddIcon,
+    ddLink,
     ddBlock,
     ddDescribe,
     ddRow,
     ddCol,
     ddTable,
     ddTableColumn,
+    ddRadio,
 };
 
 export default {
@@ -50,8 +56,10 @@ export default {
     ddBlock,
     ddDescribe,
     ddIcon,
+    ddLink,
     ddRow,
     ddCol,
     ddTable,
     ddTableColumn,
+    ddRadio,
 };

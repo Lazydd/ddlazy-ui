@@ -1,15 +1,13 @@
 <template>
     <div>
-        <dd-table :data="tableData">
+        <dd-table :data="tableData" stripe>
             <dd-table-column prop="date" label="日期"></dd-table-column>
             <dd-table-column prop="name" label="姓名"></dd-table-column>
             <dd-table-column prop="address" label="地址"></dd-table-column>
             <dd-table-column label="操作">
                 <template slot-scope="scope">
-                    <div>
-                        <span @click="a(scope.row)">是</span>
-                        <span>否</span>
-                    </div>
+                   <dd-button size="small" @click="a(scope.row)">编辑</dd-button>
+                    <dd-button size="small" type="danger">删除</dd-button>
                 </template>
             </dd-table-column>
         </dd-table>
@@ -45,12 +43,16 @@ export default {
             ],
         };
     },
-    methods:{
-        a(item){
+    methods: {
+        a(item) {
             console.log(item);
-        }
-    }
+        },
+    },
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.dd-button {
+    margin: 0 5px;
+}
+</style>

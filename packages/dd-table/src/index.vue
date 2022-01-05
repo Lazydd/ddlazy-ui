@@ -3,7 +3,7 @@
         <table cellspacing="0">
             <thead>
                 <tr>
-                    <slot></slot>
+                    <slot> </slot>
                 </tr>
             </thead>
             <tbody>
@@ -17,13 +17,15 @@
                         v-for="tbody in tableStore"
                         :style="tbody.width ? `width:${tbody.width}` : ''"
                         :class="[tbody.fixed ? 'isFix' : '']"
-                        :key="tbody.prop"
+                        :key="tbody.index"
                     >
                         <span v-if="tbody.prop">
                             {{ thead[tbody.prop] }}
                         </span>
                         <span v-else>
-                            <slot :scope="tbody"></slot>
+                            <slot :row="tbody.slot.context.tableData[i]">
+                                <column-body :vnode="tbody.slot"></column-body>
+                            </slot>
                         </span>
                     </td>
                 </tr>
@@ -33,9 +35,13 @@
 </template>
 
 <script>
+import ColumnBody from "./body";
 let vnodeArr = [];
 export default {
     name: "ddTable",
+    components: {
+        ColumnBody,
+    },
     props: {
         data: {
             type: Array,
@@ -52,14 +58,15 @@ export default {
     data() {
         const slotList = this.$slots.default;
         let vnodeObj = {};
-        console.log(this.$slots);
         slotList.map((vnode, index) => {
             vnodeObj = vnode.componentOptions.propsData;
             vnodeObj["index"] = index;
+            vnodeObj["slot"] = vnode;
             vnodeArr.push(vnodeObj);
         });
         return {
             tableStore: [],
+            list: [1, 2, 3],
         };
     },
     created() {

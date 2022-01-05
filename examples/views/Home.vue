@@ -97,7 +97,7 @@ export default {
                     children: [
                         {
                             label: "Radio 单选框",
-                            path: "/component/quickstart",
+                            path: "#/component/radio",
                         },
                         {
                             label: "Checkbox 多选框",

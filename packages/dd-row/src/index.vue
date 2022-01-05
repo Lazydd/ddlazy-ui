@@ -7,7 +7,8 @@ export default {
             {
                 class: ["dd-row", { isflex: this.type === "flex" }],
                 style: {
-                    "justify-content": this.justify,
+                    "justify-content":
+                        this.justify == "end" ? "flex-end" : this.justify,
                     "align-items": this.align,
                     "margin-left": "-" + this.gutter / 2 + "px",
                     "margin-right": "-" + this.gutter / 2 + "px",
@@ -37,6 +38,7 @@ export default {
 
 <style lang="less" scoped>
 .dd-row {
+    display: flex;
     width: 100%;
     height: auto;
 }

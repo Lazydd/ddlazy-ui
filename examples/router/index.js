@@ -8,6 +8,7 @@ const Button = () => import("@/components/Button.vue");
 const Link = () => import("@/components/Link.vue");
 const Table = () => import("@/components/Table.vue");
 const Tag = () => import("@/components/Tag.vue");
+const Radio = () => import("@/components/Radio.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -50,6 +51,11 @@ const routes = [
                 path: "/component/tag",
                 name: "Tag",
                 component: Tag,
+            },
+            {
+                path: "/component/radio",
+                name: "Radio",
+                component: Radio,
             },
         ],
     },
