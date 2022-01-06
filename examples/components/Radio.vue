@@ -8,10 +8,10 @@
                 <dd-radio v-model="radio" label="2">备选项2</dd-radio>
             </template>
         </dd-block>
-        <dd-block title="禁用状态" :code="code1">
+        <dd-block title="禁用状态" :code="code2">
             <template #source>
-                <dd-radio disabled v-model="radio" label="1">备选项1</dd-radio>
-                <dd-radio disabled v-model="radio" label="2">备选项2</dd-radio>
+                <dd-radio v-model="radio1" label="禁用" disabled>备选项1</dd-radio>
+                <dd-radio v-model="radio1" label="选中且禁用" disabled>备选项2</dd-radio>
             </template>
         </dd-block>
     </div>
@@ -22,8 +22,16 @@ export default {
     name: "Radio",
     data() {
         return {
-            code1: ``,
             radio: "1",
+            radio1: "选中且禁用",
+            code1: `
+                <dd-radio v-model="radio" label="1">备选项1</dd-radio>
+                <dd-radio v-model="radio" label="2">备选项2</dd-radio>
+            `,
+            code2: `
+                <dd-radio v-model="radio1" label="禁用" disabled>备选项1</dd-radio>
+                <dd-radio v-model="radio1" label="选中且禁用" disabled>备选项2</dd-radio>
+            `,
         };
     },
 };

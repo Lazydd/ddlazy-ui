@@ -1,10 +1,14 @@
 <template>
-    <div class="dd-radio" :disabled="disabled" @click="disabled ? null : aa()">
+    <div
+        class="dd-radio"
+        :disabled="disabled"
+        @click="disabled ? null : updateRadio()"
+    >
         <span
             class="radio_inner"
             :class="[!disabled ? 'radio_inner_hover' : '']"
         >
-            <span :class="[isActive ? 'radio_origina' : null]"></span>
+            <span :class="[label == value ? 'radio_origina' : null]"></span>
         </span>
         <span class="radio__label"><slot /></span>
     </div>
@@ -18,7 +22,7 @@ export default {
             type: String,
         },
         value: {
-            type: String,
+            type: [String, Number],
         },
         disabled: {
             type: Boolean,
@@ -31,9 +35,11 @@ export default {
         };
     },
     methods: {
-        aa() {
-            this.isActive = true;
-            this.$emit("input", this.value);
+        updateRadio() {
+            if (!this.isActive) {
+                this.isActive = !this.isActive;
+            }
+            this.$emit("input", this.label);
         },
     },
 };
