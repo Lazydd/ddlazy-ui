@@ -8,6 +8,7 @@ import ddCol from "./dd-col";
 import ddTable from "./dd-table";
 import ddTableColumn from "./dd-table-column";
 import ddRadio from "./dd-radio";
+import ddRadioGroup from "./dd-radio-group";
 import "./css/global.css";
 
 const components = [
@@ -21,6 +22,7 @@ const components = [
     ddTable,
     ddTableColumn,
     ddRadio,
+    ddRadioGroup,
 ];
 
 const install = function (Vue) {
@@ -46,6 +48,7 @@ export {
     ddTable,
     ddTableColumn,
     ddRadio,
+    ddRadioGroup,
 };
 
 export default {
@@ -62,4 +65,5 @@ export default {
     ddTable,
     ddTableColumn,
     ddRadio,
+    ddRadioGroup,
 };

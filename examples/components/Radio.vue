@@ -14,6 +14,16 @@
                 <dd-radio v-model="radio1" label="选中且禁用" disabled>备选项2</dd-radio>
             </template>
         </dd-block>
+        <dd-block title="单选框组" :code="code3">
+            <template #source>
+                <dd-radio-group v-model="radio2">
+                    <dd-radio  label="1" >备选项1</dd-radio>
+                    <dd-radio  label="2" >备选项2</dd-radio>
+                    <dd-radio  label="3" >备选项3</dd-radio>
+                    <dd-radio  label="4" >备选项4</dd-radio>
+                </dd-radio-group>
+            </template>
+        </dd-block>
     </div>
 </template>
 
@@ -24,6 +34,7 @@ export default {
         return {
             radio: "1",
             radio1: "选中且禁用",
+            radio2: 1,
             code1: `
                 <dd-radio v-model="radio" label="1">备选项1</dd-radio>
                 <dd-radio v-model="radio" label="2">备选项2</dd-radio>
@@ -32,6 +43,14 @@ export default {
                 <dd-radio v-model="radio1" label="禁用" disabled>备选项1</dd-radio>
                 <dd-radio v-model="radio1" label="选中且禁用" disabled>备选项2</dd-radio>
             `,
+            code3:`
+                <dd-radio-group v-model="radio2">
+                    <dd-radio  label="1" >备选项1</dd-radio>
+                    <dd-radio  label="2" >备选项2</dd-radio>
+                    <dd-radio  label="3" >备选项3</dd-radio>
+                    <dd-radio  label="4" >备选项4</dd-radio>
+                </dd-radio-group>
+            `
         };
     },
 };

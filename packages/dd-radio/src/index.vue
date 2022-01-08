@@ -8,7 +8,13 @@
             class="radio_inner"
             :class="[!disabled ? 'radio_inner_hover' : '']"
         >
-            <span :class="[label == value ? 'radio_origina' : null]"></span>
+            <span
+                :class="[
+                    (group ? groupActive : value) == label
+                        ? 'radio_origina'
+                        : null,
+                ]"
+            ></span>
         </span>
         <span class="radio__label"><slot /></span>
     </div>
@@ -31,15 +37,37 @@ export default {
     },
     data() {
         return {
+            group: null,
             isActive: false,
+            groupActive: this.$parent.value,
         };
     },
     methods: {
         updateRadio() {
+            let parent = this.isGroup();
             if (!this.isActive) {
+                // parent ? !parent.isActive : !this.isActive;
                 this.isActive = !this.isActive;
             }
-            this.$emit("input", this.label);
+            parent
+                ? parent.$emit("input", this.label)
+                : this.$emit("input", this.label);
+        },
+        isGroup() {
+            let parent = this.$parent;
+            while (parent && parent.$options.name != "ddRadioGroup") {
+                parent = parent.$parent;
+            }
+            this.group = parent ? true : false;
+            return parent;
+        },
+    },
+    created(){
+        this.isGroup()
+    },
+    watch: {
+        "$parent.value"(val) {
+            this.groupActive = val;
         },
     },
 };
