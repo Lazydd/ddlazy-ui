@@ -1,19 +1,17 @@
 <template>
     <div
-        class="dd-radio"
+        class="dd-radio-button"
         :disabled="isDisabled ? isDisabled : disabled"
         @click="(isDisabled ? isDisabled : disabled) ? null : updateRadio()"
     >
-        <span :class="['radio_inner', !isDisabled ? 'radio_inner_hover' : '']">
-            <span
-                :class="[
-                    (group ? groupActive : value) == label
-                        ? 'radio_origina'
-                        : null,
-                ]"
-            ></span>
-        </span>
-        <span class="radio__label">
+        <span
+            :class="[
+                'radio__label',
+                (group ? groupActive : value) == label ? 'radio_origina' : null,
+                !isDisabled ? 'radio_inner_hover' : '',
+                size,
+            ]"
+        >
             <slot v-if="$slots.default" />
             <span v-else>{{ label }}</span>
         </span>
@@ -22,7 +20,7 @@
 
 <script>
 export default {
-    name: "ddRadio",
+    name: "ddRadioButton",
     props: {
         label: {
             type: String,
@@ -41,6 +39,7 @@ export default {
             isActive: false,
             groupActive: this.$parent.value,
             isDisabled: false,
+            size: this.$parent.size,
         };
     },
     methods: {
@@ -59,9 +58,9 @@ export default {
                 parent = parent.$parent;
             }
             this.group = parent ? true : false;
-            this.isDisabled = this.group
-                ? this.$parent.disabled
-                : this.disabled;
+            this.isDisabled = !this.group
+                ? this.disabled
+                : this.$parent.disabled;
             return parent;
         },
     },
@@ -77,65 +76,82 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.dd-radio {
+.dd-radio-button {
     display: inline-block;
     color: #606266;
     font-weight: 500;
     line-height: 1;
-    margin-right: 30px;
+    cursor: pointer;
     &:last-child {
         margin-right: 0;
     }
-    cursor: pointer;
-    .radio_inner {
+
+    .radio_origina {
+        color: #fff !important;
+        background-color: #409eff !important;
+        border-color: #409eff !important;
+    }
+    .radio_inner_hover {
+        &:hover {
+            color: #409eff;
+        }
+    }
+    .radio__label {
+        background: #fff;
         border: 1px solid #dcdfe6;
-        border-radius: 100%;
-        width: 14px;
-        height: 14px;
-        background-color: #fff;
+
+        font-weight: 500;
+        border-left: 0;
+        color: #606266;
         position: relative;
         vertical-align: bottom;
         cursor: pointer;
         display: inline-block;
+        text-align: center;
         box-sizing: border-box;
-        .radio_origina {
-            display: inline-block;
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-            border: 4px solid #409eff;
-            border-radius: 100%;
-        }
-    }
-    .radio_inner_hover {
-        &:hover {
-            border-color: #409eff;
-        }
-    }
-    .radio__label {
-        padding-left: 10px;
+        padding: 12px 20px;
         font-size: 14px;
     }
-
+    &:first-child .radio__label {
+        border-left: 1px solid #dcdfe6;
+        border-radius: 4px 0 0 4px;
+    }
+    &:last-child .radio__label {
+        border-radius: 0 4px 4px 0;
+    }
     &[disabled] {
         cursor: not-allowed !important;
         color: #c0c4cc !important;
-        border-color: #c0c4cc !important;
         span {
+            background-image: none !important;
+            box-shadow: none !important;
+            background-color: #fff !important;
+            border-color: #ebeef5 !important;
             cursor: not-allowed !important;
+            color: #c0c4cc !important;
         }
-        .radio_inner {
-            .radio_origina {
-                border-color: #c0c4cc !important;
+        .radio_origina {
+            background-color: #f2f6fc !important;
+            border-color: #ebeef5 !important;
+            color: #c0c4cc !important;
+            background-image: none !important;
+            span {
+                background-color: #f2f6fc !important;
             }
         }
     }
 
-    &[size] {
-        font-size: 50px;
+    .medium {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    .small {
+        padding: 9px 15px;
+        font-size: 12px;
+    }
+    .mini {
+        padding: 7px 15px;
+        font-size: 12px;
     }
 }
 </style>

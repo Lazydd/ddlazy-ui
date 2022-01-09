@@ -9,6 +9,7 @@ import ddTable from "./dd-table";
 import ddTableColumn from "./dd-table-column";
 import ddRadio from "./dd-radio";
 import ddRadioGroup from "./dd-radio-group";
+import ddRadioButton from "./dd-radio-button";
 import "./css/global.css";
 
 const components = [
@@ -23,6 +24,7 @@ const components = [
     ddTableColumn,
     ddRadio,
     ddRadioGroup,
+    ddRadioButton,
 ];
 
 const install = function (Vue) {
@@ -49,6 +51,7 @@ export {
     ddTableColumn,
     ddRadio,
     ddRadioGroup,
+    ddRadioButton,
 };
 
 export default {
@@ -66,4 +69,5 @@ export default {
     ddTableColumn,
     ddRadio,
     ddRadioGroup,
+    ddRadioButton,
 };

@@ -24,14 +24,14 @@
         </dd-block>
         <dd-block title="下划线" :code="code3">
             <template #source>
-                <dd-link :underline="false">默认链接</dd-link>
-                <dd-link>默认链接</dd-link>
+                <dd-link :underline="false">有下划线</dd-link>
+                <dd-link>无下划线</dd-link>
             </template>
         </dd-block>
         <dd-block title="图标" :code="code4">
             <template #source>
-                <dd-link icon="icon-map">默认链接</dd-link>
-                <dd-link>默认链接
+                <dd-link icon="icon-map">定位</dd-link>
+                <dd-link>点赞
                   	<dd-icon icon="icon-good"></dd-icon>
                 </dd-link>
             </template>

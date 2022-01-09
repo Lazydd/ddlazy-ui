@@ -11,6 +11,14 @@ export default {
         value: {
             type: [String, Number],
         },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
+        size: {
+            type: String,
+            default: "big",
+        },
     },
 };
 </script>
