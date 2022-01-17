@@ -101,7 +101,7 @@ export default {
                         },
                         {
                             label: "Checkbox 多选框",
-                            path: "/component/quickstart",
+                            path: "#/component/checkbox",
                         },
                         {
                             label: "Input 输入框",

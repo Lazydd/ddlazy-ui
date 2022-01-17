@@ -1,24 +1,20 @@
 <template>
     <div
-        class="dd-radio"
+        :class="['dd-checkbox', value ? 'is_checked' : '']"
         :disabled="isDisabled ? isDisabled : disabled"
         @click="(isDisabled ? isDisabled : disabled) ? null : updateRadio()"
     >
         <span
             :class="[
                 'radio_inner',
-                !isDisabled && (group ? groupActive : value) != label
-                    ? 'radio_inner_hover'
-                    : '',
+                value ? 'is_checked' : '',
+                /*   !isDisabled && (group ? groupActive : value) != label */
+                !disabled ? 'radio_inner_hover' : '',
             ]"
         >
-            <span
-                :class="[
-                    (group ? groupActive : value) == label
-                        ? 'radio_origina'
-                        : null,
-                ]"
-            ></span>
+            <span :class="[value ? 'radio_origina' : null]">
+                <dd-icon v-if="value" icon="icon-seleted"></dd-icon>
+            </span>
         </span>
         <span class="radio__label">
             <slot v-if="$slots.default" />
@@ -29,13 +25,13 @@
 
 <script>
 export default {
-    name: "ddRadio",
+    name: "ddCheckbox",
     props: {
         label: {
             type: String,
         },
         value: {
-            type: [String, Number],
+            type: [String, Number, Boolean],
         },
         disabled: {
             type: Boolean,
@@ -56,13 +52,18 @@ export default {
             if (!this.isActive) {
                 this.isActive = !this.isActive;
             }
-            parent
-                ? parent.$emit("input", this.label)
-                : this.$emit("input", this.label);
+            if (parent) {
+                let arr=[]
+                arr=[...parent.value]
+                console.log(arr);
+                // parent.$emit("input", this.label);
+            } else {
+                this.$emit("input", !this.value);
+            }
         },
         isGroup() {
             let parent = this.$parent;
-            while (parent && parent.$options.name != "ddRadioGroup") {
+            while (parent && parent.$options.name != "ddCheckboxGroup") {
                 parent = parent.$parent;
             }
             this.group = parent ? true : false;
@@ -84,24 +85,30 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.dd-radio {
+.dd-checkbox {
     display: inline-block;
     color: #606266;
     font-weight: 500;
     line-height: 1;
     margin-right: 30px;
+    cursor: pointer;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     &:last-child {
         margin-right: 0;
     }
-    cursor: pointer;
+    .is_checked {
+        color: #409eff !important;
+        border-color: #409eff !important;
+        background-color: #409eff !important;
+    }
     .radio_inner {
         border: 1px solid #dcdfe6;
-        border-radius: 100%;
+        border-radius: 2px;
         width: 14px;
         height: 14px;
+        color: #fff;
         background-color: #fff;
         position: relative;
         vertical-align: bottom;
@@ -116,8 +123,10 @@ export default {
             top: 0;
             bottom: 0;
             margin: auto;
-            border: 4px solid #409eff;
-            border-radius: 100%;
+            color: #fff;
+            background-color: #409eff;
+            transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46),
+                background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
         }
     }
     .radio_inner_hover {
@@ -133,14 +142,16 @@ export default {
     &[disabled] {
         cursor: not-allowed !important;
         color: #c0c4cc !important;
-        border-color: #c0c4cc !important;
+
         span {
             cursor: not-allowed !important;
         }
         .radio_inner {
+            border-color: #c0c4cc !important;
             background-color: #f5f7fa !important;
             .radio_origina {
-                border-color: #c0c4cc !important;
+                background-color: #f5f7fa !important;
+                color: #c0c4cc !important;
             }
         }
     }
@@ -148,5 +159,8 @@ export default {
     &[size] {
         font-size: 50px;
     }
+}
+.is_checked {
+    color: #409eff;
 }
 </style>
