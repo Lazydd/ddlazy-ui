@@ -4,6 +4,7 @@
         :disabled="isDisabled ? isDisabled : disabled"
         @click="(isDisabled ? isDisabled : disabled) ? null : updateRadio()"
     >
+        {{ isActive }}
         <span
             :class="[
                 'radio_inner',
@@ -12,8 +13,14 @@
                 !disabled ? 'radio_inner_hover' : '',
             ]"
         >
-            <span :class="[value ? 'radio_origina' : null]">
-                <dd-icon v-if="value" icon="icon-seleted"></dd-icon>
+            <span
+                :class="[
+                    !isDisabled && (group ? isActive : value)
+                        ? 'radio_origina'
+                        : null,
+                ]"
+            >
+                <dd-icon icon="icon-seleted"></dd-icon>
             </span>
         </span>
         <span class="radio__label">
@@ -24,6 +31,7 @@
 </template>
 
 <script>
+let newArr = [];
 export default {
     name: "ddCheckbox",
     props: {
@@ -53,10 +61,16 @@ export default {
                 this.isActive = !this.isActive;
             }
             if (parent) {
-                let arr=[]
-                arr=[...parent.value]
-                console.log(arr);
-                // parent.$emit("input", this.label);
+                let arr = [...parent.value];
+                arr.map((item) => {
+                    if (item.indexOf(this.label) == -1) {
+                        newArr = [...arr, this.label];
+                    } else {
+                        newArr = arr.filter((sonItem) => sonItem != item);
+                    }
+                });
+                parent.$emit("input", newArr);
+                // this.isGroupActive();
             } else {
                 this.$emit("input", !this.value);
             }
@@ -67,17 +81,44 @@ export default {
                 parent = parent.$parent;
             }
             this.group = parent ? true : false;
+            // if (this.group) {
+            //     this.isGroupActive();
+            // }
             this.isDisabled = this.group
                 ? this.$parent.disabled
                 : this.disabled;
             return parent;
         },
+        isGroupActive() {
+            console.log(this.groupActive);
+            for (let i = 0; i < this.groupActive.length; i++) {
+                if (this.groupActive[i] === this.label) {
+                    this.isActive = true;
+                    break;
+                } else {
+                    this.isActive = false;
+                    break;
+                }
+            }
+            console.log(this.isActive);
+            // this.groupActive.forEach((item) => {
+            //     if (item === this.label) {
+            //         this.isActive = true;
+            //         break;
+            //     } else {
+            //         this.isActive = false;
+            //         break
+            //     }
+            // });
+        },
     },
     created() {
         this.isGroup();
+        // console.log(this.isActive);
     },
     watch: {
         "$parent.value"(val) {
+            // newArr = val;
             this.groupActive = val;
         },
     },
