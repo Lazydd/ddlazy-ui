@@ -1,23 +1,22 @@
 <template>
     <div
-        :class="['dd-checkbox', group ? isActive : value ? 'is_checked' : '']"
+        :class="[
+            'dd-checkbox',
+            !isDisabled && (group ? isActive : value) ? 'is_checked' : '',
+        ]"
         :disabled="isDisabled ? isDisabled : disabled"
         @click="(isDisabled ? isDisabled : disabled) ? null : updateRadio()"
     >
         <span
             :class="[
                 'radio_inner',
-                group ? isActive : value ? 'is_checked' : '',
+                !isDisabled && (group ? isActive : value) ? 'is_checked' : '',
                 /*   !isDisabled && (group ? groupActive : value) != label */
                 !disabled ? 'radio_inner_hover' : '',
             ]"
         >
             <span
-                :class="[
-                    !isDisabled && (group ? isActive : value)
-                        ? 'radio_origina'
-                        : null,
-                ]"
+                :class="[(group ? isActive : value) ? 'radio_origina' : null]"
             >
                 <dd-icon icon="icon-seleted"></dd-icon>
             </span>
@@ -61,22 +60,25 @@ export default {
             }
             if (parent) {
                 let arr = [...parent.value];
+                let str = this.label ? this.label : this.$slots.default[0].text;
                 if (arr.length) {
                     for (let i = 0; i < arr.length; i++) {
-                        if (arr.indexOf(this.label) == -1) {
-                            newArr = [...arr, this.label];
+                        if (arr.indexOf(str) == -1) {
+                            newArr = [...arr, str];
                             break;
                         } else {
-                            newArr = arr.filter((item) => item !== this.label);
+                            newArr = arr.filter((item) => item !== str);
                             break;
                         }
                     }
                 } else {
-                    newArr = [...arr, this.label];
+                    newArr = [...arr, str];
                 }
                 parent.$emit("input", newArr);
+                parent.change(newArr);
             } else {
                 this.$emit("input", !this.value);
+                this.$emit("change", !this.value);
             }
         },
         isGroup() {
@@ -93,7 +95,10 @@ export default {
         isGroupActive() {
             if (this.groupActive.length) {
                 for (let i = 0; i < this.groupActive.length; i++) {
-                    if (this.groupActive[i] === this.label) {
+                    if (
+                        this.groupActive[i] ===
+                        (this.label ? this.label : this.$slots.default[0].text)
+                    ) {
                         this.isActive = true;
                         break;
                     } else {

@@ -20,6 +20,11 @@ export default {
             default: "big",
         },
     },
+    methods: {
+        change(value) {
+            this.$emit("change", value);
+        },
+    },
 };
 </script>
 

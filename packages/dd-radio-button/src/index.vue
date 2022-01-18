@@ -48,9 +48,13 @@ export default {
             if (!this.isActive) {
                 this.isActive = !this.isActive;
             }
-            parent
-                ? parent.$emit("input", this.label)
-                : this.$emit("input", this.label);
+            if (parent) {
+                parent.$emit("input", this.label);
+                if (this.label != parent.value) parent.change(this.label);
+            } else {
+                this.$emit("input", this.label);
+                this.$emit("change", this.label || undefined);
+            }
         },
         isGroup() {
             let parent = this.$parent;

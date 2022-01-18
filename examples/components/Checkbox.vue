@@ -16,8 +16,8 @@
         <dd-block title="多选框组" :code="code3">
             <template #source>
                 <dd-checkbox-group v-model="checkList">
-                    <dd-checkbox label="复选框A"></dd-checkbox>
-                    <dd-checkbox label="复选框B"></dd-checkbox>
+                    <dd-checkbox>复选框A</dd-checkbox>
+                    <dd-checkbox label="复选框B">复选框B</dd-checkbox>
                     <dd-checkbox label="复选框C"></dd-checkbox>
                     <dd-checkbox disabled label="禁用"></dd-checkbox>
                     <dd-checkbox disabled label="选中且禁用"></dd-checkbox>
@@ -45,11 +45,11 @@ export default {
             `,
             code3: `
                 <dd-checkbox-group v-model="checkList">
-                    <dd-checkbox label="">复选框A</dd-checkbox>
-                    <dd-checkbox label="备选项B"></dd-checkbox>
-                    <dd-checkbox label="备选项C"></dd-checkbox>
-                    <dd-checkbox disabled>禁用</dd-checkbox>
-                    <dd-checkbox disabled>选中且禁用</dd-checkbox>
+                    <dd-checkbox>复选框A</dd-checkbox>
+                    <dd-checkbox label="复选框B">复选框B</dd-checkbox>
+                    <dd-checkbox label="复选框C"></dd-checkbox>
+                    <dd-checkbox disabled label="禁用"></dd-checkbox>
+                    <dd-checkbox disabled label="选中且禁用"></dd-checkbox>
                 </dd-checkbox-group>
 
                 checkList: ["复选框A", "选中且禁用"],

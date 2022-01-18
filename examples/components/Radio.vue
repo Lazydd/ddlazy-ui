@@ -16,13 +16,13 @@
         </dd-block>
         <dd-block title="单选框组" :code="code3">
             <template #source>
-                <dd-radio-group disabled v-model="radio2">
+                <dd-radio-group  disabled v-model="radio2">
                     <dd-radio  label="1" >备选项1</dd-radio>
                     <dd-radio  label="2" >备选项2</dd-radio>
                     <dd-radio  label="3" >备选项3</dd-radio>
                     <dd-radio  label="4" >备选项4</dd-radio>
                 </dd-radio-group>
-                <dd-radio-group v-model="radio3" style="margin-top:20px">
+                <dd-radio-group   v-model="radio3" style="margin-top:20px">
                     <dd-radio disabled  label="1" >备选项1</dd-radio>
                     <dd-radio  label="2" >备选项2</dd-radio>
                     <dd-radio  label="3" >备选项3</dd-radio>
