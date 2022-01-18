@@ -2,7 +2,6 @@
     <div class="page-box">
         <h2 class="_title">Checkbox 多选框</h2>
         <p class="_descript">一组备选项中进行多选</p>
-        {{ checked }}
         <dd-block title="基础用法" :code="code1">
             <template #source>
                 <dd-checkbox v-model="checked">备选项</dd-checkbox>
@@ -14,7 +13,6 @@
                 <dd-checkbox v-model="checked2" disabled>备选项</dd-checkbox>
             </template>
         </dd-block>
-        {{ checkList }}
         <dd-block title="多选框组" :code="code3">
             <template #source>
                 <dd-checkbox-group v-model="checkList">

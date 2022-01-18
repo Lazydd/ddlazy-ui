@@ -1,14 +1,13 @@
 <template>
     <div
-        :class="['dd-checkbox', value ? 'is_checked' : '']"
+        :class="['dd-checkbox', group ? isActive : value ? 'is_checked' : '']"
         :disabled="isDisabled ? isDisabled : disabled"
         @click="(isDisabled ? isDisabled : disabled) ? null : updateRadio()"
     >
-        {{ isActive }}
         <span
             :class="[
                 'radio_inner',
-                value ? 'is_checked' : '',
+                group ? isActive : value ? 'is_checked' : '',
                 /*   !isDisabled && (group ? groupActive : value) != label */
                 !disabled ? 'radio_inner_hover' : '',
             ]"
@@ -50,7 +49,7 @@ export default {
         return {
             group: null,
             isActive: false,
-            groupActive: this.$parent.value,
+            groupActive: this.$parent.value || [],
             isDisabled: false,
         };
     },
@@ -62,15 +61,20 @@ export default {
             }
             if (parent) {
                 let arr = [...parent.value];
-                arr.map((item) => {
-                    if (item.indexOf(this.label) == -1) {
-                        newArr = [...arr, this.label];
-                    } else {
-                        newArr = arr.filter((sonItem) => sonItem != item);
+                if (arr.length) {
+                    for (let i = 0; i < arr.length; i++) {
+                        if (arr.indexOf(this.label) == -1) {
+                            newArr = [...arr, this.label];
+                            break;
+                        } else {
+                            newArr = arr.filter((item) => item !== this.label);
+                            break;
+                        }
                     }
-                });
+                } else {
+                    newArr = [...arr, this.label];
+                }
                 parent.$emit("input", newArr);
-                // this.isGroupActive();
             } else {
                 this.$emit("input", !this.value);
             }
@@ -81,45 +85,34 @@ export default {
                 parent = parent.$parent;
             }
             this.group = parent ? true : false;
-            // if (this.group) {
-            //     this.isGroupActive();
-            // }
             this.isDisabled = this.group
                 ? this.$parent.disabled
                 : this.disabled;
             return parent;
         },
         isGroupActive() {
-            console.log(this.groupActive);
-            for (let i = 0; i < this.groupActive.length; i++) {
-                if (this.groupActive[i] === this.label) {
-                    this.isActive = true;
-                    break;
-                } else {
-                    this.isActive = false;
-                    break;
+            if (this.groupActive.length) {
+                for (let i = 0; i < this.groupActive.length; i++) {
+                    if (this.groupActive[i] === this.label) {
+                        this.isActive = true;
+                        break;
+                    } else {
+                        this.isActive = false;
+                    }
                 }
+            } else {
+                this.isActive = false;
             }
-            console.log(this.isActive);
-            // this.groupActive.forEach((item) => {
-            //     if (item === this.label) {
-            //         this.isActive = true;
-            //         break;
-            //     } else {
-            //         this.isActive = false;
-            //         break
-            //     }
-            // });
         },
     },
     created() {
         this.isGroup();
-        // console.log(this.isActive);
+        this.isGroupActive();
     },
     watch: {
         "$parent.value"(val) {
-            // newArr = val;
             this.groupActive = val;
+            this.isGroupActive();
         },
     },
 };
