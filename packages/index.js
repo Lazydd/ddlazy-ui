@@ -12,6 +12,8 @@ import ddRadioGroup from "./dd-radio-group";
 import ddRadioButton from "./dd-radio-button";
 import ddCheckbox from "./dd-checkbox";
 import ddCheckboxGroup from "./dd-checkbox-group";
+import ddCheckboxButton from "./dd-checkbox-button";
+import ddInput from "./dd-input";
 import "./css/global.css";
 
 const components = [
@@ -29,6 +31,8 @@ const components = [
     ddRadioButton,
     ddCheckbox,
     ddCheckboxGroup,
+    ddCheckboxButton,
+    ddInput,
 ];
 
 const install = function (Vue) {
@@ -58,6 +62,8 @@ export {
     ddRadioButton,
     ddCheckbox,
     ddCheckboxGroup,
+    ddCheckboxButton,
+    ddInput,
 };
 
 export default {
@@ -78,4 +84,6 @@ export default {
     ddRadioButton,
     ddCheckbox,
     ddCheckboxGroup,
+    ddCheckboxButton,
+    ddInput,
 };

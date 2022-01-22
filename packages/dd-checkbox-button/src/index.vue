@@ -1,7 +1,7 @@
 <template>
     <div
         :class="[
-            'dd-checkbox',
+            'dd-checkbox-button',
             !isDisabled && (group ? isActive : value) ? 'is_checked' : '',
         ]"
         :disabled="isDisabled ? isDisabled : disabled"
@@ -10,18 +10,11 @@
         <span
             :class="[
                 'checkbox_inner',
-                !isDisabled && (group ? isActive : value) ? 'is_checked' : '',
-                /*   !isDisabled && (group ? groupActive : value) != label */
-                !disabled ? 'checkbox_inner_hover' : '',
+                (group ? isActive : value) ? 'is_checked' : '',
+                !isDisabled ? 'checkbox_inner_hover' : '',
+                size,
             ]"
         >
-            <span
-                :class="[(group ? isActive : value) ? 'checkbox_origina' : null]"
-            >
-                <dd-icon icon="icon-seleted"></dd-icon>
-            </span>
-        </span>
-        <span class="checkbox__label">
             <slot v-if="$slots.default" />
             <span v-else>{{ label }}</span>
         </span>
@@ -31,7 +24,7 @@
 <script>
 let newArr = [];
 export default {
-    name: "ddCheckbox",
+    name: "ddCheckboxButton",
     props: {
         label: {
             type: String,
@@ -50,6 +43,7 @@ export default {
             isActive: false,
             groupActive: this.$parent.value || [],
             isDisabled: false,
+            size: this.$parent.size,
         };
     },
     methods: {
@@ -124,12 +118,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.dd-checkbox {
+.dd-checkbox-button {
     display: inline-block;
     color: #606266;
     font-weight: 500;
     line-height: 1;
-    margin-right: 30px;
     cursor: pointer;
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -137,70 +130,76 @@ export default {
     &:last-child {
         margin-right: 0;
     }
-    .is_checked {
-        color: #409eff !important;
-        border-color: #409eff !important;
-        background-color: #409eff !important;
-    }
+
     .checkbox_inner {
         border: 1px solid #dcdfe6;
-        border-radius: 2px;
-        width: 14px;
-        height: 14px;
-        color: #fff;
+        padding: 12px 20px;
+        border-left: 0;
         background-color: #fff;
         position: relative;
         vertical-align: bottom;
         cursor: pointer;
         display: inline-block;
         box-sizing: border-box;
-        .checkbox_origina {
-            display: inline-block;
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            margin: auto;
-            color: #fff;
-            background-color: #409eff;
-            transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46),
-                background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
-        }
         transition: all 0.3s;
+    }
+    .is_checked {
+        color: #fff !important;
+        border-color: #409eff !important;
+        background-color: #409eff !important;
+        transition: all 0.3s;
+        border-left-color: #fff !important;
+        border-right-color: #fff !important;
     }
     .checkbox_inner_hover {
         &:hover {
-            border-color: #409eff;
+            color: #409eff;
         }
     }
-    .checkbox__label {
-        padding-left: 10px;
-        font-size: 14px;
+    &:first-child .checkbox_inner {
+        border-left: 1px solid #dcdfe6;
+        border-radius: 4px 0 0 4px;
     }
-
+    &:first-child .is_checked {
+        border-left-color: #409eff !important;
+    }
+    &:last-child .is_checked {
+        border-right-color: #409eff !important;
+    }
+    &:last-child .checkbox_inner {
+        border-radius: 0 4px 4px 0;
+    }
     &[disabled] {
         cursor: not-allowed !important;
         color: #c0c4cc !important;
 
         span {
             cursor: not-allowed !important;
+            border-color: #ebeef5 !important;
         }
-        .checkbox_inner {
-            border-color: #c0c4cc !important;
+        .is_checked {
             background-color: #f5f7fa !important;
-            .checkbox_origina {
+            border-color: #ebeef5 !important;
+            color: #c0c4cc !important;
+            background-image: none !important;
+            span {
                 background-color: #f5f7fa !important;
-                color: #c0c4cc !important;
+                
             }
         }
     }
 
-    &[size] {
-        font-size: 50px;
+    .medium {
+        padding: 10px 20px;
+        font-size: 14px;
     }
-}
-.is_checked {
-    color: #409eff;
+    .small {
+        padding: 9px 15px;
+        font-size: 12px;
+    }
+    .mini {
+        padding: 7px 15px;
+        font-size: 12px;
+    }
 }
 </style>

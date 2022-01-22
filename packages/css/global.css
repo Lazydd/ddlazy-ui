@@ -62,6 +62,15 @@ html::-webkit-scrollbar-track {
     /*滚动条里面轨道*/
     background: #fff !important;
 }
+input::-webkit-input-placeholder {
+    color: #c0c4cc;
+}
+input::-moz-input-placeholder {
+    color: #c0c4cc;
+}
+input::-ms-input-placeholder {
+    color: #c0c4cc;
+}
 ._title {
     font-size: 22px;
     font-weight: 400;

@@ -94,6 +94,7 @@ export default {
         color: #fff !important;
         background-color: #409eff !important;
         border-color: #409eff !important;
+        transition: all .3s;
     }
     .radio_inner_hover {
         &:hover {
@@ -103,7 +104,6 @@ export default {
     .radio__label {
         background: #fff;
         border: 1px solid #dcdfe6;
-
         font-weight: 500;
         border-left: 0;
         color: #606266;
@@ -115,6 +115,7 @@ export default {
         box-sizing: border-box;
         padding: 12px 20px;
         font-size: 14px;
+        transition: all .3s;
     }
     &:first-child .radio__label {
         border-left: 1px solid #dcdfe6;
@@ -140,7 +141,7 @@ export default {
             color: #c0c4cc !important;
             background-image: none !important;
             span {
-                background-color: #f2f6fc !important;
+                background-color: #f5f7fa !important;
             }
         }
     }

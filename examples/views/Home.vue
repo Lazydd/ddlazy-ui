@@ -105,7 +105,7 @@ export default {
                         },
                         {
                             label: "Input 输入框",
-                            path: "/component/quickstart",
+                            path: "#/component/input",
                         },
                         {
                             label: "InputNumber 计数器",

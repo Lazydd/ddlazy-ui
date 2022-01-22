@@ -10,6 +10,7 @@ const Table = () => import("@/components/Table.vue");
 const Tag = () => import("@/components/Tag.vue");
 const Radio = () => import("@/components/Radio.vue");
 const Checkbox = () => import("@/components/Checkbox.vue");
+const Input = () => import("@/components/Input.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -62,6 +63,11 @@ const routes = [
                 path: "/component/checkbox",
                 name: "Checkbox",
                 component: Checkbox,
+            },
+            {
+                path: "/component/input",
+                name: "Input",
+                component: Input,
             },
         ],
     },

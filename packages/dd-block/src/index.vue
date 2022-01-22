@@ -95,6 +95,7 @@ export default {
         span {
             opacity: 1;
         }
+        transition: background-color 1s;
     }
 }
 .box {
@@ -103,6 +104,7 @@ export default {
         color: #d3dce6;
         box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6),
             0 2px 4px 0 rgba(232, 237, 250, 0.5);
+        transition: all 0.3s;
         .control {
             .dd-icon,
             span {
@@ -111,5 +113,6 @@ export default {
             }
         }
     }
+    transition: all .3s;
 }
 </style>
