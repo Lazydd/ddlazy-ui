@@ -80,6 +80,7 @@
               <li><dd-icon icon="icon-confirm"></dd-icon><div><span>icon-confirm</span></div></li>
               <li><dd-icon icon="icon-company"></dd-icon><div><span>icon-company</span></div></li>
               <li><dd-icon icon="icon-ali-clould"></dd-icon><div><span>icon-ali-clould</span></div></li>
+              <li><dd-icon icon="icon-password-visible"></dd-icon><div><span>icon-password-visible</span></div></li>
               <li><dd-icon icon="icon-credit-level"></dd-icon><div><span>icon-credit-level</span></div></li>
               <li><dd-icon icon="icon-coupons"></dd-icon><div><span>icon-coupons</span></div></li>
               <li><dd-icon icon="icon-connections"></dd-icon><div><span>icon-connections</span></div></li>
@@ -506,7 +507,7 @@ export default {
             border-bottom: 1px solid #eee;
             margin-bottom: -1px;
             &:hover {
-              transition: all .5s;
+                transition: all .5s;
                 color: #5cb6ff;
                 .dd-icon {
                   transform: scale(1.4);
