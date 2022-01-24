@@ -113,7 +113,7 @@ export default {
                         },
                         {
                             label: "Select 选择器",
-                            path: "/component/quickstart",
+                            path: "#/component/select",
                         },
                         {
                             label: "Cascader 级联选择器",

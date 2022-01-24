@@ -15,6 +15,8 @@ import ddCheckboxGroup from "./dd-checkbox-group";
 import ddCheckboxButton from "./dd-checkbox-button";
 import ddInput from "./dd-input";
 import ddInputNumber from "./dd-input-number";
+import ddSelect from "./dd-select";
+import ddOption from "./dd-option";
 import "./css/global.css";
 
 const components = [
@@ -35,6 +37,8 @@ const components = [
     ddCheckboxButton,
     ddInput,
     ddInputNumber,
+    ddSelect,
+    ddOption,
 ];
 
 const install = function (Vue) {
@@ -67,6 +71,8 @@ export {
     ddCheckboxButton,
     ddInput,
     ddInputNumber,
+    ddSelect,
+    ddOption,
 };
 
 export default {
@@ -90,4 +96,6 @@ export default {
     ddCheckboxButton,
     ddInput,
     ddInputNumber,
+    ddSelect,
+    ddOption,
 };
