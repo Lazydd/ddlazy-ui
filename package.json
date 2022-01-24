@@ -1,11 +1,15 @@
 {
   "name": "ddlazy-ui",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "private": false,
   "author": "lazy",
   "license": "MIT",
   "description": "A Component Library for Vue.js.",
   "main": "lib/ddlazy-ui.umd.min",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lazydd/ddlazy-ui.git"
+  },
   "files": [
     "lib",
     "src"

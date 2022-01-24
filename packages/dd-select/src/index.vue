@@ -3,8 +3,8 @@
         <input
             ref="input"
             type="text"
-            @focus="select_getFocus"
             @blur="select_onBlur"
+            @click="select_Click"
             :placeholder="placeholder"
             :disabled="disabled"
             :value="select_value"
@@ -16,13 +16,22 @@
             ]"
         />
         <span
+            @click="select_Click"
             ref="select_icon"
             :class="['dd-select__suffix', disabled ? 'is-disabled' : '']"
         >
-            <svg class="icon" aria-hidden="true" style="color: #c0c4cc">
+            <svg
+                :class="[
+                    'icon',
+                    isActive ? 'select_active' : 'select_NOactive',
+                ]"
+                aria-hidden="true"
+                style="color: #c0c4cc"
+            >
                 <use :xlink:href="`#icon-arrow-down`"></use>
             </svg>
         </span>
+        <div v-if="isActive" class="el-select-dropdown"></div>
     </div>
 </template>
 
@@ -42,17 +51,16 @@ export default {
     data() {
         return {
             select_value: this.value,
+            isActive: false,
         };
     },
     methods: {
         select_onBlur(e) {
+            this.isActive = false;
             this.$emit("blur", e);
         },
-        select_getFocus(e) {
-            this.select_icon.setAttribute(
-                "style",
-                "transform:rotate(180deg) center center"
-            );
+        select_Click(e) {
+            this.isActive = !this.isActive;
         },
     },
     computed: {
@@ -80,7 +88,7 @@ export default {
         display: inline-block;
         font-size: inherit;
         width: 100%;
-        width: 180px;
+        width: 240px;
         height: 40px;
         outline: none;
         padding: 0 15px;
@@ -94,7 +102,13 @@ export default {
             border-color: #c0c4cc;
         }
     }
-    .is_focus {
+    .select_active {
+        transform: rotate(180deg);
+        transition: all 0.3s;
+    }
+    .select_NOactive {
+        transform: rotate(360deg);
+        transition: all 0.3s;
     }
     .dd-select__suffix {
         position: absolute;
@@ -113,6 +127,17 @@ export default {
         color: #c0c4cc !important;
         background-color: #f5f7fa;
         border-color: #e4e7ed !important;
+    }
+    .el-select-dropdown {
+        min-width: 240px;
+        height: 100px;
+        position: absolute;
+        border: 1px solid #e4e7ed;
+        border-radius: 4px;
+        background-color: #fff;
+        box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+        box-sizing: border-box;
+        margin: 5px 0;
     }
 }
 </style>
