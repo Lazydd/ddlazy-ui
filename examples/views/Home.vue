@@ -109,7 +109,7 @@ export default {
                         },
                         {
                             label: "InputNumber 计数器",
-                            path: "/component/quickstart",
+                            path: "#/component/input-number",
                         },
                         {
                             label: "Select 选择器",

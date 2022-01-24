@@ -1,39 +1,79 @@
 <template>
-    <div class="dd-input">
-        <div class="dd-textarea" v-if="type === 'textarea'">
-            <textarea
-                :style="{ 'min-height': '33px', resize: resize }"
-                :rows="autosize.minRows ? autosize.minRows : rows"
-                :class="[disabled ? 'is-disabled' : '']"
-            ></textarea>
+    <div
+        class="dd-input"
+        :style="$slots.prepend || $slots.append ? 'width:100%' : ''"
+    >
+        <div :class="['dd-input_group']">
+            <div class="dd-input_prepend" v-if="$slots.prepend">
+                <slot name="prepend"></slot>
+            </div>
+            <div class="dd-textarea" v-if="type === 'textarea'">
+                <textarea
+                    :style="{ 'min-height': '33px', resize: resize }"
+                    :rows="rows"
+                    :class="[disabled ? 'is-disabled' : '']"
+                ></textarea>
+            </div>
+            <input
+                v-else
+                ref="input"
+                :type="input_type"
+                @input="changInput"
+                @focus="input_getFocus"
+                @blur="input_onBlur"
+                :placeholder="placeholder"
+                :disabled="disabled"
+                :value="input_value"
+                :class="[
+                    'dd-input_inner',
+                    isInput__suffix ? 'dd-input_sufinner' : '',
+                    isInput__prefix ? 'dd-input_preinner' : '',
+                    $slots.prepend ? 'dd-input_Left' : '',
+                    $slots.append ? 'dd-input_Right' : '',
+                    disabled ? 'is-disabled' : '',
+                ]"
+            />
+            <div class="dd-input_append" v-if="$slots.append">
+                <slot name="append"></slot>
+            </div>
         </div>
-        <input
-            v-else
-            ref="input"
-            :type="input_type"
-            @input="changInput"
-            @focus="input_getFocus"
-            @blur="input_onBlur"
-            :placeholder="placeholder"
-            :disabled="disabled"
-            :value="input_value"
-            :class="[
-                isInput__suffix ? 'dd-input_inner' : '',
-                disabled ? 'is-disabled' : '',
-            ]"
-        />
-
+        <span class="dd-input__prefix">
+            <svg
+                v-if="prefixIcon"
+                class="icon"
+                aria-hidden="true"
+                style="color: #c0c4cc"
+            >
+                <use :xlink:href="`#${prefixIcon}`"></use>
+            </svg>
+        </span>
         <span class="dd-input__suffix">
-            <dd-icon
+            <svg
                 v-if="clearable && input_value != ''"
+                class="icon is_input_change"
                 @click="dd_input_delete"
-                icon="icon-reeor"
-            ></dd-icon>
-            <dd-icon
+                aria-hidden="true"
+                style="color: #c0c4cc"
+            >
+                <use :xlink:href="`#icon-reeor`"></use>
+            </svg>
+            <svg
                 v-if="showPassword && isFocus"
+                class="icon is_input_change"
                 @click="dd_input_showPWD"
-                icon="icon-password-visible"
-            ></dd-icon>
+                aria-hidden="true"
+                style="color: #c0c4cc"
+            >
+                <use :xlink:href="`#icon-password-visible`"></use>
+            </svg>
+            <svg
+                v-if="suffixIcon"
+                class="icon"
+                aria-hidden="true"
+                style="color: #c0c4cc"
+            >
+                <use :xlink:href="`#${suffixIcon}`"></use>
+            </svg>
         </span>
     </div>
 </template>
@@ -70,14 +110,18 @@ export default {
         resize: {
             type: String,
         },
-        autosize: {
-            type: [Boolean, Object],
-            default: false,
+        suffixIcon: {
+            type: String,
+        },
+        prefixIcon: {
+            type: String,
         },
     },
     data() {
         return {
-            isInput__suffix: this.clearable || this.showPassword || false,
+            isInput__suffix:
+                this.clearable || this.showPassword || this.suffixIcon || false,
+            isInput__prefix: this.prefixIcon,
             input_value: this.value,
             input_type: this.type,
             isFocus: false,
@@ -95,11 +139,13 @@ export default {
         dd_input_showPWD() {
             this.input_type = this.input_type === "text" ? "password" : "text";
         },
-        input_getFocus() {
+        input_getFocus(e) {
             this.isFocus = true;
+            this.$emit("focus", e);
         },
-        input_onBlur() {
-            this.isFocus = false;
+        input_onBlur(e) {
+            this.$emit("blur", e);
+            // this.isFocus = false;
         },
     },
     computed: {
@@ -117,9 +163,14 @@ export default {
 
 <style lang="less" scoped>
 .dd-input {
-    width: 180px;
     position: relative;
-    input {
+    display: inline-block;
+    .dd-input_group {
+        display: inline-flex;
+        width: 100%;
+        line-height: 40px;
+    }
+    .dd-input_inner {
         background-color: #fff;
         background-image: none;
         border-radius: 4px;
@@ -129,12 +180,11 @@ export default {
         display: inline-block;
         font-size: inherit;
         width: 100%;
+        width: 180px;
         height: 40px;
-        line-height: 40px;
         outline: none;
         padding: 0 15px;
         cursor: pointer;
-        box-sizing: border-box;
         transition: all 0.3s;
         &:focus {
             border-color: #409eff !important;
@@ -181,18 +231,75 @@ export default {
         top: 50%;
         transform: translateY(-50%);
         right: 5px;
-        .dd-icon {
+        svg {
             color: #c0c4cc;
             font-size: 20px;
+        }
+        .is_input_change {
             cursor: pointer;
             transition: all 0.3s;
             &:hover {
-                color: #909399;
+                color: #909399 !important;
             }
         }
     }
-    .dd-input_inner {
+    .dd-input__prefix {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 5px;
+        svg {
+            color: #c0c4cc;
+            font-size: 20px;
+        }
+    }
+    .dd-input_sufinner {
         padding-right: 30px;
+    }
+    .dd-input_preinner {
+        padding-left: 30px;
+    }
+    .dd-input_Left {
+        width: 100%;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .dd-input_Right {
+        width: 100%;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .dd-input_prepend {
+        background-color: #f5f7fa;
+        color: #909399;
+        vertical-align: middle;
+        display: table-cell;
+        position: relative;
+        border: 1px solid #dcdfe6;
+        border-radius: 4px;
+        border-right: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        height: 40px;
+        padding: 0 20px;
+        box-sizing: border-box;
+        white-space: nowrap;
+    }
+    .dd-input_append {
+        background-color: #f5f7fa;
+        color: #909399;
+        vertical-align: middle;
+        display: table-cell;
+        position: relative;
+        border: 1px solid #dcdfe6;
+        border-radius: 4px;
+        border-left: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        height: 40px;
+        padding: 0 20px;
+        box-sizing: border-box;
+        white-space: nowrap;
     }
 }
 </style>
