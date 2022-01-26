@@ -5,9 +5,10 @@
             type="text"
             @blur="select_onBlur"
             @click="select_Click"
+            @focus="select_getFocus"
             :placeholder="placeholder"
             :disabled="disabled"
-            :value="select_value"
+            :value="select_label"
             readonly="readonly"
             :class="[
                 'dd-select_inner',
@@ -31,7 +32,17 @@
                 <use :xlink:href="`#icon-arrow-down`"></use>
             </svg>
         </span>
-        <div v-if="isActive" class="el-select-dropdown"></div>
+        <div
+            :class="[
+                'el-select-dropdown',
+                isShow_dropdown ? 'show_dropdown' : '',
+            ]"
+        >
+            <div class="el-select-dropdown-s"></div>
+            <ul>
+                <slot />
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -51,7 +62,9 @@ export default {
     data() {
         return {
             select_value: this.value,
+            select_label: null,
             isActive: false,
+            isShow_dropdown: false,
         };
     },
     methods: {
@@ -62,6 +75,12 @@ export default {
         select_Click(e) {
             this.isActive = !this.isActive;
         },
+        select_getFocus(e) {
+            this.isShow_dropdown = true;
+        },
+        select_change(item) {
+            this.$emit("input", item);
+        },
     },
     computed: {
         select_icon() {
@@ -69,6 +88,11 @@ export default {
         },
         select_input() {
             return this.$refs.input;
+        },
+    },
+    watch: {
+        value(val) {
+            this.select_value = val;
         },
     },
 };
@@ -130,14 +154,49 @@ export default {
     }
     .el-select-dropdown {
         min-width: 240px;
-        height: 100px;
         position: absolute;
+        transform-origin: center top;
         border: 1px solid #e4e7ed;
         border-radius: 4px;
+        margin-top: 10px;
+        display: none;
         background-color: #fff;
         box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
         box-sizing: border-box;
-        margin: 5px 0;
+        z-index: 1000;
+        transition: opacity 0.3s;
+        ul {
+            padding: 6px 0;
+        }
+
+        // margin: 5px 0;
+    }
+    .el-select-dropdown-s {
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: -6px;
+        left: 20px;
+        border-width: 0 6px 6px;
+        z-index: 1;
+        border-style: solid;
+        border-color: transparent transparent #e4e7ed;
+        &::before {
+            content: "";
+            position: absolute;
+            display: inline-block;
+            width: 0;
+            height: 0;
+            z-index: 2;
+            top: -5px;
+            left: -6px;
+            border: 6px solid;
+            border-color: transparent transparent #fff;
+        }
+    }
+    .show_dropdown {
+        // transition: opacity 0.3s;
+        // opacity: 1;
     }
 }
 </style>

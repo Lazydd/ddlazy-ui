@@ -2,8 +2,16 @@
     <div class="dd-input-number">
         <div :class="['dd-input_NumberGroup', disabled ? 'is-disabled' : '']">
             <div
-                class="dd-control dd-input_Numberprepend"
-                @click="!disabled ? dd_changeNumber('decrement') : null"
+                :class="[
+                    'dd-control',
+                    'dd-input_Numberprepend',
+                    input_value <= min ? 'is-disabled' : '',
+                ]"
+                @click="
+                    !disabled && input_value > min
+                        ? dd_changeNumber('decrement')
+                        : null
+                "
             >
                 <svg class="icon" aria-hidden="true">
                     <use :xlink:href="`#icon-sami-select`"></use>
@@ -21,8 +29,16 @@
                 :class="['dd-input_inner', disabled ? 'is-disabled' : '']"
             />
             <div
-                class="dd-control dd-input_Numberappend"
-                @click="!disabled ? dd_changeNumber('increment') : null"
+                :class="[
+                    'dd-control',
+                    'dd-input_Numberappend',
+                    input_value >= max ? 'is-disabled' : '',
+                ]"
+                @click="
+                    !disabled && input_value < max
+                        ? dd_changeNumber('increment')
+                        : null
+                "
             >
                 <svg class="icon" aria-hidden="true">
                     <use :xlink:href="`#icon-add-select`"></use>
@@ -48,6 +64,14 @@ export default {
             type: Number,
             default: 1,
         },
+        min: {
+            type: Number,
+            default: -Infinity,
+        },
+        max: {
+            type: Number,
+            default: Infinity,
+        },
     },
     data() {
         return {
@@ -56,18 +80,23 @@ export default {
     },
     methods: {
         changInput(e) {
-            this.$emit("input", e.target.value);
+            // this.$emit("input", e);
         },
         input_getFocus(e) {
             this.isFocus = true;
             this.$emit("focus", e);
         },
         input_onBlur(e) {
-            console.log(typeof this.input_value);
-            // this.input_value =
-            //     typeof this.input_value === "number" ? this.input_value : "";
+            if (e.target.value > this.max) {
+                this.input_value = this.max;
+            } else if (e.target.value < this.min) {
+                this.input_value = this.min;
+            } else {
+                this.input_value = e.target.value;
+            }
+            this.$emit("input", this.input_value);
+            this.$emit("handleChange", this.input_value);
             this.$emit("blur", e);
-            // this.isFocus = false;
         },
         dd_changeNumber(type) {
             if (type === "increment") {
@@ -75,8 +104,8 @@ export default {
             } else if (type === "decrement") {
                 this.input_value -= this.step;
             }
-            // this.input.setAttribute("style", "border-color:#409eff");
             this.$emit("input", this.input_value);
+            this.$emit("handleChange", this.input_value);
         },
     },
     computed: {
@@ -89,6 +118,7 @@ export default {
             this.input_value = this.input_value
                 ? Number(this.input_value)
                 : val;
+            console.log(this.input_value);
         },
         input_value(val) {
             this.$emit("handleChange", val);
@@ -151,7 +181,7 @@ export default {
         width: 39px;
         line-height: 40px;
         text-align: center;
-        color: #606266 !important;
+        color: #606266;
         background: #f5f7fa;
         cursor: pointer;
         font-size: 13px;

@@ -15,9 +15,23 @@
                 </dd-select>
             </template>
         </dd-block>
-        <dd-block title="基础用法" :code="code2">
+        <dd-block title="有禁用选项" :code="code2">
             <template #source>
-                <dd-select v-model="value2" disabled placeholder="请选择">
+                <dd-select v-model="value2" placeholder="请选择">
+                    <dd-option
+                        v-for="item in options2"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                        :disabled="item.disabled"
+                    >
+                    </dd-option>
+                </dd-select>
+            </template>
+        </dd-block>
+        <dd-block title="禁用状态" :code="code3">
+            <template #source>
+                <dd-select v-model="value3" disabled placeholder="请选择">
                     <dd-option
                         v-for="item in options"
                         :key="item.value"
@@ -45,8 +59,68 @@ export default {
                     >
                     </dd-option>
                 </dd-select>
+
+                options: [
+                    {
+                        value: "选项1",
+                        label: "黄金糕",
+                    },
+                    {
+                        value: "选项2",
+                        label: "双皮奶",
+                    },
+                    {
+                        value: "选项3",
+                        label: "蚵仔煎",
+                    },
+                    {
+                        value: "选项4",
+                        label: "龙须面",
+                    },
+                    {
+                        value: "选项5",
+                        label: "北京烤鸭",
+                    },
+                ],
+                value: "选项3",
             `,
             code2: `
+                <dd-select v-model="value2" placeholder="请选择">
+                    <dd-option
+                        v-for="item in options2"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                        :disabled="item.disabled"
+                    >
+                    </dd-option>
+                </dd-select>
+
+                options2: [
+                    {
+                        value: "选项1",
+                        label: "黄金糕",
+                    },
+                    {
+                        value: "选项2",
+                        label: "双皮奶",
+                        disabled: true,
+                    },
+                    {
+                        value: "选项3",
+                        label: "蚵仔煎",
+                    },
+                    {
+                        value: "选项4",
+                        label: "龙须面",
+                    },
+                    {
+                        value: "选项5",
+                        label: "北京烤鸭",
+                    },
+                ],
+            `,
+            code3:`
                 <dd-select v-model="value2" disabled placeholder="请选择">
                     <dd-option
                         v-for="item in options"
@@ -79,8 +153,32 @@ export default {
                     label: "北京烤鸭",
                 },
             ],
-            value: "",
+            options2: [
+                {
+                    value: "选项1",
+                    label: "黄金糕",
+                },
+                {
+                    value: "选项2",
+                    label: "双皮奶",
+                    disabled: true,
+                },
+                {
+                    value: "选项3",
+                    label: "蚵仔煎",
+                },
+                {
+                    value: "选项4",
+                    label: "龙须面",
+                },
+                {
+                    value: "选项5",
+                    label: "北京烤鸭",
+                },
+            ],
+            value: "选项3",
             value2: "",
+            value3: "",
         };
     },
 };
