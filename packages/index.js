@@ -18,6 +18,7 @@ import ddInputNumber from "./dd-input-number";
 import ddSelect from "./dd-select";
 import ddOption from "./dd-option";
 import ddScroll from "./dd-scroll";
+import ddSwitch from "./dd-switch";
 import "./css/global.css";
 
 const components = [
@@ -41,6 +42,7 @@ const components = [
     ddSelect,
     ddOption,
     ddScroll,
+    ddSwitch,
 ];
 
 const install = function (Vue) {
@@ -76,6 +78,7 @@ export {
     ddSelect,
     ddOption,
     ddScroll,
+    ddSwitch,
 };
 
 export default {
@@ -102,4 +105,5 @@ export default {
     ddSelect,
     ddOption,
     ddScroll,
+    ddSwitch,
 };

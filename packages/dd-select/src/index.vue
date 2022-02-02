@@ -1,5 +1,9 @@
 <template>
-    <div class="dd-select">
+    <div
+        class="dd-select"
+        @mouseover="select_mouseOver"
+        @mouseleave="select_mouseLeave"
+    >
         <input
             ref="input"
             type="text"
@@ -24,21 +28,32 @@
             <svg
                 :class="[
                     'icon',
-                    isActive ? 'select_active' : 'select_NOactive',
+                    clearable
+                        ? ''
+                        : isActive
+                        ? 'select_active'
+                        : 'select_NOactive',
                 ]"
                 aria-hidden="true"
+                @click="select_clearable"
                 style="color: #c0c4cc"
             >
-                <use :xlink:href="`#icon-arrow-down`"></use>
+                <use
+                    :xlink:href="
+                        clearable && select_value
+                            ? `#icon-reeor`
+                            : `#icon-arrow-down`
+                    "
+                ></use>
             </svg>
         </span>
         <div
             :class="[
-                'el-select-dropdown',
+                'dd-select-dropdown',
                 isShow_dropdown ? 'show_dropdown' : '',
             ]"
         >
-            <div class="el-select-dropdown-s"></div>
+            <div class="dd-select-dropdown-s"></div>
             <ul>
                 <slot />
             </ul>
@@ -58,6 +73,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        clearable: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {
@@ -65,6 +84,7 @@ export default {
             select_label: null,
             isActive: false,
             isShow_dropdown: false,
+            isShow_clearable: false,
         };
     },
     methods: {
@@ -75,11 +95,24 @@ export default {
         select_Click(e) {
             this.isActive = !this.isActive;
         },
+        select_clearable() {
+            if (this.clearable && this.select_value) {
+                this.select_value = "";
+                this.select_label = "";
+                this.$emit("input", this.select_value);
+            }
+        },
         select_getFocus(e) {
             this.isShow_dropdown = true;
         },
         select_change(item) {
             this.$emit("input", item);
+        },
+        select_mouseOver() {
+            this.isShow_clearable = true;
+        },
+        select_mouseLeave() {
+            this.isShow_clearable = false;
         },
     },
     computed: {
@@ -152,7 +185,7 @@ export default {
         background-color: #f5f7fa;
         border-color: #e4e7ed !important;
     }
-    .el-select-dropdown {
+    .dd-select-dropdown {
         min-width: 240px;
         position: absolute;
         transform-origin: center top;
@@ -164,14 +197,13 @@ export default {
         box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
         box-sizing: border-box;
         z-index: 1000;
-        transition: opacity 0.3s;
         ul {
             padding: 6px 0;
         }
 
         // margin: 5px 0;
     }
-    .el-select-dropdown-s {
+    .dd-select-dropdown-s {
         position: absolute;
         width: 0;
         height: 0;
@@ -195,6 +227,7 @@ export default {
         }
     }
     .show_dropdown {
+        display: block;
         // transition: opacity 0.3s;
         // opacity: 1;
     }

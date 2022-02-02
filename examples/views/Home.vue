@@ -120,8 +120,8 @@ export default {
                             path: "/component/quickstart",
                         },
                         {
-                            label: "Input 开关",
-                            path: "/component/quickstart",
+                            label: "Switch 开关",
+                            path: "#/component/switch",
                         },
                         {
                             label: "Slider 滑块",

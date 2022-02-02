@@ -42,6 +42,19 @@
                 </dd-select>
             </template>
         </dd-block>
+        <dd-block title="可清空单选" :code="code4">
+            <template #source>
+                <dd-select v-model="value4" clearable placeholder="请选择">
+                    <dd-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                    >
+                    </dd-option>
+                </dd-select>
+            </template>
+        </dd-block>
     </div>
 </template>
 
@@ -131,6 +144,17 @@ export default {
                     </dd-option>
                 </dd-select>
             `,
+            code4:`
+                <dd-select v-model="value4" clearable placeholder="请选择">
+                    <dd-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                    >
+                    </dd-option>
+                </dd-select>
+            `,
             options: [
                 {
                     value: "选项1",
@@ -179,6 +203,7 @@ export default {
             value: "选项3",
             value2: "",
             value3: "",
+            value4: "",
         };
     },
 };

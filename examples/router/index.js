@@ -13,6 +13,7 @@ const Checkbox = () => import("@/components/Checkbox.vue");
 const Input = () => import("@/components/Input.vue");
 const InputNumber = () => import("@/components/InputNumber.vue");
 const Select = () => import("@/components/Select.vue");
+const Switch = () => import("@/components/Switch.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -80,6 +81,11 @@ const routes = [
                 path: "/component/select",
                 name: "Select",
                 component: Select,
+            },
+            {
+                path: "/component/switch",
+                name: "Switch",
+                component: Switch,
             },
         ],
     },
