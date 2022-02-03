@@ -1,9 +1,27 @@
 <template>
-    <div
-        :class="['dd-switch']"
-        :style="{ background: value ? activeColor : inactiveColor }"
-        @click="switch_click"
-    ></div>
+    <div :style="'display: inline-block'" :class="[value ? 'is-checked' : '']">
+        <span
+            class="dd-switch_label"
+            style="margin-right: 10px"
+            :style="{ color: !value ? '#409eff' : '' }"
+            @click="!disabled ? switch_click() : null"
+            >{{ activeText }}</span
+        >
+        <div
+            :class="['dd-switch']"
+            :disabled="disabled"
+            :switch_value="!switch_value && disabled"
+            :style="{ background: value ? activeColor : inactiveColor }"
+            @click="!disabled ? switch_click() : null"
+        ></div>
+        <span
+            class="dd-switch_label"
+            style="margin-left: 10px"
+            :style="{ color: value ? '#409eff' : '' }"
+            @click="!disabled ? switch_click() : null"
+            >{{ inactiveText }}</span
+        >
+    </div>
 </template>
 
 <script>
@@ -22,6 +40,16 @@ export default {
             type: String,
             default: "#C0CCDA",
         },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
+        activeText: {
+            type: String,
+        },
+        inactiveText: {
+            type: String,
+        },
     },
     data() {
         return {
@@ -32,6 +60,7 @@ export default {
         switch_click() {
             this.switch_value = !this.switch_value;
             this.$emit("input", this.switch_value);
+            this.$emit("change", this.switch_value);
         },
     },
 };
@@ -52,6 +81,17 @@ export default {
     cursor: pointer;
     transition: border-color 0.3s, background-color 0.3s;
     vertical-align: middle;
+    &[disabled] {
+        cursor: not-allowed !important;
+        color: #c0c4cc !important;
+        border-color: #409eff;
+        background: #409eff !important;
+        opacity: 0.6;
+    }
+    &[switch_value] {
+        border-color: #dcdfe6;
+        background: #dcdfe6 !important;
+    }
     &::after {
         content: "";
         position: absolute;
@@ -62,6 +102,25 @@ export default {
         width: 16px;
         height: 16px;
         background-color: #fff;
+    }
+}
+.dd-switch_label {
+    transition: 0.2s;
+    height: 20px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    vertical-align: middle;
+    color: #303133;
+    cursor: pointer;
+}
+.is-checked {
+    .dd-switch {
+        &::after {
+            left: 100%;
+            margin-left: -17px;
+        }
     }
 }
 </style>

@@ -14,6 +14,7 @@ const Input = () => import("@/components/Input.vue");
 const InputNumber = () => import("@/components/InputNumber.vue");
 const Select = () => import("@/components/Select.vue");
 const Switch = () => import("@/components/Switch.vue");
+const Slider = () => import("@/components/Slider.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -86,6 +87,11 @@ const routes = [
                 path: "/component/switch",
                 name: "Switch",
                 component: Switch,
+            },
+            {
+                path: "/component/slider",
+                name: "Slider",
+                component: Slider,
             },
         ],
     },

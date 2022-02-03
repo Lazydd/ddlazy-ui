@@ -90,7 +90,7 @@ export default {
         transition: 0.5s;
     }
     &:hover {
-        color: #4096ff;
+        color: #4096ff !important;
         background-color: rgba(215, 215, 215, 0.3);
         span {
             opacity: 1;
@@ -101,11 +101,11 @@ export default {
 .box {
     z-index: 5;
     &:hover {
-        color: #d3dce6;
         box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6),
             0 2px 4px 0 rgba(232, 237, 250, 0.5);
         transition: all 0.3s;
         .control {
+            color: #d3dce6;
             .dd-icon,
             span {
                 transform: translateX(-30px);
@@ -113,6 +113,6 @@ export default {
             }
         }
     }
-    transition: all .3s;
+    transition: all 0.3s;
 }
 </style>
