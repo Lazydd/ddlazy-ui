@@ -8,7 +8,7 @@
                 </div>
             </div>
             <transition name="fale">
-                <div v-if="isShow">
+                <div v-if="isShow" class="code">
                     <pre v-highlightjs="code"><code class="html"></code></pre>
                 </div>
             </transition>

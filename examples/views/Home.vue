@@ -1,8 +1,8 @@
 <template>
-    <div class="container">
+    <div :class="['container', value ? 'night' : '']">
         <header>
             <!-- <pre v-highlightjs="sourcecode"><code class="javascript"></code></pre> -->
-            <div class="tit">
+            <div class="tit" @click="$router.push('/')">
                 <svg class="icon" aria-hidden="true" :style="{ fill: color }">
                     <use :xlink:href="`#${icon}`"></use>
                 </svg>
@@ -18,6 +18,7 @@
                 >
                     {{ nav.label }}
                 </li>
+                <dd-switch v-model="value"></dd-switch>
             </ul>
         </header>
         <div class="page">
@@ -53,6 +54,7 @@ export default {
             color: "rgb(70, 159, 252)",
             icon: "icon-salescenter",
             code1: "npm i ddlazy-ui",
+            value: false,
             navList: [
                 {
                     label: "指南",
@@ -220,6 +222,34 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.night {
+    background: rgb(30, 30, 30) !important;
+    /deep/ ._title {
+        color: #999;
+    }
+    /deep/.dd-block,
+    /deep/.control {
+        color: #eaeaea;
+        border-color: #eaeaea;
+        background: rgb(30, 30, 30);
+    }
+    /deep/ .code {
+        border-left: 1px solid #eaeaea;
+        border-right: 1px solid #eaeaea;
+    }
+    /deep/ header,
+    /deep/ .dd-input .dd-input_inner,
+    /deep/.dd-input .dd-textarea textarea,
+    /deep/.dd-input .dd-input_prepend,
+    /deep/.dd-input .dd-input_append,
+    /deep/.dd-radio-button .radio__label,
+    /deep/.dd-checkbox-button .checkbox_inner,
+    /deep/.dd-input-number .dd-input_inner,
+    /deep/.dd-select .dd-select_inner,
+    /deep/.dd-select .dd-select-dropdown {
+        background-color: rgb(30, 30, 30) !important;
+    }
+}
 a {
     text-decoration: none;
     outline: none;
@@ -253,6 +283,7 @@ a:focus {
             display: flex;
             align-items: center;
             color: rgb(70, 159, 252);
+            cursor: pointer;
             .icon {
                 font-size: 40px;
                 margin-right: 15px;
