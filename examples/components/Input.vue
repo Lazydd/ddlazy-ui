@@ -49,6 +49,16 @@
                 </dd-input>
             </template>
         </dd-block>
+        <dd-block title="尺寸" :code="code8">
+            <template #source>
+                <div>
+                    <dd-input v-model="input11" suffixIcon="icon-calendar" placeholder="请输入内容" style="margin-right:25px"></dd-input>
+                    <dd-input v-model="input12" prefixIcon="icon-search" placeholder="请输入内容" size="medium"  style="margin-right:25px"></dd-input>
+                    <dd-input v-model="input13" prefixIcon="icon-search" placeholder="请输入内容" size="small" style="margin-right:25px"></dd-input>
+                    <dd-input v-model="input14" prefixIcon="icon-search" placeholder="请输入内容" size="mini"></dd-input>
+                </div>
+            </template>
+        </dd-block>
     </div>
 </template>
 
@@ -68,6 +78,10 @@ export default {
             input8:'',
             input9:'',
             input10:'',
+            input11:'',
+            input12:'',
+            input13:'',
+            input14:'',
             code1:`
                 <dd-input v-model="input" placeholder="请输入内容"></dd-input>
             `,
@@ -96,6 +110,14 @@ export default {
                 <dd-input v-model="input10" placeholder="请输入内容">
                     <template slot="append">.com</template>
                 </dd-input>
+            `,
+            code8:`
+                <div>
+                    <dd-input v-model="input11" suffixIcon="icon-calendar" placeholder="请输入内容" style="margin-right:25px"></dd-input>
+                    <dd-input v-model="input12" prefixIcon="icon-search" placeholder="请输入内容" size="medium"  style="margin-right:25px"></dd-input>
+                    <dd-input v-model="input13" prefixIcon="icon-search" placeholder="请输入内容" size="small" style="margin-right:25px"></dd-input>
+                    <dd-input v-model="input14" prefixIcon="icon-search" placeholder="请输入内容" size="mini"></dd-input>
+                </div>
             `
         }
     },

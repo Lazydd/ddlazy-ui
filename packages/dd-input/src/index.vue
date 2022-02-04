@@ -31,6 +31,7 @@
                     $slots.prepend ? 'dd-input_Left' : '',
                     $slots.append ? 'dd-input_Right' : '',
                     disabled ? 'is-disabled' : '',
+                    size,
                 ]"
             />
             <div class="dd-input_append" v-if="$slots.append">
@@ -114,6 +115,9 @@ export default {
             type: String,
         },
         prefixIcon: {
+            type: String,
+        },
+        size: {
             type: String,
         },
     },
@@ -219,7 +223,6 @@ export default {
             }
         }
     }
-
     .is-disabled {
         cursor: not-allowed !important;
         color: #c0c4cc !important;
@@ -300,6 +303,19 @@ export default {
         padding: 0 20px;
         box-sizing: border-box;
         white-space: nowrap;
+    }
+
+    .medium {
+        height: 36px;
+        line-height: 36px;
+    }
+    .small {
+        height: 32px;
+        line-height: 32px;
+    }
+    .mini {
+        height: 28px;
+        line-height: 28px;
     }
 }
 </style>
