@@ -21,6 +21,7 @@ import ddScroll from "./dd-scroll";
 import ddSwitch from "./dd-switch";
 import ddSlider from "./dd-slider";
 import ddTag from "./dd-tag";
+import ddProgress from "./dd-progress";
 import "./css/global.css";
 
 const components = [
@@ -47,6 +48,7 @@ const components = [
     ddSwitch,
     ddSlider,
     ddTag,
+    ddProgress,
 ];
 
 const install = function (Vue) {
@@ -85,6 +87,7 @@ export {
     ddSwitch,
     ddSlider,
     ddTag,
+    ddProgress,
 };
 
 export default {
@@ -114,4 +117,5 @@ export default {
     ddSwitch,
     ddSlider,
     ddTag,
+    ddProgress,
 };

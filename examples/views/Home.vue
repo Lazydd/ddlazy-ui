@@ -143,8 +143,8 @@ export default {
                             path: "#/component/tag",
                         },
                         {
-                            label: "Input 输入框",
-                            path: "#/component/quickstart",
+                            label: "Progress 进度条",
+                            path: "#/component/progress",
                         },
                         {
                             label: "InputNumber 计数器",
@@ -226,16 +226,19 @@ export default {
     background: rgb(30, 30, 30) !important;
     /deep/ ._title {
         color: #999;
+        transition: all 1s;
     }
     /deep/.dd-block,
     /deep/.control {
         color: #eaeaea;
         border-color: #eaeaea;
         background: rgb(30, 30, 30);
+        transition: all 1s;
     }
     /deep/ .code {
         border-left: 1px solid #eaeaea;
         border-right: 1px solid #eaeaea;
+        transition: all 1s;
     }
     /deep/ header,
     /deep/ .dd-input .dd-input_inner,
@@ -248,7 +251,9 @@ export default {
     /deep/.dd-select .dd-select_inner,
     /deep/.dd-select .dd-select-dropdown {
         background-color: rgb(30, 30, 30) !important;
+        transition: all 1s;
     }
+    transition: all 1s;
 }
 a {
     text-decoration: none;

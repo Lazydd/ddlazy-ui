@@ -1,8 +1,8 @@
 // 导入组件
-import ddRadio from "./src";
+import ddProgress from "./src";
 // 为组件提供install安装方法，供按需引入
-ddRadio.install = Vue => {
-    Vue.component(ddRadio.name, ddRadio)
+ddProgress.install = Vue => {
+    Vue.component(ddProgress.name, ddProgress)
 }
 // 暴露组件
-export default ddRadio
+export default ddProgress
