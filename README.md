@@ -2,18 +2,32 @@
 
 ## Project setup
 ```
-npm install
+npm install ddLazy-ui -S
 ```
 
-### Compiles and hot-reloads for development
+### Quick Start
 ```
-npm run serve
+import Vue from 'vue'
+import ddlazyui from 'ddlazy-ui'
+
+Vue.use(ddlazyui)
+
+// or
+import {
+  Select,
+  Button
+  // ...
+} from 'ddlazy-ui'
+
+Vue.component(Select.name, Select)
+Vue.component(Button.name, Button)
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Browser Support
+Modern browsers and Internet Explorer 10+.
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### NPM
+See [Configuration Reference](https://www.npmjs.com/package/ddlazy-ui).
+
+### LICENSE
+See [Configuration Reference](https://github.com/ElemeFE/element/blob/dev/LICENSE).
