@@ -147,8 +147,8 @@ export default {
                             path: "#/component/progress",
                         },
                         {
-                            label: "InputNumber 计数器",
-                            path: "#/component/quickstart",
+                            label: "Upload 上传",
+                            path: "#/component/upload",
                         },
                         {
                             label: "Select 选择器",
@@ -165,6 +165,15 @@ export default {
                         {
                             label: "Slider 滑块",
                             path: "#/component/quickstart",
+                        },
+                    ],
+                },
+                {
+                    label: "Notice",
+                    children: [
+                        {
+                            label: "Message 消息提示",
+                            path: "#/component/message",
                         },
                     ],
                 },

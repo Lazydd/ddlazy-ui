@@ -16,6 +16,8 @@ const Select = () => import("@/components/Select.vue");
 const Switch = () => import("@/components/Switch.vue");
 const Slider = () => import("@/components/Slider.vue");
 const Progress = () => import("@/components/Progress.vue");
+const Upload = () => import("@/components/Upload.vue");
+const Message = () => import("@/components/Message.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -98,6 +100,16 @@ const routes = [
                 path: "/component/progress",
                 name: "Progress",
                 component: Progress,
+            },
+            {
+                path: "/component/upload",
+                name: "Upload",
+                component: Upload,
+            },
+            {
+                path: "/component/message",
+                name: "Message",
+                component: Message,
             },
         ],
     },

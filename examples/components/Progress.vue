@@ -28,6 +28,15 @@
                 <dd-button @click="increase" icon="icon-add-select"></dd-button>
             </template>
         </dd-block>
+        <dd-block title="环形进度条" :code="code3">
+            <template #source>
+                <dd-progress type="circle" :percentage="0" style="margin-right:15px"></dd-progress>
+                <dd-progress type="circle" :percentage="25" style="margin-right:15px"></dd-progress>
+                <dd-progress type="circle" :percentage="100" style="margin-right:15px"></dd-progress>
+                <dd-progress type="circle" :percentage="70" style="margin-right:15px"></dd-progress>
+                <dd-progress type="circle" :percentage="50"></dd-progress>
+            </template>
+        </dd-block>
     </div>
 </template>
 

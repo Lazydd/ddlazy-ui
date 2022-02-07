@@ -77,6 +77,10 @@ export default {
             default: false,
         },
         color: {},
+        type: {
+            type: String,
+            default: "line",
+        },
     },
     data() {
         return {
