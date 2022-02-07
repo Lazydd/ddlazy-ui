@@ -27,7 +27,7 @@ Vue.component(Button.name, Button)
 Modern browsers and Internet Explorer 10+.
 
 ### NPM
-[NPM](https://www.npmjs.com/package/ddlazy-ui).
+[NPM](https://www.npmjs.com/package/ddlazy-ui)
 
 ### LICENSE
-[MIT](https://github.com/ElemeFE/element/blob/dev/LICENSE).
+[MIT](https://github.com/ElemeFE/element/blob/dev/LICENSE)
