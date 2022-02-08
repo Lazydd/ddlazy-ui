@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 import ddButton from "./dd-botton";
 import ddIcon from "./dd-icon";
 import ddLink from "./dd-link";
@@ -23,9 +25,10 @@ import ddSlider from "./dd-slider";
 import ddTag from "./dd-tag";
 import ddProgress from "./dd-progress";
 import ddUpload from "./dd-upload";
-import ddMessage from "./dd-message";
+import Message from "./dd-message";
+import ddColorPicker from "./dd-color-picker";
 import "./css/global.css";
-
+Vue.use(Message);
 const components = [
     ddButton,
     ddIcon,
@@ -52,7 +55,7 @@ const components = [
     ddTag,
     ddProgress,
     ddUpload,
-    ddMessage,
+    ddColorPicker,
 ];
 
 const install = function (Vue) {
@@ -93,7 +96,7 @@ export {
     ddTag,
     ddProgress,
     ddUpload,
-    ddMessage,
+    ddColorPicker,
 };
 
 export default {
@@ -125,5 +128,5 @@ export default {
     ddTag,
     ddProgress,
     ddUpload,
-    ddMessage,
+    ddColorPicker,
 };

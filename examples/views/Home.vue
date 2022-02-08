@@ -151,8 +151,8 @@ export default {
                             path: "#/component/upload",
                         },
                         {
-                            label: "Select 选择器",
-                            path: "#/component/quickstart",
+                            label: "ColorPicker 颜色选择器",
+                            path: "#/component/color-picker",
                         },
                         {
                             label: "Cascader 级联选择器",

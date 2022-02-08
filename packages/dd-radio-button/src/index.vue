@@ -130,7 +130,6 @@ export default {
         span {
             background-image: none !important;
             box-shadow: none !important;
-            background-color: #fff !important;
             border-color: #ebeef5 !important;
             cursor: not-allowed !important;
             color: #c0c4cc !important;

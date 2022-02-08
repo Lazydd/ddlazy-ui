@@ -18,6 +18,7 @@ const Slider = () => import("@/components/Slider.vue");
 const Progress = () => import("@/components/Progress.vue");
 const Upload = () => import("@/components/Upload.vue");
 const Message = () => import("@/components/Message.vue");
+const ColorPicker = () => import("@/components/ColorPicker.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -110,6 +111,11 @@ const routes = [
                 path: "/component/message",
                 name: "Message",
                 component: Message,
+            },
+            {
+                path: "/component/color-picker",
+                name: "ColorPicker",
+                component: ColorPicker,
             },
         ],
     },
