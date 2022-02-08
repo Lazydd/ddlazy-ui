@@ -1,6 +1,5 @@
 <template>
     <div @mouseup="mouseup">
-        {{ radio }}
         <div class="dd-color-hue-slider" ref="hub_slider" @mouseup="sliderUp">
             <div
                 class="dd-color-hub-slider_thumb"
@@ -26,6 +25,7 @@ export default {
             this.left =
                 e.clientX - this.hub_slider.getBoundingClientRect().left;
             this.radio = (this.left / _hubSliderWidth).toFixed(6);
+            this.$emit("input", this.radio * 360);
         },
         mousedown(event) {
             var event = event || window.event;
@@ -43,6 +43,7 @@ export default {
                 }
                 _this.left = endx;
                 _this.radio = (endx / _hubSliderWidth).toFixed(6);
+                _this.$emit("input", _this.radio * 360);
             };
         },
         mouseup() {
