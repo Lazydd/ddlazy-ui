@@ -1,9 +1,14 @@
 <template>
     <div @mouseup="mouseup">
-        <div class="dd-color-hue-slider" ref="hub_slider" @mouseup="sliderUp">
+        <div
+            class="dd-color-hue-slider"
+            ref="hub_slider"
+            @mousedown="mousedownIn"
+            @mouseup="sliderUp"
+        >
             <div
                 class="dd-color-hub-slider_thumb"
-                @mousedown="mousedown"
+                @mousedown="mousedownOut"
                 :style="{ left: left + 'px' }"
             ></div>
         </div>
@@ -27,7 +32,19 @@ export default {
             this.radio = (this.left / _hubSliderWidth).toFixed(6);
             this.$emit("input", this.radio * 360);
         },
-        mousedown(event) {
+        mousedownIn() {
+            let _this = this;
+            document.onmousemove = function (e) {
+                let left =
+                    e.clientX - _this.hub_slider.getBoundingClientRect().left;
+                if (left < 0) left = 0;
+                if (left > _hubSliderWidth) left = _hubSliderWidth;
+                _this.left = left;
+                _this.radio = (_this.left / _hubSliderWidth).toFixed(6);
+                _this.$emit("input", _this.radio * 360);
+            };
+        },
+        mousedownOut(event) {
             var event = event || window.event;
             let startx = event.clientX;
             let sb_bkx = startx - event.target.offsetLeft;

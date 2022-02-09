@@ -1,11 +1,17 @@
 <template>
     <div>
-        <div class="dd-color-sv-picker" ref="sc_picker" @mouseup="pickerUp">
+        <div
+            class="dd-color-sv-picker"
+            :style="`background-color:${hex}`"
+            ref="sc_picker"
+            @mouseup="pickerUp"
+            @mousedown="mousedownIn"
+        >
             <div class="dd-white picker_blak"></div>
             <div class="dd-black picker_blak"></div>
             <div
-                @mousedown="mousedown"
                 class="picker_cursor"
+                @mousedown="mousedownOut"
                 :style="{ left: left + 'px', top: top + 'px' }"
             ></div>
         </div>
@@ -15,8 +21,11 @@
 <script>
 let _pickerWidth = 0;
 let _pickerHeight = 0;
+import mixin from "../../dd-mixins/mixin";
 export default {
     name: "dd-color-sv-picker",
+    props: ["hex"],
+    mixins: [mixin],
     data() {
         return {
             left: 0,
@@ -27,45 +36,63 @@ export default {
     },
     methods: {
         pickerUp(e) {
-            this.left = e.clientX - this.sc_picker.getBoundingClientRect().left;
-            this.top = e.clientY - this.sc_picker.getBoundingClientRect().top;
-            this.radiox = (this.left / _pickerWidth).toFixed(6);
-            this.radioy = (this.top / _pickerHeight).toFixed(6);
+            let { left, top, radiox, radioy } = this.move(
+                e,
+                this.sc_picker,
+                _pickerWidth,
+                _pickerHeight
+            );
+            this.left = left;
+            this.top = top;
+            this.radiox = radiox;
+            this.radioy = radioy;
             this.$emit("input", {
-                saturation: this.radiox,
-                value: this.radioy,
+                saturation: 1 * this.radiox,
+                value: 1 - this.radioy,
             });
         },
-        mousedown(event) {
+        mousedownIn() {
+            let _this = this;
+            document.onmousemove = function (e) {
+                let { left, top, radiox, radioy } = _this.move(
+                    e,
+                    _this.sc_picker,
+                    _pickerWidth,
+                    _pickerHeight
+                );
+                _this.left = left;
+                _this.top = top;
+                _this.radiox = radiox;
+                _this.radioy = radioy;
+
+                _this.$emit("input", {
+                    saturation: 1 * _this.radiox,
+                    value: 1 - _this.radioy,
+                });
+            };
+        },
+        mousedownOut(event) {
             var event = event || window.event;
-            let startx = event.clientX;
-            let starty = event.clientY;
-            let sb_bkx = startx - event.target.offsetLeft;
-            let sb_bky = starty - event.target.offsetTop;
+            let sb_bkx = event.clientX - event.target.offsetLeft;
+            let sb_bky = event.clientY - event.target.offsetTop;
             let _this = this;
             document.onmousemove = function (e) {
                 let event = e || window.event;
                 let endx = event.clientX - sb_bkx;
                 let endy = event.clientY - sb_bky;
-                if (endx < 0) {
-                    endx = 0;
-                }
-                if (endx > _pickerWidth) {
-                    endx = _pickerWidth;
-                }
-                if (endy < 0) {
-                    endy = 0;
-                }
-                if (endy > _pickerHeight) {
-                    endy = _pickerHeight;
-                }
+
+                if (endx < 0) endx = 0;
+                if (endx > _pickerWidth) endx = _pickerWidth;
+                if (endy < 0) endy = 0;
+                if (endy > _pickerHeight) endy = _pickerHeight;
+
                 _this.left = endx;
                 _this.top = endy;
                 _this.radiox = (endx / _pickerWidth).toFixed(6);
                 _this.radioy = (endy / _pickerHeight).toFixed(6);
                 _this.$emit("input", {
-                    saturation: _this.radiox,
-                    value: _this.radioy,
+                    saturation: 1 * _this.radiox,
+                    value: 1 - _this.radioy,
                 });
             };
         },
@@ -91,7 +118,7 @@ export default {
 <style lang="less" scoped>
 .dd-color-sv-picker {
     position: relative;
-    background-color: rgb(255, 0, 0);
+    transition: background-color 0.3s;
     width: 280px;
     height: 180px;
     .picker_blak {
