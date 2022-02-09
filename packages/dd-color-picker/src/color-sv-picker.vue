@@ -52,22 +52,21 @@ export default {
             });
         },
         mousedownIn() {
-            let _this = this;
-            document.onmousemove = function (e) {
-                let { left, top, radiox, radioy } = _this.move(
+            document.onmousemove = (e) => {
+                let { left, top, radiox, radioy } = this.move(
                     e,
-                    _this.sc_picker,
+                    this.sc_picker,
                     _pickerWidth,
                     _pickerHeight
                 );
-                _this.left = left;
-                _this.top = top;
-                _this.radiox = radiox;
-                _this.radioy = radioy;
+                this.left = left;
+                this.top = top;
+                this.radiox = radiox;
+                this.radioy = radioy;
 
-                _this.$emit("input", {
-                    saturation: 1 * _this.radiox,
-                    value: 1 - _this.radioy,
+                this.$emit("input", {
+                    saturation: 1 * this.radiox,
+                    value: 1 - this.radioy,
                 });
             };
         },
@@ -75,8 +74,7 @@ export default {
             var event = event || window.event;
             let sb_bkx = event.clientX - event.target.offsetLeft;
             let sb_bky = event.clientY - event.target.offsetTop;
-            let _this = this;
-            document.onmousemove = function (e) {
+            document.onmousemove = (e) => {
                 let event = e || window.event;
                 let endx = event.clientX - sb_bkx;
                 let endy = event.clientY - sb_bky;
@@ -86,13 +84,13 @@ export default {
                 if (endy < 0) endy = 0;
                 if (endy > _pickerHeight) endy = _pickerHeight;
 
-                _this.left = endx;
-                _this.top = endy;
-                _this.radiox = (endx / _pickerWidth).toFixed(6);
-                _this.radioy = (endy / _pickerHeight).toFixed(6);
-                _this.$emit("input", {
-                    saturation: 1 * _this.radiox,
-                    value: 1 - _this.radioy,
+                this.left = endx;
+                this.top = endy;
+                this.radiox = (endx / _pickerWidth).toFixed(6);
+                this.radioy = (endy / _pickerHeight).toFixed(6);
+                this.$emit("input", {
+                    saturation: 1 * this.radiox,
+                    value: 1 - this.radioy,
                 });
             };
         },

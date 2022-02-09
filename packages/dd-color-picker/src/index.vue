@@ -6,35 +6,47 @@
                 :style="`background-color: ${hex}`"
             ></div>
         </div>
-        <transition name="fale">
-            <div class="dd-color_dropdown dd-color-picker_pannel" v-if="isShow">
-                <color-sv-picker
-                    v-model="sv"
-                    :hex="noChangeHEX"
-                ></color-sv-picker
-                ><color-hue-slider
-                    v-model="h"
-                    style="margin: 8px 0"
-                ></color-hue-slider>
-                <div class="dd-color_control">
-                    <dd-input v-model="hex" size="mini"></dd-input>
-                    <div>
-                        <dd-button
-                            size="mini"
-                            class="dd-color_clear"
-                            @click="dd_color_clear"
-                            >清空</dd-button
-                        >
-                        <dd-button
-                            size="mini"
-                            style="margin-left: 10px"
-                            @click="dd_color_determine"
-                            >确定</dd-button
-                        >
+        <div ref="dd-color_dropdown">
+            <transition name="fale">
+                <div
+                    class="dd-color_dropdown dd-color-picker_pannel"
+                    v-if="isShow"
+                >
+                    <color-sv-picker
+                        v-model="sv"
+                        :hex="noChangeHEX"
+                    ></color-sv-picker
+                    ><color-hue-slider
+                        v-model="h"
+                        style="margin: 8px 0"
+                    ></color-hue-slider>
+                    <div class="dd-color_control">
+                        <div>
+                            <dd-input v-model="hex" size="mini"></dd-input
+                            ><dd-input
+                                v-model="RGB"
+                                size="mini"
+                                style="margin-top: 8px"
+                            ></dd-input>
+                        </div>
+                        <div>
+                            <dd-button
+                                size="mini"
+                                class="dd-color_clear"
+                                @click="dd_color_clear"
+                                >清空</dd-button
+                            >
+                            <dd-button
+                                size="mini"
+                                @click="dd_color_determine"
+                                style="margin-top: 8px"
+                                >确定</dd-button
+                            >
+                        </div>
                     </div>
                 </div>
-            </div>
-        </transition>
+            </transition>
+        </div>
     </div>
 </template>
 
@@ -115,6 +127,28 @@ export default {
         this.rgb = this.hsv2rgb(this.h, this.sv.saturation, this.sv.value);
         this.hex = this.rgb2hex(this.rgb.r, this.rgb.g, this.rgb.b);
         this.noChangeHEX = this.hex;
+        document.onmousedown = (e) => {
+            console.log(this.$refs["dd-color_dropdown"].contains(e.target));
+            if (
+                this.$refs["dd-color_dropdown"] &&
+                this.$refs["dd-color_dropdown"].contains(e.target)
+            )
+                return;
+            this.isShow = false;
+        };
+    },
+    beforeDestroy() {
+        document.onmousedown = null;
+    },
+    computed: {
+        RGB() {
+            if (this.rgb) {
+                const { r, g, b } = this.rgb;
+                if (r & g & b) return `rgb(${r}, ${g}, ${b})`;
+            } else {
+                return "";
+            }
+        },
     },
     components: {
         ColorHueSlider,
@@ -160,7 +194,7 @@ export default {
             display: block;
             box-sizing: border-box;
             border: 1px solid #999;
-            transition: background-color .3s;
+            transition: background-color 0.3s;
             border-radius: 2px;
             width: 100%;
             height: 100%;
@@ -178,11 +212,7 @@ export default {
             align-items: center;
             justify-content: space-between;
             /deep/.dd-color_clear button {
-                border-color: transparent;
                 color: #409eff;
-                background: transparent;
-                padding-left: 0;
-                padding-right: 0;
             }
             /deep/.dd-input .dd-input_inner {
                 width: 160px;

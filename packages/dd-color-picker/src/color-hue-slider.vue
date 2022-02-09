@@ -33,23 +33,21 @@ export default {
             this.$emit("input", this.radio * 360);
         },
         mousedownIn() {
-            let _this = this;
-            document.onmousemove = function (e) {
+            document.onmousemove = (e) => {
                 let left =
-                    e.clientX - _this.hub_slider.getBoundingClientRect().left;
+                    e.clientX - this.hub_slider.getBoundingClientRect().left;
                 if (left < 0) left = 0;
                 if (left > _hubSliderWidth) left = _hubSliderWidth;
-                _this.left = left;
-                _this.radio = (_this.left / _hubSliderWidth).toFixed(6);
-                _this.$emit("input", _this.radio * 360);
+                this.left = left;
+                this.radio = (this.left / _hubSliderWidth).toFixed(6);
+                this.$emit("input", this.radio * 360);
             };
         },
         mousedownOut(event) {
             var event = event || window.event;
             let startx = event.clientX;
             let sb_bkx = startx - event.target.offsetLeft;
-            let _this = this;
-            document.onmousemove = function (e) {
+            document.onmousemove = (e) => {
                 let event = e || window.event;
                 let endx = event.clientX - sb_bkx;
                 if (endx < 0) {
@@ -58,9 +56,9 @@ export default {
                 if (endx > _hubSliderWidth) {
                     endx = _hubSliderWidth;
                 }
-                _this.left = endx;
-                _this.radio = (endx / _hubSliderWidth).toFixed(6);
-                _this.$emit("input", _this.radio * 360);
+                this.left = endx;
+                this.radio = (endx / _hubSliderWidth).toFixed(6);
+                this.$emit("input", this.radio * 360);
             };
         },
         mouseup() {

@@ -7,7 +7,6 @@
         <input
             ref="input"
             type="text"
-            @blur="select_onBlur"
             @click="select_Click"
             @focus="select_getFocus"
             :placeholder="placeholder"
@@ -47,16 +46,21 @@
                 ></use>
             </svg>
         </span>
-        <div
-            :class="[
-                'dd-select-dropdown',
-                isShow_dropdown ? 'show_dropdown' : '',
-            ]"
-        >
-            <div class="dd-select-dropdown-s"></div>
-            <ul>
-                <slot />
-            </ul>
+        <div ref="dd-select-dropdown">
+            <transition name="fale">
+                <div
+                    v-if="isShow_dropdown"
+                    :class="[
+                        'dd-select-dropdown',
+                        isShow_dropdown ? 'show_dropdown' : '',
+                    ]"
+                >
+                    <div class="dd-select-dropdown-s"></div>
+                    <ul>
+                        <slot />
+                    </ul>
+                </div>
+            </transition>
         </div>
     </div>
 </template>
@@ -89,11 +93,11 @@ export default {
     },
     methods: {
         select_onBlur(e) {
-            this.isActive = false;
             this.$emit("blur", e);
         },
         select_Click(e) {
             this.isActive = !this.isActive;
+            this.isShow_dropdown = true;
         },
         select_clearable() {
             if (this.clearable && this.select_value) {
@@ -122,6 +126,20 @@ export default {
         select_input() {
             return this.$refs.input;
         },
+    },
+    mounted() {
+        document.onmousedown = (e) => {
+            if (
+                this.$refs["dd-select-dropdown"] &&
+                this.$refs["dd-select-dropdown"].contains(e.target)
+            )
+                return;
+            this.isActive = false;
+            this.isShow_dropdown = false;
+        };
+    },
+    beforeDestroy() {
+        document.onmousedown = null;
     },
     watch: {
         value(val) {
@@ -192,7 +210,6 @@ export default {
         border: 1px solid #e4e7ed;
         border-radius: 4px;
         margin-top: 10px;
-        display: none;
         background-color: #fff;
         box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
         box-sizing: border-box;
@@ -231,5 +248,17 @@ export default {
         // transition: opacity 0.3s;
         // opacity: 1;
     }
+}
+.fale-enter-active,
+.fale-leave-active {
+    transition: opacity 0.5s;
+}
+.fale-enter,
+.fale-leave-to {
+    opacity: 0;
+}
+.fale-enter-to,
+.fale-leave {
+    opacity: 1;
 }
 </style>
