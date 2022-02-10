@@ -19,6 +19,7 @@ const Progress = () => import("@/components/Progress.vue");
 const Upload = () => import("@/components/Upload.vue");
 const Message = () => import("@/components/Message.vue");
 const ColorPicker = () => import("@/components/ColorPicker.vue");
+const Tooltip = () => import("@/components/Tooltip.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -116,6 +117,11 @@ const routes = [
                 path: "/component/color-picker",
                 name: "ColorPicker",
                 component: ColorPicker,
+            },
+            {
+                path: "/component/tooltip",
+                name: "Tooltip",
+                component: Tooltip,
             },
         ],
     },

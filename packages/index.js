@@ -27,6 +27,7 @@ import ddProgress from "./dd-progress";
 import ddUpload from "./dd-upload";
 import Message from "./dd-message";
 import ddColorPicker from "./dd-color-picker";
+import ddTooltip from "./dd-tooltip";
 import "./css/global.css";
 Vue.use(Message);
 const components = [
@@ -56,6 +57,7 @@ const components = [
     ddProgress,
     ddUpload,
     ddColorPicker,
+    ddTooltip,
 ];
 
 const install = function (Vue) {
@@ -97,6 +99,7 @@ export {
     ddProgress,
     ddUpload,
     ddColorPicker,
+    ddTooltip,
 };
 
 export default {
@@ -129,4 +132,5 @@ export default {
     ddProgress,
     ddUpload,
     ddColorPicker,
+    ddTooltip,
 };

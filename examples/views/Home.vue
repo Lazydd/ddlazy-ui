@@ -117,10 +117,10 @@ export default {
                             label: "Select 选择器",
                             path: "#/component/select",
                         },
-                        {
-                            label: "Cascader 级联选择器",
-                            path: "/component/quickstart",
-                        },
+                        // {
+                        //     label: "Cascader 级联选择器",
+                        //     path: "/component/quickstart",
+                        // },
                         {
                             label: "Switch 开关",
                             path: "#/component/switch",
@@ -154,18 +154,18 @@ export default {
                             label: "ColorPicker 颜色选择器",
                             path: "#/component/color-picker",
                         },
-                        {
-                            label: "Cascader 级联选择器",
-                            path: "#/component/quickstart",
-                        },
-                        {
-                            label: "Input 开关",
-                            path: "#/component/quickstart",
-                        },
-                        {
-                            label: "Slider 滑块",
-                            path: "#/component/quickstart",
-                        },
+                        // {
+                        //     label: "Cascader 级联选择器",
+                        //     path: "#/component/quickstart",
+                        // },
+                        // {
+                        //     label: "Input 开关",
+                        //     path: "#/component/quickstart",
+                        // },
+                        // {
+                        //     label: "Slider 滑块",
+                        //     path: "#/component/quickstart",
+                        // },
                     ],
                 },
                 {
@@ -180,38 +180,38 @@ export default {
                 {
                     label: "Others",
                     children: [
+                        // {
+                        //     label: "Dialog 对话框",
+                        //     path: "#/component/quickstart",
+                        // },
                         {
-                            label: "Radio 单选框",
-                            path: "#/component/quickstart",
+                            label: "Tooltip 文字提示",
+                            path: "#/component/tooltip",
                         },
-                        {
-                            label: "Checkbox 多选框",
-                            path: "#/component/quickstart",
-                        },
-                        {
-                            label: "Input 输入框",
-                            path: "#/component/quickstart",
-                        },
-                        {
-                            label: "InputNumber 计数器",
-                            path: "#/component/quickstart",
-                        },
-                        {
-                            label: "Select 选择器",
-                            path: "#/component/quickstart",
-                        },
-                        {
-                            label: "Cascader 级联选择器",
-                            path: "#/component/quickstart",
-                        },
-                        {
-                            label: "Input 开关",
-                            path: "#/component/quickstart",
-                        },
-                        {
-                            label: "Slider 滑块",
-                            path: "#/component/quickstart",
-                        },
+                        // {
+                        //     label: "Input 输入框",
+                        //     path: "#/component/quickstart",
+                        // },
+                        // {
+                        //     label: "InputNumber 计数器",
+                        //     path: "#/component/quickstart",
+                        // },
+                        // {
+                        //     label: "Select 选择器",
+                        //     path: "#/component/quickstart",
+                        // },
+                        // {
+                        //     label: "Cascader 级联选择器",
+                        //     path: "#/component/quickstart",
+                        // },
+                        // {
+                        //     label: "Input 开关",
+                        //     path: "#/component/quickstart",
+                        // },
+                        // {
+                        //     label: "Slider 滑块",
+                        //     path: "#/component/quickstart",
+                        // },
                     ],
                 },
             ],

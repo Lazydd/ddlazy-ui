@@ -1,7 +1,12 @@
 <template>
     <div class="dd-slider" @mouseup="mouseup">
         {{ radio }}
-        <div class="dd-slider_runway" ref="slider_runway" @mouseup="runwayUp">
+        <div
+            class="dd-slider_runway"
+            ref="slider_runway"
+            @mousedown="mousedownIn"
+            @mouseup="runwayUp"
+        >
             <div
                 class="dd-slider__button-wrapper"
                 :style="`width:${left}px`"
@@ -9,7 +14,7 @@
             <div
                 class="dd-slider_button-wrapper"
                 ref="button_wrapper"
-                @mousedown="mousedown"
+                @mousedown="mousedownOut"
                 :style="{ left: left + 'px' }"
             >
                 <div class="dd-tooltip dd-slider_button"></div>
@@ -34,7 +39,18 @@ export default {
                 e.clientX - this.slider_runway.getBoundingClientRect().left;
             this.radio = (this.left / _hubSliderWidth).toFixed(6);
         },
-        mousedown(event) {
+        mousedownIn() {
+            document.onmousemove = (e) => {
+                let left =
+                    e.clientX - this.slider_runway.getBoundingClientRect().left;
+                if (left < 0) left = 0;
+                if (left > _hubSliderWidth) left = _hubSliderWidth;
+                this.left = left;
+                this.radio = (this.left / _hubSliderWidth).toFixed(6);
+                this.$emit("input", this.radio * 360);
+            };
+        },
+        mousedownOut(event) {
             // this.setAttribute({style:'cursor:grabbing'})
             var event = event || window.event;
             let startx = event.clientX;
