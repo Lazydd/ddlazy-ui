@@ -1,12 +1,12 @@
 <template>
-    <div class="dd-color-picker">
+    <div class="dd-color-picker" ref="dd-color_dropdown">
         <div class="color-picker_trigger" @click="isShow = !isShow">
             <div
                 class="color-picker_color"
                 :style="`background-color: ${hex}`"
             ></div>
         </div>
-        <div ref="dd-color_dropdown">
+        <div>
             <transition name="fale">
                 <div
                     class="dd-color_dropdown dd-color-picker_pannel"
@@ -71,7 +71,7 @@ export default {
         };
     },
     methods: {
-        hsv2rgb(h, s, v) {
+        hsv2rgb(h, s, v) { 
             let r, g, b, i, f, p, q, t;
             if (arguments.length === 1) {
                 (s = h.s), (v = h.v), (h = h.h);
@@ -128,7 +128,6 @@ export default {
         this.hex = this.rgb2hex(this.rgb.r, this.rgb.g, this.rgb.b);
         this.noChangeHEX = this.hex;
         document.onmousedown = (e) => {
-            console.log(this.$refs["dd-color_dropdown"].contains(e.target));
             if (
                 this.$refs["dd-color_dropdown"] &&
                 this.$refs["dd-color_dropdown"].contains(e.target)

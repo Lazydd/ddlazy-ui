@@ -3,12 +3,12 @@
         class="dd-select"
         @mouseover="select_mouseOver"
         @mouseleave="select_mouseLeave"
+        ref="dd-select-dropdown"
     >
         <input
             ref="input"
             type="text"
             @click="select_Click"
-            @focus="select_getFocus"
             :placeholder="placeholder"
             :disabled="disabled"
             :value="select_label"
@@ -46,10 +46,10 @@
                 ></use>
             </svg>
         </span>
-        <div ref="dd-select-dropdown">
+        <div>
             <transition name="fale">
                 <div
-                    v-if="isShow_dropdown"
+                    v-show="isShow_dropdown"
                     :class="[
                         'dd-select-dropdown',
                         isShow_dropdown ? 'show_dropdown' : '',
@@ -97,7 +97,7 @@ export default {
         },
         select_Click(e) {
             this.isActive = !this.isActive;
-            this.isShow_dropdown = true;
+            this.isShow_dropdown = !this.isShow_dropdown;
         },
         select_clearable() {
             if (this.clearable && this.select_value) {
@@ -105,9 +105,6 @@ export default {
                 this.select_label = "";
                 this.$emit("input", this.select_value);
             }
-        },
-        select_getFocus(e) {
-            this.isShow_dropdown = true;
         },
         select_change(item) {
             this.$emit("input", item);
@@ -137,6 +134,9 @@ export default {
             this.isActive = false;
             this.isShow_dropdown = false;
         };
+    },
+    created() {
+        console.log(this.select_label);
     },
     beforeDestroy() {
         document.onmousedown = null;
