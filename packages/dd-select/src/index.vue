@@ -135,9 +135,6 @@ export default {
             this.isShow_dropdown = false;
         };
     },
-    created() {
-        console.log(this.select_label);
-    },
     beforeDestroy() {
         document.onmousedown = null;
     },
