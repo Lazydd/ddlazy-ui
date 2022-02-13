@@ -28,6 +28,7 @@ import ddUpload from "./dd-upload";
 import Message from "./dd-message";
 import ddColorPicker from "./dd-color-picker";
 import ddTooltip from "./dd-tooltip";
+import ddPagination from "./dd-pagination";
 import "./css/global.css";
 Vue.use(Message);
 const components = [
@@ -58,6 +59,7 @@ const components = [
     ddUpload,
     ddColorPicker,
     ddTooltip,
+    ddPagination,
 ];
 
 const install = function (Vue) {
@@ -100,6 +102,7 @@ export {
     ddUpload,
     ddColorPicker,
     ddTooltip,
+    ddPagination,
 };
 
 export default {
@@ -133,4 +136,5 @@ export default {
     ddUpload,
     ddColorPicker,
     ddTooltip,
+    ddPagination,
 };

@@ -154,10 +154,10 @@ export default {
                             label: "ColorPicker 颜色选择器",
                             path: "#/component/color-picker",
                         },
-                        // {
-                        //     label: "Cascader 级联选择器",
-                        //     path: "#/component/quickstart",
-                        // },
+                        {
+                            label: "Pagination 分页",
+                            path: "#/component/pagination",
+                        },
                         // {
                         //     label: "Input 开关",
                         //     path: "#/component/quickstart",

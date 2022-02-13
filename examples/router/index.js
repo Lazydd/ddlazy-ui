@@ -20,6 +20,7 @@ const Upload = () => import("@/components/Upload.vue");
 const Message = () => import("@/components/Message.vue");
 const ColorPicker = () => import("@/components/ColorPicker.vue");
 const Tooltip = () => import("@/components/Tooltip.vue");
+const Pagination = () => import("@/components/Pagination.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -122,6 +123,11 @@ const routes = [
                 path: "/component/tooltip",
                 name: "Tooltip",
                 component: Tooltip,
+            },
+            {
+                path: "/component/pagination",
+                name: "Pagination",
+                component: Pagination,
             },
         ],
     },

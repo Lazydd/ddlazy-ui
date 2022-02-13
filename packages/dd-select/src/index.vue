@@ -126,11 +126,7 @@ export default {
     },
     mounted() {
         document.onmousedown = (e) => {
-            if (
-                this.$refs["dd-select-dropdown"] &&
-                this.$refs["dd-select-dropdown"].contains(e.target)
-            )
-                return;
+            if (this?.$refs["dd-select-dropdown"]?.contains(e.target)) return;
             this.isActive = false;
             this.isShow_dropdown = false;
         };
