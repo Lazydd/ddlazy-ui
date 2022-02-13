@@ -6,7 +6,10 @@
             <template #source>
                 <dd-upload
                     action="https://jsonplaceholder.typicode.com/posts/"
-                ></dd-upload>
+                    name="files"
+                >
+                    <dd-button type="primary" size="small">点击上传</dd-button>
+                </dd-upload>
             </template>
         </dd-block>
     </div>

@@ -1,6 +1,13 @@
 <template>
     <div class="dd-upload" @click="dd_upload">
-        <dd-button type="primary" size="small">点击上传</dd-button>
+        <input
+            type="file"
+            ref="input"
+            :multiple="multiple"
+            style="display: none"
+            @change="addFile"
+        />
+        <slot />
     </div>
 </template>
 
@@ -12,10 +19,31 @@ export default {
         action: {
             type: String,
         },
+        multiple: {
+            type: Boolean,
+        },
+        size: {
+            type: Number,
+            default: 1,
+        },
+        name: {
+            type: String,
+            default: "file",
+        },
     },
     methods: {
         dd_upload() {
-            console.log(ajax({ action: this.action }));
+            this.$refs.input.click();
+        },
+        addFile(e) {
+            let file = e.target.files[0];
+            if (file == null || file == "undefined" || file === "undefined")
+                return true;
+            // if (file.size > 1024 * this.size) alert("图片大小超过");
+            let param = new FormData();
+            param.append(this.name, file, file.name);
+            param.append("type", "RESOURCE");
+            ajax({ action: this.action, param });
         },
     },
 };
