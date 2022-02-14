@@ -100,6 +100,9 @@ export default {
 }
 .box {
     z-index: 5;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
     &:hover {
         box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6),
             0 2px 4px 0 rgba(232, 237, 250, 0.5);

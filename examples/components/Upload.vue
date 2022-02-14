@@ -5,7 +5,7 @@
         <dd-block title="基础用法" :code="code1">
             <template #source>
                 <dd-upload
-                    action="https://jsonplaceholder.typicode.com/posts/"
+                    action="http://fanyi.youdao.com/translate"
                     name="files"
                 >
                     <dd-button type="primary" size="small">点击上传</dd-button>

@@ -7,7 +7,7 @@
                 <dd-pagination
                     layout="prev, pager, next"
                     :current-page.sync="page"
-                    :total="52"
+                    :total="62"
                     :page-sizes="10"
                 ></dd-pagination>
             </template>

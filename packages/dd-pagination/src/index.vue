@@ -3,28 +3,31 @@
         <div :small="small">
             <div
                 class="btn-pre control"
-                @click="!disabledPre ? btn_pre() : null"
-                :disabled="disabledPre || pageCounts == 1"
+                @click="!disabled ? (!disabledPre ? btn_pre() : null) : null"
+                :disabled="disabled ? disabled : disabledPre || pageCounts == 1"
             >
                 <svg class="icon" aria-hidden="true">
                     <use :xlink:href="`#icon-arrow-left`"></use>
                 </svg>
             </div>
-            <ul class="pager">
+            <ul class="pager" :disabled="disabled">
                 <li
                     class="number"
                     v-for="(page, index) in pageCounts"
                     :key="index"
                     :class="page == currentPages ? 'active' : ''"
-                    @click="pagerClick(page)"
+                    @click="!disabled ? pagerClick(page) : null"
                 >
                     {{ page }}
                 </li>
+                <li class="number">...</li>
             </ul>
             <div
                 class="btn-next control"
-                @click="!disabledNext ? btn_next() : null"
-                :disabled="disabledNext || pageCounts == 1"
+                @click="!disabled ? (!disabledNext ? btn_next() : null) : null"
+                :disabled="
+                    disabled ? disabled : disabledNext || pageCounts == 1
+                "
             >
                 <svg class="icon" aria-hidden="true">
                     <use :xlink:href="`#icon-arrow-right`"></use>
@@ -63,6 +66,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {
@@ -83,12 +90,14 @@ export default {
             if (this.currentPages < this.pageCounts) {
                 this.disabledNext = false;
                 this.currentPages++;
+                this.$emit("next-click", this.currentPages);
             }
         },
         btn_pre() {
             if (this.currentPages > 1) {
                 this.disabledPre = false;
                 this.currentPages--;
+                this.$emit("prev-click", this.currentPages);
             }
         },
         pageInit() {
@@ -162,6 +171,14 @@ export default {
         .active {
             color: #409eff;
             cursor: default;
+        }
+    }
+    [disabled] {
+        li {
+            color: #c0c4cc;
+            background-color: #fff;
+            cursor: not-allowed !important;
+            pointer-events: none;
         }
     }
     .btn-pre {
@@ -239,8 +256,13 @@ export default {
     }
     [disabled] {
         color: #c0c4cc;
-        background-color: #f4f4f5;
         cursor: not-allowed !important;
+        li {
+            color: #c0c4cc;
+            background-color: #f4f4f5;
+            cursor: not-allowed !important;
+            pointer-events: none;
+        }
     }
     [small] {
         .pager {
