@@ -51,6 +51,7 @@ export default {
 
 <style lang="less" scoped>
 .dd-option {
+    width: 100%;
     .dd-select-dropdown {
         font-size: 14px;
         padding: 0 20px;

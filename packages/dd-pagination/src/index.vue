@@ -1,6 +1,22 @@
 <template>
     <div :class="['dd-pagination', background ? 'is-background' : '']">
         <div :small="small">
+            <div class="dd-pagination_total">共 {{ total }} 条</div>
+            <div class="dd-pagination_sizes" v-if="pageSizes">
+                <dd-select
+                    v-model="currentPageSizes"
+                    size="mini"
+                    @change="currentPageSizesChange"
+                >
+                    <dd-option
+                        v-for="item in pageSizes"
+                        :key="item"
+                        :label="`${item}条/页`"
+                        :value="item"
+                    >
+                    </dd-option>
+                </dd-select>
+            </div>
             <div
                 class="btn-pre control"
                 @click="!disabled ? (!disabledPre ? btn_pre() : null) : null"
@@ -33,6 +49,20 @@
                     <use :xlink:href="`#icon-arrow-right`"></use>
                 </svg>
             </div>
+            <div class="dd-pagination__jump">
+                <span
+                    >前往
+                    <div class="dd-input">
+                        <input
+                            class="dd-input_inner"
+                            type="number"
+                            v-model="dd_pagination_input"
+                            @change="ddJumper"
+                        />
+                    </div>
+                    页
+                </span>
+            </div>
         </div>
     </div>
 </template>
@@ -51,9 +81,13 @@ export default {
             type: Number,
             default: 1,
         },
-        pageSizes: {
+        pageSize: {
             type: Number,
             default: 10,
+        },
+        pageSizes: {
+            type: Array,
+            default: () => [10, 20, 30, 40, 50],
         },
         pageCount: {
             type: Number,
@@ -74,15 +108,18 @@ export default {
     data() {
         return {
             currentPages: this.currentPage || 1,
-            pagesize: this.pageSizes || 10,
+            pagesize: this.pageSize || 10,
             pageCounts: this.pageCount,
             disabledNext: false,
             disabledPre: false,
+            dd_pagination_input: this.currentPage || 1,
+            currentPageSizes: this.pageSizes[0],
         };
     },
     methods: {
         pagerClick(page) {
             this.currentPages = page;
+            this.dd_pagination_input = this.currentPages;
             this.$parent.currentPage = page;
             this.$emit("current-change", this.currentPages);
         },
@@ -90,6 +127,7 @@ export default {
             if (this.currentPages < this.pageCounts) {
                 this.disabledNext = false;
                 this.currentPages++;
+                this.dd_pagination_input = this.currentPages;
                 this.$emit("next-click", this.currentPages);
             }
         },
@@ -97,12 +135,22 @@ export default {
             if (this.currentPages > 1) {
                 this.disabledPre = false;
                 this.currentPages--;
+                this.dd_pagination_input = this.currentPages;
                 this.$emit("prev-click", this.currentPages);
             }
+        },
+        ddJumper(e) {
+            this.currentPages = parseInt(e.target.value);
+        },
+        currentPageSizesChange() {
+            this.pagesize = this.currentPageSizes;
+            this.pageInit();
+            this.currentPages = 1;
         },
         pageInit() {
             if (this.currentPage >= this.pageCounts)
                 this.currentPages = this.pageCounts;
+            this.dd_pagination_input = this.currentPages;
             let count = Math.floor(this.total / this.pagesize);
             let mod = this.total % this.pagesize;
             if (mod == 0) this.pageCounts = count;
@@ -233,6 +281,74 @@ export default {
             font-size: 15px;
             margin: 0 3px;
             min-width: 22px;
+        }
+    }
+    .dd-pagination_total {
+        font-size: 13px;
+        line-height: 28px;
+        margin-right: 10px;
+        font-weight: 400;
+        color: #606266;
+    }
+    .dd-pagination_sizes {
+        font-size: 13px;
+        margin-right: 10px;
+        font-weight: 400;
+        color: #606266;
+        /deep/.dd-select .dd-select_inner {
+            width: 100px;
+        }
+        /deep/.dd-select .dd-select-dropdown {
+            min-width: 110px;
+        }
+    }
+    .dd-pagination__jump {
+        display: inline-block;
+        font-size: 13px;
+        min-width: 35.5px;
+        height: 28px;
+        line-height: 28px;
+        margin-left: 24px;
+        vertical-align: top;
+        box-sizing: border-box;
+        span {
+            font-weight: 400;
+            color: #606266;
+        }
+        .dd-input {
+            position: relative;
+            display: inline-block;
+            .dd-input_inner {
+                background-color: #fff;
+                background-image: none;
+                border-radius: 4px;
+                border: 1px solid #dcdfe6;
+                box-sizing: border-box;
+                color: #606266;
+                display: inline-block;
+                font-size: inherit;
+                width: 50px;
+                outline: none;
+                padding: 0 3px;
+                cursor: pointer;
+                height: 28px;
+                line-height: 28px;
+                transition: all 0.3s;
+                &:focus {
+                    border-color: #409eff !important;
+                }
+                &:hover {
+                    border-color: #c0c4cc;
+                }
+            }
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            }
+
+            input[type="number"] {
+                -moz-appearance: textfield;
+            }
         }
     }
 }

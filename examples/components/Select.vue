@@ -55,6 +55,46 @@
                 </dd-select>
             </template>
         </dd-block>
+        <dd-block title="尺寸" :code="code5">
+            <template #source>
+                <dd-select
+                    v-model="value5"
+                    placeholder="请选择"
+                    style="margin-right: 20px"
+                >
+                    <dd-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                    >
+                    </dd-option>
+                </dd-select>
+                <dd-select
+                    v-model="value5"
+                    placeholder="请选择"
+                    style="margin-right: 20px"
+                    size="small"
+                >
+                    <dd-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                    >
+                    </dd-option>
+                </dd-select>
+                <dd-select v-model="value5" placeholder="请选择" size="mini">
+                    <dd-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                    >
+                    </dd-option>
+                </dd-select>
+            </template>
+        </dd-block>
     </div>
 </template>
 
@@ -133,7 +173,7 @@ export default {
                     },
                 ],
             `,
-            code3:`
+            code3: `
                 <dd-select v-model="value2" disabled placeholder="请选择">
                     <dd-option
                         v-for="item in options"
@@ -144,8 +184,46 @@ export default {
                     </dd-option>
                 </dd-select>
             `,
-            code4:`
+            code4: `
                 <dd-select v-model="value4" clearable placeholder="请选择">
+                    <dd-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                    >
+                    </dd-option>
+                </dd-select>
+            `,
+            code5: `
+                <dd-select
+                    v-model="value5"
+                    placeholder="请选择"
+                    style="margin-right: 20px"
+                >
+                    <dd-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                    >
+                    </dd-option>
+                </dd-select>
+                <dd-select
+                    v-model="value5"
+                    placeholder="请选择"
+                    style="margin-right: 20px"
+                    size="small"
+                >
+                    <dd-option
+                        v-for="item in options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                    >
+                    </dd-option>
+                </dd-select>
+                <dd-select v-model="value5" placeholder="请选择" size="mini">
                     <dd-option
                         v-for="item in options"
                         :key="item.value"
@@ -204,6 +282,7 @@ export default {
             value2: "",
             value3: "",
             value4: "选项5",
+            value5: "",
         };
     },
 };

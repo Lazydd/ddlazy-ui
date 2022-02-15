@@ -8,7 +8,7 @@
                     layout="prev, pager, next"
                     :current-page.sync="page"
                     :total="62"
-                    :page-sizes="10"
+                    :page-size="10"
                 ></dd-pagination>
             </template>
         </dd-block>
@@ -19,7 +19,7 @@
                     layout="prev, pager, next"
                     :current-page.sync="page"
                     :total="52"
-                    :page-sizes="10"
+                    :page-size="10"
                 ></dd-pagination>
             </template>
         </dd-block>
@@ -30,7 +30,7 @@
                     layout="prev, pager, next"
                     :current-page.sync="page"
                     :total="52"
-                    :page-sizes="10"
+                    :page-size="10"
                 ></dd-pagination>
             </template>
         </dd-block>

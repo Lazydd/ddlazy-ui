@@ -16,6 +16,7 @@
             :class="[
                 'dd-select_inner',
                 'is_focus',
+                size,
                 disabled ? 'is-disabled' : '',
             ]"
         />
@@ -81,6 +82,9 @@ export default {
             type: Boolean,
             default: false,
         },
+        size: {
+            type: String,
+        },
     },
     data() {
         return {
@@ -108,6 +112,7 @@ export default {
         },
         select_change(item) {
             this.$emit("input", item);
+            this.$emit("change", item);
         },
         select_mouseOver() {
             this.isShow_clearable = true;
@@ -240,6 +245,19 @@ export default {
         display: block;
         // transition: opacity 0.3s;
         // opacity: 1;
+    }
+
+    .medium {
+        height: 36px;
+        line-height: 36px;
+    }
+    .small {
+        height: 32px;
+        line-height: 32px;
+    }
+    .mini {
+        height: 28px;
+        line-height: 28px;
     }
 }
 .fale-enter-active,
