@@ -29,6 +29,8 @@ import Message from "./dd-message";
 import ddColorPicker from "./dd-color-picker";
 import ddTooltip from "./dd-tooltip";
 import ddPagination from "./dd-pagination";
+import ddBadge from "./dd-badge";
+import ddAvatar from "./dd-avatar";
 import "./css/global.css";
 Vue.use(Message);
 const components = [
@@ -60,6 +62,8 @@ const components = [
     ddColorPicker,
     ddTooltip,
     ddPagination,
+    ddBadge,
+    ddAvatar,
 ];
 
 const install = function (Vue) {
@@ -103,6 +107,8 @@ export {
     ddColorPicker,
     ddTooltip,
     ddPagination,
+    ddBadge,
+    ddAvatar,
 };
 
 export default {
@@ -137,4 +143,6 @@ export default {
     ddColorPicker,
     ddTooltip,
     ddPagination,
+    ddBadge,
+    ddAvatar,
 };

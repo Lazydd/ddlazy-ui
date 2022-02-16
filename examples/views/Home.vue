@@ -158,14 +158,14 @@ export default {
                             label: "Pagination 分页",
                             path: "#/component/pagination",
                         },
-                        // {
-                        //     label: "Input 开关",
-                        //     path: "#/component/quickstart",
-                        // },
-                        // {
-                        //     label: "Slider 滑块",
-                        //     path: "#/component/quickstart",
-                        // },
+                        {
+                            label: "Badge 标记",
+                            path: "#/component/badge",
+                        },
+                        {
+                            label: "Avatar 头像",
+                            path: "#/component/avatar",
+                        },
                     ],
                 },
                 {

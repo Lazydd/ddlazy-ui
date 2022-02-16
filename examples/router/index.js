@@ -21,6 +21,8 @@ const Message = () => import("@/components/Message.vue");
 const ColorPicker = () => import("@/components/ColorPicker.vue");
 const Tooltip = () => import("@/components/Tooltip.vue");
 const Pagination = () => import("@/components/Pagination.vue");
+const Badge = () => import("@/components/Badge.vue");
+const Avatar = () => import("@/components/Avatar.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -128,6 +130,16 @@ const routes = [
                 path: "/component/pagination",
                 name: "Pagination",
                 component: Pagination,
+            },
+            {
+                path: "/component/badge",
+                name: "Badge",
+                component: Badge,
+            },
+            {
+                path: "/component/avatar",
+                name: "Avatar",
+                component: Avatar,
             },
         ],
     },

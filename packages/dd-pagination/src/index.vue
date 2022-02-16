@@ -1,8 +1,10 @@
 <template>
     <div :class="['dd-pagination', background ? 'is-background' : '']">
         <div :small="small">
-            <div class="dd-pagination_total">共 {{ total }} 条</div>
-            <div class="dd-pagination_sizes" v-if="pageSizes">
+            <div v-if="isShow.total" class="dd-pagination_total">
+                共 {{ total }} 条
+            </div>
+            <div class="dd-pagination_sizes" v-if="isShow.sizes && pageSizes">
                 <dd-select
                     v-model="currentPageSizes"
                     size="mini"
@@ -18,6 +20,7 @@
                 </dd-select>
             </div>
             <div
+                v-if="isShow.prev"
                 class="btn-pre control"
                 @click="!disabled ? (!disabledPre ? btn_pre() : null) : null"
                 :disabled="disabled ? disabled : disabledPre || pageCounts == 1"
@@ -26,7 +29,7 @@
                     <use :xlink:href="`#icon-arrow-left`"></use>
                 </svg>
             </div>
-            <ul class="pager" :disabled="disabled">
+            <ul class="pager" :disabled="disabled" v-if="isShow.pager">
                 <li
                     class="number"
                     v-for="(page, index) in pageCounts"
@@ -39,6 +42,7 @@
                 <li class="number">...</li>
             </ul>
             <div
+                v-if="isShow.next"
                 class="btn-next control"
                 @click="!disabled ? (!disabledNext ? btn_next() : null) : null"
                 :disabled="
@@ -49,7 +53,7 @@
                     <use :xlink:href="`#icon-arrow-right`"></use>
                 </svg>
             </div>
-            <div class="dd-pagination__jump">
+            <div class="dd-pagination__jump" v-if="isShow.jumper">
                 <span
                     >前往
                     <div class="dd-input">
@@ -104,6 +108,9 @@ export default {
             type: Boolean,
             default: false,
         },
+        layout: {
+            type: String,
+        },
     },
     data() {
         return {
@@ -114,6 +121,7 @@ export default {
             disabledPre: false,
             dd_pagination_input: this.currentPage || 1,
             currentPageSizes: this.pageSizes[0],
+            isShow: {},
         };
     },
     methods: {
@@ -155,6 +163,29 @@ export default {
             let mod = this.total % this.pagesize;
             if (mod == 0) this.pageCounts = count;
             if (mod != 0) this.pageCounts = count + 1;
+            let components = this.layout.split(",").map((item) => item.trim());
+            components.map((item) => {
+                switch (item) {
+                    case "prev":
+                        this.$set(this.isShow, item, true);
+                        break;
+                    case "next":
+                        this.$set(this.isShow, item, true);
+                        break;
+                    case "pager":
+                        this.$set(this.isShow, item, true);
+                        break;
+                    case "jumper":
+                        this.$set(this.isShow, item, true);
+                        break;
+                    case "total":
+                        this.$set(this.isShow, item, true);
+                        break;
+                    case "sizes":
+                        this.$set(this.isShow, item, true);
+                        break;
+                }
+            });
         },
     },
     created() {

@@ -5,7 +5,7 @@
         <dd-block title="基础用法" :code="code1">
             <template #source>
                 <dd-pagination
-                    layout="prev, pager, next"
+                    layout="total, sizes, prev, pager, next, jumper"
                     :current-page.sync="page"
                     :total="62"
                     :page-size="10"
@@ -45,10 +45,10 @@ export default {
             page: 1,
             code1: `
                 <dd-pagination
-                    layout="prev, pager, next"
+                    layout="total, sizes, prev, pager, next, jumper"
                     :current-page.sync="page"
-                    :total="52"
-                    :page-sizes="10"
+                    :total="62"
+                    :page-size="10"
                 ></dd-pagination>
             `,
             code2: `
