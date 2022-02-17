@@ -111,6 +111,7 @@ export default {
             }
         },
         select_change(item) {
+            this.isActive = false;
             this.$emit("input", item);
             this.$emit("change", item);
         },

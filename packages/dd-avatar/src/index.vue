@@ -5,6 +5,11 @@
             shape == 'square' ? 'dd-avatar-square' : 'dd-avatar-circle ',
             size,
         ]"
+        :style="
+            typeof size === 'number'
+                ? `width: ${size}px; height: ${size}px; line-height: ${size}px`
+                : ''
+        "
     >
         <img :src="src" alt="" />
     </div>
@@ -15,7 +20,7 @@ export default {
     name: "ddAvatar",
     props: {
         size: {
-            type: String,
+            type: [String, Number],
         },
         src: {
             type: String,
