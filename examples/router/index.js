@@ -23,6 +23,7 @@ const Tooltip = () => import("@/components/Tooltip.vue");
 const Pagination = () => import("@/components/Pagination.vue");
 const Badge = () => import("@/components/Badge.vue");
 const Avatar = () => import("@/components/Avatar.vue");
+const Loading = () => import("@/components/Loading.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -140,6 +141,11 @@ const routes = [
                 path: "/component/avatar",
                 name: "Avatar",
                 component: Avatar,
+            },
+            {
+                path: "/component/loading",
+                name: "Loading",
+                component: Loading,
             },
         ],
     },

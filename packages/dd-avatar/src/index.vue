@@ -11,7 +11,21 @@
                 : ''
         "
     >
-        <img :src="src" alt="" />
+        <img
+            v-if="src && Error"
+            :src="src"
+            alt=""
+            @error="error"
+            :style="`object-fit:${fit}`"
+        />
+        <div class="dd-icon" v-if="!src && icon">
+            <svg class="icon" aria-hidden="true">
+                <use :xlink:href="`#${icon}`"></use>
+            </svg>
+        </div>
+        <template v-if="$slots.default || ($slots.default && !Error)">
+            <slot />
+        </template>
     </div>
 </template>
 
@@ -27,6 +41,23 @@ export default {
         },
         shape: {
             type: String,
+        },
+        icon: {
+            type: String,
+        },
+        fit: {
+            type: String,
+        },
+    },
+    data() {
+        return {
+            Error: true,
+        };
+    },
+    methods: {
+        error(e) {
+            this.Error = e.defaultPrevented;
+            this.$emit("error", e.defaultPrevented);
         },
     },
 };
@@ -48,6 +79,10 @@ export default {
         display: block;
         height: 100%;
         vertical-align: middle;
+    }
+    .dd-icon {
+        display: inline-block;
+        font-size: 25px;
     }
 }
 .dd-avatar-circle {

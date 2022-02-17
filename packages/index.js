@@ -31,8 +31,10 @@ import ddTooltip from "./dd-tooltip";
 import ddPagination from "./dd-pagination";
 import ddBadge from "./dd-badge";
 import ddAvatar from "./dd-avatar";
+import ddLoading from "./dd-loading";
 import "./css/global.css";
 Vue.use(Message);
+Vue.use(ddLoading);
 const components = [
     ddButton,
     ddIcon,

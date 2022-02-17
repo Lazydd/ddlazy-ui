@@ -172,6 +172,10 @@ export default {
                     label: "Notice",
                     children: [
                         {
+                            label: "Loading 加载",
+                            path: "#/component/loading",
+                        },
+                        {
                             label: "Message 消息提示",
                             path: "#/component/message",
                         },
