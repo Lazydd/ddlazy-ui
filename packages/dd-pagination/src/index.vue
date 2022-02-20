@@ -148,7 +148,16 @@ export default {
             }
         },
         ddJumper(e) {
-            this.currentPages = parseInt(e.target.value);
+            if (e.target.value) {
+                let current = parseInt(e.target.value);
+                if (current > this.pageCounts) {
+                    this.dd_pagination_input = this.pageCounts;
+                } else if (current < 1) {
+                    this.dd_pagination_input = 1;
+                } else {
+                    this.dd_pagination_input = current;
+                }
+            }
         },
         currentPageSizesChange() {
             this.pagesize = this.currentPageSizes;

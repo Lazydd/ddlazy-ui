@@ -26,7 +26,6 @@ const Loading = (options) => {
     document.body.appendChild(instance.dom); // 将dom插入body
     instance.dom.style.zIndex = nId + 1001; // 后插入的Notice组件z-index加一，保证能盖在之前的上面
     // instance.dom.style.top = -500 + "px";
-
     return instance.vm;
 };
 ["service"].forEach((type) => {

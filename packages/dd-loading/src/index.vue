@@ -1,27 +1,30 @@
 <template>
-    <div
-        ref="ddLoading"
-        v-show="visible"
-        :style="`background-color: ${
-            background ? background : 'rgba(0, 0, 0, 0.7)'
-        }`"
-        class="dd-loading is-fullscreen"
-    >
-        <div class="dd-loading-spinner">
-            <div class="dd-icon" style="display: inline-block">
-                <svg class="icon" aria-hidden="true">
-                    <use
-                        :xlink:href="`#${spinner ? spinner : 'icon-loading'}`"
-                    ></use>
-                </svg>
+    <transition name="loading"
+        ><div
+            ref="ddLoading"
+            v-show="visible"
+            :style="`background-color: ${
+                background ? background : 'rgba(0, 0, 0, 0.7)'
+            }`"
+            class="dd-loading is-fullscreen"
+        >
+            <div class="dd-loading-spinner">
+                <div class="dd-icon" style="display: inline-block">
+                    <svg class="icon" aria-hidden="true">
+                        <use
+                            :xlink:href="`#${
+                                spinner ? spinner : 'icon-loading'
+                            }`"
+                        ></use>
+                    </svg>
+                </div>
+                <p class="dd-loading-text">{{ text }}</p>
             </div>
-            <p class="dd-loading-text">{{ text }}</p>
-        </div>
-    </div>
+        </div></transition
+    >
 </template>
 
 <script>
-let _MessageHeight = 0;
 export default {
     name: "ddLoading",
     data() {
@@ -37,14 +40,14 @@ export default {
             this.visible ? this.destroy() : null;
         },
         destroy() {
+            this.visible = false;
             setTimeout(() => {
-                this.visible = false;
                 this.$destroy(true);
                 this.$el.parentNode.removeChild(this.$el); // 从DOM里将这个组件移除
             }, 500);
         },
         close() {
-            this.visible = false;
+            this.ddMessage_closeBtn();
         },
     },
 };
@@ -88,6 +91,12 @@ export default {
     right: 0;
     bottom: 0;
     left: 0;
-    transition: all 3s;
+    transition: all 0.3s;
+}
+.loading-enter {
+    opacity: 0;
+}
+.loading-leave-to {
+    opacity: 0;
 }
 </style>

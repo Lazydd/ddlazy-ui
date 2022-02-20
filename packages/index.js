@@ -32,9 +32,13 @@ import ddPagination from "./dd-pagination";
 import ddBadge from "./dd-badge";
 import ddAvatar from "./dd-avatar";
 import ddLoading from "./dd-loading";
+import ddMessageBox from "./dd-message-box";
+import ddTabs from "./dd-tabs";
+import ddTabPane from "./dd-tab-pane";
 import "./css/global.css";
 Vue.use(Message);
 Vue.use(ddLoading);
+Vue.use(ddMessageBox);
 const components = [
     ddButton,
     ddIcon,
@@ -66,6 +70,8 @@ const components = [
     ddPagination,
     ddBadge,
     ddAvatar,
+    ddTabs,
+    ddTabPane,
 ];
 
 const install = function (Vue) {
@@ -111,6 +117,8 @@ export {
     ddPagination,
     ddBadge,
     ddAvatar,
+    ddTabs,
+    ddTabPane,
 };
 
 export default {
@@ -147,4 +155,6 @@ export default {
     ddPagination,
     ddBadge,
     ddAvatar,
+    ddTabs,
+    ddTabPane,
 };

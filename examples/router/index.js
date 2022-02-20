@@ -24,6 +24,8 @@ const Pagination = () => import("@/components/Pagination.vue");
 const Badge = () => import("@/components/Badge.vue");
 const Avatar = () => import("@/components/Avatar.vue");
 const Loading = () => import("@/components/Loading.vue");
+const MessageBox = () => import("@/components/MessageBox.vue");
+const Tabs = () => import("@/components/Tabs.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -146,6 +148,16 @@ const routes = [
                 path: "/component/loading",
                 name: "Loading",
                 component: Loading,
+            },
+            {
+                path: "/component/message-box",
+                name: "MessageBox",
+                component: MessageBox,
+            },
+            {
+                path: "/component/tabs",
+                name: "Tabs",
+                component: Tabs,
             },
         ],
     },

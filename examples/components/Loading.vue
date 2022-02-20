@@ -4,7 +4,9 @@
         <p class="_descript">加载数据时显示动效。</p>
         <dd-block title="整页加载" :code="code1">
             <template #source>
-                <dd-button type="primary" @click="openFullScreen2">服务方式</dd-button>
+                <dd-button type="primary" @click="openFullScreen2"
+                    >服务方式</dd-button
+                >
             </template>
         </dd-block>
     </div>
@@ -31,8 +33,11 @@ export default {
             //     lock: true,
             //     text: "Loading",
             //     spinner: "icon-loading",
-
             // });
+            // setTimeout(() => {
+            //     loading.close();
+            // }, 3000);
+
             this.$loading.service("Loading");
             setTimeout(() => {
                 this.$loading.close();

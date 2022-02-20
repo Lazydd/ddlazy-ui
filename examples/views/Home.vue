@@ -179,6 +179,23 @@ export default {
                             label: "Message 消息提示",
                             path: "#/component/message",
                         },
+                        {
+                            label: "MessageBox 弹框",
+                            path: "#/component/message-box",
+                        },
+                    ],
+                },
+                {
+                    label: "Navigation",
+                    children: [
+                        // {
+                        //     label: "NavMenu 导航菜单",
+                        //     path: "#/component/quickstart",
+                        // },
+                        {
+                            label: "Tabs 标签页",
+                            path: "#/component/tabs",
+                        },
                     ],
                 },
                 {
