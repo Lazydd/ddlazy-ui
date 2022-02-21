@@ -5,7 +5,17 @@
         <dd-block title="基础用法" :code="code1">
             <template #source>
                 <dd-breadcrumb separator="/">
-                    <dd-breadcrumb-item>首页</dd-breadcrumb-item>
+                    <dd-breadcrumb-item :to="{ path: '/' }">首页</dd-breadcrumb-item>
+                    <dd-breadcrumb-item><a href="/">活动管理</a></dd-breadcrumb-item>
+                    <dd-breadcrumb-item>活动列表</dd-breadcrumb-item>
+                    <dd-breadcrumb-item>活动详情</dd-breadcrumb-item>
+                </dd-breadcrumb>
+            </template>
+        </dd-block>
+        <dd-block title="图标分隔符" :code="code2">
+            <template #source>
+                <dd-breadcrumb separator-class="icon-link">
+                    <dd-breadcrumb-item :to="{ path: '/' }">首页</dd-breadcrumb-item>
                     <dd-breadcrumb-item>活动管理</dd-breadcrumb-item>
                     <dd-breadcrumb-item>活动列表</dd-breadcrumb-item>
                     <dd-breadcrumb-item>活动详情</dd-breadcrumb-item>
@@ -21,10 +31,20 @@ export default {
     data() {
         return {
             code1: `
-                
+                <dd-breadcrumb separator="/">
+                    <dd-breadcrumb-item :to="{ path: '/' }">首页</dd-breadcrumb-item>
+                    <dd-breadcrumb-item><a href="/">活动管理</a></dd-breadcrumb-item>
+                    <dd-breadcrumb-item>活动列表</dd-breadcrumb-item>
+                    <dd-breadcrumb-item>活动详情</dd-breadcrumb-item>
+                </dd-breadcrumb>
             `,
             code2: `
-                
+                <dd-breadcrumb separator-class="icon-link">
+                    <dd-breadcrumb-item :to="{ path: '/' }">首页</dd-breadcrumb-item>
+                    <dd-breadcrumb-item>活动管理</dd-breadcrumb-item>
+                    <dd-breadcrumb-item>活动列表</dd-breadcrumb-item>
+                    <dd-breadcrumb-item>活动详情</dd-breadcrumb-item>
+                </dd-breadcrumb>
             `,
         };
     },

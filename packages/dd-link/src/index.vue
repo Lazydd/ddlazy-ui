@@ -9,7 +9,7 @@
         >
             <span>
                 <dd-icon v-if="icon" :icon="icon"></dd-icon>
-                <slot />
+                <slot  v-if="$slots.default" />
             </span>
         </a>
     </div>

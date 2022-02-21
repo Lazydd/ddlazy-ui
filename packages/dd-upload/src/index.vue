@@ -7,7 +7,7 @@
             style="display: none"
             @change="addFile"
         />
-        <slot />
+        <slot  v-if="$slots.default" />
     </div>
 </template>
 

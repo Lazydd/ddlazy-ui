@@ -2,7 +2,7 @@
     <transition name="list">
         <div class="dd-tag">
             <span :class="[type, size]">
-                <slot />
+                <slot  v-if="$slots.default" />
                 <dd-icon
                     v-if="closable"
                     @click="dd_tag_close"

@@ -3,7 +3,7 @@
         <table cellspacing="0">
             <thead>
                 <tr>
-                    <slot> </slot>
+                    <slot v-if="$slots.default"> </slot>
                 </tr>
             </thead>
             <tbody>

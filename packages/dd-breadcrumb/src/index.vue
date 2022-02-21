@@ -1,6 +1,6 @@
 <template>
-    <div class="dd-breadcrumb">
-        <slot kk="123" />
+    <div class="dd-breadcrumb" aria-label="Breadcrumb">
+        <slot v-if="$slots.default" />
     </div>
 </template>
 
@@ -9,6 +9,10 @@ export default {
     name: "ddBreadcrumb",
     props: {
         separator: {
+            type: String,
+            default: "/",
+        },
+        separatorClass: {
             type: String,
         },
     },

@@ -12,8 +12,8 @@ export default {
     data() {
         return {
             activeTab: this.value,
-            width: 40,
-            left: 20,
+            width: 0,
+            left: 0,
             tabIndex: 0,
             tabLength: 0,
         };

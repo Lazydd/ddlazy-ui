@@ -1,6 +1,6 @@
 <template>
     <div class="dd-checkbox-group">
-        <slot />
+        <slot v-if="$slots.default" />
     </div>
 </template>
 

@@ -502,16 +502,24 @@ export default {
             width: calc(100% / 6);
             text-align: center;
             height: 120px;
+            cursor: pointer;
             color: #666;
             border-right: 1px solid #eee;
             border-bottom: 1px solid #eee;
             margin-bottom: -1px;
-            &:hover {
+            transition: all .5s;
+            .dd-icon {
+                color: #606266;
+                margin: 0 20px;
+                font-size: 2.5em;
+                vertical-align: middle;
+                transform: scale(1);
                 transition: all .5s;
+            }
+            &:hover {
                 color: #5cb6ff;
                 .dd-icon {
                   transform: scale(1.4);
-                  transition: all .5s;
                   color: #5cb6ff;
                 }
             }

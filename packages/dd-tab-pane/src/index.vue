@@ -1,6 +1,6 @@
 <template>
     <div class="dd-tab-pane">
-        <slot />
+        <slot  v-if="$slots.default" />
     </div>
 </template>
 

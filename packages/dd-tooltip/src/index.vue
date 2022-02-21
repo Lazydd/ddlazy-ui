@@ -14,7 +14,7 @@
                 </div>
             </transition>
             <div>
-                <slot />
+                <slot  v-if="$slots.default" />
             </div>
         </div>
     </div>

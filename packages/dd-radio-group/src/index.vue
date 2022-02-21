@@ -1,6 +1,6 @@
 <template>
     <div class="dd-radio-group">
-        <slot />
+        <slot  v-if="$slots.default" />
     </div>
 </template>
 

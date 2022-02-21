@@ -58,7 +58,7 @@
                 >
                     <div class="dd-select-dropdown-s"></div>
                     <ul>
-                        <slot />
+                        <slot  v-if="$slots.default" />
                     </ul>
                 </div>
             </transition>

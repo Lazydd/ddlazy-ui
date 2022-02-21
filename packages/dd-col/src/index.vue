@@ -7,7 +7,7 @@
             'margin-left': (offset / 24) * 100 + '%',
         }"
     >
-        <slot></slot>
+        <slot v-if="$slots.default" />
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <div class="dd-badge">
-        <slot />
+        <slot v-if="$slots.default" />
         <sup
             v-if="!hidden"
             :class="[

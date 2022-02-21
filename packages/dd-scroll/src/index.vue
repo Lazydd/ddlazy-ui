@@ -4,7 +4,7 @@
             class="dd-scrollbar_srap"
             style="margin-right: -17px; margin-bottom: -17px"
         >
-            <slot />
+            <slot  v-if="$slots.default" />
         </div>
         <div class="dd-scrollbar_bar is_horizontal"></div>
         <div class="dd-scrollbar_bar is_vertical">
