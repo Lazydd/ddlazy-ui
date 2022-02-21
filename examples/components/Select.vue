@@ -100,6 +100,7 @@
 
 <script>
 export default {
+    name:'Select',
     data() {
         return {
             code1: `

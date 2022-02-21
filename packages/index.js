@@ -35,6 +35,8 @@ import ddLoading from "./dd-loading";
 import ddMessageBox from "./dd-message-box";
 import ddTabs from "./dd-tabs";
 import ddTabPane from "./dd-tab-pane";
+import ddBreadcrumb from "./dd-breadcrumb";
+import ddBreadcrumbItem from "./dd-breadcrumb-item";
 import "./css/global.css";
 Vue.use(Message);
 Vue.use(ddLoading);
@@ -72,6 +74,8 @@ const components = [
     ddAvatar,
     ddTabs,
     ddTabPane,
+    ddBreadcrumb,
+    ddBreadcrumbItem,
 ];
 
 const install = function (Vue) {
@@ -119,6 +123,8 @@ export {
     ddAvatar,
     ddTabs,
     ddTabPane,
+    ddBreadcrumb,
+    ddBreadcrumbItem,
 };
 
 export default {
@@ -157,4 +163,6 @@ export default {
     ddAvatar,
     ddTabs,
     ddTabPane,
+    ddBreadcrumb,
+    ddBreadcrumbItem,
 };

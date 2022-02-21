@@ -22,7 +22,7 @@
 
 <script>
 export default {
-    name: "Input-Number",
+    name: "InputNumber",
     data() {
         return {
             num: 1,

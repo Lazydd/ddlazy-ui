@@ -89,7 +89,7 @@
 
 <script>
 export default {
-    name: "Badge",
+    name: "Avatar",
     data() {
         return {
             size: "",

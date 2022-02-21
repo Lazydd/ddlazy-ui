@@ -26,6 +26,7 @@ const Avatar = () => import("@/components/Avatar.vue");
 const Loading = () => import("@/components/Loading.vue");
 const MessageBox = () => import("@/components/MessageBox.vue");
 const Tabs = () => import("@/components/Tabs.vue");
+const Breadcrumb = () => import("@/components/Breadcrumb.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -158,6 +159,11 @@ const routes = [
                 path: "/component/tabs",
                 name: "Tabs",
                 component: Tabs,
+            },
+            {
+                path: "/component/breadcrumb",
+                name: "Breadcrumb",
+                component: Breadcrumb,
             },
         ],
     },

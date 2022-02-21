@@ -14,7 +14,7 @@
 
 <script>
 export default {
-    name: "Icon",
+    name: "MessageBox",
     data() {
         return {
             code1: `

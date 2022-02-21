@@ -196,6 +196,10 @@ export default {
                             label: "Tabs 标签页",
                             path: "#/component/tabs",
                         },
+                        {
+                            label: "Breadcrumb 面包屑",
+                            path: "#/component/breadcrumb",
+                        },
                     ],
                 },
                 {

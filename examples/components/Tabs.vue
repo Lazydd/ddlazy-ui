@@ -47,7 +47,7 @@
 
 <script>
 export default {
-    name: "Icon",
+    name: "Tabs",
     data() {
         return {
             activeName: "first",

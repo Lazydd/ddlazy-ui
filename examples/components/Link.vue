@@ -41,7 +41,7 @@
 
 <script>
 export default {
-    name: "Icon",
+    name: "Link",
     data() {
         return {
             code1: `

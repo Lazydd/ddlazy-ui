@@ -14,7 +14,7 @@
 
 <script>
 export default {
-    name: "Icon",
+    name: "Loading",
     data() {
         return {
             code1: `
