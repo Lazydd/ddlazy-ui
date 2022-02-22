@@ -214,29 +214,29 @@ export default {
                             path: "#/component/tooltip",
                         },
                         // {
-                        //     label: "Input 输入框",
-                        //     path: "#/component/quickstart",
+                        //     label: "Popover 弹出框",
+                        //     path: "#/component/popover",
                         // },
                         // {
-                        //     label: "InputNumber 计数器",
-                        //     path: "#/component/quickstart",
+                        //     label: "Popconfirm 气泡确认框",
+                        //     path: "#/component/popconfirm",
+                        // },
+                        {
+                            label: "Card 卡片",
+                            path: "#/component/card",
+                        },
+                        // {
+                        //     label: "Carousel 走马灯",
+                        //     path: "#/component/carousel",
                         // },
                         // {
-                        //     label: "Select 选择器",
-                        //     path: "#/component/quickstart",
+                        //     label: "Collapse 折叠面板",
+                        //     path: "#/component/collapse",
                         // },
-                        // {
-                        //     label: "Cascader 级联选择器",
-                        //     path: "#/component/quickstart",
-                        // },
-                        // {
-                        //     label: "Input 开关",
-                        //     path: "#/component/quickstart",
-                        // },
-                        // {
-                        //     label: "Slider 滑块",
-                        //     path: "#/component/quickstart",
-                        // },
+                        {
+                            label: "Divider 分割线",
+                            path: "#/component/divider",
+                        },
                     ],
                 },
             ],

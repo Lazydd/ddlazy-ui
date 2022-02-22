@@ -37,6 +37,8 @@ import ddTabs from "./dd-tabs";
 import ddTabPane from "./dd-tab-pane";
 import ddBreadcrumb from "./dd-breadcrumb";
 import ddBreadcrumbItem from "./dd-breadcrumb-item";
+import ddCard from "./dd-card";
+import ddDivider from "./dd-divider";
 import "./css/global.css";
 Vue.use(Message);
 Vue.use(ddLoading);
@@ -76,6 +78,8 @@ const components = [
     ddTabPane,
     ddBreadcrumb,
     ddBreadcrumbItem,
+    ddCard,
+    ddDivider,
 ];
 
 const install = function (Vue) {
@@ -125,6 +129,8 @@ export {
     ddTabPane,
     ddBreadcrumb,
     ddBreadcrumbItem,
+    ddCard,
+    ddDivider,
 };
 
 export default {
@@ -165,4 +171,6 @@ export default {
     ddTabPane,
     ddBreadcrumb,
     ddBreadcrumbItem,
+    ddCard,
+    ddDivider,
 };
