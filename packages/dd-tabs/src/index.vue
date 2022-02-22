@@ -203,6 +203,7 @@ export default {
             box-sizing: border-box;
             .dd-tabs__active-bar {
                 background-color: #fff;
+                height: 1px;
             }
         }
         .dd-tabs__active-bar {

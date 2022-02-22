@@ -29,6 +29,7 @@ const Tabs = () => import("@/components/Tabs.vue");
 const Breadcrumb = () => import("@/components/Breadcrumb.vue");
 const Card = () => import("@/components/Card.vue");
 const Divider = () => import("@/components/Divider.vue");
+const Backtop = () => import("@/components/Backtop.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -176,6 +177,11 @@ const routes = [
                 path: "/component/divider",
                 name: "Divider",
                 component: Divider,
+            },
+            {
+                path: "/component/backtop",
+                name: "Backtop",
+                component: Backtop,
             },
         ],
     },

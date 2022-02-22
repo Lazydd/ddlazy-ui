@@ -237,6 +237,10 @@ export default {
                             label: "Divider 分割线",
                             path: "#/component/divider",
                         },
+                        {
+                            label: "Backtop 回到顶部",
+                            path: "#/component/Backtop",
+                        },
                     ],
                 },
             ],
@@ -264,10 +268,9 @@ export default {
     }
     /deep/.dd-block,
     /deep/.control {
-        color: #eaeaea;
-        border-color: #eaeaea;
-        background: rgb(30, 30, 30);
-        transition: all 1s;
+        color: #eaeaea !important;
+        border-color: #eaeaea !important;
+        background: rgb(30, 30, 30) !important;
     }
     /deep/ .code {
         border-left: 1px solid #eaeaea;
@@ -306,6 +309,26 @@ a:focus {
     width: 100%;
     height: 100%;
     min-width: 1200px;
+    background-color: #fff;
+    transition: all 1s;
+    /deep/ .code {
+        border-left: 1px solid #eaeaea;
+        border-right: 1px solid #eaeaea;
+        transition: all 1s;
+    }
+    /deep/ header,
+    /deep/ .dd-input .dd-input_inner,
+    /deep/.dd-input .dd-textarea textarea,
+    /deep/.dd-input .dd-input_prepend,
+    /deep/.dd-input .dd-input_append,
+    /deep/.dd-radio-button .radio__label,
+    /deep/.dd-checkbox-button .checkbox_inner,
+    /deep/.dd-input-number .dd-input_inner,
+    /deep/.dd-select .dd-select_inner,
+    /deep/.dd-select .dd-select-dropdown {
+        background-color: #fff;
+        transition: all 1s;
+    }
     header {
         display: flex;
         position: fixed;
