@@ -5,13 +5,13 @@
         <dd-block title="基础用法" :code="code1">
             <template #source>
                 Scroll down to see the bottom-right button.
-                <dd-backtop target=".page"></dd-backtop>
+                <dd-backtop target=".main-box"></dd-backtop>
             </template>
         </dd-block>
         <dd-block title="自定义显示内容" :code="code2">
             <template #source>
                 Scroll down to see the bottom-right button.
-                <dd-backtop :bottom="100">
+                <dd-backtop target=".main-box" :bottom="100">
                     <div
                         style="
                              {

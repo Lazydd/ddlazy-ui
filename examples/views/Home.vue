@@ -40,7 +40,7 @@
                     </li>
                 </ul>
             </article>
-            <main>
+            <main class="main-box" ref="abc">
                 <router-view />
             </main>
         </div>
