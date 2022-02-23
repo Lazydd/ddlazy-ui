@@ -30,6 +30,17 @@
                 </dd-backtop>
             </template>
         </dd-block>
+        <dd-block title="自定义距离顶部距离" :code="code3">
+            <template #source>
+                Scroll down to see the bottom-right button.
+                <dd-backtop
+                    icon="icon-pointerleft"
+                    :bottom="160"
+                    target=".main-box"
+                    :offsetTop="100"
+                ></dd-backtop>
+            </template>
+        </dd-block>
     </div>
 </template>
 
@@ -40,11 +51,36 @@ export default {
         return {
             code1: `
                 Scroll down to see the bottom-right button.
-                <dd-backtop></dd-backtop>
+                <dd-backtop target=".main-box"></dd-backtop>
             `,
             code2: `
                 Scroll down to see the bottom-right button.
-                <dd-backtop></dd-backtop>
+                <dd-backtop target=".main-box" :bottom="100">
+                    <div
+                        style="
+                             {
+                                height: 100%;
+                                width: 100%;
+                                background-color: #f2f5f6;
+                                box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+                                text-align: center;
+                                line-height: 40px;
+                                color: #1989fa;
+                            }
+                        "
+                    >
+                        UP
+                    </div>
+                </dd-backtop>
+            `,
+            code3: `
+                Scroll down to see the bottom-right button.
+                <dd-backtop
+                    icon="icon-pointerleft"
+                    :bottom="160"
+                    target=".main-box"
+                    :offsetTop="100"
+                ></dd-backtop>
             `,
         };
     },

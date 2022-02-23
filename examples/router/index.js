@@ -30,6 +30,7 @@ const Breadcrumb = () => import("@/components/Breadcrumb.vue");
 const Card = () => import("@/components/Card.vue");
 const Divider = () => import("@/components/Divider.vue");
 const Backtop = () => import("@/components/Backtop.vue");
+const Dialog = () => import("@/components/Dialog.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -182,6 +183,11 @@ const routes = [
                 path: "/component/backtop",
                 name: "Backtop",
                 component: Backtop,
+            },
+            {
+                path: "/component/dialog",
+                name: "Dialog",
+                component: Dialog,
             },
         ],
     },

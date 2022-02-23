@@ -15,9 +15,6 @@
 </template>
 
 <script>
-const cubic = (value) => Math.pow(value, 3);
-const easeInOutCubic = (value) =>
-    value < 0.5 ? cubic(value * 2) / 2 : 1 - cubic((1 - value) * 2) / 2;
 export default {
     name: "ddBacktop",
     props: {
@@ -40,6 +37,10 @@ export default {
         target: {
             type: String,
         },
+        offsetTop: {
+            type: Number,
+            default: 0,
+        },
     },
     data() {
         return {
@@ -60,36 +61,19 @@ export default {
             this.dd_scrolltoTop();
         },
         dd_scrolltoTop() {
-            console.log(this.vnode.scrollIntoView({ behavior: "smooth" }));
-            this.vnode.scrollIntoView({ behavior: "smooth" });
-            // const beginTime = Date.now();
-            // const beginValue = this.vnode.scrollTop;
-            // const rAF =
-            //     window.requestAnimationFrame ||
-            //     ((func) => setTimeout(func, 16));
-            // const frameFunc = () => {
-            //     const progress = (Date.now() - beginTime) / 500;
-            //     if (progress < 1) {
-            //         this.vnode.scrollTop =
-            //             beginValue * (1 - easeInOutCubic(progress));
-            //         rAF(frameFunc);
-            //     } else {
-            //         this.vnode.scrollTop = 0;
-            //     }
-            // };
-            // rAF(frameFunc);
+            this.vnode.scrollTo({ behavior: "smooth", top: this.offsetTop });
+        },
+        dd_isShowBacktop() {
+            this.isShowBacktop =
+                this.vnode.scrollTop > this.visibilityHeight ? true : false;
         },
     },
     mounted() {
         this.init();
-        window.addEventListener(
-            "scroll",
-            () => {
-                this.isShowBacktop =
-                    this.vnode.scrollTop > this.visibilityHeight ? true : false;
-            },
-            true
-        );
+        window.addEventListener("scroll", this.dd_isShowBacktop, true);
+    },
+    beforeDestroy() {
+        window.removeEventListener("scroll", this.dd_isShowBacktop);
     },
 };
 </script>

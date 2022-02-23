@@ -205,10 +205,10 @@ export default {
                 {
                     label: "Others",
                     children: [
-                        // {
-                        //     label: "Dialog 对话框",
-                        //     path: "#/component/quickstart",
-                        // },
+                        {
+                            label: "Dialog 对话框",
+                            path: "#/component/dialog",
+                        },
                         {
                             label: "Tooltip 文字提示",
                             path: "#/component/tooltip",

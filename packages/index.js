@@ -40,6 +40,7 @@ import ddBreadcrumbItem from "./dd-breadcrumb-item";
 import ddCard from "./dd-card";
 import ddDivider from "./dd-divider";
 import ddBacktop from "./dd-backtop";
+import ddDialog from "./dd-dialog";
 import "./css/global.css";
 Vue.use(Message);
 Vue.use(ddLoading);
@@ -82,6 +83,7 @@ const components = [
     ddCard,
     ddDivider,
     ddBacktop,
+    ddDialog,
 ];
 
 const install = function (Vue) {
@@ -134,6 +136,7 @@ export {
     ddCard,
     ddDivider,
     ddBacktop,
+    ddDialog,
 };
 
 export default {
@@ -177,4 +180,5 @@ export default {
     ddCard,
     ddDivider,
     ddBacktop,
+    ddDialog,
 };
