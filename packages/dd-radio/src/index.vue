@@ -20,7 +20,16 @@
                 ]"
             ></span>
         </span>
-        <span class="radio__label">
+        <span
+            :class="[
+                'radio__label',
+                !isDisabled &&
+                (group ? groupActive : value) == label &&
+                !disabled
+                    ? 'radio_origina_text'
+                    : '',
+            ]"
+        >
             <slot v-if="$slots.default" />
             <span v-else>{{ label }}</span>
         </span>
@@ -122,7 +131,12 @@ export default {
             margin: auto;
             border: 4px solid #409eff;
             border-radius: 100%;
+            transition: all 0.3s;
         }
+    }
+    .radio_origina_text {
+        color: #409eff;
+        transition: color 0.3s;
     }
     .radio_inner_hover {
         &:hover {

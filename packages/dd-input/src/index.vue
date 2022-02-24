@@ -12,6 +12,7 @@
                     :style="{ 'min-height': '33px', resize: resize }"
                     :rows="rows"
                     :class="[disabled ? 'is-disabled' : '']"
+                    :value="input_value"
                 ></textarea>
             </div>
             <input
@@ -184,7 +185,7 @@ export default {
         display: inline-block;
         font-size: inherit;
         width: 100%;
-        width: 180px;
+        // width: 180px;
         height: 40px;
         outline: none;
         padding: 0 15px;

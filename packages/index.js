@@ -41,6 +41,8 @@ import ddCard from "./dd-card";
 import ddDivider from "./dd-divider";
 import ddBacktop from "./dd-backtop";
 import ddDialog from "./dd-dialog";
+import ddForm from "./dd-form";
+import ddFormItem from "./dd-form-item";
 import "./css/global.css";
 Vue.use(Message);
 Vue.use(ddLoading);
@@ -84,6 +86,8 @@ const components = [
     ddDivider,
     ddBacktop,
     ddDialog,
+    ddForm,
+    ddFormItem,
 ];
 
 const install = function (Vue) {
@@ -137,6 +141,8 @@ export {
     ddDivider,
     ddBacktop,
     ddDialog,
+    ddForm,
+    ddFormItem,
 };
 
 export default {
@@ -181,4 +187,6 @@ export default {
     ddDivider,
     ddBacktop,
     ddDialog,
+    ddForm,
+    ddFormItem,
 };

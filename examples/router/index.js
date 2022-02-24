@@ -31,6 +31,7 @@ const Card = () => import("@/components/Card.vue");
 const Divider = () => import("@/components/Divider.vue");
 const Backtop = () => import("@/components/Backtop.vue");
 const Dialog = () => import("@/components/Dialog.vue");
+const Form = () => import("@/components/Form.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -188,6 +189,11 @@ const routes = [
                 path: "/component/dialog",
                 name: "Dialog",
                 component: Dialog,
+            },
+            {
+                path: "/component/form",
+                name: "Form",
+                component: Form,
             },
         ],
     },

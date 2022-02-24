@@ -58,7 +58,7 @@
                 >
                     <div class="dd-select-dropdown-s"></div>
                     <ul>
-                        <slot  v-if="$slots.default" />
+                        <slot v-if="$slots.default" />
                     </ul>
                 </div>
             </transition>
@@ -210,7 +210,7 @@ export default {
         border-radius: 4px;
         margin-top: 10px;
         background-color: #fff;
-        box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
         box-sizing: border-box;
         z-index: 1000;
         ul {

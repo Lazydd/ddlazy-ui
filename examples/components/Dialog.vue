@@ -29,7 +29,7 @@
                 </dd-dialog>
             </template>
         </dd-block>
-        <dd-block title="居中布局" :code="code1">
+        <dd-block title="居中布局" :code="code2">
             <template #source>
                 <dd-button @click="dialogVisible1 = true">
                     点击打开 Dialog
@@ -60,14 +60,58 @@
 
 <script>
 export default {
-    name: "Link",
+    name: "Dialog",
     data() {
         return {
             dialogVisible: false,
             dialogVisible1: false,
             code1: `
-                
+                <dd-button @click="dialogVisible = true">
+                    点击打开 Dialog
+                </dd-button>
+                <dd-dialog
+                    title="提示"
+                    :visible.sync="dialogVisible"
+                    width="30%"
+                >
+                    <span>这是一段信息</span>
+                    <span slot="footer" class="dialog-footer">
+                        <dd-button size="small" @click="dialogVisible = false"
+                            >取 消</dd-button
+                        >
+                        <dd-button
+                            type="primary"
+                            size="small"
+                            @click="dialogVisible = false"
+                            >确 定</dd-button
+                        >
+                    </span>
+                </dd-dialog>
             `,
+            code2:`
+                <dd-button @click="dialogVisible1 = true">
+                    点击打开 Dialog
+                </dd-button>
+                <dd-dialog
+                    title="提示"
+                    :visible.sync="dialogVisible1"
+                    width="30%"
+                    cente
+                >
+                    <span>这是一段信息</span>
+                    <span slot="footer" class="dialog-footer">
+                        <dd-button size="small" @click="dialogVisible1 = false"
+                            >取 消</dd-button
+                        >
+                        <dd-button
+                            type="primary"
+                            size="small"
+                            @click="dialogVisible1 = false"
+                            >确 定</dd-button
+                        >
+                    </span>
+                </dd-dialog>
+            `
         };
     },
 };

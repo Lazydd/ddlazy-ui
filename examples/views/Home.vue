@@ -129,6 +129,10 @@ export default {
                             label: "Slider 滑块",
                             path: "#/component/slider",
                         },
+                        {
+                            label: "Form 表单",
+                            path: "#/component/form",
+                        },
                     ],
                 },
                 {
@@ -285,8 +289,7 @@ export default {
     /deep/.dd-radio-button .radio__label,
     /deep/.dd-checkbox-button .checkbox_inner,
     /deep/.dd-input-number .dd-input_inner,
-    /deep/.dd-select .dd-select_inner,
-    /deep/.dd-select .dd-select-dropdown {
+    /deep/.dd-select .dd-select_inner {
         background-color: rgb(30, 30, 30) !important;
         transition: all 1s;
     }
@@ -324,8 +327,7 @@ a:focus {
     /deep/.dd-radio-button .radio__label,
     /deep/.dd-checkbox-button .checkbox_inner,
     /deep/.dd-input-number .dd-input_inner,
-    /deep/.dd-select .dd-select_inner,
-    /deep/.dd-select .dd-select-dropdown {
+    /deep/.dd-select .dd-select_inner {
         background-color: #fff;
         transition: all 1s;
     }
