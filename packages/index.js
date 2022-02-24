@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-import ddButton from "./dd-botton";
+import ddButton from "./dd-button";
 import ddIcon from "./dd-icon";
 import ddLink from "./dd-link";
 import ddBlock from "./dd-block";
