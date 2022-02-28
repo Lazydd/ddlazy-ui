@@ -32,6 +32,9 @@ const Divider = () => import("@/components/Divider.vue");
 const Backtop = () => import("@/components/Backtop.vue");
 const Dialog = () => import("@/components/Dialog.vue");
 const Form = () => import("@/components/Form.vue");
+
+
+const Skeleton = () => import("@/components/Skeleton.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -194,6 +197,17 @@ const routes = [
                 path: "/component/form",
                 name: "Form",
                 component: Form,
+            },
+
+
+
+
+
+
+            {
+                path: "/component/skeleton",
+                name: "Skeleton",
+                component: Skeleton,
             },
         ],
     },

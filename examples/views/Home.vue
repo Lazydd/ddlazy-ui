@@ -170,6 +170,10 @@ export default {
                             label: "Avatar 头像",
                             path: "#/component/avatar",
                         },
+                        {
+                            label: "Skeleton 骨架屏",
+                            path: "#/component/skeleton",
+                        },
                     ],
                 },
                 {
