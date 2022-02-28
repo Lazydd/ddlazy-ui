@@ -175,6 +175,10 @@ export default {
                             path: "#/component/avatar",
                         },
                         {
+                            label: "Skeleton 骨架屏",
+                            path: "#/component/skeleton",
+                        },
+                        {
                             label: "Empty 空状态",
                             path: "#/component/empty",
                         },

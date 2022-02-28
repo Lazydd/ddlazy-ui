@@ -45,6 +45,7 @@ import ddForm from "./dd-form";
 import ddFormItem from "./dd-form-item";
 import ddEmpty from "./dd-empty";
 import ddTree from "./dd-tree";
+import ddSkeleton from "./dd-skeleton";
 import "./css/global.css";
 Vue.use(Message);
 Vue.use(ddLoading);
@@ -92,6 +93,7 @@ const components = [
     ddFormItem,
     ddEmpty,
     ddTree,
+    ddSkeleton,
 ];
 
 const install = function (Vue) {
@@ -149,6 +151,7 @@ export {
     ddFormItem,
     ddEmpty,
     ddTree,
+    ddSkeleton,
 };
 
 export default {
@@ -197,4 +200,5 @@ export default {
     ddFormItem,
     ddEmpty,
     ddTree,
+    ddSkeleton,
 };

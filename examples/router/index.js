@@ -34,6 +34,7 @@ const Dialog = () => import("@/components/Dialog.vue");
 const Form = () => import("@/components/Form.vue");
 const Empty = () => import("@/components/Empty.vue");
 const Tree = () => import("@/components/Tree.vue");
+const Skeleton = () => import("@/components/Skeleton.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -206,6 +207,11 @@ const routes = [
                 path: "/component/tree",
                 name: "Tree",
                 component: Tree,
+            },
+            {
+                path: "/component/skeleton",
+                name: "Skeleton",
+                component: Skeleton,
             },
         ],
     },

@@ -13,6 +13,7 @@
                     :rows="rows"
                     :class="[disabled ? 'is-disabled' : '']"
                     @input="changInput"
+                    v-model="input_value"
                 ></textarea>
             </div>
             <input
