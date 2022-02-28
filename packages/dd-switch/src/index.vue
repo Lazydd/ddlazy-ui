@@ -2,7 +2,6 @@
     <div :style="'display: inline-block'" :class="[value ? 'is-checked' : '']">
         <span
             class="dd-switch_label"
-            style="margin-right: 10px"
             :style="{ color: !value ? '#409eff' : '' }"
             @click="!disabled ? switch_click() : null"
             >{{ activeText }}</span
@@ -11,13 +10,18 @@
             :class="['dd-switch']"
             :disabled="disabled"
             :switch_value="!switch_value && disabled"
-            :style="{ background: value ? activeColor : inactiveColor }"
+            :style="{
+                background: value ? activeColor : inactiveColor,
+                'margin-right': inactiveText ? '10px' : '',
+                'margin-left': activeText ? '10px' : '',
+            }"
             @click="!disabled ? switch_click() : null"
         ></div>
         <span
             class="dd-switch_label"
-            style="margin-left: 10px"
-            :style="{ color: value ? '#409eff' : '' }"
+            :style="{
+                color: value ? '#409eff' : '',
+            }"
             @click="!disabled ? switch_click() : null"
             >{{ inactiveText }}</span
         >

@@ -12,7 +12,7 @@
                     :style="{ 'min-height': '33px', resize: resize }"
                     :rows="rows"
                     :class="[disabled ? 'is-disabled' : '']"
-                    :value="input_value"
+                    @input="changInput"
                 ></textarea>
             </div>
             <input

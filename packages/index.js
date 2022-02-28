@@ -43,6 +43,8 @@ import ddBacktop from "./dd-backtop";
 import ddDialog from "./dd-dialog";
 import ddForm from "./dd-form";
 import ddFormItem from "./dd-form-item";
+import ddEmpty from "./dd-empty";
+import ddTree from "./dd-tree";
 import "./css/global.css";
 Vue.use(Message);
 Vue.use(ddLoading);
@@ -88,6 +90,8 @@ const components = [
     ddDialog,
     ddForm,
     ddFormItem,
+    ddEmpty,
+    ddTree,
 ];
 
 const install = function (Vue) {
@@ -143,6 +147,8 @@ export {
     ddDialog,
     ddForm,
     ddFormItem,
+    ddEmpty,
+    ddTree,
 };
 
 export default {
@@ -189,4 +195,6 @@ export default {
     ddDialog,
     ddForm,
     ddFormItem,
+    ddEmpty,
+    ddTree,
 };

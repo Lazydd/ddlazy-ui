@@ -32,6 +32,8 @@ const Divider = () => import("@/components/Divider.vue");
 const Backtop = () => import("@/components/Backtop.vue");
 const Dialog = () => import("@/components/Dialog.vue");
 const Form = () => import("@/components/Form.vue");
+const Empty = () => import("@/components/Empty.vue");
+const Tree = () => import("@/components/Tree.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -194,6 +196,16 @@ const routes = [
                 path: "/component/form",
                 name: "Form",
                 component: Form,
+            },
+            {
+                path: "/component/empty",
+                name: "Empty",
+                component: Empty,
+            },
+            {
+                path: "/component/tree",
+                name: "Tree",
+                component: Tree,
             },
         ],
     },

@@ -61,9 +61,6 @@ export default {
         this.vnode = this.$el;
         if (this.isShowDialog) this.append();
     },
-    destroyed() {
-        this.remove();
-    },
     watch: {
         visible(val) {
             this.isShowDialog = val;

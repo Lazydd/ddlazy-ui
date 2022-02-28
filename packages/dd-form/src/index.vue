@@ -1,7 +1,7 @@
 <template>
     <div class="dd-form">
         <form>
-            <slot />
+            <slot v-if="$slots.default" />
         </form>
     </div>
 </template>
@@ -12,6 +12,22 @@ export default {
     props: {
         model: {
             type: Object,
+        },
+        labelWidth: {
+            type: String,
+        },
+        rules: {
+            type: Object,
+        },
+    },
+    methods: {
+        validate(callback) {
+            console.log(this.$slots.default);
+            if (!this.model) {
+                return;
+            }
+            let promise = 123;
+            return promise;
         },
     },
 };

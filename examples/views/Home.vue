@@ -151,6 +151,10 @@ export default {
                             path: "#/component/progress",
                         },
                         {
+                            label: "Tree 树形控件",
+                            path: "#/component/tree",
+                        },
+                        {
                             label: "Upload 上传",
                             path: "#/component/upload",
                         },
@@ -169,6 +173,10 @@ export default {
                         {
                             label: "Avatar 头像",
                             path: "#/component/avatar",
+                        },
+                        {
+                            label: "Empty 空状态",
+                            path: "#/component/empty",
                         },
                     ],
                 },
@@ -282,14 +290,9 @@ export default {
         transition: all 1s;
     }
     /deep/ header,
-    /deep/ .dd-input .dd-input_inner,
-    /deep/.dd-input .dd-textarea textarea,
-    /deep/.dd-input .dd-input_prepend,
-    /deep/.dd-input .dd-input_append,
     /deep/.dd-radio-button .radio__label,
     /deep/.dd-checkbox-button .checkbox_inner,
-    /deep/.dd-input-number .dd-input_inner,
-    /deep/.dd-select .dd-select_inner {
+    /deep/.dd-input-number .dd-input_inner {
         background-color: rgb(30, 30, 30) !important;
         transition: all 1s;
     }
@@ -320,14 +323,9 @@ a:focus {
         transition: all 1s;
     }
     /deep/ header,
-    /deep/ .dd-input .dd-input_inner,
-    /deep/.dd-input .dd-textarea textarea,
-    /deep/.dd-input .dd-input_prepend,
-    /deep/.dd-input .dd-input_append,
     /deep/.dd-radio-button .radio__label,
     /deep/.dd-checkbox-button .checkbox_inner,
-    /deep/.dd-input-number .dd-input_inner,
-    /deep/.dd-select .dd-select_inner {
+    /deep/.dd-input-number .dd-input_inner {
         background-color: #fff;
         transition: all 1s;
     }

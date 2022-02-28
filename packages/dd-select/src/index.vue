@@ -21,7 +21,7 @@
             ]"
         />
         <span
-            @click="select_Click"
+            @click="!disabled ? select_Click() : null"
             ref="select_icon"
             :class="['dd-select__suffix', disabled ? 'is-disabled' : '']"
         >
@@ -132,6 +132,7 @@ export default {
     },
     mounted() {
         document.onmousedown = (e) => {
+            console.log(e);
             if (this?.$refs["dd-select-dropdown"]?.contains(e.target)) return;
             this.isActive = false;
             this.isShow_dropdown = false;
