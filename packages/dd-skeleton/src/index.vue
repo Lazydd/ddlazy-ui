@@ -31,31 +31,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@keyframes aaa {
+@keyframes loading {
     0% {
-        background: #f2f2f2;
-        background-size: 100% 100%;
-    }
-    25% {
-        background: #f2f2f2;
-        background-size: 300% 100%;
-    }
-    50% {
-        background: linear-gradient(
-            90deg,
-            #f2f2f2 25%,
-            #e6e6e6 37%,
-            #f2f2f2 63%
-        );
-        background-size: 400% 100%;
-    }
-    75% {
-        background: #f2f2f2;
-        background-size: 300% 100%;
+        left: -100%;
     }
     100% {
-        background: #f2f2f2;
-        background-size: 100% 100%;
+        left: 100%;
     }
 }
 .dd-skeleton {
@@ -80,7 +61,22 @@ export default {
         width: 66%;
     }
     .is_animated {
-        animation: aaa 4.4s ease infinite;
+        position: relative;
+        overflow: hidden;
+        &::before {
+            position: absolute;
+            animation: loading 2.4s ease infinite;
+            content: "";
+            display: inline-block;
+            height: 16px;
+            width: 100%;
+            background: linear-gradient(
+                90deg,
+                #f2f2f2 25%,
+                #e6e6e6 37%,
+                #f2f2f2 63%
+            );
+        }
     }
 }
 </style>

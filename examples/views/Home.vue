@@ -245,10 +245,10 @@ export default {
                         //     label: "Carousel 走马灯",
                         //     path: "#/component/carousel",
                         // },
-                        // {
-                        //     label: "Collapse 折叠面板",
-                        //     path: "#/component/collapse",
-                        // },
+                        {
+                            label: "Collapse 折叠面板",
+                            path: "#/component/collapse",
+                        },
                         {
                             label: "Divider 分割线",
                             path: "#/component/divider",

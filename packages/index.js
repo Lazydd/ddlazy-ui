@@ -46,6 +46,8 @@ import ddFormItem from "./dd-form-item";
 import ddEmpty from "./dd-empty";
 import ddTree from "./dd-tree";
 import ddSkeleton from "./dd-skeleton";
+import ddCollapse from "./dd-collapse";
+import ddCollapseItem from "./dd-collapse-item";
 import "./css/global.css";
 Vue.use(Message);
 Vue.use(ddLoading);
@@ -94,6 +96,8 @@ const components = [
     ddEmpty,
     ddTree,
     ddSkeleton,
+    ddCollapse,
+    ddCollapseItem,
 ];
 
 const install = function (Vue) {
@@ -152,6 +156,8 @@ export {
     ddEmpty,
     ddTree,
     ddSkeleton,
+    ddCollapse,
+    ddCollapseItem,
 };
 
 export default {
@@ -201,4 +207,6 @@ export default {
     ddEmpty,
     ddTree,
     ddSkeleton,
+    ddCollapse,
+    ddCollapseItem,
 };
