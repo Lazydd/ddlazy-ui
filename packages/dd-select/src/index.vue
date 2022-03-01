@@ -132,7 +132,6 @@ export default {
     },
     mounted() {
         document.onmousedown = (e) => {
-            console.log(e);
             if (this?.$refs["dd-select-dropdown"]?.contains(e.target)) return;
             this.isActive = false;
             this.isShow_dropdown = false;

@@ -384,7 +384,9 @@ export default {
         };
     },
     methods: {
-        onSubmit() {},
+        onSubmit() {
+            console.log(123);
+        },
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {

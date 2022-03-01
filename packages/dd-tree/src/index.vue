@@ -3,12 +3,11 @@
         <div class="dd-tree-node" v-for="(item, i) in data" :key="i">
             <div
                 class="dd-tree-node__content"
-                :style="`padding-left:${18}px`"
+                :style="`padding-left:${node.nodeLevel * 18}px`"
                 v-if="item[props.label]"
             >
                 {{ item[props.label] }}
             </div>
-            {{ node }}
             <div
                 class="dd-tree-node__children"
                 v-if="item[props.children] && item[props.children].length"
@@ -48,15 +47,10 @@ export default {
             if (this.$parent?.nodeLevel) {
                 let parentNodeLevel = this.$parent.nodeLevel;
                 this.$set(this.node, "nodeLevel", parentNodeLevel + 1);
+                this.nodeLevel = parentNodeLevel + 1;
+            } else {
+                this.$set(this.node, "nodeLevel", 1);
             }
-            // if (
-            //     this.node[this.props?.children]?.length &&
-            //     this.node[this.props?.children]?.length != 0
-            // ) {
-            //     this.nodeLevel++;
-            //     this.$set(this.node, "nodeLevel", this.nodeLevel);
-            //     this.initTree();
-            // }
         },
     },
     created() {
