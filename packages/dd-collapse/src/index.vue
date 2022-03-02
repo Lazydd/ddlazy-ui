@@ -11,6 +11,10 @@ export default {
         value: {
             type: Array,
         },
+        accordion: {
+            type: Boolean,
+            default: false,
+        },
     },
 };
 </script>
