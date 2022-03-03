@@ -1,6 +1,5 @@
 <template>
     <div :class="['dd-collapse-item', isActive ? 'is-active' : '']">
-        {{ isActive }}
         <div
             class="dd-collapse-item__header"
             @click="sollapseChange"

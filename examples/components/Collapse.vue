@@ -127,7 +127,7 @@ export default {
                     </dd-collapse-item>
                 </dd-collapse>
             `,
-            code1: `
+            code2: `
                 <dd-collapse v-model="activeNames1" accordion>
                     <dd-collapse-item title="一致性 Consistency" name="1">
                         <div>

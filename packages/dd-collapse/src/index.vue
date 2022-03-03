@@ -9,7 +9,7 @@ export default {
     name: "ddCollapse",
     props: {
         value: {
-            type: Array,
+            type: [Array, String],
         },
         accordion: {
             type: Boolean,
