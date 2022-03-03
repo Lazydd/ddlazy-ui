@@ -16,7 +16,7 @@
 
 <script>
 export default {
-    name: "ddSkeleton",
+    name: "ddPopconfirm",
     props: {
         rows: {
             type: Number,

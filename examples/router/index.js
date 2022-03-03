@@ -36,6 +36,7 @@ const Empty = () => import("@/components/Empty.vue");
 const Tree = () => import("@/components/Tree.vue");
 const Skeleton = () => import("@/components/Skeleton.vue");
 const Collapse = () => import("@/components/Collapse.vue");
+const Popconfirm = () => import("@/components/Popconfirm.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -218,6 +219,11 @@ const routes = [
                 path: "/component/collapse",
                 name: "Collapse",
                 component: Collapse,
+            },
+            {
+                path: "/component/popconfirm",
+                name: "Popconfirm",
+                component: Popconfirm,
             },
         ],
     },

@@ -233,10 +233,10 @@ export default {
                         //     label: "Popover 弹出框",
                         //     path: "#/component/popover",
                         // },
-                        // {
-                        //     label: "Popconfirm 气泡确认框",
-                        //     path: "#/component/popconfirm",
-                        // },
+                        {
+                            label: "Popconfirm 气泡确认框",
+                            path: "#/component/popconfirm",
+                        },
                         {
                             label: "Card 卡片",
                             path: "#/component/card",

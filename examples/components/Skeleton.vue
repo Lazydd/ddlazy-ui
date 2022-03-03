@@ -37,6 +37,9 @@ export default {
             code3: `
                 <dd-skeleton :rows="6" animated />
             `,
+            code4: `
+
+            `,
         };
     },
 };

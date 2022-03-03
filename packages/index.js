@@ -48,6 +48,7 @@ import ddTree from "./dd-tree";
 import ddSkeleton from "./dd-skeleton";
 import ddCollapse from "./dd-collapse";
 import ddCollapseItem from "./dd-collapse-item";
+import ddPopconfirm from "./dd-popconfirm";
 import "./css/global.css";
 Vue.use(Message);
 Vue.use(ddLoading);
@@ -98,6 +99,7 @@ const components = [
     ddSkeleton,
     ddCollapse,
     ddCollapseItem,
+    ddPopconfirm,
 ];
 
 const install = function (Vue) {
@@ -158,6 +160,7 @@ export {
     ddSkeleton,
     ddCollapse,
     ddCollapseItem,
+    ddPopconfirm,
 };
 
 export default {
@@ -209,4 +212,5 @@ export default {
     ddSkeleton,
     ddCollapse,
     ddCollapseItem,
+    ddPopconfirm,
 };
