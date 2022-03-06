@@ -17,6 +17,8 @@
                     icon="icon-reeor"
                     icon-color="red"
                     title="这是一段内容确定删除吗？"
+                    @confirm="deleteClick"
+                    @cancel="cancel"
                 >
                     <dd-button slot="reference">删除</dd-button>
                 </dd-popconfirm>
@@ -39,6 +41,14 @@ export default {
 
             `,
         };
+    },
+    methods: {
+        deleteClick() {
+            console.log("确定");
+        },
+        cancel() {
+            console.log("取消");
+        },
     },
 };
 </script>

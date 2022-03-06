@@ -79,7 +79,8 @@
                 <dd-button type="primary" loading>默认按钮</dd-button>
             </template>
         </dd-block>
-        <dd-describe title="Button Attributes" :data="tableData"></dd-describe>
+        <dd-describe title="Button Attributes" :data="Attributes"></dd-describe>
+        <dd-footer left="Icon 图标" right="Link 文字链接"></dd-footer>
     </div>
 </template>
 
@@ -141,13 +142,62 @@ export default {
             code5: `
                 <dd-button type="primary" loading>默认按钮</dd-button>
                 `,
-            tableData: [
+            Attributes: [
                 {
-                    parameter: "参数",
-                    explain: "说明",
-                    type: "类型",
-                    optional: "可选值",
-                    default: "默认值",
+                    parameter: "size",
+                    explain: "尺寸",
+                    type: "string",
+                    optional: "medium / small / mini",
+                    default: "—",
+                },
+                {
+                    parameter: "type",
+                    explain: "类型",
+                    type: "string",
+                    optional: "primary / success / warning / danger / info",
+                    default: "—",
+                },
+                {
+                    parameter: "plain",
+                    explain: "是否朴素按钮",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "round",
+                    explain: "是否圆角按钮",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "circle",
+                    explain: "是否圆形按钮",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "loading",
+                    explain: "是否加载中状态",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "是否禁用状态",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "icon",
+                    explain: "图标类名",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
                 },
             ],
         };

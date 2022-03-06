@@ -1,7 +1,14 @@
 <template>
-    <div class="dd-input-number">
-        <div :class="['dd-input_NumberGroup', disabled ? 'is-disabled' : '']">
+    <div :class="['dd-input-number']">
+        <div
+            :class="[
+                'dd-input_NumberGroup',
+                disabled ? 'is-disabled' : '',
+                size,
+            ]"
+        >
             <div
+                v-if="controlsPosition !== 'right'"
                 :class="[
                     'dd-control',
                     'dd-input_Numberprepend',
@@ -29,6 +36,7 @@
                 :class="['dd-input_inner', disabled ? 'is-disabled' : '']"
             />
             <div
+                v-if="controlsPosition !== 'right'"
                 :class="[
                     'dd-control',
                     'dd-input_Numberappend',
@@ -42,6 +50,42 @@
             >
                 <svg class="icon" aria-hidden="true">
                     <use :xlink:href="`#icon-add-select`"></use>
+                </svg>
+            </div>
+            <div
+                v-if="controlsPosition === 'right'"
+                @click="
+                    !disabled && input_value > min
+                        ? dd_changeNumber('decrement')
+                        : null
+                "
+                :class="[
+                    'dd-control',
+                    'is-controls-decrement',
+                    'is-controls-right',
+                    input_value <= min ? 'is-disabled' : '',
+                ]"
+            >
+                <svg class="icon" aria-hidden="true">
+                    <use :xlink:href="`#icon-arrow-down`"></use>
+                </svg>
+            </div>
+            <div
+                v-if="controlsPosition === 'right'"
+                @click="
+                    !disabled && input_value < max
+                        ? dd_changeNumber('increment')
+                        : null
+                "
+                :class="[
+                    'dd-control',
+                    'is-controls-increment',
+                    'is-controls-right',
+                    input_value >= max ? 'is-disabled' : '',
+                ]"
+            >
+                <svg class="icon" aria-hidden="true">
+                    <use :xlink:href="`#icon-arrow-up`"></use>
                 </svg>
             </div>
         </div>
@@ -72,6 +116,15 @@ export default {
             type: Number,
             default: Infinity,
         },
+        precision: {
+            type: Number,
+        },
+        size: {
+            type: String,
+        },
+        controlsPosition: {
+            type: String,
+        },
     },
     data() {
         return {
@@ -88,21 +141,43 @@ export default {
         },
         input_onBlur(e) {
             if (e.target.value > this.max) {
+                if (this.precision >= 0) {
+                    this.max = parseFloat(this.max).toFixed(this.precision);
+                }
                 this.input_value = this.max;
             } else if (e.target.value < this.min) {
+                if (this.precision >= 0) {
+                    this.min = parseFloat(this.min).toFixed(this.precision);
+                }
                 this.input_value = this.min;
             } else {
-                this.input_value = e.target.value;
+                if (this.precision >= 0) {
+                    e.target.value = parseFloat(e.target.value).toFixed(
+                        this.precision
+                    );
+                }
+                this.input_value = parseFloat(e.target.value).toFixed(
+                    this.precision
+                );
             }
             this.$emit("input", this.input_value);
             this.$emit("handleChange", this.input_value);
             this.$emit("blur", e);
         },
         dd_changeNumber(type) {
+            if (this.precision >= 0) {
+                this.input_value = parseFloat(this.input_value).toFixed(
+                    this.precision
+                );
+            }
             if (type === "increment") {
-                this.input_value += this.step;
+                this.input_value = (
+                    parseFloat(this.input_value) + this.step
+                ).toFixed(this.precision);
             } else if (type === "decrement") {
-                this.input_value -= this.step;
+                this.input_value = (
+                    parseFloat(this.input_value) - this.step
+                ).toFixed(this.precision);
             }
             this.$emit("input", this.input_value);
             this.$emit("handleChange", this.input_value);
@@ -115,10 +190,7 @@ export default {
     },
     watch: {
         value(val) {
-            this.input_value = this.input_value
-                ? Number(this.input_value)
-                : val;
-            console.log(this.input_value);
+            this.input_value = val;
         },
         input_value(val) {
             this.$emit("handleChange", val);
@@ -147,7 +219,6 @@ export default {
         color: #606266 !important;
         display: inline-block;
         font-size: inherit;
-        width: 100%;
         width: 180px;
         height: 40px;
         outline: none;
@@ -186,14 +257,69 @@ export default {
         cursor: pointer;
         font-size: 13px;
     }
+    .is-controls-right {
+        border-right: none;
+        border-left: 1px solid #dcdfe6;
+        height: auto;
+        line-height: 19px;
+        left: auto;
+        right: 1px;
+    }
+    .is-controls-decrement {
+        bottom: 1px;
+        top: auto;
+    }
+    .is-controls-increment {
+        bottom: auto;
+        top: 1;
+        border-bottom: 1px solid #dcdfe6;
+    }
     .dd-input_Numberprepend {
         left: 1px;
-
         border-right: 1px solid #dcdfe6;
     }
     .dd-input_Numberappend {
         right: 1px;
         border-left: 1px solid #dcdfe6;
+    }
+    .medium {
+        .dd-input_inner {
+            height: 36px;
+            width: 200px;
+            line-height: 36px;
+        }
+        .dd-control {
+            width: 28px;
+            height: 34px;
+            line-height: 34px;
+            font-size: 14px;
+        }
+    }
+    .small {
+        .dd-input_inner {
+            height: 32px;
+            width: 130px;
+            line-height: 32px;
+        }
+        .dd-control {
+            width: 28px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 14px;
+        }
+    }
+    .mini {
+        .dd-input_inner {
+            height: 28px;
+            width: 130px;
+            line-height: 26px;
+        }
+        .dd-control {
+            width: 28px;
+            height: 26px;
+            line-height: 26px;
+            font-size: 14px;
+        }
     }
 }
 </style>

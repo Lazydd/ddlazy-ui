@@ -40,7 +40,7 @@
                     </li>
                 </ul>
             </article>
-            <main class="main-box" ref="abc">
+            <main class="main-box">
                 <router-view />
             </main>
         </div>
@@ -216,6 +216,10 @@ export default {
                             label: "Breadcrumb 面包屑",
                             path: "#/component/breadcrumb",
                         },
+                        {
+                            label: "Steps 步骤条",
+                            path: "#/component/steps",
+                        },
                     ],
                 },
                 {
@@ -294,8 +298,6 @@ export default {
         transition: all 1s;
     }
     /deep/ header,
-    /deep/.dd-radio-button .radio__label,
-    /deep/.dd-checkbox-button .checkbox_inner,
     /deep/.dd-input-number .dd-input_inner {
         background-color: rgb(30, 30, 30) !important;
         transition: all 1s;
@@ -327,8 +329,6 @@ a:focus {
         transition: all 1s;
     }
     /deep/ header,
-    /deep/.dd-radio-button .radio__label,
-    /deep/.dd-checkbox-button .checkbox_inner,
     /deep/.dd-input-number .dd-input_inner {
         background-color: #fff;
         transition: all 1s;
@@ -448,7 +448,7 @@ a:focus {
             box-sizing: border-box;
             overflow-y: scroll;
             flex: 1;
-            padding: 20px 60px;
+            padding: 20px 60px 100px;
             &::-webkit-scrollbar {
                 width: 7px;
             }

@@ -20,7 +20,7 @@ export default {
     props: {
         icon: {
             type: String,
-            default: "icon-arrow-up",
+            default: "icon-triangle-up-fill",
         },
         bottom: {
             type: Number,

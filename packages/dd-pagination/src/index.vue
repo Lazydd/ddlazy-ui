@@ -157,12 +157,14 @@ export default {
                 } else {
                     this.dd_pagination_input = current;
                 }
+                this.currentPages = this.dd_pagination_input;
             }
         },
         currentPageSizesChange() {
             this.pagesize = this.currentPageSizes;
             this.pageInit();
             this.currentPages = 1;
+            this.dd_pagination_input = 1;
         },
         pageInit() {
             if (this.currentPage >= this.pageCounts)

@@ -1,10 +1,12 @@
 import Vue from "vue";
 
+import ddBlock from "./dd-block";
+import ddDescribe from "./dd-describe";
+import ddFooter from "./dd-footer";
+
 import ddButton from "./dd-button";
 import ddIcon from "./dd-icon";
 import ddLink from "./dd-link";
-import ddBlock from "./dd-block";
-import ddDescribe from "./dd-describe";
 import ddRow from "./dd-row";
 import ddCol from "./dd-col";
 import ddTable from "./dd-table";
@@ -49,16 +51,19 @@ import ddSkeleton from "./dd-skeleton";
 import ddCollapse from "./dd-collapse";
 import ddCollapseItem from "./dd-collapse-item";
 import ddPopconfirm from "./dd-popconfirm";
+import ddSteps from "./dd-steps";
+import ddStep from "./dd-step";
 import "./css/global.css";
 Vue.use(Message);
 Vue.use(ddLoading);
 Vue.use(ddMessageBox);
 const components = [
+    ddBlock,
+    ddDescribe,
+    ddFooter,
     ddButton,
     ddIcon,
     ddLink,
-    ddBlock,
-    ddDescribe,
     ddRow,
     ddCol,
     ddTable,
@@ -100,6 +105,8 @@ const components = [
     ddCollapse,
     ddCollapseItem,
     ddPopconfirm,
+    ddSteps,
+    ddStep,
 ];
 
 const install = function (Vue) {
@@ -115,11 +122,12 @@ if (typeof window !== "undefined" && window.Vue) {
 }
 export {
     install,
+    ddBlock,
+    ddDescribe,
+    ddFooter,
     ddButton,
     ddIcon,
     ddLink,
-    ddBlock,
-    ddDescribe,
     ddRow,
     ddCol,
     ddTable,
@@ -161,15 +169,17 @@ export {
     ddCollapse,
     ddCollapseItem,
     ddPopconfirm,
+    ddSteps,
+    ddStep,
 };
 
 export default {
     // 导出的对象必须具有install，才能被Vue.use()方法安装
     install,
-    // 具体组件列表
-    ddButton,
     ddBlock,
     ddDescribe,
+    ddFooter,
+    ddButton,
     ddIcon,
     ddLink,
     ddRow,
@@ -213,4 +223,6 @@ export default {
     ddCollapse,
     ddCollapseItem,
     ddPopconfirm,
+    ddSteps,
+    ddStep,
 };

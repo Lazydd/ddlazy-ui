@@ -455,7 +455,12 @@
               <li><dd-icon icon="icon-robot"></dd-icon><div><span>icon-robot</span></div></li>
               <li><dd-icon icon="icon-block"></dd-icon><div><span>icon-block</span></div></li>
               <li><dd-icon icon="icon-shouhuoicon"></dd-icon><div><span>icon-shouhuoicon</span></div></li>
+              <li><dd-icon icon="icon-triangle-down-fill"></dd-icon><div><span>icon-triangle-down-fill</span></div></li>
+              <li><dd-icon icon="icon-triangle-up-fill"></dd-icon><div><span>icon-triangle-up-fill</span></div></li>
+              <li><dd-icon icon="icon-triangle-left-fill"></dd-icon><div><span>icon-triangle-left-fill</span></div></li>
+              <li><dd-icon icon="icon-triangle-right-fill"></dd-icon><div><span>icon-triangle-right-fill</span></div></li>
             </ul>
+            <dd-footer left="Layout 布局" right="Button 按钮"></dd-footer>
         </div>
     </div>
 </template>

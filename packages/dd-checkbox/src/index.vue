@@ -16,7 +16,9 @@
             ]"
         >
             <span
-                :class="[(group ? isActive : value) ? 'checkbox_origina' : null]"
+                :class="[
+                    (group ? isActive : value) ? 'checkbox_origina' : null,
+                ]"
             >
                 <dd-icon icon="icon-seleted"></dd-icon>
             </span>
@@ -30,8 +32,10 @@
 
 <script>
 let newArr = [];
+import mixin from "../../dd-mixins/mixin";
 export default {
     name: "ddCheckbox",
+    mixins: [mixin],
     props: {
         label: {
             type: String,
@@ -62,15 +66,7 @@ export default {
                 let arr = [...parent.value];
                 let str = this.label ? this.label : this.$slots.default[0].text;
                 if (arr.length) {
-                    for (let i = 0; i < arr.length; i++) {
-                        if (arr.indexOf(str) == -1) {
-                            newArr = [...arr, str];
-                            break;
-                        } else {
-                            newArr = arr.filter((item) => item !== str);
-                            break;
-                        }
-                    }
+                    newArr = this.multipleChoice(arr, str);
                 } else {
                     newArr = [...arr, str];
                 }

@@ -16,6 +16,19 @@ const mixin = {
                 radioy,
             };
         },
+        multipleChoice(arr, name) {
+            let newArr = [];
+            for (let i = 0; i < arr.length; i++) {
+                if (arr.indexOf(name) == -1) {
+                    newArr = [...arr, name];
+                    break;
+                } else {
+                    newArr = arr.filter((item) => item !== name);
+                    break;
+                }
+            }
+            return newArr;
+        },
     },
 };
 export default mixin;

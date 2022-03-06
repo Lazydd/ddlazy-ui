@@ -1,7 +1,7 @@
 <template>
     <div class="page-box">
-        <h2 class="_title">Link 文字链接</h2>
-        <p class="_descript">文字超链接</p>
+        <h2 class="_title">Tooltip 文字提示</h2>
+        <p class="_descript">常用于展示鼠标 hover 时的提示信息。</p>
         <dd-block title="基础用法" :code="code1">
             <template #source>
                 <dd-tooltip

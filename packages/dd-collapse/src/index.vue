@@ -16,6 +16,17 @@ export default {
             default: false,
         },
     },
+    data() {
+        return {
+            activeName: this.value,
+        };
+    },
+    methods: {
+        changeActive_name() {
+            this.$emit("input", this.activeName);
+            this.$emit("change", this.activeName);
+        },
+    },
 };
 </script>
 

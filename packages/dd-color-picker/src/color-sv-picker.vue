@@ -53,21 +53,7 @@ export default {
         },
         mousedownIn() {
             document.onmousemove = (e) => {
-                let { left, top, radiox, radioy } = this.move(
-                    e,
-                    this.sc_picker,
-                    _pickerWidth,
-                    _pickerHeight
-                );
-                this.left = left;
-                this.top = top;
-                this.radiox = radiox;
-                this.radioy = radioy;
-
-                this.$emit("input", {
-                    saturation: 1 * this.radiox,
-                    value: 1 - this.radioy,
-                });
+                this.pickerUp(e);
             };
         },
         mousedownOut(event) {

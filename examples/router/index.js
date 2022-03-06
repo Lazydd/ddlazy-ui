@@ -37,6 +37,7 @@ const Tree = () => import("@/components/Tree.vue");
 const Skeleton = () => import("@/components/Skeleton.vue");
 const Collapse = () => import("@/components/Collapse.vue");
 const Popconfirm = () => import("@/components/Popconfirm.vue");
+const Steps = () => import("@/components/Steps.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -225,6 +226,11 @@ const routes = [
                 name: "Popconfirm",
                 component: Popconfirm,
             },
+            {
+                path: "/component/steps",
+                name: "Steps",
+                component: Steps,
+            },
         ],
     },
 ];
@@ -232,5 +238,11 @@ const routes = [
 const router = new VueRouter({
     routes,
 });
-
+router.afterEach((to, from, next) => {
+    if (document.querySelector(".main-box")) {
+        document
+            .querySelector(".main-box")
+            .scrollTo({ behavior: "smooth", top: 0 });
+    }
+});
 export default router;
