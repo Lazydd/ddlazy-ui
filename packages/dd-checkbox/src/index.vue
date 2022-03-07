@@ -13,14 +13,18 @@
                 !isDisabled && (group ? isActive : value) ? 'is_checked' : '',
                 /*   !isDisabled && (group ? groupActive : value) != label */
                 !disabled ? 'checkbox_inner_hover' : '',
+                indeterminate ? 'is_checked' : '',
             ]"
         >
             <span
                 :class="[
                     (group ? isActive : value) ? 'checkbox_origina' : null,
+                    indeterminate ? 'checkbox_origina' : null,
+                    'checkbox_input',
                 ]"
             >
-                <dd-icon icon="icon-seleted"></dd-icon>
+                <dd-icon v-if="!indeterminate" icon="icon-seleted"></dd-icon>
+                <dd-icon v-if="indeterminate" icon="icon-sami-select"></dd-icon>
             </span>
         </span>
         <span class="checkbox__label">
@@ -44,6 +48,10 @@ export default {
             type: [String, Number, Boolean],
         },
         disabled: {
+            type: Boolean,
+            default: false,
+        },
+        indeterminate: {
             type: Boolean,
             default: false,
         },

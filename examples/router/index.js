@@ -38,6 +38,7 @@ const Skeleton = () => import("@/components/Skeleton.vue");
 const Collapse = () => import("@/components/Collapse.vue");
 const Popconfirm = () => import("@/components/Popconfirm.vue");
 const Steps = () => import("@/components/Steps.vue");
+const Transfer = () => import("@/components/Transfer.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -230,6 +231,11 @@ const routes = [
                 path: "/component/steps",
                 name: "Steps",
                 component: Steps,
+            },
+            {
+                path: "/component/transfer",
+                name: "Transfer",
+                component: Transfer,
             },
         ],
     },

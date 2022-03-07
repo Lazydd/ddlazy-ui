@@ -53,6 +53,7 @@ import ddCollapseItem from "./dd-collapse-item";
 import ddPopconfirm from "./dd-popconfirm";
 import ddSteps from "./dd-steps";
 import ddStep from "./dd-step";
+import ddTransfer from "./dd-transfer";
 import "./css/global.css";
 Vue.use(Message);
 Vue.use(ddLoading);
@@ -107,6 +108,7 @@ const components = [
     ddPopconfirm,
     ddSteps,
     ddStep,
+    ddTransfer,
 ];
 
 const install = function (Vue) {
@@ -171,6 +173,7 @@ export {
     ddPopconfirm,
     ddSteps,
     ddStep,
+    ddTransfer,
 };
 
 export default {
@@ -225,4 +228,5 @@ export default {
     ddPopconfirm,
     ddSteps,
     ddStep,
+    ddTransfer,
 };

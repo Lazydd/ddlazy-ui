@@ -22,12 +22,15 @@ export default {
     },
     methods: {
         validate(callback) {
+            this.$children.map((item) => {
+                item.valid();
+            });
             console.log(this.$slots.default);
-            if (!this.model) {
-                return;
-            }
-            let promise = 123;
-            return promise;
+            // if (!this.model) {
+            //     return;
+            // }
+            // let promise = 123;
+            // return promise;
         },
     },
 };

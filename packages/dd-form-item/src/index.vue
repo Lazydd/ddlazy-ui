@@ -13,9 +13,11 @@
             }`"
         >
             <slot v-if="$slots.default" />
-            <div v-if="prop && isValidate" class="dd-form-item__error">
-                {{ message }}
-            </div>
+            <transition name="fale">
+                <div v-if="prop && isValidate" class="dd-form-item__error">
+                    {{ message }}
+                </div>
+            </transition>
         </div>
     </div>
 </template>
@@ -86,5 +88,17 @@ export default {
         top: 100%;
         left: 0;
     }
+}
+.fale-enter-active,
+.fale-leave-active {
+    transition: opacity 1s;
+}
+.fale-enter,
+.fale-leave-to {
+    opacity: 0;
+}
+.fale-enter-to,
+.fale-leave {
+    opacity: 1;
 }
 </style>

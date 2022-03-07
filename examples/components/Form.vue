@@ -388,14 +388,16 @@ export default {
             console.log(123);
         },
         submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    alert("submit!");
-                } else {
-                    console.log("error submit!!");
-                    return false;
-                }
-            });
+            console.log(123);
+            // this.$refs[formName].validate((valid) => {
+            //     if (valid) {
+            //         alert("submit!");
+            //     } else {
+            //         console.log("error submit!!");
+            //         return false;
+            //     }
+            // });
+            console.log(this.$refs[formName].validate());
         },
         resetForm(formName) {
             this.$refs[formName].resetFields();

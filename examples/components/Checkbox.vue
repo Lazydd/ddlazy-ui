@@ -31,7 +31,15 @@
                 </dd-checkbox-group>
             </template>
         </dd-block>
-        <dd-block title="按钮样式" :code="code4">
+        <dd-block title="indeterminate 状态" :code="code4">
+            <template #source>
+                <dd-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</dd-checkbox>
+                <dd-checkbox-group v-model="checkedCities" style="margin-top:20px" @change="handleCheckedCitiesChange">
+                    <dd-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</dd-checkbox>
+                </dd-checkbox-group>
+            </template>
+        </dd-block>
+        <dd-block title="按钮样式" :code="code5">
             <template #source>
                 <dd-checkbox-group v-model="checkList3">
                     <dd-checkbox-button label="上海"></dd-checkbox-button>
@@ -63,6 +71,7 @@
 </template>
 
 <script>
+const cityOptions = ['上海', '北京', '广州', '深圳'];
 export default {
     name: "Checkbox",
     data() {
@@ -76,6 +85,10 @@ export default {
             checkList4: ['上海'],
             checkList5: ['上海'],
             checkList6: ['上海'],
+            checkedCities: ['上海','北京'],
+            cities: cityOptions,
+            checkAll: false,
+            isIndeterminate: true,
             code1: `
                 <dd-checkbox v-model="checked">备选项</dd-checkbox>
             `,
@@ -94,7 +107,29 @@ export default {
 
                 checkList: ["复选框A", "选中且禁用"],
             `,
-            code4: `
+            code4:`
+                <dd-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</dd-checkbox>
+                <dd-checkbox-group v-model="checkedCities" style="margin-top:20px" @change="handleCheckedCitiesChange">
+                    <dd-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</dd-checkbox>
+                </dd-checkbox-group>
+
+                const cityOptions = ['上海', '北京', '广州', '深圳'];
+                checkedCities: ['上海','北京'],
+                cities: cityOptions,
+                checkAll: false,
+                isIndeterminate: true,
+
+                handleCheckAllChange(val){
+                    this.checkedCities = val ? cityOptions : [];
+                    this.isIndeterminate = false
+                },
+                handleCheckedCitiesChange(value){
+                    let checkedCount = value.length;
+                    this.checkAll = checkedCount === this.cities.length;
+                    this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+                }
+            `, 
+            code5: `
                 <dd-checkbox-group v-model="checkList3">
                     <dd-checkbox-button label="北京"></dd-checkbox-button>
                     <dd-checkbox-button label="上海"></dd-checkbox-button>
@@ -122,6 +157,20 @@ export default {
             `,
         };
     },
+    methods:{
+        handleCheckAllChange(val){
+            this.checkedCities = val ? cityOptions : [];
+            this.isIndeterminate = false
+        },
+        handleCheckedCitiesChange(value){
+            let checkedCount = value.length;
+            this.checkAll = checkedCount === this.cities.length;
+            this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+        }
+    },
+    created(){
+        
+    }
 };
 </script>
 

@@ -130,6 +130,10 @@ export default {
                             path: "#/component/slider",
                         },
                         {
+                            label: "Transfer 穿梭框",
+                            path: "#/component/transfer",
+                        },
+                        {
                             label: "Form 表单",
                             path: "#/component/form",
                         },
