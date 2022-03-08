@@ -10,7 +10,7 @@
                         >列表一
                     </dd-checkbox>
                     <span class="dd-checkbox_label">
-                        {{ checkedLeft.length }}/{{ checkedLeft.length }}
+                        {{ checkedLeft.length }}/{{ checkedLeftList.length }}
                     </span>
                 </label>
             </p>
@@ -22,7 +22,7 @@
                         @change="handleCheckedLeftChange"
                     >
                         <dd-checkbox
-                            v-for="item in data"
+                            v-for="item in checkedLeftList"
                             :label="item.label"
                             :key="item.key"
                             :disabled="item.disabled"
@@ -45,12 +45,12 @@
                 <label>
                     <dd-checkbox
                         :indeterminate="isIndeterminateRight"
-                        v-model="checkrighttTot"
+                        v-model="checkrightTot"
                         @change="handleCheckRightChange"
-                        >列表一
+                        >列表二
                     </dd-checkbox>
                     <span class="dd-checkbox_label">
-                        {{ checkedRight.length }}/{{ checkedRight.length }}
+                        {{ checkedRight.length }}/{{ checkedRightList.length }}
                     </span>
                 </label>
             </p>
@@ -65,6 +65,7 @@
                             v-for="item in checkedRightList"
                             :label="item.label"
                             :key="item.key"
+                            :disabled="item.disabled"
                             >{{ item.label }}
                         </dd-checkbox>
                     </dd-checkbox-group>
@@ -94,27 +95,71 @@ export default {
             isIndeterminateLeft: false,
             isIndeterminateRight: false,
             checkleftTot: false,
-            checkrighttTot: false,
+            checkrightTot: false,
             checkedLeft: [],
             checkedRight: [],
+            checkedLeftList: [],
             checkedRightList: [],
         };
     },
     methods: {
         initTransfer() {
-            this.checkedRightList = this.data.find((item) => {
-                console.log(item);
-                return item.key == 1;
-                //return this.value.map((itemKey) => {
-                //     return itemKey;
-                // });
+            this.data.map((item) => {
+                if (this.value.indexOf(item.key) != -1) {
+                    this.checkedRightList.push(item);
+                } else {
+                    this.checkedLeftList.push(item);
+                }
             });
-            console.log(this.checkedRightList);
         },
-        handleCheckLeftChange(val) {},
-        handleCheckRightChange(val) {},
-        handleCheckedLeftChange(val) {},
-        handleCheckedRightChange(val) {},
+        handleCheckLeftChange(val) {
+            let arr = [];
+            this.checkedLeftList.map((item) => {
+                if (item.disabled == false) {
+                    arr.push(item.label);
+                }
+            });
+            this.checkedLeft = val ? [...arr] : [];
+            this.isIndeterminateLeft = false;
+        },
+        handleCheckRightChange(val) {
+            let arr = [];
+            this.checkedRightList.map((item) => {
+                if (item.disabled == false) {
+                    arr.push(item.label);
+                }
+            });
+            this.checkedRight = val ? [...arr] : [];
+            this.isIndeterminateRight = false;
+        },
+        handleCheckedLeftChange(val) {
+            let checkedCount = val.length;
+            let disabledCount = 0;
+            this.checkedLeftList.map((item) => {
+                if (item.disabled) {
+                    disabledCount++;
+                }
+            });
+            this.checkleftTot =
+                checkedCount === this.checkedLeftList.length - disabledCount;
+            this.isIndeterminateLeft =
+                checkedCount > 0 &&
+                checkedCount < this.checkedLeftList.length - disabledCount;
+        },
+        handleCheckedRightChange(val) {
+            let checkedCount = val.length;
+            let disabledCount = 0;
+            this.checkedRightList.map((item) => {
+                if (item.disabled) {
+                    disabledCount++;
+                }
+            });
+            this.checkrightTot =
+                checkedCount === this.checkedRightList.length - disabledCount;
+            this.isIndeterminateRight =
+                checkedCount > 0 &&
+                checkedCount < this.checkedRightList.length - disabledCount;
+        },
     },
     created() {
         this.initTransfer();
