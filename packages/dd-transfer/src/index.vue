@@ -25,6 +25,7 @@
                             v-for="item in data"
                             :label="item.label"
                             :key="item.key"
+                            :disabled="item.disabled"
                             >{{ item.label }}
                         </dd-checkbox>
                     </dd-checkbox-group>
@@ -61,7 +62,7 @@
                         @change="handleCheckedRightChange"
                     >
                         <dd-checkbox
-                            v-for="item in data"
+                            v-for="item in checkedRightList"
                             :label="item.label"
                             :key="item.key"
                             >{{ item.label }}
@@ -80,7 +81,7 @@ import ddButton from "../../dd-button";
 export default {
     name: "ddTransfer",
     props: {
-        input: {
+        value: {
             type: Array,
         },
         data: {
@@ -96,13 +97,27 @@ export default {
             checkrighttTot: false,
             checkedLeft: [],
             checkedRight: [],
+            checkedRightList: [],
         };
     },
     methods: {
+        initTransfer() {
+            this.checkedRightList = this.data.find((item) => {
+                console.log(item);
+                return item.key == 1;
+                //return this.value.map((itemKey) => {
+                //     return itemKey;
+                // });
+            });
+            console.log(this.checkedRightList);
+        },
         handleCheckLeftChange(val) {},
         handleCheckRightChange(val) {},
         handleCheckedLeftChange(val) {},
         handleCheckedRightChange(val) {},
+    },
+    created() {
+        this.initTransfer();
     },
     components: {
         ddCheckbox,
@@ -190,6 +205,11 @@ export default {
         display: inline-block;
         vertical-align: middle;
         padding: 0 30px;
+        .dd-button {
+            /deep/.dd-icon {
+                font-size: 20px;
+            }
+        }
     }
 }
 </style>
