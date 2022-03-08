@@ -494,8 +494,9 @@ export default {
         margin: 0 20px;
     }
     .icon-list {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fill , minmax(15rem, 1fr));
+        grid-auto-flow: row dense;
         border: 1px solid #eaeefb;
         border-radius: 4px;
         > li {
@@ -504,7 +505,7 @@ export default {
             flex-direction: column;
             align-items: center;
             justify-content: space-evenly;
-            width: calc(100% / 6);
+            // width: calc(100% / 6);
             text-align: center;
             height: 120px;
             cursor: pointer;
@@ -512,6 +513,7 @@ export default {
             border-right: 1px solid #eee;
             border-bottom: 1px solid #eee;
             margin-bottom: -1px;
+            margin-right: -1px;
             transition: all .5s;
             .dd-icon {
                 color: #606266;
