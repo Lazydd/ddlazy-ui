@@ -1,6 +1,12 @@
 <template>
     <div :class="['container', value ? 'night' : '']">
         <header>
+            <dd-icon
+                class="cetegory"
+                icon="icon-category"
+                v-show="size.width < 1024 ? true : false"
+                @click="aaa"
+            ></dd-icon>
             <!-- <pre v-highlightjs="sourcecode"><code class="javascript"></code></pre> -->
             <div class="tit" @click="$router.push('/')">
                 <svg class="icon" aria-hidden="true" :style="{ fill: color }">
@@ -22,24 +28,26 @@
             </ul>
         </header>
         <div class="page">
-            <article>
-                <ul v-for="menu in menuList" :key="menu.label">
-                    <h4>{{ menu.label }}</h4>
-                    <li
-                        class="submenu"
-                        v-for="submenu in menu.children"
-                        :key="submenu.label"
-                        @click="changeMenu(submenu)"
-                    >
-                        <a
-                            :class="{ active: submenu.path == activeMenu }"
-                            a
-                            :href="submenu.path"
-                            >{{ submenu.label }}</a
+            <transition name="fale">
+                <article v-if="isShow">
+                    <ul v-for="menu in menuList" :key="menu.label">
+                        <h4>{{ menu.label }}</h4>
+                        <li
+                            class="submenu"
+                            v-for="submenu in menu.children"
+                            :key="submenu.label"
+                            @click="changeMenu(submenu)"
                         >
-                    </li>
-                </ul>
-            </article>
+                            <a
+                                :class="{ active: submenu.path == activeMenu }"
+                                a
+                                :href="submenu.path"
+                                >{{ submenu.label }}
+                            </a>
+                        </li>
+                    </ul>
+                </article>
+            </transition>
             <main class="main-box">
                 <router-view />
             </main>
@@ -55,6 +63,8 @@ export default {
             icon: "icon-salescenter",
             code1: "npm i ddlazy-ui",
             value: false,
+            size: {},
+            isShow: true,
             navList: [
                 {
                     label: "指南",
@@ -279,6 +289,22 @@ export default {
         changeMenu(menu) {
             this.activeMenu = menu.path;
         },
+        getsize() {
+            this.size = {
+                width: window.innerWidth,
+                height: window.innerHeight,
+            };
+            this.isShow = this.size.width < 1024 ? false : true;
+        },
+        aaa() {
+            this.isShow = true;
+        },
+    },
+    mounted() {
+        this.getsize();
+        window.addEventListener("resize", () => {
+            this.getsize();
+        });
     },
 };
 </script>
@@ -341,7 +367,7 @@ a:focus {
         width: 100%;
         top: 0;
         z-index: 9;
-        padding: 0 80px;
+        padding: 0 120px;
         justify-content: space-between;
         align-items: center;
         background-color: #fff;
@@ -356,6 +382,12 @@ a:focus {
                 font-size: 40px;
                 margin-right: 15px;
             }
+        }
+        .cetegory {
+            position: absolute;
+            left: 80px;
+            font-size: 30px;
+            cursor: pointer;
         }
         .nav {
             display: flex;
@@ -451,6 +483,7 @@ a:focus {
             overflow-y: scroll;
             flex: 1;
             padding: 20px 60px 100px;
+
             &::-webkit-scrollbar {
                 width: 7px;
             }
@@ -462,5 +495,13 @@ a:focus {
             }
         }
     }
+}
+.fale-enter-active,
+.fale-leave-active {
+    transition: all 0.5s linear;
+}
+.fale-enter,
+.fale-leave-to {
+    transform: translateX(-200%);
 }
 </style>
