@@ -7,6 +7,18 @@
                 <dd-transfer v-model="value" :data="data"></dd-transfer>
             </template>
         </dd-block>
+        <dd-block title="数据项属性别名" :code="code2">
+            <template #source>
+                <dd-transfer
+                    v-model="value2"
+                    :props="{
+                        key: 'value',
+                        label: 'desc',
+                    }"
+                    :data="data2"
+                ></dd-transfer>
+            </template>
+        </dd-block>
     </div>
 </template>
 
@@ -27,15 +39,17 @@ export default {
         };
         return {
             value: [1, 4],
+            value2: [1, 4],
             data: generateData(),
+            data2: generateData(),
             code1: `
-                
+                <dd-transfer v-model="value" :data="data"></dd-transfer>
+            `,
+            code2: `
+                <dd-transfer v-model="value" :data="data"></dd-transfer>
             `,
         };
     },
-    created(){
-        console.log(this.data);
-    }
 };
 </script>
 

@@ -33,11 +33,18 @@
             </div>
         </div>
         <div class="dd-transfer__buttons">
-            <dd-button icon="icon-arrow-left" type="primary"></dd-button>
+            <dd-button
+                icon="icon-arrow-left"
+                type="primary"
+                @click="checkdLeftClick"
+                :disabled="checkedRight.length == 0 ? true : false"
+            ></dd-button>
             <dd-button
                 icon="icon-arrow-right"
                 type="primary"
                 style="margin-left: 10px"
+                @click="checkdRighttClick"
+                :disabled="checkedLeft.length == 0 ? true : false"
             ></dd-button>
         </div>
         <div class="dd-transfer-panel">
@@ -88,6 +95,13 @@ export default {
         data: {
             type: Array,
             default: () => {},
+        },
+        props: {
+            type: Object,
+            default: () => ({
+                key: "key",
+                label: "label",
+            }),
         },
     },
     data() {
@@ -159,6 +173,50 @@ export default {
             this.isIndeterminateRight =
                 checkedCount > 0 &&
                 checkedCount < this.checkedRightList.length - disabledCount;
+        },
+        checkdLeftClick() {
+            let arr = [];
+            this.data.map((item, i) => {
+                this.checkedRight.map((items) => {
+                    if (item.label == items) {
+                        arr = [...arr, item];
+                        this.checkedRightList = this.checkedRightList.filter(
+                            (itemChild) => {
+                                return itemChild.label != items;
+                            }
+                        );
+                    }
+                });
+            });
+            this.checkedLeftList = [...this.checkedLeftList, ...arr];
+            this.checkedLeftList = this.checkedLeftList.sort((a, b) => {
+                return a["key"] - b["key"];
+            });
+            this.isIndeterminateRight = false;
+            this.checkRightTot = false;
+            this.checkedRight = [];
+        },
+        checkdRighttClick() {
+            let arr = [];
+            this.data.map((item, i) => {
+                this.checkedLeft.map((items) => {
+                    if (item.label == items) {
+                        arr = [...arr, item];
+                        this.checkedLeftList = this.checkedLeftList.filter(
+                            (itemChild) => {
+                                return itemChild.label != items;
+                            }
+                        );
+                    }
+                });
+            });
+            this.checkedRightList = [...this.checkedRightList, ...arr];
+            this.checkedRightList = this.checkedRightList.sort((a, b) => {
+                return a["key"] - b["key"];
+            });
+            this.isIndeterminateLeft = false;
+            this.checkleftTot = false;
+            this.checkedLeft = [];
         },
     },
     created() {
