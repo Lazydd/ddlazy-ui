@@ -14,7 +14,7 @@
                 class="loading"
             ></dd-icon>
             <dd-icon v-if="icon" :icon="icon"></dd-icon>
-            <span :class="icon ? 'ml5' : ''" v-if="$slots.default">
+            <span :class="['des',icon ? 'ml5' : '']" v-if="$slots.default">
                 <slot />
             </span>
         </button>

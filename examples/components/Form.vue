@@ -120,7 +120,9 @@
                         <dd-button type="primary" @click="submitForm('form1')">
                             立即创建
                         </dd-button>
-                        <dd-button style="margin-left: 10px" @click="resetForm"
+                        <dd-button
+                            style="margin-left: 10px"
+                            @click="resetForm('form1')"
                             >重置</dd-button
                         >
                     </dd-form-item>
@@ -389,18 +391,18 @@ export default {
         },
         submitForm(formName) {
             console.log(123);
-            // this.$refs[formName].validate((valid) => {
-            //     if (valid) {
-            //         alert("submit!");
-            //     } else {
-            //         console.log("error submit!!");
-            //         return false;
-            //     }
-            // });
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    alert("submit!");
+                } else {
+                    console.log("error submit!!");
+                    return false;
+                }
+            });
             console.log(this.$refs[formName].validate());
         },
         resetForm(formName) {
-            this.$refs[formName].resetFields();
+            if (this.$refs[formName]) this.$refs[formName].resetFields();
         },
     },
 };

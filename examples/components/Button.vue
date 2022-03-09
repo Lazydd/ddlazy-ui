@@ -63,7 +63,9 @@
                 <dd-button type="primary" icon="icon-map"></dd-button>
                 <dd-button type="primary" icon="icon-account"></dd-button>
                 <dd-button type="primary" icon="icon-search">搜索</dd-button>
-                <dd-button type="primary">搜索</dd-button>
+                <dd-button type="primary"
+                    >搜索<dd-icon icon="icon-search"></dd-icon
+                ></dd-button>
             </template>
         </dd-block>
         <dd-block title="不同尺寸" :code="code4">
@@ -131,7 +133,9 @@ export default {
                 <dd-button type="primary" icon="icon-map"></dd-button>
                 <dd-button type="primary" icon="icon-account"></dd-button>
                 <dd-button type="primary" icon="icon-search">搜索</dd-button>
-                <dd-button type="primary" >搜索</dd-button>
+                <dd-button type="primary"
+                    >搜索<dd-icon icon="icon-search"></dd-icon
+                ></dd-button>
                 `,
             code4: `
                 <dd-button>默认按钮</dd-button>

@@ -7,7 +7,7 @@
                         :indeterminate="isIndeterminateLeft"
                         v-model="checkleftTot"
                         @change="handleCheckLeftChange"
-                        >列表一
+                        >{{ titles[0] }}
                     </dd-checkbox>
                     <span class="dd-checkbox_label">
                         {{ checkedLeft.length }}/{{ checkedLeftList.length }}
@@ -23,9 +23,9 @@
                     >
                         <dd-checkbox
                             v-for="item in checkedLeftList"
-                            :label="item.label"
-                            :key="item.key"
-                            :disabled="item.disabled"
+                            :label="item[props.label]"
+                            :key="item[props.key]"
+                            :disabled="item[props.disabled]"
                             >{{ item.label }}
                         </dd-checkbox>
                     </dd-checkbox-group>
@@ -38,14 +38,15 @@
                 type="primary"
                 @click="checkdLeftClick"
                 :disabled="checkedRight.length == 0 ? true : false"
-            ></dd-button>
+                >{{ buttonTexts[0] }}
+            </dd-button>
             <dd-button
-                icon="icon-arrow-right"
                 type="primary"
                 style="margin-left: 10px"
                 @click="checkdRighttClick"
                 :disabled="checkedLeft.length == 0 ? true : false"
-            ></dd-button>
+                >{{ buttonTexts[1] }}<dd-icon icon="icon-arrow-right"></dd-icon>
+            </dd-button>
         </div>
         <div class="dd-transfer-panel">
             <p class="dd-transfer-panel_header">
@@ -54,7 +55,7 @@
                         :indeterminate="isIndeterminateRight"
                         v-model="checkrightTot"
                         @change="handleCheckRightChange"
-                        >列表二
+                        >{{ titles[1] }}
                     </dd-checkbox>
                     <span class="dd-checkbox_label">
                         {{ checkedRight.length }}/{{ checkedRightList.length }}
@@ -70,9 +71,9 @@
                     >
                         <dd-checkbox
                             v-for="item in checkedRightList"
-                            :label="item.label"
-                            :key="item.key"
-                            :disabled="item.disabled"
+                            :label="item[props.label]"
+                            :key="item[props.key]"
+                            :disabled="item[props.disabled]"
                             >{{ item.label }}
                         </dd-checkbox>
                     </dd-checkbox-group>
@@ -101,7 +102,16 @@ export default {
             default: () => ({
                 key: "key",
                 label: "label",
+                disabled: "disabled",
             }),
+        },
+        buttonTexts: {
+            type: Array,
+            default: () => [],
+        },
+        titles: {
+            type: Array,
+            default: () => ["列表 1", "列表 2"],
         },
     },
     data() {
@@ -119,7 +129,7 @@ export default {
     methods: {
         initTransfer() {
             this.data.map((item) => {
-                if (this.value.indexOf(item.key) != -1) {
+                if (this.value.indexOf(item[this.props.key]) != -1) {
                     this.checkedRightList.push(item);
                 } else {
                     this.checkedLeftList.push(item);
@@ -129,8 +139,8 @@ export default {
         handleCheckLeftChange(val) {
             let arr = [];
             this.checkedLeftList.map((item) => {
-                if (item.disabled == false) {
-                    arr.push(item.label);
+                if (item[this.props.disabled] == false) {
+                    arr.push(item[this.props.label]);
                 }
             });
             this.checkedLeft = val ? [...arr] : [];
@@ -139,8 +149,8 @@ export default {
         handleCheckRightChange(val) {
             let arr = [];
             this.checkedRightList.map((item) => {
-                if (item.disabled == false) {
-                    arr.push(item.label);
+                if (item[this.props.disabled] == false) {
+                    arr.push(item[this.props.label]);
                 }
             });
             this.checkedRight = val ? [...arr] : [];
@@ -150,7 +160,7 @@ export default {
             let checkedCount = val.length;
             let disabledCount = 0;
             this.checkedLeftList.map((item) => {
-                if (item.disabled) {
+                if (item[this.props.disabled]) {
                     disabledCount++;
                 }
             });
@@ -164,7 +174,7 @@ export default {
             let checkedCount = val.length;
             let disabledCount = 0;
             this.checkedRightList.map((item) => {
-                if (item.disabled) {
+                if (item[this.props.disabled]) {
                     disabledCount++;
                 }
             });
@@ -178,11 +188,11 @@ export default {
             let arr = [];
             this.data.map((item, i) => {
                 this.checkedRight.map((items) => {
-                    if (item.label == items) {
+                    if (item[[this.props.label]] == items) {
                         arr = [...arr, item];
                         this.checkedRightList = this.checkedRightList.filter(
                             (itemChild) => {
-                                return itemChild.label != items;
+                                return itemChild[[this.props.label]] != items;
                             }
                         );
                     }
@@ -190,21 +200,21 @@ export default {
             });
             this.checkedLeftList = [...this.checkedLeftList, ...arr];
             this.checkedLeftList = this.checkedLeftList.sort((a, b) => {
-                return a["key"] - b["key"];
+                return a[this.props.key] - b[this.props.key];
             });
             this.isIndeterminateRight = false;
-            this.checkRightTot = false;
+            this.checkrightTot = false;
             this.checkedRight = [];
         },
         checkdRighttClick() {
             let arr = [];
             this.data.map((item, i) => {
                 this.checkedLeft.map((items) => {
-                    if (item.label == items) {
+                    if (item[this.props.label] == items) {
                         arr = [...arr, item];
                         this.checkedLeftList = this.checkedLeftList.filter(
                             (itemChild) => {
-                                return itemChild.label != items;
+                                return itemChild[this.props.label] != items;
                             }
                         );
                     }
@@ -212,7 +222,7 @@ export default {
             });
             this.checkedRightList = [...this.checkedRightList, ...arr];
             this.checkedRightList = this.checkedRightList.sort((a, b) => {
-                return a["key"] - b["key"];
+                return a[this.props.key] - b[this.props.key];
             });
             this.isIndeterminateLeft = false;
             this.checkleftTot = false;
@@ -309,8 +319,9 @@ export default {
         vertical-align: middle;
         padding: 0 30px;
         .dd-button {
+            /deep/.des,
             /deep/.dd-icon {
-                font-size: 20px;
+                font-size: 18px;
             }
         }
     }

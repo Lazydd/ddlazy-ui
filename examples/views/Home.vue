@@ -301,8 +301,7 @@ export default {
         border-right: 1px solid #eaeaea;
         transition: all 1s;
     }
-    /deep/ header,
-    /deep/.dd-input-number .dd-input_inner {
+    /deep/ header {
         background-color: rgb(30, 30, 30) !important;
         transition: all 1s;
     }
@@ -332,8 +331,7 @@ a:focus {
         border-right: 1px solid #eaeaea;
         transition: all 1s;
     }
-    /deep/ header,
-    /deep/.dd-input-number .dd-input_inner {
+    /deep/ header {
         background-color: #fff;
         transition: all 1s;
     }

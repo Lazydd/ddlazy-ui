@@ -1,8 +1,8 @@
 <template>
     <div class="dd-form">
-        <form>
+        <div>
             <slot v-if="$slots.default" />
-        </form>
+        </div>
     </div>
 </template>
 
@@ -31,6 +31,11 @@ export default {
             // }
             // let promise = 123;
             // return promise;
+        },
+        resetFields() {
+            this.$children.map((item) => {
+                item.resetFields();
+            });
         },
     },
 };

@@ -42,6 +42,9 @@ export default {
         valid() {
             this.isValidate = true;
         },
+        resetFields() {
+            this.isValidate = false;
+        },
     },
     computed: {
         message() {
