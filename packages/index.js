@@ -54,6 +54,8 @@ import ddPopconfirm from "./dd-popconfirm";
 import ddSteps from "./dd-steps";
 import ddStep from "./dd-step";
 import ddTransfer from "./dd-transfer";
+import ddCarousel from "./dd-carousel";
+import ddCarouselItem from "./dd-carousel-item";
 import "./css/global.css";
 Vue.use(Message);
 Vue.use(ddLoading);
@@ -109,6 +111,8 @@ const components = [
     ddSteps,
     ddStep,
     ddTransfer,
+    ddCarousel,
+    ddCarouselItem,
 ];
 
 const install = function (Vue) {
@@ -174,6 +178,8 @@ export {
     ddSteps,
     ddStep,
     ddTransfer,
+    ddCarousel,
+    ddCarouselItem,
 };
 
 export default {
@@ -229,4 +235,6 @@ export default {
     ddSteps,
     ddStep,
     ddTransfer,
+    ddCarousel,
+    ddCarouselItem,
 };

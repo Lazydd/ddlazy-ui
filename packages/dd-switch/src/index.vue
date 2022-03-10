@@ -8,6 +8,7 @@
         >
         <div
             :class="['dd-switch']"
+            onselectstart="return false"
             :disabled="disabled"
             :switch_value="!switch_value && disabled"
             :style="{

@@ -39,6 +39,7 @@ const Collapse = () => import("@/components/Collapse.vue");
 const Popconfirm = () => import("@/components/Popconfirm.vue");
 const Steps = () => import("@/components/Steps.vue");
 const Transfer = () => import("@/components/Transfer.vue");
+const Carousel = () => import("@/components/Carousel.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -236,6 +237,11 @@ const routes = [
                 path: "/component/transfer",
                 name: "Transfer",
                 component: Transfer,
+            },
+            {
+                path: "/component/carousel",
+                name: "Carousel",
+                component: Carousel,
             },
         ],
     },

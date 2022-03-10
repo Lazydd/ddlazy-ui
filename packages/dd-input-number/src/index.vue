@@ -9,6 +9,7 @@
         >
             <div
                 v-if="controlsPosition !== 'right'"
+                onselectstart="return false"
                 :class="[
                     'dd-control',
                     'dd-input_Numberprepend',
@@ -37,6 +38,7 @@
             />
             <div
                 v-if="controlsPosition !== 'right'"
+                onselectstart="return false"
                 :class="[
                     'dd-control',
                     'dd-input_Numberappend',
@@ -54,6 +56,7 @@
             </div>
             <div
                 v-if="controlsPosition === 'right'"
+                onselectstart="return false"
                 @click="
                     !disabled && input_value > min
                         ? dd_changeNumber('decrement')
@@ -72,6 +75,7 @@
             </div>
             <div
                 v-if="controlsPosition === 'right'"
+                onselectstart="return false"
                 @click="
                     !disabled && input_value < max
                         ? dd_changeNumber('increment')

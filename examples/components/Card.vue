@@ -26,7 +26,7 @@
                 </dd-card>
             </template>
         </dd-block>
-        <dd-block title="带图片" :code="code4">
+        <dd-block title="带图片" :code="code3">
             <template #source>
                 <div class="box-card">
                     <div class="box-card1">
@@ -107,7 +107,30 @@ export default {
                 </dd-card>
             `,
             code3: `
-
+            <dd-card :body-style="{ padding: '0px' }">
+                    <img
+                        src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                        class="image"
+                    />
+                    <div style="padding: 14px">
+                        <span>好吃的汉堡</span>
+                        <div class="bottom clearfix">
+                            <dd-link type="primary">操作按钮</dd-link>
+                        </div>
+                    </div>
+                </dd-card>
+                <dd-card :body-style="{ padding: '0px' }">
+                    <img
+                        src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                        class="image"
+                    />
+                    <div style="padding: 14px">
+                        <span>好吃的汉堡</span>
+                        <div class="bottom clearfix">
+                            <dd-link type="primary">操作按钮</dd-link>
+                        </div>
+                    </div>
+                </dd-card>    
             `,
             code4: `
                 <div class="box-card1">

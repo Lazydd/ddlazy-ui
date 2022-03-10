@@ -20,6 +20,58 @@
                 <dd-skeleton :rows="6" animated />
             </template>
         </dd-block>
+        <dd-block title="图片样式" :code="code4">
+            <template #source>
+                <dd-skeleton
+                    variant="image"
+                    style="width: 240px; height: 240px"
+                >
+                </dd-skeleton>
+            </template>
+        </dd-block>
+        <dd-block title="Loading 状态" :code="code5">
+            <template #source>
+                <div style="margin-bottom: 15px">
+                    <label style="margin-right: 16px">切换 Loading</label>
+                    <dd-switch v-model="loading" />
+                </div>
+                <dd-skeleton
+                    animated
+                    :loading="loading"
+                    variant="image"
+                    style="width: 240px; height: 240px"
+                >
+                    <dd-card :body-style="{ padding: '0px' }">
+                        <img
+                            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                            class="image"
+                        />
+                    </dd-card>
+                </dd-skeleton>
+            </template>
+        </dd-block>
+        <dd-block title="防止渲染抖动" :code="code7">
+            <template #source>
+                <div style="margin-bottom: 15px">
+                    <label style="margin-right: 16px">切换 Loading</label>
+                    <dd-switch v-model="loading1"/>
+                </div>
+                <dd-skeleton
+                    animated
+                    :loading="loading1"
+                    variant="image"
+                    :throttle="500"
+                    style="width: 240px; height: 240px"
+                >
+                    <dd-card :body-style="{ padding: '0px' }">
+                        <img
+                            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                            class="image"
+                        />
+                    </dd-card>
+                </dd-skeleton>
+            </template>
+        </dd-block>
     </div>
 </template>
 
@@ -28,6 +80,8 @@ export default {
     name: "Skeleton",
     data() {
         return {
+            loading: true,
+            loading1: true,
             code1: `
                 <dd-skeleton />
             `,
@@ -38,7 +92,36 @@ export default {
                 <dd-skeleton :rows="6" animated />
             `,
             code4: `
-
+                <dd-skeleton
+                    variant="image"
+                    style="width: 240px; height: 240px"
+                >
+                </dd-skeleton>
+            `,
+            code5: `
+                <div style="margin-bottom: 15px">
+                    <label style="margin-right: 16px">切换 Loading</label>
+                    <dd-switch v-model="loading" />
+                </div>
+                <dd-skeleton
+                    animated
+                    :loading="loading"
+                    variant="image"
+                    style="width: 240px; height: 240px"
+                >
+                    <dd-card :body-style="{ padding: '0px' }">
+                        <img
+                            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                            class="image"
+                        />
+                    </dd-card>
+                </dd-skeleton>
+            `,
+            code6: `
+                
+            `,
+            code7: `
+                
             `,
         };
     },

@@ -259,10 +259,10 @@ export default {
                             label: "Card 卡片",
                             path: "#/component/card",
                         },
-                        // {
-                        //     label: "Carousel 走马灯",
-                        //     path: "#/component/carousel",
-                        // },
+                        {
+                            label: "Carousel 走马灯",
+                            path: "#/component/carousel",
+                        },
                         {
                             label: "Collapse 折叠面板",
                             path: "#/component/collapse",
