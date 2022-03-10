@@ -13,6 +13,15 @@
                 </dd-carousel>
             </template>
         </dd-block>
+        <dd-block title="无限滚动" :code="code2">
+            <template #source>
+                <dd-carousel height="150px" loop>
+                    <dd-carousel-item v-for="item in 4" :key="item">
+                        <h3 class="small">{{ item }}</h3>
+                    </dd-carousel-item>
+                </dd-carousel>
+            </template>
+        </dd-block>
     </div>
 </template>
 
@@ -24,6 +33,9 @@ export default {
             code1: `
                 
             `,
+            code2: `
+                
+            `,
         };
     },
 };
@@ -31,13 +43,13 @@ export default {
 
 <style lang="less" scoped>
 /deep/.dd-carousel-item:nth-child(2n) {
-    // background-color: #99a9bf;
-    background: url("https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/lucheng/1644565026162.jpg");
+    background-color: #99a9bf;
+    // background: url("https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/lucheng/1644565026162.jpg");
 }
 
 /deep/.dd-carousel-item:nth-child(2n + 1) {
-    // background-color: #d3dce6;
-    background: url('https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/test/1638946365720.png');
+    background-color: #d3dce6;
+    // background: url('https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/test/1638946365720.png');
 }
 /deep/.dd-carousel-item h3 {
     color: #475669;
