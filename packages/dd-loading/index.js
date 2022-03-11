@@ -27,7 +27,7 @@ const Loading = (options) => {
     if (instance.vm.area == "") {
         document.body.appendChild(instance.dom); // 将dom插入body
     } else {
-        instance.vm.area.appendChild(instance.dom);
+        instance.vm.area.appendChild(instance.dom); //将dom插入指定位置
     }
     instance.dom.style.zIndex = nId + 1001; // 后插入的Notice组件z-index加一，保证能盖在之前的上面
     // instance.dom.style.top = -500 + "px";

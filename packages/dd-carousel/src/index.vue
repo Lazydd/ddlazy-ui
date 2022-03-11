@@ -23,11 +23,13 @@ export default {
         let carouselList = this.$slots.default;
         this.carouselLength = carouselList.length;
         // let vnode = [];
-        // let vnodeObj = {};
-        // carouselList.map((item, i) => {
-        //     let { name, label, icon } = item.componentOptions.propsData;
-        //     vnode.push({ name, label, icon });
-        // });
+        let vnodeObj = {};
+        carouselList.map((item, i) => {
+            console.log(item);
+            vnodeObj[item.componentOptions.propsData.name] = item;
+            // let { name, label, icon } = item.componentOptions.propsData;
+            // vnode.push({ name, label, icon });
+        });
         return h(
             "div",
             {
@@ -113,10 +115,14 @@ export default {
                     },
                     [
                         carouselList.map((item, i) => {
-                            return h("div", {
-                                class: ["dd-carousel-item"],
-                                ref: `carouselItem-${i}`,
-                            });
+                            return h(
+                                "div",
+                                {
+                                    class: ["dd-carousel-item"],
+                                    ref: `carouselItem-${i}`,
+                                },
+                                [h(_this.$slots.default[i].componentOptions.children[0])]
+                            );
                         }),
                     ]
                 ),
@@ -156,16 +162,26 @@ export default {
         ddIcon,
     },
     methods: {
-        getWidth() {
-            return this.carouselItem.offsetWidth;
-        },
+        // getWidth() {
+        //     return this.carouselItem.offsetWidth;
+        // },
         carouselMove() {
             this.$refs["dd-carousel_container"].style.left =
-                -(this.getWidth() * this.activeIndicator) + "px";
+                -(this.activeIndicator * 100) + "%";
         },
+        // carouselMove() {
+        //     this.$refs["dd-carousel_container"].style.left =
+        //         -(this.getWidth() * this.activeIndicator) + "px";
+        // },
     },
     mounted() {
-        this.getWidth();
+        if (this.loop) {
+            console.log(this.$slots.default[0].componentOptions.children[0]);
+            // let vnode = this.carouselItem;
+            // console.log(this.$refs[`carouselItem-0`]);
+            // this.$refs[`carouselItem-0`].appendChild(vnode);
+        }
+        // this.getWidth();
     },
     watch: {
         activeIndicator(val) {

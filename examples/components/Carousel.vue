@@ -22,6 +22,15 @@
                 </dd-carousel>
             </template>
         </dd-block>
+        <dd-block title="无限滚动" :code="code2">
+            <template #source>
+                <dd-carousel height="150px" loop>
+                    <dd-carousel-item v-for="item in 4" :key="item">
+                        <h3 class="small">{{ item }}</h3>
+                    </dd-carousel-item>
+                </dd-carousel>
+            </template>
+        </dd-block>
     </div>
 </template>
 
