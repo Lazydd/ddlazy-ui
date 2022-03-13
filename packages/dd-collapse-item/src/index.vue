@@ -1,5 +1,11 @@
 <template>
-    <div :class="['dd-collapse-item', isActive ? 'is-active' : '']">
+    <div
+        :class="[
+            'dd-collapse-item',
+            isActive === true ? 'is-active' : '',
+            arrayActive ? 'is-active' : '',
+        ]"
+    >
         <div
             :class="['dd-collapse-item__header', disabled ? 'is-disabled' : '']"
             @click="!disabled ? sollapseChange() : null"
@@ -63,6 +69,7 @@ export default {
             activeName: null,
             isArray: null,
             arrayActive: null,
+            activeArr: this.$parent.value,
         };
     },
     methods: {
@@ -122,6 +129,9 @@ export default {
         "$parent.activeName"(val) {
             if (this.accordion)
                 if (this.activeName != val) this.isActive = false;
+        },
+        "$parent.value"(val) {
+            this.activeArr = val;
         },
     },
 };

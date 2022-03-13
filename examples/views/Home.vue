@@ -140,6 +140,10 @@ export default {
                             path: "#/component/slider",
                         },
                         {
+                            label: "TimePicker 时间选择器",
+                            path: "#/component/timeSelect",
+                        },
+                        {
                             label: "Transfer 穿梭框",
                             path: "#/component/transfer",
                         },
@@ -231,6 +235,10 @@ export default {
                             path: "#/component/breadcrumb",
                         },
                         {
+                            label: "Dropdown 下拉菜单",
+                            path: "#/component/dropdown",
+                        },
+                        {
                             label: "Steps 步骤条",
                             path: "#/component/steps",
                         },
@@ -266,6 +274,10 @@ export default {
                         {
                             label: "Collapse 折叠面板",
                             path: "#/component/collapse",
+                        },
+                        {
+                            label: "Timeline 时间线",
+                            path: "#/component/timeline",
                         },
                         {
                             label: "Divider 分割线",

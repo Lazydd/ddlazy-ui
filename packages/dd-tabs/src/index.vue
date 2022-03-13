@@ -136,7 +136,13 @@ export default {
                     {
                         class: ["dd-tabs-main"],
                     },
-                    [vnodeObj[this.value].componentOptions.children[0]]
+                    [
+                        vnodeObj[this.value].componentOptions.children.map(
+                            (item) => {
+                                return item;
+                            }
+                        ),
+                    ]
                 ),
             ]
         );

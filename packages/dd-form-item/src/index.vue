@@ -2,14 +2,24 @@
     <div class="dd-form-item">
         <div
             :class="['dd-form_label', prop ? 'dd-form_prop' : '']"
-            :style="`width:${$parent.labelWidth ? $parent.labelWidth : ''}`"
+            :style="`width:${
+                labelWidth
+                    ? labelWidth
+                    : $parent.labelWidth
+                    ? $parent.labelWidth
+                    : ''
+            }`"
         >
             {{ label }}
         </div>
         <div
             class="dd-form_content"
             :style="`margin-left:${
-                $parent.labelWidth ? $parent.labelWidth : ''
+                labelWidth
+                    ? labelWidth
+                    : $parent.labelWidth
+                    ? $parent.labelWidth
+                    : ''
             }`"
         >
             <slot v-if="$slots.default" />
@@ -27,6 +37,9 @@ export default {
     name: "ddFormItem",
     props: {
         label: {
+            type: String,
+        },
+        labelWidth: {
             type: String,
         },
         prop: {

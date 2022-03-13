@@ -55,6 +55,13 @@
                         'dd-select-dropdown',
                         isShow_dropdown ? 'show_dropdown' : '',
                     ]"
+                    :style="`width:${
+                        isShow_dropdown
+                            ? getWidth
+                                ? getWidth + 'px'
+                                : '100$'
+                            : '100%'
+                    }`"
                 >
                     <div class="dd-select-dropdown-s"></div>
                     <ul>
@@ -121,6 +128,13 @@ export default {
         select_mouseLeave() {
             this.isShow_clearable = false;
         },
+        except(e) {
+            let isSelf = this.$refs["dd-select-dropdown"].contains(e.target);
+            if (!isSelf) {
+                this.isActive = false;
+                this.isShow_dropdown = false;
+            }
+        },
     },
     computed: {
         select_icon() {
@@ -129,16 +143,15 @@ export default {
         select_input() {
             return this.$refs.input;
         },
+        getWidth() {
+            return this.$refs["dd-select-dropdown"].offsetWidth;
+        },
     },
     mounted() {
-        document.onmousedown = (e) => {
-            if (this?.$refs["dd-select-dropdown"]?.contains(e.target)) return;
-            this.isActive = false;
-            this.isShow_dropdown = false;
-        };
+        document.addEventListener("click", this.except);
     },
     beforeDestroy() {
-        document.onmousedown = null;
+        document.removeEventListener("click", this.except);
     },
     watch: {
         value(val) {
@@ -162,7 +175,7 @@ export default {
         display: inline-block;
         font-size: inherit;
         width: 100%;
-        width: 240px;
+        // min-width: 240px;
         height: 40px;
         outline: none;
         padding: 0 15px;
@@ -203,7 +216,7 @@ export default {
         border-color: #e4e7ed !important;
     }
     .dd-select-dropdown {
-        min-width: 240px;
+        // min-width: 240px;
         position: absolute;
         transform-origin: center top;
         border: 1px solid #e4e7ed;

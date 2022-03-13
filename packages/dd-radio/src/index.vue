@@ -41,7 +41,7 @@ export default {
     name: "ddRadio",
     props: {
         label: {
-            type: String,
+            type: [String, Boolean],
         },
         value: {
             type: [String, Number],

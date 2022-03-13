@@ -71,7 +71,7 @@ export default {
         };
     },
     methods: {
-        hsv2rgb(h, s, v) { 
+        hsv2rgb(h, s, v) {
             let r, g, b, i, f, p, q, t;
             if (arguments.length === 1) {
                 (s = h.s), (v = h.v), (h = h.h);
@@ -122,22 +122,19 @@ export default {
         dd_color_determine() {
             this.isShow = false;
         },
+        except(e) {
+            let isSelf = this.$refs["dd-color_dropdown"].contains(e.target);
+            if (!isSelf) this.isShow = false;
+        },
     },
     mounted() {
         this.rgb = this.hsv2rgb(this.h, this.sv.saturation, this.sv.value);
         this.hex = this.rgb2hex(this.rgb.r, this.rgb.g, this.rgb.b);
         this.noChangeHEX = this.hex;
-        document.onmousedown = (e) => {
-            if (
-                this.$refs["dd-color_dropdown"] &&
-                this.$refs["dd-color_dropdown"].contains(e.target)
-            )
-                return;
-            this.isShow = false;
-        };
+        document.addEventListener("click", this.except);
     },
     beforeDestroy() {
-        document.onmousedown = null;
+        document.removeEventListener("click", this.except);
     },
     computed: {
         RGB() {

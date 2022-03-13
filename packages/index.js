@@ -56,6 +56,12 @@ import ddStep from "./dd-step";
 import ddTransfer from "./dd-transfer";
 import ddCarousel from "./dd-carousel";
 import ddCarouselItem from "./dd-carousel-item";
+import ddTimeline from "./dd-timeline";
+import ddTimelineItem from "./dd-timeline-item";
+import ddDropdown from "./dd-dropdown";
+import ddDropdownMenu from "./dd-dropdown-menu";
+import ddDropdownItem from "./dd-dropdown-item";
+import ddTimeSelect from "./dd-time-select";
 import "./css/global.css";
 Vue.use(Message);
 Vue.use(ddLoading);
@@ -113,6 +119,12 @@ const components = [
     ddTransfer,
     ddCarousel,
     ddCarouselItem,
+    ddTimeline,
+    ddTimelineItem,
+    ddDropdown,
+    ddDropdownMenu,
+    ddDropdownItem,
+    ddTimeSelect,
 ];
 
 const install = function (Vue) {
@@ -180,6 +192,12 @@ export {
     ddTransfer,
     ddCarousel,
     ddCarouselItem,
+    ddTimeline,
+    ddTimelineItem,
+    ddDropdown,
+    ddDropdownMenu,
+    ddDropdownItem,
+    ddTimeSelect,
 };
 
 export default {
@@ -237,4 +255,10 @@ export default {
     ddTransfer,
     ddCarousel,
     ddCarouselItem,
+    ddTimeline,
+    ddTimelineItem,
+    ddDropdown,
+    ddDropdownMenu,
+    ddDropdownItem,
+    ddTimeSelect,
 };

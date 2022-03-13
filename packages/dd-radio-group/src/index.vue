@@ -1,6 +1,6 @@
 <template>
     <div class="dd-radio-group">
-        <slot  v-if="$slots.default" />
+        <slot v-if="$slots.default" />
     </div>
 </template>
 
@@ -9,7 +9,7 @@ export default {
     name: "ddRadioGroup",
     props: {
         value: {
-            type: [String, Number],
+            type: [String, Number, Boolean],
         },
         disabled: {
             type: Boolean,

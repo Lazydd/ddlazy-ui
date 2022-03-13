@@ -6,7 +6,7 @@
         </p>
         <dd-block title="基础用法" :code="code1">
             <template #source>
-                <dd-carousel height="150px">
+                <dd-carousel :height="150">
                     <dd-carousel-item v-for="item in 4" :key="item">
                         <h3 class="small">{{ item }}</h3>
                     </dd-carousel-item>
@@ -15,16 +15,47 @@
         </dd-block>
         <dd-block title="无限滚动" :code="code2">
             <template #source>
-                <dd-carousel height="150px" loop>
+                <dd-carousel :height="150" loop>
                     <dd-carousel-item v-for="item in 4" :key="item">
                         <h3 class="small">{{ item }}</h3>
                     </dd-carousel-item>
                 </dd-carousel>
             </template>
         </dd-block>
-        <dd-block title="无限滚动" :code="code2">
+        <dd-block title="指示器" :code="code3">
             <template #source>
-                <dd-carousel height="150px" loop>
+                <dd-carousel
+                    :height="150"
+                    loop
+                    arrow="always"
+                    active-color="red"
+                    inactive-color="black"
+                    slide-type="rectangle"
+                    indicator-position="outside"
+                >
+                    <dd-carousel-item v-for="item in 4" :key="item">
+                        <h3 class="small">{{ item }}</h3>
+                    </dd-carousel-item>
+                </dd-carousel>
+            </template>
+        </dd-block>
+        <dd-block title="卡片化" :code="code4">
+            <template #source>
+                <dd-carousel
+                    :height="150"
+                    loop
+                    type="card"
+                    indicator-position="outside"
+                >
+                    <dd-carousel-item v-for="item in 4" :key="item">
+                        <h3 class="small">{{ item }}</h3>
+                    </dd-carousel-item>
+                </dd-carousel>
+            </template>
+        </dd-block>
+        <dd-block title="方向" :code="code5">
+            <template #source>
+                <dd-carousel :height="150" loop direction="vertical">
                     <dd-carousel-item v-for="item in 4" :key="item">
                         <h3 class="small">{{ item }}</h3>
                     </dd-carousel-item>
@@ -40,10 +71,50 @@ export default {
     data() {
         return {
             code1: `
-                
+                <dd-carousel :height="150">
+                    <dd-carousel-item v-for="item in 4" :key="item">
+                        <h3 class="small">{{ item }}</h3>
+                    </dd-carousel-item>
+                </dd-carousel>
             `,
             code2: `
-                
+                <dd-carousel-item v-for="item in 4" :key="item">
+                        <h3 class="small">{{ item }}</h3>
+                </dd-carousel-item>
+            `,
+            code3: `
+                <dd-carousel
+                    :height="150"
+                    loop
+                    arrow="always"
+                    active-color="red"
+                    inactive-color="black"
+                    slide-type="rectangle"
+                    indicator-position="outside"
+                >
+                    <dd-carousel-item v-for="item in 4" :key="item">
+                        <h3 class="small">{{ item }}</h3>
+                    </dd-carousel-item>
+                </dd-carousel>
+            `,
+            code4: `
+                <dd-carousel
+                    :height="150"
+                    loop
+                    type="card"
+                    indicator-position="outside"
+                >
+                    <dd-carousel-item v-for="item in 4" :key="item">
+                        <h3 class="small">{{ item }}</h3>
+                    </dd-carousel-item>
+                </dd-carousel>
+            `,
+            code5: `
+                <dd-carousel :height="150" loop direction="vertical">
+                    <dd-carousel-item v-for="item in 4" :key="item">
+                        <h3 class="small">{{ item }}</h3>
+                    </dd-carousel-item>
+                </dd-carousel>
             `,
         };
     },
@@ -51,6 +122,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+/deep/.dd-carousel-item {
+    text-align: center;
+}
 /deep/.dd-carousel-item:nth-child(2n) {
     background-color: #99a9bf;
     // background: url("https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/lucheng/1644565026162.jpg");

@@ -40,6 +40,9 @@ const Popconfirm = () => import("@/components/Popconfirm.vue");
 const Steps = () => import("@/components/Steps.vue");
 const Transfer = () => import("@/components/Transfer.vue");
 const Carousel = () => import("@/components/Carousel.vue");
+const Timeline = () => import("@/components/Timeline.vue");
+const Dropdown = () => import("@/components/Dropdown.vue");
+const TimeSelect = () => import("@/components/TimeSelect.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -242,6 +245,21 @@ const routes = [
                 path: "/component/carousel",
                 name: "Carousel",
                 component: Carousel,
+            },
+            {
+                path: "/component/timeline",
+                name: "Timeline",
+                component: Timeline,
+            },
+            {
+                path: "/component/dropdown",
+                name: "Dropdown",
+                component: Dropdown,
+            },
+            {
+                path: "/component/timeSelect",
+                name: "TimeSelect",
+                component: TimeSelect,
             },
         ],
     },

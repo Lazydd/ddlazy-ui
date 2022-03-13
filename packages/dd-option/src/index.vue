@@ -29,7 +29,8 @@ export default {
         };
     },
     methods: {
-        dd_select_Click() {
+        dd_select_Click(e) {
+            console.log(this.$options);
             this.select_value = this.value;
             this.$parent.select_change(this.select_value);
             this.$parent.isShow_dropdown = false;
@@ -44,6 +45,7 @@ export default {
     watch: {
         "$parent.select_value"(val) {
             this.select_value = val;
+            this.$parent.select_label = this.label || this.value;
         },
     },
 };

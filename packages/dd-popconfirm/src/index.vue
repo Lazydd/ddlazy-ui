@@ -5,17 +5,11 @@
         v-model="isShowPopconfirm"
         trigger="click"
     >
-        {{ isShowPopconfirm }}
-        <div @click="popconfirm_control" v-if="$slots.reference">
+        <div @click="popconfirm_control" v-if="$slots.reference" ref="popconfirm">
             <slot name="reference" />
         </div>
         <transition name="popconfirm-wrapper">
-            <div
-                class="dd-popover"
-                v-show="isShowPopconfirm"
-                :ref="`popconfirm${key}`"
-                :key="`popconfirm${key}`"
-            >
+            <div class="dd-popover" v-if="isShowPopconfirm">
                 <div class="dd-popconfirm-s"></div>
                 <p class="dd-popconfirm__main">
                     <svg
@@ -68,7 +62,6 @@ export default {
         return {
             isShowPopconfirm: false,
             vnode: null,
-            key: null,
         };
     },
     methods: {
@@ -81,20 +74,18 @@ export default {
             this.$emit("cancel");
         },
         popconfirm_control() {
-            this.key = +new Date();
             this.isShowPopconfirm = !this.isShowPopconfirm;
+        },
+        except(e) {
+            let isSelf = this.$refs["popconfirm"].contains(e.target);
+            if (!isSelf) this.isShowPopconfirm = false;
         },
     },
     mounted() {
-        document.onmousedown = (e) => {
-            console.log(this.key);
-            if (this?.$refs[`popconfirm${this.key}`]?.contains(e.target))
-                return;
-            // this.isShowPopconfirm = false;
-        };
+        document.addEventListener("click", this.except);
     },
     beforeDestroy() {
-        document.onmousedown = null;
+        document.removeEventListener("click", this.except);
     },
 };
 </script>

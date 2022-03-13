@@ -57,7 +57,9 @@
                         <dd-button type="primary" @click="onSubmit">
                             立即创建
                         </dd-button>
-                        <dd-button style="margin-left: 10px">取消</dd-button>
+                        <dd-button style="margin-left: 10px" @click="aa"
+                            >取消</dd-button
+                        >
                     </dd-form-item>
                 </dd-form>
             </template>
@@ -388,6 +390,9 @@ export default {
     methods: {
         onSubmit() {
             console.log(123);
+        },
+        aa() {
+            this.form = this.$options.data().form;
         },
         submitForm(formName) {
             console.log(123);

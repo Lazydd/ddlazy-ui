@@ -15,8 +15,8 @@
             <template #source>
                 <dd-progress textInside :percentage="50" :strokeWidth="26" style="margin-bottom:35px"></dd-progress>
                 <dd-progress textInside :percentage="100" status="success" :strokeWidth="24" style="margin-bottom:35px"></dd-progress>
-                <dd-progress textInside :percentage="100" status="warning" :strokeWidth="22" style="margin-bottom:35px"></dd-progress>
-                <dd-progress textInside :percentage="100" status="exception" :strokeWidth="20" style="margin-bottom:35px"></dd-progress>
+                <dd-progress textInside :percentage="80" status="warning" :strokeWidth="22" style="margin-bottom:35px"></dd-progress>
+                <dd-progress textInside :percentage="50" status="exception" :strokeWidth="20" style="margin-bottom:35px"></dd-progress>
             </template>
         </dd-block>
         <dd-block title="自定义颜色" :code="code3">
@@ -28,13 +28,12 @@
                 <dd-button @click="increase" icon="icon-add-select"></dd-button>
             </template>
         </dd-block>
-        <dd-block title="环形进度条" :code="code3">
+        <dd-block title="环形进度条" :code="code4">
             <template #source>
-                <dd-progress type="circle" :percentage="0" style="margin-right:15px"></dd-progress>
-                <dd-progress type="circle" :percentage="25" style="margin-right:15px"></dd-progress>
-                <dd-progress type="circle" :percentage="100" style="margin-right:15px"></dd-progress>
-                <dd-progress type="circle" :percentage="70" style="margin-right:15px"></dd-progress>
-                <dd-progress type="circle" :percentage="50"></dd-progress>
+                <dd-progress type="circle" :percentage="percentage" style="margin-right:15px"></dd-progress>
+                <dd-progress type="circle" :percentage="percentage" status="success" style="margin-right:15px"></dd-progress>
+                <dd-progress type="circle" :percentage="percentage" status="warning" style="margin-right:15px"></dd-progress>
+                <dd-progress type="circle" :percentage="percentage" status="exception"></dd-progress>
             </template>
         </dd-block>
     </div>
@@ -57,14 +56,20 @@ export default {
             code2:`
                 <dd-progress textInside :percentage="50" :strokeWidth="26" style="margin-bottom:35px"></dd-progress>
                 <dd-progress textInside :percentage="100" status="success" :strokeWidth="24" style="margin-bottom:35px"></dd-progress>
-                <dd-progress textInside :percentage="100" status="warning" :strokeWidth="22" style="margin-bottom:35px"></dd-progress>
-                <dd-progress textInside :percentage="100" status="exception" :strokeWidth="20" style="margin-bottom:35px"></dd-progress>
+                <dd-progress textInside :percentage="80" status="warning" :strokeWidth="22" style="margin-bottom:35px"></dd-progress>
+                <dd-progress textInside :percentage="50" status="exception" :strokeWidth="20" style="margin-bottom:35px"></dd-progress>
             `,
             code3:`
                 <dd-progress textInside :percentage="50" :strokeWidth="26" style="margin-bottom:35px"></dd-progress>
                 <dd-progress textInside :percentage="100" status="success" :strokeWidth="24" style="margin-bottom:35px"></dd-progress>
                 <dd-progress textInside :percentage="100" status="warning" :strokeWidth="22" style="margin-bottom:35px"></dd-progress>
                 <dd-progress textInside :percentage="100" status="exception" :strokeWidth="20" style="margin-bottom:35px"></dd-progress>
+            `,
+            code4:`
+                <dd-progress type="circle" :percentage="percentage" style="margin-right:15px"></dd-progress>
+                <dd-progress type="circle" :percentage="percentage" status="success" style="margin-right:15px"></dd-progress>
+                <dd-progress type="circle" :percentage="percentage" status="warning" style="margin-right:15px"></dd-progress>
+                <dd-progress type="circle" :percentage="percentage" status="exception"></dd-progress>
             `
         };
     },

@@ -1,7 +1,7 @@
 <template>
     <transition name="dialog-wrapper">
         <div class="dd-dialog_wrapper" v-show="isShowDialog">
-            <div class="dd-dialog">
+            <div class="dd-dialog" :style="`width:${width}`">
                 <div class="dd-dialog_header" :cente="cente">
                     <span class="dd-dialog_title">
                         {{ title }}
@@ -32,6 +32,10 @@ export default {
         },
         title: {
             type: String,
+        },
+        width: {
+            type: String,
+            default: "50%",
         },
         cente: {
             type: Boolean,
