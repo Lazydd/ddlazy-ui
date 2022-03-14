@@ -105,7 +105,7 @@
 
 <script>
 export default {
-    name: "Link",
+    name: "Dropdown",
     data() {
         return {
             code1: `

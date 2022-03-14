@@ -45,7 +45,7 @@ export default {
     watch: {
         "$parent.select_value"(val) {
             this.select_value = val;
-            this.$parent.select_label = this.label || this.value;
+            // this.$parent.select_label = this.label || this.value;
         },
     },
 };

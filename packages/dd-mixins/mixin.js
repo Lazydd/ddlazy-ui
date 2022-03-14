@@ -29,6 +29,29 @@ const mixin = {
             }
             return newArr;
         },
+        getSecond(time) {
+            let second = 0;
+            second =
+                Number(time.split(":")[0] * 3600) +
+                Number(time.split(":")[1] * 60) +
+                Number(time.split(":")[2]);
+            return second;
+        },
+        getHMS(time) {
+            let h =
+                Math.floor(time / 3600) < 10
+                    ? "0" + Math.floor(time / 3600)
+                    : Math.floor(time / 3600);
+            let m =
+                Math.floor((time / 60) % 60) < 10
+                    ? "0" + Math.floor((time / 60) % 60)
+                    : Math.floor((time / 60) % 60);
+            let s =
+                Math.floor(time % 60) < 10
+                    ? "0" + Math.floor(time % 60)
+                    : Math.floor(time % 60);
+            return h + ":" + m + ":" + s;
+        },
     },
 };
 export default mixin;

@@ -43,6 +43,7 @@ const Carousel = () => import("@/components/Carousel.vue");
 const Timeline = () => import("@/components/Timeline.vue");
 const Dropdown = () => import("@/components/Dropdown.vue");
 const TimeSelect = () => import("@/components/TimeSelect.vue");
+const Scroll = () => import("@/components/Scroll.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -260,6 +261,11 @@ const routes = [
                 path: "/component/timeSelect",
                 name: "TimeSelect",
                 component: TimeSelect,
+            },
+            {
+                path: "/component/scroll",
+                name: "Scroll",
+                component: Scroll,
             },
         ],
     },

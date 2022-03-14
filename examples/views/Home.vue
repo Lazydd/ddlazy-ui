@@ -87,6 +87,10 @@ export default {
                     label: "Basic",
                     children: [
                         {
+                            label: "Scroll 滚动条",
+                            path: "#/component/scroll",
+                        },
+                        {
                             label: "Layout 布局",
                             path: "#/component/layout",
                         },
@@ -327,12 +331,6 @@ export default {
     /deep/ ._title {
         color: #999;
         transition: all 1s;
-    }
-    /deep/.dd-block,
-    /deep/.control {
-        color: #eaeaea !important;
-        border-color: #eaeaea !important;
-        background: rgb(30, 30, 30) !important;
     }
     /deep/ .code {
         border-left: 1px solid #eaeaea;

@@ -13,10 +13,11 @@
                             style="width: 240px"
                         ></dd-input>
                     </dd-form-item>
-                    <dd-form-item label="活动区域">
+                    <dd-form-item label="活动区域" >
                         <dd-select
                             v-model="form.region"
                             placeholder="请选择活动区域"
+                            style="width: 240px"
                         >
                             <dd-option
                                 label="区域一"
@@ -82,6 +83,7 @@
                         <dd-select
                             v-model="form1.region"
                             placeholder="请选择活动区域"
+                            style="width: 240px"
                         >
                             <dd-option
                                 label="区域一"
@@ -274,6 +276,7 @@ export default {
                         <dd-select
                             v-model="form1.region"
                             placeholder="请选择活动区域"
+                            style="width: 240px"
                         >
                             <dd-option
                                 label="区域一"
