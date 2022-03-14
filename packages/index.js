@@ -3,6 +3,7 @@ import Vue from "vue";
 import ddBlock from "./dd-block";
 import ddDescribe from "./dd-describe";
 import ddFooter from "./dd-footer";
+import ddCoder from "./dd-coder";
 
 import ddButton from "./dd-button";
 import ddIcon from "./dd-icon";
@@ -70,6 +71,7 @@ const components = [
     ddBlock,
     ddDescribe,
     ddFooter,
+    ddCoder,
     ddButton,
     ddIcon,
     ddLink,
@@ -143,6 +145,7 @@ export {
     ddBlock,
     ddDescribe,
     ddFooter,
+    ddCoder,
     ddButton,
     ddIcon,
     ddLink,
@@ -206,6 +209,7 @@ export default {
     ddBlock,
     ddDescribe,
     ddFooter,
+    ddCoder,
     ddButton,
     ddIcon,
     ddLink,

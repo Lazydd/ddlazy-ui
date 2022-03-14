@@ -78,6 +78,10 @@ export default {
                     label: "指南",
                     children: [
                         {
+                            label: "安装",
+                            path: "#/component/installation",
+                        },
+                        {
                             label: "快速上手",
                             path: "#/component/quickstart",
                         },
@@ -86,10 +90,6 @@ export default {
                 {
                     label: "Basic",
                     children: [
-                        {
-                            label: "Scroll 滚动条",
-                            path: "#/component/scroll",
-                        },
                         {
                             label: "Layout 布局",
                             path: "#/component/layout",
@@ -286,6 +286,10 @@ export default {
                         {
                             label: "Divider 分割线",
                             path: "#/component/divider",
+                        },
+                        {
+                            label: "Scroll 滚动条",
+                            path: "#/component/scroll",
                         },
                         {
                             label: "Backtop 回到顶部",

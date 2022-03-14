@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 const Home = () => import("../views/Home.vue");
 const Quickstart = () => import("@/components/Quickstart.vue");
+const Installation = () => import("@/components/Installation.vue");
 const Layout = () => import("@/components/Layout.vue");
 const Icon = () => import("@/components/Icon.vue");
 const Button = () => import("@/components/Button.vue");
@@ -266,6 +267,11 @@ const routes = [
                 path: "/component/scroll",
                 name: "Scroll",
                 component: Scroll,
+            },
+            {
+                path: "/component/installation",
+                name: "Installation",
+                component: Installation,
             },
         ],
     },

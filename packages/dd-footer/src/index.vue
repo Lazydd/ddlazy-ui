@@ -1,14 +1,14 @@
 <template>
     <div class="dd-footer">
         <div class="dd-icon">
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon" v-if="left" aria-hidden="true">
                 <use xlink:href="#icon-arrow-left"></use>
             </svg>
             <span>{{ left }}</span>
         </div>
         <div class="dd-icon">
             <span>{{ right }}</span>
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon" v-if="right" aria-hidden="true">
                 <use xlink:href="#icon-arrow-right"></use>
             </svg>
         </div>
