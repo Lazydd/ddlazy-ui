@@ -63,7 +63,7 @@
             <template #source>
                 <div class="fold">
                     <dd-button @click="show3 = !show3">Click Me</dd-button>
-                    <div style="height: 300px">
+                    <div style="height: 320px">
                         <dd-transition name="list">
                             <div v-show="show3">
                                 <div class="transition-box">折叠</div>

@@ -42,20 +42,22 @@ export default {
             carouselIndex: 0,
             carouselLength: 0,
             activeIndicator: 0,
+            carouselList: [],
+            isLeft: false,
         };
     },
     render: function (h) {
         const _this = this;
-        let carouselList = this.$slots.default;
-        this.carouselLength = carouselList.length;
+        this.carouselList = this.$slots.default;
+        this.carouselLength = this.carouselList.length;
         // let vnode = [];
         let vnodeObj = {};
-        carouselList.map((item, i) => {
-            console.log(item);
+        this.carouselList.map((item, i) => {
             vnodeObj[item.componentOptions.propsData.name] = item;
             // let { name, label, icon } = item.componentOptions.propsData;
             // vnode.push({ name, label, icon });
         });
+
         return h(
             "div",
             {
@@ -143,6 +145,7 @@ export default {
                                                 _this.carouselLength - 1
                                             ) {
                                                 _this.activeIndicator = 0;
+                                                _this.isLeft = true;
                                             } else {
                                                 _this.activeIndicator++;
                                             }
@@ -186,7 +189,7 @@ export default {
                                 },
                             },
                             [
-                                carouselList.map((item, i) => {
+                                _this.carouselList.map((item, i) => {
                                     return h(
                                         "div",
                                         {
@@ -225,7 +228,7 @@ export default {
                         ],
                     },
                     [
-                        carouselList.map((item, i) => {
+                        _this.carouselList.map((item, i) => {
                             return h("li", {
                                 class: [
                                     _this.slideType === "rectangle"
@@ -269,11 +272,13 @@ export default {
             return this.carouselItem.offsetHeight;
         },
         carouselMove() {
-            this.$refs["dd-carousel_container"].style.left =
+            let left =
                 -(
                     this.activeIndicator *
                     (this.type === "card" ? this.getWidth() : 100)
                 ) + (this.type === "card" ? "px" : "%");
+            if (this.activeIndicator == this.carouselList.length - 1) left = 0;
+            this.$refs["dd-carousel_container"].style.left = left;
         },
         carouseMove_vertical() {
             this.$refs["dd-carousel_container"].style.top =
@@ -286,12 +291,13 @@ export default {
     },
     mounted() {
         if (this.loop) {
-            console.log(this.$slots.default[0].componentOptions.children[0]);
-            // let vnode = this.carouselItem;
-            // console.log(this.$refs[`carouselItem-0`]);
-            // this.$refs[`carouselItem-0`].appendChild(vnode);
+            this.carouselList.push(this.carouselList[0]);
         }
-        // this.getWidth();
+        // if (this.loop) {
+        // let vnode =
+        //     this.$refs["dd-carousel_container"].children[0].cloneNode(true);
+        // this.$refs["dd-carousel_container"].appendChild(vnode);
+        // }
     },
     watch: {
         activeIndicator(val) {

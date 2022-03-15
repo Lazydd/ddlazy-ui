@@ -22,53 +22,28 @@ export default {
             activeIndex: "",
             activeTime: "",
             isShow_dropdown: false,
+            activeHour: 0,
+            activeMinute: 0,
+            activeSecond: 0,
         };
     },
     render: function (h) {
         let _this = this;
-        let timeList1 = [
-            "00",
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "05",
-            "07",
-            "08",
-            "09",
-            "10",
-        ];
-        let timeList2 = [
-            "00",
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "05",
-            "07",
-            "08",
-            "09",
-            "10",
-        ];
-        let timeList3 = [
-            "00",
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "05",
-            "07",
-            "08",
-            "09",
-            "10",
-        ];
+        let timeList1 = [];
+        let timeList2 = [];
+        let timeList3 = [];
+        for (let i = 0; i < 24; i++) {
+            timeList1.push(i);
+        }
+        for (let i = 0; i < 60; i++) {
+            timeList2.push(i);
+            timeList3.push(i);
+        }
         let exceptList = [];
         let newMinTime;
 
         this.activeTime = this.value || "";
+
         // for (let i = 0; i < stepS; i++) {
         //     let time = this.getHMS(
         //         this.getSecond(start) + this.getSecond(step) * i
@@ -189,13 +164,26 @@ export default {
                                                                                   "li",
                                                                                   {
                                                                                       class: [
-                                                                                          "",
+                                                                                          _this.activeHour ==
+                                                                                          item
+                                                                                              ? "activeTime"
+                                                                                              : "",
                                                                                       ],
                                                                                       domProps:
                                                                                           {
                                                                                               innerHTML:
-                                                                                                  item,
+                                                                                                  item <
+                                                                                                  10
+                                                                                                      ? "0" +
+                                                                                                        item
+                                                                                                      : item,
                                                                                           },
+                                                                                      on: {
+                                                                                          click() {
+                                                                                              _this.activeHour =
+                                                                                                  item;
+                                                                                          },
+                                                                                      },
                                                                                   }
                                                                               );
                                                                           }
@@ -228,13 +216,26 @@ export default {
                                                                                   "li",
                                                                                   {
                                                                                       class: [
-                                                                                          "",
+                                                                                          _this.activeMinute ==
+                                                                                          item
+                                                                                              ? "activeTime"
+                                                                                              : "",
                                                                                       ],
                                                                                       domProps:
                                                                                           {
                                                                                               innerHTML:
-                                                                                                  item,
+                                                                                                  item <
+                                                                                                  10
+                                                                                                      ? "0" +
+                                                                                                        item
+                                                                                                      : item,
                                                                                           },
+                                                                                      on: {
+                                                                                          click() {
+                                                                                              _this.activeMinute =
+                                                                                                  item;
+                                                                                          },
+                                                                                      },
                                                                                   }
                                                                               );
                                                                           }
@@ -267,13 +268,26 @@ export default {
                                                                                   "li",
                                                                                   {
                                                                                       class: [
-                                                                                          "",
+                                                                                          _this.activeSecond ==
+                                                                                          item
+                                                                                              ? "activeTime"
+                                                                                              : "",
                                                                                       ],
                                                                                       domProps:
                                                                                           {
                                                                                               innerHTML:
-                                                                                                  item,
+                                                                                                  item <
+                                                                                                  10
+                                                                                                      ? "0" +
+                                                                                                        item
+                                                                                                      : item,
                                                                                           },
+                                                                                      on: {
+                                                                                          click() {
+                                                                                              _this.activeSecond =
+                                                                                                  item;
+                                                                                          },
+                                                                                      },
                                                                                   }
                                                                               );
                                                                           }
