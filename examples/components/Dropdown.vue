@@ -46,7 +46,7 @@
             <template #source>
                 <dd-dropdown split-button>
                     下拉菜单
-                    <dd-dropdown-menu slot="dropdown">
+                    <dd-dropdown-menu slot="dropdown" >
                         <dd-dropdown-item>黄金糕</dd-dropdown-item>
                         <dd-dropdown-item>狮子头</dd-dropdown-item>
                         <dd-dropdown-item>螺蛳粉</dd-dropdown-item>

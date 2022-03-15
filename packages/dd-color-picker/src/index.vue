@@ -7,7 +7,7 @@
             ></div>
         </div>
         <div>
-            <transition name="fale">
+            <dd-transition name="dd-zoom-top">
                 <div
                     class="dd-color_dropdown dd-color-picker_pannel"
                     v-if="isShow"
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-            </transition>
+            </dd-transition>
         </div>
     </div>
 </template>
@@ -53,6 +53,7 @@
 <script>
 import ColorHueSlider from "./color-hue-slider.vue";
 import ColorSvPicker from "./color-sv-picker.vue";
+import ddTransition from "../../dd-transition";
 export default {
     name: "ddColorPicker",
     props: {},
@@ -149,6 +150,7 @@ export default {
     components: {
         ColorHueSlider,
         ColorSvPicker,
+        ddTransition,
     },
     watch: {
         sv(val) {
@@ -223,17 +225,5 @@ export default {
         border-radius: 4px;
         box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     }
-}
-.fale-enter-active,
-.fale-leave-active {
-    transition: opacity 0.5s;
-}
-.fale-enter,
-.fale-leave-to {
-    opacity: 0;
-}
-.fale-enter-to,
-.fale-leave {
-    opacity: 1;
 }
 </style>

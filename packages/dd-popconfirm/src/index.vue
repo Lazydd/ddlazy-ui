@@ -5,10 +5,14 @@
         v-model="isShowPopconfirm"
         trigger="click"
     >
-        <div @click="popconfirm_control" v-if="$slots.reference" ref="popconfirm">
+        <div
+            @click="popconfirm_control"
+            v-if="$slots.reference"
+            ref="popconfirm"
+        >
             <slot name="reference" />
         </div>
-        <transition name="popconfirm-wrapper">
+        <dd-transition name="dd-fade">
             <div class="dd-popover" v-if="isShowPopconfirm">
                 <div class="dd-popconfirm-s"></div>
                 <p class="dd-popconfirm__main">
@@ -30,11 +34,12 @@
                     </dd-button>
                 </div>
             </div>
-        </transition>
+        </dd-transition>
     </div>
 </template>
 
 <script>
+import ddTransition from "../../dd-transition";
 export default {
     name: "ddPopconfirm",
     props: {
@@ -87,20 +92,13 @@ export default {
     beforeDestroy() {
         document.removeEventListener("click", this.except);
     },
+    components: {
+        ddTransition,
+    },
 };
 </script>
 
 <style lang="less" scoped>
-.popconfirm-wrapper-enter-active,
-.popconfirm-wrapper-leave-active {
-    transition: all 0.3s;
-}
-.popconfirm-wrapper-enter {
-    opacity: 0;
-}
-.popconfirm-wrapper-leave-to {
-    opacity: 0;
-}
 .dd-popover__reference-wrapper {
     position: relative;
     .dd-popover {

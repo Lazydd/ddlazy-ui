@@ -25,7 +25,7 @@
                 </svg>
             </div>
         </div>
-        <transition name="fale">
+        <dd-transition name="dd-zoom-top">
             <div
                 class="dd-collapse-item__wrap"
                 v-if="
@@ -40,13 +40,14 @@
             >
                 <div class="dd-collapse-item__content"><slot /></div>
             </div>
-        </transition>
+        </dd-transition>
     </div>
 </template>
 
 <script>
 let newArr = [];
 import mixin from "../../dd-mixins/mixin";
+import ddTransition from "../../dd-transition";
 export default {
     name: "ddCollapseItem",
     mixins: [mixin],
@@ -122,6 +123,9 @@ export default {
             }
         },
     },
+    components: {
+        ddTransition,
+    },
     created() {
         this.initCollapse();
     },
@@ -186,17 +190,5 @@ export default {
             transform: rotate(90deg);
         }
     }
-}
-.fale-enter-active,
-.fale-leave-active {
-    transition: opacity 0.3s;
-}
-.fale-enter,
-.fale-leave-to {
-    opacity: 0;
-}
-.fale-enter-to,
-.fale-leave {
-    opacity: 1;
 }
 </style>

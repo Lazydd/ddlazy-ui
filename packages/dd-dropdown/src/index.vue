@@ -57,7 +57,7 @@ export default {
                                   "transition",
                                   {
                                       props: {
-                                          name: "fale",
+                                          name: "dd-zoom-top",
                                       },
                                   },
                                   [_this.isShow ? _this.$slots.dropdown : ""]
@@ -70,7 +70,7 @@ export default {
                           "transition",
                           {
                               props: {
-                                  name: "fale",
+                                  name: "dd-zoom-top",
                               },
                           },
                           [_this.isShow ? _this.$slots.dropdown : ""]
@@ -133,16 +133,18 @@ export default {
         color: #409eff;
     }
 }
-.fale-enter-active,
-.fale-leave-active {
-    transition: opacity 0.3s;
+.dd-zoom-top-enter-active,
+.dd-zoom-top-leave-active {
+    transition: transform 0.2s;
 }
-.fale-enter,
-.fale-leave-to {
-    opacity: 0;
+.dd-zoom-top-enter,
+.dd-zoom-top-leave-to {
+    transform: scale(1, 0);
+    transform-origin: center top;
 }
-.fale-enter-to,
-.fale-leave {
-    opacity: 1;
+.dd-zoom-top-enter-to,
+.dd-zoom-top-leave {
+    transform: scale(1, 1);
+    transform-origin: center top;
 }
 </style>

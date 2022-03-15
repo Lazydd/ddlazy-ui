@@ -63,6 +63,8 @@ import ddDropdown from "./dd-dropdown";
 import ddDropdownMenu from "./dd-dropdown-menu";
 import ddDropdownItem from "./dd-dropdown-item";
 import ddTimeSelect from "./dd-time-select";
+import ddTransition from "./dd-transition";
+import ddTimePicker from "./dd-time-picker";
 import "./css/global.css";
 Vue.use(Message);
 Vue.use(ddLoading);
@@ -127,6 +129,8 @@ const components = [
     ddDropdownMenu,
     ddDropdownItem,
     ddTimeSelect,
+    ddTransition,
+    ddTimePicker,
 ];
 
 const install = function (Vue) {
@@ -201,6 +205,8 @@ export {
     ddDropdownMenu,
     ddDropdownItem,
     ddTimeSelect,
+    ddTransition,
+    ddTimePicker,
 };
 
 export default {
@@ -265,4 +271,6 @@ export default {
     ddDropdownMenu,
     ddDropdownItem,
     ddTimeSelect,
+    ddTransition,
+    ddTimePicker,
 };

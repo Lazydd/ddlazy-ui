@@ -45,6 +45,7 @@ const Timeline = () => import("@/components/Timeline.vue");
 const Dropdown = () => import("@/components/Dropdown.vue");
 const TimeSelect = () => import("@/components/TimeSelect.vue");
 const Scroll = () => import("@/components/Scroll.vue");
+const Transition = () => import("@/components/Transition.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -272,6 +273,11 @@ const routes = [
                 path: "/component/installation",
                 name: "Installation",
                 component: Installation,
+            },
+            {
+                path: "/component/transition",
+                name: "Transition",
+                component: Transition,
             },
         ],
     },

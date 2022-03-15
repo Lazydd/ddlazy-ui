@@ -85,6 +85,10 @@ export default {
                             label: "快速上手",
                             path: "#/component/quickstart",
                         },
+                        {
+                            label: "内置过渡动画",
+                            path: "#/component/transition",
+                        },
                     ],
                 },
                 {

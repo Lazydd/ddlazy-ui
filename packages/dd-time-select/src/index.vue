@@ -93,9 +93,9 @@ export default {
                         value: _this.activeTime,
                     },
                     on: {
-                        input(e) {
-                            _this.aa = e.target.value;
-                        },
+                        // input(e) {
+                        //     _this.aa = e.target.value;
+                        // },
                         click(e) {
                             _this.isShow_dropdown = !_this.isShow_dropdown;
                         },
@@ -338,14 +338,14 @@ export default {
 }
 .fale-enter-active,
 .fale-leave-active {
-    transition: opacity 0.5s;
+    transition: transform 0.2s;
 }
 .fale-enter,
 .fale-leave-to {
-    opacity: 0;
+    transform: scale(1,0);
 }
 .fale-enter-to,
 .fale-leave {
-    opacity: 1;
+    transform: scale(1,1);
 }
 </style>

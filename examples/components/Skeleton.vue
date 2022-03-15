@@ -50,7 +50,7 @@
                 </dd-skeleton>
             </template>
         </dd-block>
-        <dd-block title="防止渲染抖动" :code="code7">
+        <dd-block title="防止渲染抖动" :code="code6">
             <template #source>
                 <div style="margin-bottom: 15px">
                     <label style="margin-right: 16px">切换 Loading</label>
@@ -86,7 +86,7 @@ export default {
                 <dd-skeleton />
             `,
             code2: `
-                <dd-skeleton />
+                <dd-skeleton :rows="6" />
             `,
             code3: `
                 <dd-skeleton :rows="6" animated />
@@ -118,10 +118,24 @@ export default {
                 </dd-skeleton>
             `,
             code6: `
-                
-            `,
-            code7: `
-                
+                <div style="margin-bottom: 15px">
+                    <label style="margin-right: 16px">切换 Loading</label>
+                    <dd-switch v-model="loading1"/>
+                </div>
+                <dd-skeleton
+                    animated
+                    :loading="loading1"
+                    variant="image"
+                    :throttle="500"
+                    style="width: 240px; height: 240px"
+                >
+                    <dd-card :body-style="{ padding: '0px' }">
+                        <img
+                            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                            class="image"
+                        />
+                    </dd-card>
+                </dd-skeleton>
             `,
         };
     },
