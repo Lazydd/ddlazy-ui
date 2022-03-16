@@ -39,7 +39,6 @@ export default {
 <style lang="less" scoped>
 .dd-row {
     display: flex;
-    width: 100%;
     height: auto;
 }
 .isflex {

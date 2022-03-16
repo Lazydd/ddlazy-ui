@@ -53,12 +53,37 @@ export default {
             ],
             loading1: true,
             code1: `
-                <dd-button type="primary" @click="openFullScreen2">服务方式</dd-button>
-
-                this.$loading.service("Loading");
-                setTimeout(() => {
-                    this.$loading.close();
-                }, 3000);
+                <dd-table :data="tableData" stripe v-loading="loading1">
+                    <dd-table-column prop="date" label="日期"></dd-table-column>
+                    <dd-table-column prop="name" label="姓名"></dd-table-column>
+                    <dd-table-column
+                        prop="address"
+                        label="地址"
+                    ></dd-table-column>
+                </dd-table>
+                loading1: true,
+                tableData: [
+                    {
+                        date: "2016-05-02",
+                        name: "王小虎",
+                        address: "上海市普陀区金沙江路 1518 弄",
+                    },
+                    {
+                        date: "2016-05-04",
+                        name: "王小虎",
+                        address: "上海市普陀区金沙江路 1517 弄",
+                    },
+                    {
+                        date: "2016-05-01",
+                        name: "王小虎",
+                        address: "上海市普陀区金沙江路 1519 弄",
+                    },
+                    {
+                        date: "2016-05-03",
+                        name: "王小虎",
+                        address: "上海市普陀区金沙江路 1516 弄",
+                    },
+                ],
             `,
             code2: `
                 <dd-button type="primary" @click="openFullScreen">服务方式</dd-button>

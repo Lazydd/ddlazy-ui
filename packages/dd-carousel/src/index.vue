@@ -44,12 +44,17 @@ export default {
             activeIndicator: 0,
             carouselList: [],
             isLeft: false,
+            left: 0,
         };
     },
     render: function (h) {
         const _this = this;
         this.carouselList = this.$slots.default;
-        this.carouselLength = this.carouselList.length;
+        if (this.loop) {
+            this.carouselLength = this.carouselList.length + 1;
+        } else {
+            this.carouselLength = this.carouselList.length;
+        }
         // let vnode = [];
         let vnodeObj = {};
         this.carouselList.map((item, i) => {
@@ -140,10 +145,7 @@ export default {
                                                 _this.activeIndicator++;
                                             }
                                         } else {
-                                            if (
-                                                _this.activeIndicator ==
-                                                _this.carouselLength - 1
-                                            ) {
+                                            if (_this.activeIndicator == 5) {
                                                 _this.activeIndicator = 0;
                                                 _this.isLeft = true;
                                             } else {
@@ -164,6 +166,14 @@ export default {
                                 }),
                             ]
                         ),
+                        h("div", {
+                            domProps: {
+                                innerHTML:
+                                    _this.left +
+                                    "-----" +
+                                    _this.activeIndicator,
+                            },
+                        }),
                         h(
                             "div",
                             {
@@ -186,6 +196,10 @@ export default {
                                         _this.direction !== "vertical"
                                             ? "nowrap"
                                             : "wrap",
+                                    transition:
+                                        _this.activeIndicator == 5
+                                            ? ""
+                                            : "all 1s",
                                 },
                             },
                             [
@@ -277,7 +291,10 @@ export default {
                     this.activeIndicator *
                     (this.type === "card" ? this.getWidth() : 100)
                 ) + (this.type === "card" ? "px" : "%");
-            if (this.activeIndicator == this.carouselList.length - 1) left = 0;
+            if (this.loop && this.activeIndicator == 5) {
+                left = 0;
+            }
+            this.left = left;
             this.$refs["dd-carousel_container"].style.left = left;
         },
         carouseMove_vertical() {
@@ -290,17 +307,18 @@ export default {
         // },
     },
     mounted() {
-        if (this.loop) {
-            this.carouselList.push(this.carouselList[0]);
-        }
         // if (this.loop) {
-        // let vnode =
-        //     this.$refs["dd-carousel_container"].children[0].cloneNode(true);
-        // this.$refs["dd-carousel_container"].appendChild(vnode);
+        //     this.carouselList.push(this.carouselList[0]);
         // }
+        if (this.loop) {
+            let vnode =
+                this.$refs["dd-carousel_container"].children[0].cloneNode(true);
+            this.$refs["dd-carousel_container"].appendChild(vnode);
+        }
     },
     watch: {
         activeIndicator(val) {
+            // if (val == 5) this.activeIndicator = 1;
             this.direction === "vertical"
                 ? this.carouseMove_vertical()
                 : this.carouselMove();
@@ -337,6 +355,9 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
             &:hover {
                 background-color: rgba(31, 45, 61, 0.23);
             }
@@ -367,7 +388,7 @@ export default {
             align-items: center;
             position: relative;
             left: 0;
-            transition: all 1s;
+            // transition: all 1s;
 
             .dd-carousel-item {
                 // position: absolute;

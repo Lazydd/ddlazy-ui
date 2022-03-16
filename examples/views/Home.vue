@@ -135,10 +135,10 @@ export default {
                             label: "Select 选择器",
                             path: "#/component/select",
                         },
-                        // {
-                        //     label: "Cascader 级联选择器",
-                        //     path: "/component/quickstart",
-                        // },
+                        {
+                            label: "Cascader 级联选择器",
+                            path: "#/component/cascader",
+                        },
                         {
                             label: "Switch 开关",
                             path: "#/component/switch",
