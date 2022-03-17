@@ -388,7 +388,7 @@ export default {
                 color: #409eff;
             }
             /deep/.dd-input .dd-input_inner {
-                width: 180px;
+                width: 190px;
             }
         }
     }

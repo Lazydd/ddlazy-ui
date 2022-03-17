@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 const Home = () => import("../views/Home.vue");
+const Index = () => import("../views/Index.vue");
+const Guides = () => import("../views/Guides.vue");
 const Quickstart = () => import("@/components/Quickstart.vue");
 const Installation = () => import("@/components/Installation.vue");
 const Layout = () => import("@/components/Layout.vue");
@@ -52,238 +54,250 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: "",
-        name: "Home",
-        component: Home,
+        name: "Index",
+        component: Index,
         children: [
             {
-                path: "/component/quickstart",
-                name: "Quickstart",
-                component: Quickstart,
+                path: "",
+                name: "Home",
+                component: Home,
+                children: [
+                    {
+                        path: "/component/quickstart",
+                        name: "Quickstart",
+                        component: Quickstart,
+                    },
+                    {
+                        path: "/component/layout",
+                        name: "Layout",
+                        component: Layout,
+                    },
+                    {
+                        path: "/component/icon",
+                        name: "Icon",
+                        component: Icon,
+                    },
+                    {
+                        path: "/component/button",
+                        name: "Button",
+                        component: Button,
+                    },
+                    {
+                        path: "/component/link",
+                        name: "Link",
+                        component: Link,
+                    },
+                    {
+                        path: "/component/table",
+                        name: "Table",
+                        component: Table,
+                    },
+                    {
+                        path: "/component/tag",
+                        name: "Tag",
+                        component: Tag,
+                    },
+                    {
+                        path: "/component/radio",
+                        name: "Radio",
+                        component: Radio,
+                    },
+                    {
+                        path: "/component/checkbox",
+                        name: "Checkbox",
+                        component: Checkbox,
+                    },
+                    {
+                        path: "/component/input",
+                        name: "Input",
+                        component: Input,
+                    },
+                    {
+                        path: "/component/input-number",
+                        name: "InputNumber",
+                        component: InputNumber,
+                    },
+                    {
+                        path: "/component/select",
+                        name: "Select",
+                        component: Select,
+                    },
+                    {
+                        path: "/component/switch",
+                        name: "Switch",
+                        component: Switch,
+                    },
+                    {
+                        path: "/component/slider",
+                        name: "Slider",
+                        component: Slider,
+                    },
+                    {
+                        path: "/component/progress",
+                        name: "Progress",
+                        component: Progress,
+                    },
+                    {
+                        path: "/component/upload",
+                        name: "Upload",
+                        component: Upload,
+                    },
+                    {
+                        path: "/component/message",
+                        name: "Message",
+                        component: Message,
+                    },
+                    {
+                        path: "/component/color-picker",
+                        name: "ColorPicker",
+                        component: ColorPicker,
+                    },
+                    {
+                        path: "/component/tooltip",
+                        name: "Tooltip",
+                        component: Tooltip,
+                    },
+                    {
+                        path: "/component/pagination",
+                        name: "Pagination",
+                        component: Pagination,
+                    },
+                    {
+                        path: "/component/badge",
+                        name: "Badge",
+                        component: Badge,
+                    },
+                    {
+                        path: "/component/avatar",
+                        name: "Avatar",
+                        component: Avatar,
+                    },
+                    {
+                        path: "/component/loading",
+                        name: "Loading",
+                        component: Loading,
+                    },
+                    {
+                        path: "/component/message-box",
+                        name: "MessageBox",
+                        component: MessageBox,
+                    },
+                    {
+                        path: "/component/tabs",
+                        name: "Tabs",
+                        component: Tabs,
+                    },
+                    {
+                        path: "/component/breadcrumb",
+                        name: "Breadcrumb",
+                        component: Breadcrumb,
+                    },
+                    {
+                        path: "/component/card",
+                        name: "Card",
+                        component: Card,
+                    },
+                    {
+                        path: "/component/divider",
+                        name: "Divider",
+                        component: Divider,
+                    },
+                    {
+                        path: "/component/backtop",
+                        name: "Backtop",
+                        component: Backtop,
+                    },
+                    {
+                        path: "/component/dialog",
+                        name: "Dialog",
+                        component: Dialog,
+                    },
+                    {
+                        path: "/component/form",
+                        name: "Form",
+                        component: Form,
+                    },
+                    {
+                        path: "/component/empty",
+                        name: "Empty",
+                        component: Empty,
+                    },
+                    {
+                        path: "/component/tree",
+                        name: "Tree",
+                        component: Tree,
+                    },
+                    {
+                        path: "/component/skeleton",
+                        name: "Skeleton",
+                        component: Skeleton,
+                    },
+                    {
+                        path: "/component/collapse",
+                        name: "Collapse",
+                        component: Collapse,
+                    },
+                    {
+                        path: "/component/popconfirm",
+                        name: "Popconfirm",
+                        component: Popconfirm,
+                    },
+                    {
+                        path: "/component/steps",
+                        name: "Steps",
+                        component: Steps,
+                    },
+                    {
+                        path: "/component/transfer",
+                        name: "Transfer",
+                        component: Transfer,
+                    },
+                    {
+                        path: "/component/carousel",
+                        name: "Carousel",
+                        component: Carousel,
+                    },
+                    {
+                        path: "/component/timeline",
+                        name: "Timeline",
+                        component: Timeline,
+                    },
+                    {
+                        path: "/component/dropdown",
+                        name: "Dropdown",
+                        component: Dropdown,
+                    },
+                    {
+                        path: "/component/timeSelect",
+                        name: "TimeSelect",
+                        component: TimeSelect,
+                    },
+                    {
+                        path: "/component/scroll",
+                        name: "Scroll",
+                        component: Scroll,
+                    },
+                    {
+                        path: "/component/installation",
+                        name: "Installation",
+                        component: Installation,
+                    },
+                    {
+                        path: "/component/transition",
+                        name: "Transition",
+                        component: Transition,
+                    },
+                    {
+                        path: "/component/cascader",
+                        name: "Cascader",
+                        component: Cascader,
+                    },
+                ],
             },
             {
-                path: "/component/layout",
-                name: "Layout",
-                component: Layout,
-            },
-            {
-                path: "/component/icon",
-                name: "Icon",
-                component: Icon,
-            },
-            {
-                path: "/component/button",
-                name: "Button",
-                component: Button,
-            },
-            {
-                path: "/component/link",
-                name: "Link",
-                component: Link,
-            },
-            {
-                path: "/component/table",
-                name: "Table",
-                component: Table,
-            },
-            {
-                path: "/component/tag",
-                name: "Tag",
-                component: Tag,
-            },
-            {
-                path: "/component/radio",
-                name: "Radio",
-                component: Radio,
-            },
-            {
-                path: "/component/checkbox",
-                name: "Checkbox",
-                component: Checkbox,
-            },
-            {
-                path: "/component/input",
-                name: "Input",
-                component: Input,
-            },
-            {
-                path: "/component/input-number",
-                name: "InputNumber",
-                component: InputNumber,
-            },
-            {
-                path: "/component/select",
-                name: "Select",
-                component: Select,
-            },
-            {
-                path: "/component/switch",
-                name: "Switch",
-                component: Switch,
-            },
-            {
-                path: "/component/slider",
-                name: "Slider",
-                component: Slider,
-            },
-            {
-                path: "/component/progress",
-                name: "Progress",
-                component: Progress,
-            },
-            {
-                path: "/component/upload",
-                name: "Upload",
-                component: Upload,
-            },
-            {
-                path: "/component/message",
-                name: "Message",
-                component: Message,
-            },
-            {
-                path: "/component/color-picker",
-                name: "ColorPicker",
-                component: ColorPicker,
-            },
-            {
-                path: "/component/tooltip",
-                name: "Tooltip",
-                component: Tooltip,
-            },
-            {
-                path: "/component/pagination",
-                name: "Pagination",
-                component: Pagination,
-            },
-            {
-                path: "/component/badge",
-                name: "Badge",
-                component: Badge,
-            },
-            {
-                path: "/component/avatar",
-                name: "Avatar",
-                component: Avatar,
-            },
-            {
-                path: "/component/loading",
-                name: "Loading",
-                component: Loading,
-            },
-            {
-                path: "/component/message-box",
-                name: "MessageBox",
-                component: MessageBox,
-            },
-            {
-                path: "/component/tabs",
-                name: "Tabs",
-                component: Tabs,
-            },
-            {
-                path: "/component/breadcrumb",
-                name: "Breadcrumb",
-                component: Breadcrumb,
-            },
-            {
-                path: "/component/card",
-                name: "Card",
-                component: Card,
-            },
-            {
-                path: "/component/divider",
-                name: "Divider",
-                component: Divider,
-            },
-            {
-                path: "/component/backtop",
-                name: "Backtop",
-                component: Backtop,
-            },
-            {
-                path: "/component/dialog",
-                name: "Dialog",
-                component: Dialog,
-            },
-            {
-                path: "/component/form",
-                name: "Form",
-                component: Form,
-            },
-            {
-                path: "/component/empty",
-                name: "Empty",
-                component: Empty,
-            },
-            {
-                path: "/component/tree",
-                name: "Tree",
-                component: Tree,
-            },
-            {
-                path: "/component/skeleton",
-                name: "Skeleton",
-                component: Skeleton,
-            },
-            {
-                path: "/component/collapse",
-                name: "Collapse",
-                component: Collapse,
-            },
-            {
-                path: "/component/popconfirm",
-                name: "Popconfirm",
-                component: Popconfirm,
-            },
-            {
-                path: "/component/steps",
-                name: "Steps",
-                component: Steps,
-            },
-            {
-                path: "/component/transfer",
-                name: "Transfer",
-                component: Transfer,
-            },
-            {
-                path: "/component/carousel",
-                name: "Carousel",
-                component: Carousel,
-            },
-            {
-                path: "/component/timeline",
-                name: "Timeline",
-                component: Timeline,
-            },
-            {
-                path: "/component/dropdown",
-                name: "Dropdown",
-                component: Dropdown,
-            },
-            {
-                path: "/component/timeSelect",
-                name: "TimeSelect",
-                component: TimeSelect,
-            },
-            {
-                path: "/component/scroll",
-                name: "Scroll",
-                component: Scroll,
-            },
-            {
-                path: "/component/installation",
-                name: "Installation",
-                component: Installation,
-            },
-            {
-                path: "/component/transition",
-                name: "Transition",
-                component: Transition,
-            },
-            {
-                path: "/component/cascader",
-                name: "Cascader",
-                component: Cascader,
+                path: "/guide/design",
+                name: "Guides",
+                component: Guides,
             },
         ],
     },

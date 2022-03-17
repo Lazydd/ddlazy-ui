@@ -38,7 +38,17 @@ export default {
                 </dd-popconfirm>
             `,
             code2: `
-
+                <dd-popconfirm
+                    confirm-button-text="好的"
+                    cancel-button-text="不用了"
+                    icon="icon-reeor"
+                    icon-color="red"
+                    title="这是一段内容确定删除吗？"
+                    @confirm="deleteClick"
+                    @cancel="cancel"
+                >
+                    <dd-button slot="reference">删除</dd-button>
+                </dd-popconfirm>
             `,
         };
     },

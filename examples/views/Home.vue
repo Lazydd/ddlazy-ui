@@ -1,57 +1,28 @@
 <template>
-    <div :class="['container', value ? 'night' : '']">
-        <header>
-            <dd-icon
-                class="cetegory"
-                icon="icon-category"
-                v-show="size.width < 1024 ? true : false"
-                @click="aaa"
-            ></dd-icon>
-            <!-- <pre v-highlightjs="sourcecode"><code class="javascript"></code></pre> -->
-            <div class="tit" @click="$router.push('/')">
-                <svg class="icon" aria-hidden="true" :style="{ fill: color }">
-                    <use :xlink:href="`#${icon}`"></use>
-                </svg>
-                <h2>ddlazy-ui</h2>
-            </div>
-            <ul class="nav">
-                <li
-                    class="navList"
-                    v-for="nav in navList"
-                    :key="nav.label"
-                    :class="{ isActive: nav.label == activeNav }"
-                    @click="changeNav(nav)"
-                >
-                    {{ nav.label }}
-                </li>
-                <dd-switch v-model="value"></dd-switch>
-            </ul>
-        </header>
-        <div class="page">
-            <transition name="fale">
-                <article v-if="isShow">
-                    <ul v-for="menu in menuList" :key="menu.label">
-                        <h4>{{ menu.label }}</h4>
-                        <li
-                            class="submenu"
-                            v-for="submenu in menu.children"
-                            :key="submenu.label"
-                            @click="changeMenu(submenu)"
-                        >
-                            <a
-                                :class="{ active: submenu.path == activeMenu }"
-                                a
-                                :href="submenu.path"
-                                >{{ submenu.label }}
-                            </a>
-                        </li>
-                    </ul>
-                </article>
-            </transition>
-            <main class="main-box">
-                <router-view />
-            </main>
-        </div>
+    <div class="page">
+        <transition name="fale">
+            <article v-if="isShow">
+                <ul v-for="menu in menuList" :key="menu.label">
+                    <h4>{{ menu.label }}</h4>
+                    <li
+                        class="submenu"
+                        v-for="submenu in menu.children"
+                        :key="submenu.label"
+                        @click="changeMenu(submenu)"
+                    >
+                        <a
+                            :class="{ active: submenu.path == activeMenu }"
+                            a
+                            :href="submenu.path"
+                            >{{ submenu.label }}
+                        </a>
+                    </li>
+                </ul>
+            </article>
+        </transition>
+        <main class="main-box">
+            <router-view />
+        </main>
     </div>
 </template>
 
@@ -59,20 +30,9 @@
 export default {
     data() {
         return {
-            color: "rgb(70, 159, 252)",
-            icon: "icon-salescenter",
             code1: "npm i ddlazy-ui",
-            value: false,
-            size: {},
             isShow: true,
-            navList: [
-                {
-                    label: "指南",
-                },
-                {
-                    label: "组件",
-                },
-            ],
+            value: false,
             menuList: [
                 {
                     label: "指南",
@@ -302,14 +262,10 @@ export default {
                     ],
                 },
             ],
-            activeNav: "组件",
             activeMenu: "#" + this.$route.path || "#/component/quickstart",
         };
     },
     methods: {
-        changeNav(nav) {
-            this.activeNav = nav.label;
-        },
         changeMenu(menu) {
             this.activeMenu = menu.path;
         },
@@ -319,9 +275,6 @@ export default {
                 height: window.innerHeight,
             };
             this.isShow = this.size.width < 1024 ? false : true;
-        },
-        aaa() {
-            this.isShow = true;
         },
     },
     mounted() {
@@ -364,153 +317,74 @@ a:focus {
     outline: none !important;
     outline-offset: 0px !important;
 }
-.container {
-    width: 100%;
-    height: 100%;
-    min-width: 1200px;
-    background-color: #fff;
-    transition: all 1s;
-    /deep/ .code {
-        border-left: 1px solid #eaeaea;
-        border-right: 1px solid #eaeaea;
-        transition: all 1s;
-    }
-    /deep/ header {
-        background-color: #fff;
-        transition: all 1s;
-    }
-    header {
-        display: flex;
-        position: fixed;
-        width: 100%;
-        top: 0;
-        z-index: 9;
-        padding: 0 120px;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #fff;
-        border-bottom: 1px solid #dcdfe6;
-        height: 80px;
-        .tit {
-            display: flex;
-            align-items: center;
-            color: rgb(70, 159, 252);
-            cursor: pointer;
-            .icon {
-                font-size: 40px;
-                margin-right: 15px;
-            }
-        }
-        .cetegory {
-            position: absolute;
-            left: 80px;
-            font-size: 30px;
-            cursor: pointer;
-        }
-        .nav {
-            display: flex;
-            align-items: center;
 
-            .navList {
-                position: relative;
-                line-height: 80px;
-                text-decoration: none;
-                color: #1989fa;
-                cursor: pointer;
-                display: block;
-                opacity: 0.5;
-                padding: 0 22px;
-
-                &:hover {
-                    opacity: 1;
-                    color: #1989fa !important;
-                }
-            }
-
-            .isActive {
-                opacity: 1;
-                color: #1989fa !important;
-                &::after {
-                    content: "";
-                    display: inline-block;
-                    position: absolute;
-                    left: calc(50% - 15px);
-                    bottom: 0;
-                    height: 2px;
-                    width: 30px;
-                    background: #409eff;
-                }
-            }
-        }
-    }
-    .page {
-        display: flex;
+.page {
+    display: flex;
+    box-sizing: border-box;
+    height: calc(100vh - 80px);
+    margin-top: 80px;
+    // padding: 0 80px;
+    padding-left: 80px;
+    article {
+        width: 240px;
+        height: 100%;
         box-sizing: border-box;
-        height: calc(100vh - 80px);
-        margin-top: 80px;
-        // padding: 0 80px;
-        padding-left: 80px;
-        article {
-            width: 240px;
-            height: 100%;
-            box-sizing: border-box;
-            overflow: scroll;
-            &::-webkit-scrollbar {
-                width: 7px;
-            }
-            &::-webkit-scrollbar-thumb {
-                /* 滚动条里面小方块 */
-                background: #ddd;
-                border-radius: 5px;
-                height: 10px;
-            }
-            // position: fixed;
-            // top: 0;
-            // bottom: 0;
-            h4 {
-                font-size: 12px;
-                color: #999;
-                line-height: 26px;
-                margin-top: 15px;
-            }
-            .submenu {
-                a {
-                    display: block;
-                    height: 40px;
-                    color: #444;
-                    line-height: 40px;
-                    font-size: 14px;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    text-overflow: ellipsis;
-                    font-weight: 400;
-                    &:hover,
-                    &:focus {
-                        color: #409eff;
-                    }
-                }
-                .active {
+        overflow: scroll;
+        &::-webkit-scrollbar {
+            width: 7px;
+        }
+        &::-webkit-scrollbar-thumb {
+            /* 滚动条里面小方块 */
+            background: #ddd;
+            border-radius: 5px;
+            height: 10px;
+        }
+        // position: fixed;
+        // top: 0;
+        // bottom: 0;
+        h4 {
+            font-size: 12px;
+            color: #999;
+            line-height: 26px;
+            margin-top: 15px;
+        }
+        .submenu {
+            a {
+                display: block;
+                height: 40px;
+                color: #444;
+                line-height: 40px;
+                font-size: 14px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                font-weight: 400;
+                &:hover,
+                &:focus {
                     color: #409eff;
                 }
             }
+            .active {
+                color: #409eff;
+            }
         }
-        main {
-            position: relative;
-            height: 100%;
-            box-sizing: border-box;
-            overflow-y: scroll;
-            flex: 1;
-            padding: 20px 60px 100px;
+    }
+    main {
+        position: relative;
+        height: 100%;
+        box-sizing: border-box;
+        overflow-y: scroll;
+        flex: 1;
+        padding: 20px 60px 100px;
 
-            &::-webkit-scrollbar {
-                width: 7px;
-            }
-            &::-webkit-scrollbar-thumb {
-                /* 滚动条里面小方块 */
-                background: #ddd;
-                border-radius: 5px;
-                height: 10px;
-            }
+        &::-webkit-scrollbar {
+            width: 7px;
+        }
+        &::-webkit-scrollbar-thumb {
+            /* 滚动条里面小方块 */
+            background: #ddd;
+            border-radius: 5px;
+            height: 10px;
         }
     }
 }
