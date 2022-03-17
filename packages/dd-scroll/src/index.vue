@@ -31,11 +31,17 @@ export default {
         &::-webkit-scrollbar-thumb {
             /* 滚动条里面小方块 */
             background: #eee;
+            visibility: hidden;
             border-radius: 5px;
         }
         &::-webkit-scrollbar-track {
             /*滚动条里面轨道*/
             background: #fff;
+        }
+        &:hover::-webkit-scrollbar-thumb{
+            background: #eee;
+            visibility:visible ;
+            border-radius: 5px;
         }
     }
 }

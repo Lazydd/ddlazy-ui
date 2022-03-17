@@ -24,7 +24,14 @@ let _pickerHeight = 0;
 import mixin from "../../dd-mixins/mixin";
 export default {
     name: "dd-color-sv-picker",
-    props: ["hex"],
+    props: {
+        hex: {
+            type: String,
+        },
+        value: {
+            Object,
+        },
+    },
     mixins: [mixin],
     data() {
         return {
@@ -83,15 +90,24 @@ export default {
         mouseup() {
             document.onmousemove = null;
         },
+        initXY() {
+            let { saturation, value } = this.value;
+            this.left = parseFloat(saturation) * 280;
+            this.top = (1 - parseFloat(value)) * 180;
+        },
     },
     mounted() {
         _pickerWidth = this.sc_picker.clientWidth;
         _pickerHeight = this.sc_picker.clientHeight;
         document.addEventListener("click", this.mouseup);
     },
+    created() {
+        this.initXY();
+    },
     beforeDestroy() {
         document.removeEventListener("click", this.mouseup);
     },
+
     computed: {
         sc_picker() {
             return this.$refs.sc_picker;

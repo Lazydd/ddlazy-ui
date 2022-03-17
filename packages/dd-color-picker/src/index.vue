@@ -1,74 +1,99 @@
 <template>
-    <div class="dd-color-picker" ref="dd-color_dropdown">
+    <div :class="['dd-color-picker', size]" ref="dd-color_dropdown">
         <div class="color-picker_trigger" @click="isShow = !isShow">
             <div
-                class="color-picker_color"
-                :style="`background-color: ${hex}`"
-            ></div>
-        </div>
-        <div>
-            <dd-transition name="dd-zoom-top">
+                class="color-picker_color-box"
+                :style="
+                    showAlpha
+                        ? `background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);`
+                        : ''
+                "
+            >
                 <div
-                    class="dd-color_dropdown dd-color-picker_pannel"
-                    v-if="isShow"
-                >
-                    <color-sv-picker
-                        v-model="sv"
-                        :hex="noChangeHEX"
-                    ></color-sv-picker
-                    ><color-hue-slider
-                        v-model="h"
-                        style="margin: 8px 0"
-                    ></color-hue-slider>
-                    <div class="dd-color_control">
-                        <div>
-                            <dd-input v-model="hex" size="mini"></dd-input
-                            ><dd-input
-                                v-model="RGB"
-                                size="mini"
-                                style="margin-top: 8px"
-                            ></dd-input>
-                        </div>
-                        <div>
-                            <dd-button
-                                size="mini"
-                                class="dd-color_clear"
-                                @click="dd_color_clear"
-                                >清空</dd-button
-                            >
-                            <dd-button
-                                size="mini"
-                                @click="dd_color_determine"
-                                style="margin-top: 8px"
-                                >确定</dd-button
-                            >
-                        </div>
+                    class="color-picker_color"
+                    :style="`background-color: ${isHex ? hex : RGB}`"
+                ></div>
+            </div>
+        </div>
+        <dd-transition name="dd-zoom-top">
+            <div class="dd-color_dropdown dd-color-picker_pannel" v-if="isShow">
+                <color-sv-picker
+                    v-model="sv"
+                    :hex="noChangeHEX"
+                ></color-sv-picker
+                ><color-hue-slider
+                    v-model="h"
+                    style="margin: 8px 0"
+                ></color-hue-slider>
+                <color-alpha-slider
+                    v-if="showAlpha"
+                    v-model="a"
+                    style="margin: 8px 0"
+                    :rgb="rgb"
+                ></color-alpha-slider>
+                <div class="dd-color_control">
+                    <div>
+                        <dd-input v-model="hex" size="mini"></dd-input
+                        ><dd-input
+                            v-model="RGB"
+                            size="mini"
+                            style="margin-top: 8px"
+                        ></dd-input>
+                    </div>
+                    <div>
+                        <dd-button
+                            size="mini"
+                            class="dd-color_clear"
+                            @click="dd_color_clear"
+                            >清空</dd-button
+                        >
+                        <dd-button
+                            size="mini"
+                            @click="dd_color_determine"
+                            style="margin-top: 8px"
+                            >确定</dd-button
+                        >
                     </div>
                 </div>
-            </dd-transition>
-        </div>
+            </div>
+        </dd-transition>
     </div>
 </template>
 
 <script>
 import ColorHueSlider from "./color-hue-slider.vue";
 import ColorSvPicker from "./color-sv-picker.vue";
+import colorAlphaSlider from "./color-alpha-slider.vue";
 import ddTransition from "../../dd-transition";
+let newOptions = {};
 export default {
     name: "ddColorPicker",
-    props: {},
+    props: {
+        value: {
+            type: String,
+        },
+        showAlpha: {
+            type: Boolean,
+            default: false,
+        },
+        size: {
+            type: String,
+        },
+    },
     data() {
         return {
             sv: {
-                saturation: 1,
+                saturation: 0,
                 value: 1,
             },
             h: 0,
+            a: 1,
             rgb: {},
             hex: "",
             noChangeHEX: "",
             noChangeRGB: "",
             isShow: false,
+            isHex: true,
         };
     },
     methods: {
@@ -108,40 +133,180 @@ export default {
                 b: Math.round(b * 255),
             };
         },
+        rgb2hsv(r, g, b, a) {
+            (r /= 255), (g /= 255), (b /= 255);
+
+            var max = Math.max(r, g, b),
+                min = Math.min(r, g, b);
+            var h,
+                s,
+                v = max;
+
+            var d = max - min;
+            s = max == 0 ? 0 : d / max;
+
+            if (max == min) {
+                h = 0; // achromatic
+            } else {
+                switch (max) {
+                    case r:
+                        h = (g - b) / d + (g < b ? 6 : 0);
+                        break;
+                    case g:
+                        h = (b - r) / d + 2;
+                        break;
+                    case b:
+                        h = (r - g) / d + 4;
+                        break;
+                }
+
+                h /= 6;
+            }
+
+            return [h, s, v, a];
+        },
         rgb2hex(r, g, b) {
             var hex =
                 "#" +
                 ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
             return hex;
         },
+        hex2rgb(hex) {
+            let RGB =
+                "rgb(" +
+                parseInt("0x" + hex.slice(1, 3)) +
+                "," +
+                parseInt("0x" + hex.slice(3, 5)) +
+                "," +
+                parseInt("0x" + hex.slice(5, 7)) +
+                ")";
+            return {
+                r: parseInt("0x" + hex.slice(1, 3)),
+                g: parseInt("0x" + hex.slice(3, 5)),
+                b: parseInt("0x" + hex.slice(5, 7)),
+                rgb: RGB,
+            };
+        },
         dd_color_clear() {
             this.hex = "";
             this.rgb = {};
             this.noChangeRGB = "";
             this.isShow = false;
+            this.$emit("input", "");
+            this.noChangeHEX = "#ff0000";
+            this.sv = {
+                saturation: 0,
+                value: 1,
+            };
+            this.h = 0;
         },
         dd_color_determine() {
             this.isShow = false;
+            this.$emit("input", this.isHex ? this.hex : this.RGB);
         },
         except(e) {
             let isSelf = this.$refs["dd-color_dropdown"].contains(e.target);
-            if (!isSelf) this.isShow = false;
+            if (!isSelf) {
+                this.isShow = false;
+                // let { h, saturation, value } = newOptions;
+                // this.h = h;
+                // this.sv = { saturation, value };
+
+                // console.log(this.$options.data().sv);
+                // this.sv = this.$options.data().sv;
+                // this.h = this.$options.data().h;
+                this.$emit("input", this.isHex ? this.hex : this.RGB);
+            }
+        },
+        initColor() {
+            if (this.value) {
+                if (this.value.indexOf("#") != -1) {
+                    const { r, g, b } = this.hex2rgb(this.value);
+                    this.isHex = true;
+                    this.hex = this.value;
+                    this.rgb = { r, g, b };
+                    let hsv = this.rgb2hsv(r, g, b);
+                    this.$set(this.sv, "saturation", hsv[1]);
+                    this.$set(this.sv, "value", hsv[2]);
+                    this.h = hsv[0];
+                    newOptions = { ...this.sv, h: this.h, a: 1 };
+                } else {
+                    this.isHex = false;
+                    if (this.showAlpha) {
+                        //正则表达式待合并
+                        let rgba = this.value.replace(/^rgba/, "");
+
+                        rgba = rgba.replace(/^\(/gi, "");
+                        rgba = rgba.replace(/\)/gi, "");
+                        let rgbaArr = rgba.split(",");
+                        this.rgb = {
+                            r: parseInt(rgbaArr[0]),
+                            g: parseInt(rgbaArr[1]),
+                            b: parseInt(rgbaArr[2]),
+                            a: parseFloat(rgbaArr[3]),
+                        };
+                        this.hex = this.rgb2hex(
+                            parseInt(rgbaArr[0]),
+                            parseInt(rgbaArr[1]),
+                            parseInt(rgbaArr[2])
+                        );
+                        let hsv = this.rgb2hsv(
+                            parseInt(rgbaArr[0]),
+                            parseInt(rgbaArr[1]),
+                            parseInt(rgbaArr[2]),
+                            parseFloat(rgbaArr[3])
+                        );
+                        this.$set(this.sv, "saturation", hsv[1]);
+                        this.$set(this.sv, "value", hsv[2]);
+                        this.h = hsv[0];
+                        this.a = hsv[3];
+                    } else {
+                        //正则表达式待合并
+                        let rgb = this.value.replace(/^rgb/, "");
+                        rgb = rgb.replace(/^\(/gi, "");
+                        rgb = rgb.replace(/\)/gi, "");
+                        let rgbArr = rgb.split(",");
+                        this.rgb = {
+                            r: parseInt(rgbArr[0]),
+                            g: parseInt(rgbArr[1]),
+                            b: parseInt(rgbArr[2]),
+                        };
+                        this.hex = this.rgb2hex(
+                            parseInt(rgbArr[0]),
+                            parseInt(rgbArr[1]),
+                            parseInt(rgbArr[2])
+                        );
+                        let hsv = this.rgb2hsv(
+                            parseInt(rgbArr[0]),
+                            parseInt(rgbArr[1]),
+                            parseInt(rgbArr[2])
+                        );
+                        this.$set(this.sv, "saturation", hsv[1]);
+                        this.$set(this.sv, "value", hsv[2]);
+                        this.h = hsv[0];
+                    }
+                }
+            } else {
+                this.noChangeHEX = "#ff0000";
+            }
         },
     },
     mounted() {
-        this.rgb = this.hsv2rgb(this.h, this.sv.saturation, this.sv.value);
-        this.hex = this.rgb2hex(this.rgb.r, this.rgb.g, this.rgb.b);
-        this.noChangeHEX = this.hex;
         document.addEventListener("click", this.except);
     },
-    beforeDestroy() {
-        document.removeEventListener("click", this.except);
+    created() {
+        this.initColor();
     },
     computed: {
         RGB() {
             if (this.rgb) {
                 const { r, g, b } = this.rgb;
-                if (r & g & b) return `rgb(${r}, ${g}, ${b})`;
+                if ((r || r == 0) && (g || g == 0) && (r || r == 0))
+                    if (this.showAlpha) {
+                        return `rgba(${r}, ${g}, ${b}, ${this.a})`;
+                    } else {
+                        return `rgb(${r}, ${g}, ${b})`;
+                    }
             } else {
                 return "";
             }
@@ -150,7 +315,11 @@ export default {
     components: {
         ColorHueSlider,
         ColorSvPicker,
+        colorAlphaSlider,
         ddTransition,
+    },
+    beforeDestroy() {
+        document.removeEventListener("click", this.except);
     },
     watch: {
         sv(val) {
@@ -176,6 +345,11 @@ export default {
     position: relative;
     width: 40px;
     height: 40px;
+    display: inline-block;
+    .color-picker_color-box {
+        width: 100%;
+        height: 100%;
+    }
     .color-picker_trigger {
         display: inline-block;
         box-sizing: border-box;
@@ -204,7 +378,8 @@ export default {
         z-index: 2005;
         position: absolute;
         top: 40px;
-        left: 0;
+        // left: 0;
+        left: -120px;
         .dd-color_control {
             display: flex;
             align-items: center;
@@ -213,7 +388,7 @@ export default {
                 color: #409eff;
             }
             /deep/.dd-input .dd-input_inner {
-                width: 160px;
+                width: 180px;
             }
         }
     }
@@ -225,5 +400,17 @@ export default {
         border-radius: 4px;
         box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     }
+}
+.medium {
+    width: 36px;
+    height: 36px;
+}
+.small {
+    width: 32px;
+    height: 32px;
+}
+.mini {
+    width: 28px;
+    height: 28px;
 }
 </style>

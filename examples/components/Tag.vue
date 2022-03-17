@@ -178,7 +178,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.el-tag + .el-tag {
+.dd-tag + .dd-tag {
     margin-left: 10px;
 }
 .button-new-tag {

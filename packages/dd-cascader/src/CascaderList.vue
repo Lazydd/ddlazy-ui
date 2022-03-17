@@ -2,6 +2,7 @@
     <div class="dd-cascader-item" v-if="options">
         <dd-transition name="dd-zoom-top">
             <div class="dd-cascader_dropdown">
+                <div class="dd-time-select-dropdown-s"></div>
                 <div class="dd-cascader-item-panel">
                     <div class="dd-cascader-item-menu">
                         <dd-scroll>
@@ -9,11 +10,11 @@
                                 <div
                                     class="dd-cascader-item-node"
                                     v-for="(item, i) in options"
-                                    :key="item.label"
+                                    :key="`${item.label}${item.value}`"
                                     @click="
                                         item.children && item.children.length
-                                            ? ddCascader_click(i)
-                                            : null
+                                            ? ddCascader_click(i, false)
+                                            : ddCascader_click(i, true)
                                     "
                                 >
                                     <span class="dd-cascader-item-node_label">
@@ -34,6 +35,7 @@
                         <cascader-list
                             v-if="isActive"
                             :options="options[index].children"
+                            :node="options[index]"
                         ></cascader-list>
                     </div>
                 </div>
@@ -56,6 +58,10 @@ export default {
         props: {
             type: Object,
         },
+        node: {
+            type: Object,
+            default: () => ({}),
+        },
     },
     data() {
         return {
@@ -63,16 +69,35 @@ export default {
             index: null,
             towIndex: null,
             isActive: false,
+            nodeLevel: 1,
+            activeValue: [],
         };
     },
     methods: {
-        ddCascader_click(index) {
+        ddCascader_click(index, isLastItem) {
             this.index = index;
-            this.isActive = true;
+            console.log(this.options[this.index]);
+            this.activeValue[this.index] = null;
+            this.$set(this.activeValue, index, this.options[this.index].value);
+            console.log(this.activeValue);
+            if (!isLastItem) this.isActive = true;
         },
         ddCascader_Twoclick(index) {
             this.towIndex = index;
         },
+        initTree() {
+            console.log(this.$parent?.nodeLevel);
+            if (this.$parent?.nodeLevel) {
+                let parentNodeLevel = this.$parent.nodeLevel;
+                this.$set(this.node, "nodeLevel", parentNodeLevel + 1);
+                this.nodeLevel = parentNodeLevel + 1;
+            } else {
+                this.$set(this.node, "nodeLevel", 1);
+            }
+        },
+    },
+    created() {
+        this.initTree();
     },
     components: {
         ddTransition,
@@ -103,7 +128,7 @@ export default {
                 height: 204px;
                 box-sizing: border-box;
                 color: #606266;
-                // border-right: 1px solid #e4e7ed;
+                border-right: 1px solid #e4e7ed;
                 .dd-cascader-item-menu_list {
                     position: relative;
                     min-height: 100%;
@@ -143,6 +168,29 @@ export default {
                         font-weight: 700;
                     }
                 }
+            }
+        }
+        .dd-time-select-dropdown-s {
+            position: absolute;
+            width: 0;
+            height: 0;
+            top: -6px;
+            left: 20px;
+            border-width: 0 6px 6px;
+            z-index: 1;
+            border-style: solid;
+            border-color: transparent transparent #e4e7ed;
+            &::before {
+                content: "";
+                position: absolute;
+                display: inline-block;
+                width: 0;
+                height: 0;
+                z-index: 2;
+                top: -5px;
+                left: -6px;
+                border: 6px solid;
+                border-color: transparent transparent #fff;
             }
         }
     }

@@ -92,7 +92,7 @@ export default {
                     <div style="display: flex; margin-top: 20px; height: 100px">
                         <dd-transition name="dd-fade">
                             <div v-show="show" class="transition-box">
-                                .el-fade-in
+                                .dd-fade
                             </div>
                         </dd-transition>
                     </div>

@@ -1,13 +1,14 @@
 <template>
-    <div @mouseup="mouseup">
+    <div @mouseup="mouseup" class="dd-color-alpha-box">
         <div
-            class="dd-color-hue-slider"
-            ref="hub_slider"
+            class="dd-color-alpha-slider"
+            ref="alpha_slider"
             @mousedown="mousedownIn"
             @mouseup="sliderUp"
+            :style="`background: linear-gradient(to right, rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0) 0%, rgb(${rgb.r}, ${rgb.g}, ${rgb.b}) 100%)`"
         >
             <div
-                class="dd-color-hub-slider_thumb"
+                class="dd-color-alpha-slider_thumb"
                 @mousedown="mousedownOut"
                 :style="{ left: left + 'px' }"
             ></div>
@@ -16,12 +17,15 @@
 </template>
 
 <script>
-let _hubSliderWidth = 0;
+let _alphaSliderWidth = 0;
 export default {
-    name: "dd-color-hue-slider",
+    name: "dd-color-alpha-slider",
     props: {
         value: {
             type: [String, Number],
+        },
+        rgb: {
+            type: Object,
         },
     },
     data() {
@@ -33,19 +37,19 @@ export default {
     methods: {
         sliderUp(e) {
             this.left =
-                e.clientX - this.hub_slider.getBoundingClientRect().left;
-            this.radio = (this.left / _hubSliderWidth).toFixed(6);
-            this.$emit("input", this.radio * 360);
+                e.clientX - this.alpha_slider.getBoundingClientRect().left;
+            this.radio = (this.left / _alphaSliderWidth).toFixed(2);
+            this.$emit("input", this.radio);
         },
         mousedownIn() {
             document.onmousemove = (e) => {
                 let left =
-                    e.clientX - this.hub_slider.getBoundingClientRect().left;
+                    e.clientX - this.alpha_slider.getBoundingClientRect().left;
                 if (left < 0) left = 0;
-                if (left > _hubSliderWidth) left = _hubSliderWidth;
+                if (left > _alphaSliderWidth) left = _alphaSliderWidth;
                 this.left = left;
-                this.radio = (this.left / _hubSliderWidth).toFixed(6);
-                this.$emit("input", this.radio * 360);
+                this.radio = (this.left / _alphaSliderWidth).toFixed(2);
+                this.$emit("input", this.radio);
             };
         },
         mousedownOut(event) {
@@ -58,12 +62,12 @@ export default {
                 if (endx < 0) {
                     endx = 0;
                 }
-                if (endx > _hubSliderWidth) {
-                    endx = _hubSliderWidth;
+                if (endx > _alphaSliderWidth) {
+                    endx = _alphaSliderWidth;
                 }
                 this.left = endx;
-                this.radio = (endx / _hubSliderWidth).toFixed(6);
-                this.$emit("input", this.radio * 360);
+                this.radio = (endx / _alphaSliderWidth).toFixed(2);
+                this.$emit("input", this.radio);
             };
         },
         mouseup() {
@@ -74,7 +78,7 @@ export default {
         },
     },
     mounted() {
-        _hubSliderWidth = this.hub_slider.clientWidth;
+        _alphaSliderWidth = this.alpha_slider.clientWidth;
         document.addEventListener("click", this.mouseup);
     },
     created() {
@@ -84,29 +88,22 @@ export default {
         document.removeEventListener("click", this.mouseup);
     },
     computed: {
-        hub_slider() {
-            return this.$refs.hub_slider;
+        alpha_slider() {
+            return this.$refs.alpha_slider;
         },
     },
 };
 </script>
 
 <style lang="less" scoped>
-.dd-color-hue-slider {
+.dd-color-alpha-box {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
+}
+.dd-color-alpha-slider {
     position: relative;
     width: 100%;
     height: 12px;
-    background: linear-gradient(
-        90deg,
-        red 0,
-        #ff0 17%,
-        #0f0 33%,
-        #0ff 50%,
-        #00f 67%,
-        #f0f 83%,
-        red
-    );
-    .dd-color-hub-slider_thumb {
+    .dd-color-alpha-slider_thumb {
         position: absolute;
         top: 0;
         left: 0;

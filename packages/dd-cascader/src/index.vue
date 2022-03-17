@@ -88,5 +88,18 @@ export default {
     .dd-cascader-item {
         z-index: 99;
     }
+    /deep/.children {
+        .dd-cascader-item .dd-cascader_dropdown {
+            box-shadow: none;
+            border: none;
+            margin: 0;
+            .dd-cascader-item-menu {
+                height: 100%;
+            }
+            .dd-cascader-item-menu_list {
+                padding: 0;
+            }
+        }
+    }
 }
 </style>
