@@ -71,7 +71,7 @@
                     </dd-option>
                 </dd-select>
                 <dd-select
-                    v-model="value6"
+                    v-model="value5"
                     placeholder="请选择"
                     style="margin-right: 20px"
                     size="small"
@@ -84,7 +84,7 @@
                     >
                     </dd-option>
                 </dd-select>
-                <dd-select v-model="value7" placeholder="请选择" size="mini">
+                <dd-select v-model="value5" placeholder="请选择" size="mini">
                     <dd-option
                         v-for="item in options"
                         :key="item.value"
@@ -100,7 +100,7 @@
 
 <script>
 export default {
-    name:'Select',
+    name: "Select",
     data() {
         return {
             code1: `
@@ -284,8 +284,6 @@ export default {
             value3: "",
             value4: "选项5",
             value5: "",
-            value6: "",
-            value7: "",
         };
     },
 };

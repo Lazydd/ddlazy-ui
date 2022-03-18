@@ -172,6 +172,10 @@ export default {
                                                                       "input",
                                                                       item.time
                                                                   );
+                                                                  _this.$emit(
+                                                                      "change",
+                                                                      item.time
+                                                                  );
                                                               },
                                                           },
                                                       });
@@ -342,10 +346,10 @@ export default {
 }
 .fale-enter,
 .fale-leave-to {
-    transform: scale(1,0);
+    transform: scale(1, 0);
 }
 .fale-enter-to,
 .fale-leave {
-    transform: scale(1,1);
+    transform: scale(1, 1);
 }
 </style>

@@ -88,6 +88,15 @@ export default {
             code2: `
                 <dd-button type="primary" @click="openFullScreen">服务方式</dd-button>
 
+                //方法一
+                const loading = this.$loading({
+                    text: "Loading",
+                    spinner: "icon-loading",
+                });
+                setTimeout(() => {
+                    loading.close();
+                }, 3000);
+                //方法二
                 this.$loading.service("Loading");
                 setTimeout(() => {
                     this.$loading.close();
@@ -97,15 +106,15 @@ export default {
     },
     methods: {
         openFullScreen() {
+            //方法一
             // const loading = this.$loading({
-            //     lock: true,
             //     text: "Loading",
             //     spinner: "icon-loading",
             // });
             // setTimeout(() => {
             //     loading.close();
             // }, 3000);
-
+            //方法二
             this.$loading.service("Loading");
             setTimeout(() => {
                 this.$loading.close();

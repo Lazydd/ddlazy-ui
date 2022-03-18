@@ -23,16 +23,17 @@
             }`"
         >
             <slot v-if="$slots.default" />
-            <transition name="fale">
+            <dd-transition name="dd-zoom-top">
                 <div v-if="prop && isValidate" class="dd-form-item__error">
                     {{ message }}
                 </div>
-            </transition>
+            </dd-transition>
         </div>
     </div>
 </template>
 
 <script>
+import ddTransition from "../../dd-transition";
 export default {
     name: "ddFormItem",
     props: {
@@ -66,6 +67,9 @@ export default {
             });
             return message.join(",");
         },
+    },
+    components: {
+        ddTransition,
     },
 };
 </script>
@@ -104,17 +108,5 @@ export default {
         top: 100%;
         left: 0;
     }
-}
-.fale-enter-active,
-.fale-leave-active {
-    transition: opacity 1s;
-}
-.fale-enter,
-.fale-leave-to {
-    opacity: 0;
-}
-.fale-enter-to,
-.fale-leave {
-    opacity: 1;
 }
 </style>
