@@ -13,7 +13,7 @@
                             style="width: 240px"
                         ></dd-input>
                     </dd-form-item>
-                    <dd-form-item label="活动区域" >
+                    <dd-form-item label="活动区域">
                         <dd-select
                             v-model="form.region"
                             placeholder="请选择活动区域"
@@ -95,7 +95,7 @@
                             ></dd-option>
                         </dd-select>
                     </dd-form-item>
-                    <dd-form-item label="即时配送" prop="delivery">
+                    <dd-form-item label="即时配送">
                         <dd-switch v-model="form1.delivery"></dd-switch>
                     </dd-form-item>
                     <dd-form-item label="活动性质" prop="type">
@@ -170,13 +170,6 @@ export default {
                     {
                         required: true,
                         message: "请选择活动区域",
-                        trigger: "change",
-                    },
-                ],
-                delivery: [
-                    {
-                        required: true,
-                        message: "是否即时配送",
                         trigger: "change",
                     },
                 ],
@@ -398,7 +391,6 @@ export default {
             this.form = this.$options.data().form;
         },
         submitForm(formName) {
-            console.log(123);
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     alert("submit!");

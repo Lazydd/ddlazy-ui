@@ -20,12 +20,24 @@ export default {
             type: Object,
         },
     },
+    data() {
+        return {
+            arr: [],
+        };
+    },
     methods: {
         validate(callback) {
             this.$children.map((item) => {
-                item.valid();
+                const i = item.validate();
+                this.arr.push(i);
             });
-            console.log(this.$slots.default);
+            Promise.all(this.arr)
+                .then((res) => {
+                    console.log(1111);
+                })
+                .catch((err) => {
+                    console.log(2222);
+                });
             // if (!this.model) {
             //     return;
             // }

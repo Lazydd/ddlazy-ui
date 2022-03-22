@@ -59,6 +59,25 @@ export default {
         resetFields() {
             this.isValidate = false;
         },
+        validate() {
+            return new Promise((resolve, reject) => {
+                console.log(this.$slots.default);
+                if (
+                    (!this.$slots.default[0].data.model.value ||
+                        !this.$slots.default[0].data.model.value.length) &&
+                    this.prop
+                ) {
+                    this.isValidate = true;
+                } else {
+                    this.isValidate = false;
+                }
+                // if ((this.isValidate = true)) {
+                //     reject();
+                // } else {
+                //     resolve();
+                // }
+            });
+        },
     },
     computed: {
         message() {
