@@ -393,13 +393,12 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    alert("submit!");
+                    console.log("成功了");
                 } else {
-                    console.log("error submit!!");
+                    console.log("失败了");
                     return false;
                 }
             });
-            console.log(this.$refs[formName].validate());
         },
         resetForm(formName) {
             if (this.$refs[formName]) this.$refs[formName].resetFields();

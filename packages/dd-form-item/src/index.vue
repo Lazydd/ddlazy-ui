@@ -60,22 +60,19 @@ export default {
             this.isValidate = false;
         },
         validate() {
+            console.log(this.$slots.default);
             return new Promise((resolve, reject) => {
-                console.log(this.$slots.default);
                 if (
                     (!this.$slots.default[0].data.model.value ||
                         !this.$slots.default[0].data.model.value.length) &&
                     this.prop
                 ) {
                     this.isValidate = true;
+                    reject();
                 } else {
                     this.isValidate = false;
+                    resolve();
                 }
-                // if ((this.isValidate = true)) {
-                //     reject();
-                // } else {
-                //     resolve();
-                // }
             });
         },
     },

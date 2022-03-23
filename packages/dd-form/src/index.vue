@@ -23,26 +23,27 @@ export default {
     data() {
         return {
             arr: [],
+            a: 0,
         };
     },
     methods: {
         validate(callback) {
-            this.$children.map((item) => {
-                const i = item.validate();
-                this.arr.push(i);
-            });
-            Promise.all(this.arr)
-                .then((res) => {
-                    console.log(1111);
-                })
-                .catch((err) => {
-                    console.log(2222);
+            this.arr = [];
+            if (this.rules) {
+                this.$children.map((item) => {
+                    if (item.prop) {
+                        const i = item.validate();
+                        this.arr.push(i);
+                    }
                 });
-            // if (!this.model) {
-            //     return;
-            // }
-            // let promise = 123;
-            // return promise;
+                Promise.all(this.arr)
+                    .then((res) => {
+                        return callback(true);
+                    })
+                    .catch((err) => {
+                        return callback(false);
+                    });
+            }
         },
         resetFields() {
             this.$children.map((item) => {
