@@ -89,8 +89,11 @@ export default {
                 h("input", {
                     class: ["dd-time-select_inner", _this.size],
                     domProps: {
-                        placeholder: _this.placeholder,
                         value: _this.activeTime,
+                    },
+                    attrs: {
+                        readonly: "readonly",
+                        placeholder: _this.placeholder,
                     },
                     on: {
                         // input(e) {
