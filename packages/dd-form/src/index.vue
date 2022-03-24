@@ -54,7 +54,4 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-.dd-form {
-}
-</style>
+<style lang="less" scoped></style>

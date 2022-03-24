@@ -60,7 +60,6 @@ export default {
             this.isValidate = false;
         },
         validate() {
-            console.log(this.$slots.default);
             return new Promise((resolve, reject) => {
                 if (
                     (!this.$slots.default[0].data.model.value ||

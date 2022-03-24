@@ -58,9 +58,12 @@ export default {
                         _this.size,
                     ],
                     domProps: {
-                        placeholder: _this.placeholder,
                         value: _this.activeSelect,
                         disabled: _this.disabled,
+                    },
+                    attrs: {
+                        readonly: "readonly",
+                        placeholder: _this.placeholder,
                     },
                     on: {
                         click(e) {
@@ -90,9 +93,11 @@ export default {
                             },
                             on: {
                                 click(e) {
-                                    _this.activeIndex = "";
-                                    _this.activeSelect = "";
-                                    _this.$emit("input", "");
+                                    if (_this.clearable) {
+                                        _this.activeIndex = "";
+                                        _this.activeSelect = "";
+                                        _this.$emit("input", "");
+                                    }
                                     _this.isShow_dropdown =
                                         !_this.isShow_dropdown;
                                 },

@@ -377,6 +377,17 @@ export default {
                     },
                 ],
             },
+
+            submitForm(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    this.$message.success("提交成功");
+                }
+            });
+            },
+            resetForm(formName) {
+                if (this.$refs[formName]) this.$refs[formName].resetFields();
+            },
             `,
             code3: `
 
@@ -393,10 +404,7 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    console.log("成功了");
-                } else {
-                    console.log("失败了");
-                    return false;
+                    this.$message.success("提交成功");
                 }
             });
         },
