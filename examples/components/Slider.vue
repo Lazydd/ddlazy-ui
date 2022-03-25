@@ -8,6 +8,14 @@
                     <span class="demonstration">默认</span>
                     <dd-slider v-model="value1"></dd-slider>
                 </div>
+                <div class="block">
+                    <span class="demonstration">自定义初始值</span>
+                    <dd-slider v-model="value2"></dd-slider>
+                </div>
+                <div class="block">
+                    <span class="demonstration">禁用</span>
+                    <dd-slider v-model="value3" disabled></dd-slider>
+                </div>
             </template>
         </dd-block>
     </div>
@@ -22,6 +30,8 @@ export default {
                 <dd-slider v-model="value1"></dd-slider>
             `,
             value1: 0,
+            value2: 0.2,
+            value3: 0.2,
         };
     },
 };

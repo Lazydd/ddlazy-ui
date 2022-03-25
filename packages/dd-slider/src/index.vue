@@ -27,6 +27,23 @@
 let _hubSliderWidth = 0;
 export default {
     name: "ddSlider",
+    props: {
+        value: {
+            type: Number,
+        },
+        min: {
+            type: Number,
+            default: 0,
+        },
+        max: {
+            type: Number,
+            default: 100,
+        },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
+    },
     data() {
         return {
             left: 0,
@@ -46,7 +63,8 @@ export default {
                 if (left < 0) left = 0;
                 if (left > _hubSliderWidth) left = _hubSliderWidth;
                 this.left = left;
-                this.radio = (this.left / _hubSliderWidth).toFixed(6);
+                this.radio =
+                    parseFloat((this.left / _hubSliderWidth)).toFixed(2) * 100;
                 this.$emit("input", this.radio * 360);
             };
         },
@@ -69,14 +87,20 @@ export default {
                 _this.radio = (endx / _hubSliderWidth).toFixed(6);
             };
         },
+        initX() {
+            this.left = parseFloat(this.value) * 280;
+            this.radio = (this.left / _hubSliderWidth).toFixed(6);
+        },
         mouseup() {
             document.onmousemove = null;
         },
     },
     mounted() {
+        this.initX();
         _hubSliderWidth = this.slider_runway.clientWidth;
         document.addEventListener("click", this.mouseup);
     },
+    created() {},
     beforeDestroy() {
         document.removeEventListener("click", this.mouseup);
     },
