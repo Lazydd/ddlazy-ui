@@ -34,6 +34,8 @@ export default {
         sliderUp(e) {
             this.left =
                 e.clientX - this.hub_slider.getBoundingClientRect().left;
+            if (this.left > _hubSliderWidth) this.left = _hubSliderWidth;
+            if (this.left < 0) this.left = 0;
             this.radio = (this.left / _hubSliderWidth).toFixed(6);
             this.$emit("input", this.radio * 360);
         },

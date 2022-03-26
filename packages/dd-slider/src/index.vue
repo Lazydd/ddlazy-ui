@@ -1,5 +1,5 @@
 <template>
-    <div class="dd-slider" @mouseup="mouseup">
+    <div :class="['dd-slider', disabled ? 'disabled' : '']" @mouseup="mouseup">
         {{ radio }}
         <div
             class="dd-slider_runway"
@@ -9,13 +9,13 @@
         >
             <div
                 class="dd-slider__button-wrapper"
-                :style="`width:${left}px`"
+                :style="`width:${left}%`"
             ></div>
             <div
                 class="dd-slider_button-wrapper"
                 ref="button_wrapper"
-                @mousedown="mousedownOut"
-                :style="{ left: left + 'px' }"
+                @mousedown="!disabled ? mousedownOut() : null"
+                :style="{ left: left + '%' }"
             >
                 <div class="dd-tooltip dd-slider_button"></div>
             </div>
@@ -29,7 +29,7 @@ export default {
     name: "ddSlider",
     props: {
         value: {
-            type: Number,
+            type: [Number, String],
         },
         min: {
             type: Number,
@@ -52,21 +52,32 @@ export default {
     },
     methods: {
         runwayUp(e) {
-            this.left =
-                e.clientX - this.slider_runway.getBoundingClientRect().left;
-            this.radio = (this.left / _hubSliderWidth).toFixed(6);
+            if (!this.disabled) {
+                this.left =
+                    ((e.clientX -
+                        this.slider_runway.getBoundingClientRect().left) /
+                        _hubSliderWidth) *
+                    100;
+                if (this.left > 100) this.left = 100;
+                if (this.left < 0) this.left = 0;
+                this.radio = this.left.toFixed(0);
+            }
         },
         mousedownIn() {
-            document.onmousemove = (e) => {
-                let left =
-                    e.clientX - this.slider_runway.getBoundingClientRect().left;
-                if (left < 0) left = 0;
-                if (left > _hubSliderWidth) left = _hubSliderWidth;
-                this.left = left;
-                this.radio =
-                    parseFloat((this.left / _hubSliderWidth)).toFixed(2) * 100;
-                this.$emit("input", this.radio * 360);
-            };
+            if (!this.disabled) {
+                document.onmousemove = (e) => {
+                    let left =
+                        ((e.clientX -
+                            this.slider_runway.getBoundingClientRect().left) /
+                            _hubSliderWidth) *
+                        100;
+                    if (left < this.min) left = this.min;
+                    if (left > this.max) left = this.max;
+                    this.left = left;
+                    this.radio = parseFloat(left).toFixed(0);
+                    this.$emit("input", this.radio);
+                };
+            }
         },
         mousedownOut(event) {
             // this.setAttribute({style:'cursor:grabbing'})
@@ -84,20 +95,22 @@ export default {
                     endx = _hubSliderWidth;
                 }
                 _this.left = endx;
-                _this.radio = (endx / _hubSliderWidth).toFixed(6);
+                _this.radio = (endx / _hubSliderWidth).toFixed(0);
             };
         },
         initX() {
-            this.left = parseFloat(this.value) * 280;
-            this.radio = (this.left / _hubSliderWidth).toFixed(6);
+            if (this.value > this.max) this.left = this.max;
+            if (this.value < this.min) this.left = this.min;
+            this.left = parseFloat(this.value);
+            this.radio = this.value;
         },
         mouseup() {
             document.onmousemove = null;
         },
     },
     mounted() {
-        this.initX();
         _hubSliderWidth = this.slider_runway.clientWidth;
+        this.initX();
         document.addEventListener("click", this.mouseup);
     },
     created() {},
@@ -156,6 +169,9 @@ export default {
                 transition: 0.2s;
                 user-select: none;
                 line-height: 36px;
+                &:hover {
+                    transform: scale(1.2);
+                }
             }
         }
         .dd-slider__button-wrapper {
@@ -165,6 +181,21 @@ export default {
             background-color: #409eff;
             border-top-left-radius: 3px;
             border-bottom-left-radius: 3px;
+        }
+    }
+}
+.disabled {
+    .dd-slider_runway {
+        .dd-slider_button-wrapper {
+            .dd-slider_button {
+                border-color: #c0c4cc;
+                &:hover {
+                    transform: scale(1);
+                }
+            }
+        }
+        .dd-slider__button-wrapper {
+            background-color: #c0c4cc;
         }
     }
 }

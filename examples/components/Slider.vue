@@ -27,11 +27,26 @@ export default {
     data() {
         return {
             code1: `
-                <dd-slider v-model="value1"></dd-slider>
+                <div class="block">
+                    <span class="demonstration">默认</span>
+                    <dd-slider v-model="value1"></dd-slider>
+                </div>
+                <div class="block">
+                    <span class="demonstration">自定义初始值</span>
+                    <dd-slider v-model="value2"></dd-slider>
+                </div>
+                <div class="block">
+                    <span class="demonstration">禁用</span>
+                    <dd-slider v-model="value3" disabled></dd-slider>
+                </div>
+
+                value1: 0,
+                value2: 100,
+                value3: 20,
             `,
             value1: 0,
-            value2: 0.2,
-            value3: 0.2,
+            value2: 100,
+            value3: 20,
         };
     },
 };
@@ -42,6 +57,9 @@ export default {
     padding: 30px 24px;
     overflow: hidden;
     border-bottom: 1px solid #eff2f6;
+    &:last-child {
+        border: none;
+    }
 }
 .demonstration {
     font-size: 14px;

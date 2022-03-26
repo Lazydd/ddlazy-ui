@@ -38,6 +38,8 @@ export default {
         sliderUp(e) {
             this.left =
                 e.clientX - this.alpha_slider.getBoundingClientRect().left;
+            if (this.left > _alphaSliderWidth) this.left = _alphaSliderWidth;
+            if (this.left < 0) this.left = 0;
             this.radio = (this.left / _alphaSliderWidth).toFixed(2);
             this.$emit("input", this.radio);
         },

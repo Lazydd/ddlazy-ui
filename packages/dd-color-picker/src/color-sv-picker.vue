@@ -92,8 +92,8 @@ export default {
         },
         initXY() {
             let { saturation, value } = this.value;
-            this.left = parseFloat(saturation) * 280;
-            this.top = (1 - parseFloat(value)) * 180;
+            this.left = parseFloat(saturation) * _pickerWidth;
+            this.top = (1 - parseFloat(value)) * _pickerHeight;
         },
     },
     mounted() {
