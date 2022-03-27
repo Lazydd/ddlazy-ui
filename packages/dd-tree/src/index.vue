@@ -1,35 +1,36 @@
 <template>
     <div class="dd-tree">
-        <div class="dd-tree-node" v-for="(item, i) in data" :key="i">
+        <div class="dd-tree-node" v-for="(item, i) in myTree" :key="i">
             <div
                 class="dd-tree-node_content"
-                :style="`padding-left:${node.nodeLevel * 18}px`"
-                v-if="item[props.label]"
-                @click="tree_header(node)"
+                :style="`padding-left:${level * 18}px`"
+                v-if="item.label"
+                @click="tree_header(item, i)"
             >
                 <span
                     :class="[
                         'dd-tree-node_icon',
-                        isActive ? 'dd-tree-node_icon_active' : '',
+                        item.isActive ? 'dd-tree-node_icon_active' : '',
                     ]"
-                    :style="!item[props.children] ? `color:transparent` : ''"
+                    :style="!item.children ? `color:transparent` : ''"
                 >
                     <svg class="icon" aria-hidden="true">
                         <use :xlink:href="`#icon-triangle-right-fill`"></use>
                     </svg>
                 </span>
-                {{ item[props.label] }}
+                {{ item.label }}
             </div>
             <div
                 class="dd-tree-node_children"
-                v-if="item[props.children] && item[props.children].length"
+                v-if="item.children && item.children.length"
             >
                 <transition name="fale">
                     <dd-tree
-                        v-if="isActive"
-                        :data="item[props.children]"
+                        v-if="item.isActive"
+                        :data="load ? null : item.children"
+                        :load="load ? load : null"
                         :props="props"
-                        :node="item"
+                        :level="level + 1"
                     ></dd-tree>
                 </transition>
             </div>
@@ -46,35 +47,66 @@ export default {
         },
         props: {
             type: Object,
+            default() {
+                return {
+                    label: "label",
+                    children: "children",
+                };
+            },
+            validator: (value) => {
+                let keys = Object.keys(value);
+                return keys.includes("label") && keys.includes("children");
+            },
         },
-        node: {
-            type: Object,
-            default: () => ({}),
+        level: {
+            type: Number,
+            default: 0,
+        },
+        load: {
+            type: Function,
         },
     },
     data() {
         return {
             nodeLevel: 1,
             isActive: false,
+            myTree: this.data?.map((item) => {
+                return {
+                    label: item[this.props.label],
+                    children: item[this.props.children],
+                    isActive: false,
+                };
+            }),
         };
     },
     methods: {
-        initTree() {
-            if (this.$parent?.nodeLevel) {
-                let parentNodeLevel = this.$parent.nodeLevel;
-                this.$set(this.node, "nodeLevel", parentNodeLevel + 1);
-                this.nodeLevel = parentNodeLevel + 1;
-            } else {
-                this.$set(this.node, "nodeLevel", 1);
-            }
+        initLoad() {
+            let node = {
+                level: 0,
+            };
+            let resolve = (data) => {
+                data.forEach((item) => {
+                    item.isActive = false;
+                });
+                this.myTree = data;
+            };
+            this.load(node, resolve);
         },
-        tree_header(item) {
-            console.log(item);
-            this.isActive = !this.isActive;
+        tree_header(item, i) {
+            this.$emit("node-click", item, this.$vnode, this);
+            item.isActive = !item.isActive;
+            this.load
+                ? this.load({ level: 0 }, (data) => {
+                      item.children = data;
+                      this.$set(this.myTree, i, item);
+                  })
+                : null;
         },
     },
     created() {
-        this.initTree();
+        if (this.load) {
+            this.initLoad();
+        }
     },
 };
 </script>

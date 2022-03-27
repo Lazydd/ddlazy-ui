@@ -22,6 +22,7 @@
             <div
                 v-if="isShow.prev"
                 class="btn-pre control"
+                onselectstart="return false"
                 @click="!disabled ? (!disabledPre ? btn_pre() : null) : null"
                 :disabled="disabled ? disabled : disabledPre || pageCounts == 1"
             >
@@ -32,18 +33,41 @@
             <ul class="pager" :disabled="disabled" v-if="isShow.pager">
                 <li
                     class="number"
-                    v-for="(page, index) in pageCounts"
+                    @click="dd_toFirst"
+                    v-if="currentPages > 4 && pageCounts > 7"
+                >
+                    1
+                </li>
+                <li class="number" v-if="currentPages > 4 && pageCounts > 7">
+                    ...
+                </li>
+                <li
+                    class="number"
+                    v-for="(page, index) in pageCountsListItem"
                     :key="index"
                     :class="page == currentPages ? 'active' : ''"
                     @click="!disabled ? pagerClick(page) : null"
                 >
                     {{ page }}
                 </li>
-                <li class="number">...</li>
+                <li
+                    class="number"
+                    v-if="pageCounts > 7 && currentPages < pageCounts - 3"
+                >
+                    ...
+                </li>
+                <li
+                    class="number"
+                    @click="dd_toLast"
+                    v-if="pageCounts > 7 && currentPages < pageCounts - 3"
+                >
+                    {{ pageCounts }}
+                </li>
             </ul>
             <div
                 v-if="isShow.next"
                 class="btn-next control"
+                onselectstart="return false"
                 @click="!disabled ? (!disabledNext ? btn_next() : null) : null"
                 :disabled="
                     disabled ? disabled : disabledNext || pageCounts == 1
@@ -117,6 +141,8 @@ export default {
             currentPages: this.currentPage || 1,
             pagesize: this.pageSize || 10,
             pageCounts: this.pageCount,
+            pageCountsList: [],
+            pageCountsListItem: [],
             disabledNext: false,
             disabledPre: false,
             dd_pagination_input: this.currentPage || 1,
@@ -125,10 +151,38 @@ export default {
         };
     },
     methods: {
+        dd_toFirst() {
+            this.currentPages = 1;
+            this.dd_pagination_input = 1;
+            if (this.pageCounts > 7)
+                this.dd_pagination_auto(this.currentPages);
+        },
+        dd_toLast() {
+            this.currentPages = this.pageCounts;
+            this.dd_pagination_input = this.pageCounts;
+            if (this.pageCounts > 7)
+                this.dd_pagination_auto(this.currentPages);
+        },
+        dd_pagination_auto(page) {
+            if (page >= 5 && page <= this.pageCounts - 4) {
+                this.pageCountsListItem = this.pageCountsList.slice(
+                    page - 3,
+                    2 + page
+                );
+            }
+            if (page < 5) {
+                this.pageCountsListItem = this.pageCountsList.slice(0, 5);
+            }
+            if (page > this.pageCounts - 4) {
+                this.pageCountsListItem = this.pageCountsList.slice(-5);
+            }
+        },
         pagerClick(page) {
             this.currentPages = page;
+            if (this.pageCounts > 7)
+                this.dd_pagination_auto(this.currentPages);
             this.dd_pagination_input = this.currentPages;
-            this.$parent.currentPage = page;
+            // this.$parent.currentPage = page;
             this.$emit("current-change", this.currentPages);
         },
         btn_next() {
@@ -136,6 +190,8 @@ export default {
                 this.disabledNext = false;
                 this.currentPages++;
                 this.dd_pagination_input = this.currentPages;
+                if (this.pageCounts > 7)
+                    this.dd_pagination_auto(this.currentPages);
                 this.$emit("next-click", this.currentPages);
             }
         },
@@ -144,6 +200,8 @@ export default {
                 this.disabledPre = false;
                 this.currentPages--;
                 this.dd_pagination_input = this.currentPages;
+                if (this.pageCounts >= 7)
+                    this.dd_pagination_auto(this.currentPages);
                 this.$emit("prev-click", this.currentPages);
             }
         },
@@ -158,6 +216,7 @@ export default {
                     this.dd_pagination_input = current;
                 }
                 this.currentPages = this.dd_pagination_input;
+                this.dd_pagination_auto(this.currentPages);
             }
         },
         currentPageSizesChange() {
@@ -167,6 +226,7 @@ export default {
             this.dd_pagination_input = 1;
         },
         pageInit() {
+            this.pageCountsList = [];
             if (this.currentPage >= this.pageCounts)
                 this.currentPages = this.pageCounts;
             this.dd_pagination_input = this.currentPages;
@@ -174,6 +234,18 @@ export default {
             let mod = this.total % this.pagesize;
             if (mod == 0) this.pageCounts = count;
             if (mod != 0) this.pageCounts = count + 1;
+            for (let i = 1; i <= this.pageCounts; i++) {
+                this.pageCountsList.push(i);
+            }
+            if (this.pageCounts <= 7) {
+                this.pageCountsListItem = this.pageCountsList.slice(
+                    0,
+                    this.pageCounts
+                );
+            } else {
+                this.pageCountsListItem = this.pageCountsList.slice(0, 5);
+            }
+
             let components = this.layout.split(",").map((item) => item.trim());
             components.map((item) => {
                 switch (item) {
@@ -403,6 +475,13 @@ export default {
             color: #606266;
             min-width: 30px;
             border-radius: 2px;
+        }
+        .active {
+            background-color: #409eff;
+            color: #fff;
+            &:hover {
+                color: #fff;
+            }
         }
     }
     .control {

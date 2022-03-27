@@ -90,6 +90,9 @@ export default {
 					<div>ddDropdownMenu,</div>
 					<div>ddDropdownItem,</div>
 					<div>ddTimeSelect,</div>
+					<div>ddTransition,</div>
+					<div>ddTimePicker,</div>
+					<div>ddCascader,</div>
 
 					<div>Message,</div>
 					<div>ddLoading,</div>
@@ -151,6 +154,9 @@ export default {
 					<div>Vue.use(ddDropdownMenu),</div>
 					<div>Vue.use(ddDropdownItem),</div>
 					<div>Vue.use(ddTimeSelect),</div>
+					<div>Vue.use(ddTransition),</div>
+					<div>Vue.use(ddTimePicker),</div>
+					<div>Vue.use(ddCascader),</div>
 					<br />
 					<div>Vue.use(Message);</div>
 					<div>Vue.use(ddLoading);</div>
