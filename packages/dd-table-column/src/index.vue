@@ -31,6 +31,7 @@ export default {
                     {
                         "text-align": "left",
                         color: "#909399",
+                        width: this.width + "px",
                     },
                 ],
             },
@@ -38,9 +39,7 @@ export default {
                 h(
                     "div",
                     {
-                        style: {
-                            width: this.width + "px",
-                        },
+                        class: ["cell"],
                     },
                     this.label
                 ),

@@ -14,14 +14,14 @@
                         label="地址"
                     ></dd-table-column>
                     <dd-table-column label="操作">
-                        <!-- <template slot-scope="scope"> -->
-                            <dd-button size="small" @click="a(scope.row)"
+                        <template v-slot:default="slotProps">
+                            <dd-button size="small" @click="a(slotProps.row.name)"
                                 >编辑</dd-button
                             >
                             <dd-button size="small" type="danger"
                                 >删除</dd-button
                             >
-                        <!-- </template> -->
+                        </template>
                     </dd-table-column>
                 </dd-table>
             </template>

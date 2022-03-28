@@ -43,7 +43,7 @@ export default {
                         },
                     },
                     [
-                        h("thead", [h("tr", {}, [_this.$slots.default])]),
+                        h("thead", [h("tr", {}, _this.$slots.default)]),
                         h("tbody", [
                             _this.data.map((item, i) => {
                                 return h(
