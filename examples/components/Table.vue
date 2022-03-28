@@ -14,8 +14,8 @@
                         label="地址"
                     ></dd-table-column>
                     <dd-table-column label="操作">
-                        <template v-slot:default="slotProps">
-                            <dd-button size="small" @click="a(slotProps.row.name)"
+                        <template slot-scope="scope">
+                            <dd-button size="small" @click="a(scope.row)"
                                 >编辑</dd-button
                             >
                             <dd-button size="small" type="danger"
