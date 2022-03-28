@@ -1,11 +1,11 @@
 <template>
-    <tbody>
-        <tr v-for="(item,i) in ">
-            <div class="cell">
-                <slot :row="scope">{{ label }}</slot>
-            </div>
-        </tr>
-    </tbody>
+    <td>
+        <div class="cell">
+            <slot :row="scope">
+                {{ tableData[1][prop] }}
+            </slot>
+        </div>
+    </td>
 </template>
 
 <script>
@@ -31,7 +31,33 @@ export default {
                 name: "aaa",
                 age: 18,
             },
+            tableData: [
+                {
+                    date: "2016-05-02",
+                    name: "王小虎",
+                    address: "上海市普陀区金沙江路 1518 弄",
+                },
+                {
+                    date: "2016-05-04",
+                    name: "王小虎",
+                    address: "上海市普陀区金沙江路 1517 弄",
+                },
+                {
+                    date: "2016-05-01",
+                    name: "王小虎",
+                    address: "上海市普陀区金沙江路 1519 弄",
+                },
+                {
+                    date: "2016-05-03",
+                    name: "王小虎",
+                    address: "上海市普陀区金沙江路 1516 弄",
+                },
+            ],
+            data: {},
         };
+    },
+    created() {
+        // console.log(this.$parent.data);
     },
     // render: function (h) {
     //     let isFixed = {};
@@ -61,8 +87,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-th {
-    text-align: left;
-    color: "#909399";
+.cell {
+    padding: 0 10px;
 }
 </style>

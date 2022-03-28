@@ -1,3 +1,27 @@
+<template>
+    <div class="dd-table">
+        <table cellspacing="0">
+            <thead>
+                <tr>
+                    <th v-for="(item, i) in vnode" :key="i">{{ item }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    v-for="(item, i) in data"
+                    :key="i"
+                    :class="[
+                        'dd-table_cell',
+                        stripe && i % 2 !== 0 ? 'striped' : '',
+                    ]"
+                >
+                    <slot v-if="$slots.default" :row="data[i]"></slot>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</template>
+
 <script>
 export default {
     name: "ddTable",
@@ -14,94 +38,106 @@ export default {
             type: [String, Number],
         },
     },
-    render: function (h) {
-        let _this = this;
-        let tableList = this.$slots.default;
-        console.log(tableList);
-        let vnode = [];
-        tableList.map((item, i) => {
-            let { prop, label, width } = item.componentOptions.propsData;
-            vnode.push({
-                prop,
-                label,
-                width,
-                children: item.componentOptions.children,
-            });
-        });
-
-        return h(
-            "div",
-            {
-                class: ["dd-table"],
-            },
-            [
-                h(
-                    "table",
-                    {
-                        attrs: {
-                            cellspacing: 0,
-                        },
-                    },
-                    [
-                        // h("thead", [h("tr", {}, _this.$slots.default)]),
-                        h("tbody", [
-                            _this.data.map((item, i) => {
-                                return h(
-                                    "tr",
-                                    {
-                                        class: [
-                                            "dd-table_cell",
-                                            _this.stripe && i % 2 !== 0
-                                                ? "striped"
-                                                : "",
-                                        ],
-                                    },
-                                    [
-                                        Array.from({
-                                            length: tableList.length,
-                                        }).map((items, j) => {
-                                            return h(
-                                                "td",
-                                                {
-                                                    // style: {
-                                                    //     width: vnode[i].width
-                                                    //         ? vnode[i].width +
-                                                    //           "px"
-                                                    //         : (1 /
-                                                    //               Object.keys(
-                                                    //                   item
-                                                    //               ).length) *
-                                                    //               100 +
-                                                    //           "%",
-                                                    // },
-                                                },
-                                                [
-                                                    h(
-                                                        "div",
-                                                        {
-                                                            class: ["cell"],
-                                                        },
-                                                        _this.$slots.default
-                                                        // vnode[j].children
-                                                        //     ? vnode[j].children
-                                                        //     : item[
-                                                        //           Object.keys(
-                                                        //               item
-                                                        //           )[j]
-                                                        //       ]
-                                                    ),
-                                                ]
-                                            );
-                                        }),
-                                    ]
-                                );
-                            }),
-                        ]),
-                    ]
-                ),
-            ]
-        );
+    data() {
+        return {
+            vnode: [],
+        };
     },
+    created() {
+        this.vnode = [];
+        this.$slots.default.map((item, i) => {
+            let { label } = item.componentOptions.propsData;
+            this.vnode.push(label);
+        });
+    },
+    // render: function (h) {
+    //     let _this = this;
+    //     let tableList = this.$slots.default;
+    //     console.log(tableList);
+    //     let vnode = [];
+    //     tableList.map((item, i) => {
+    //         let { prop, label, width } = item.componentOptions.propsData;
+    //         vnode.push({
+    //             prop,
+    //             label,
+    //             width,
+    //             children: item.componentOptions.children,
+    //         });
+    //     });
+
+    //     return h(
+    //         "div",
+    //         {
+    //             class: ["dd-table"],
+    //         },
+    //         [
+    //             h(
+    //                 "table",
+    //                 {
+    //                     attrs: {
+    //                         cellspacing: 0,
+    //                     },
+    //                 },
+    //                 [
+    //                     // h("thead", [h("tr", {}, _this.$slots.default)]),
+    //                     h("tbody", [
+    //                         _this.data.map((item, i) => {
+    //                             return h(
+    //                                 "tr",
+    //                                 {
+    //                                     class: [
+    //                                         "dd-table_cell",
+    //                                         _this.stripe && i % 2 !== 0
+    //                                             ? "striped"
+    //                                             : "",
+    //                                     ],
+    //                                 },
+    //                                 [
+    //                                     Array.from({
+    //                                         length: tableList.length,
+    //                                     }).map((items, j) => {
+    //                                         return h(
+    //                                             "td",
+    //                                             {
+    //                                                 // style: {
+    //                                                 //     width: vnode[i].width
+    //                                                 //         ? vnode[i].width +
+    //                                                 //           "px"
+    //                                                 //         : (1 /
+    //                                                 //               Object.keys(
+    //                                                 //                   item
+    //                                                 //               ).length) *
+    //                                                 //               100 +
+    //                                                 //           "%",
+    //                                                 // },
+    //                                             },
+    //                                             [
+    //                                                 h(
+    //                                                     "div",
+    //                                                     {
+    //                                                         class: ["cell"],
+    //                                                     },
+    //                                                     _this.$slots.default
+    //                                                     // vnode[j].children
+    //                                                     //     ? vnode[j].children
+    //                                                     //     : item[
+    //                                                     //           Object.keys(
+    //                                                     //               item
+    //                                                     //           )[j]
+    //                                                     //       ]
+    //                                                 ),
+    //                                             ]
+    //                                         );
+    //                                     }),
+    //                                 ]
+    //                             );
+    //                         }),
+    //                     ]),
+    //                 ]
+    //             ),
+    //         ]
+    //     );
+    // },
 };
 </script>
 
@@ -124,6 +160,10 @@ export default {
             padding: 15px 10px;
             // background-color: #fff;
             border-bottom: 1px solid #ebeef5;
+        }
+        th {
+            text-align: left;
+            color: "#909399";
         }
         td {
             padding: 15px 0;

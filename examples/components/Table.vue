@@ -9,18 +9,11 @@
                 <dd-table :data="tableData" style="width: 100%">
                     <dd-table-column prop="date" label="日期"></dd-table-column>
                     <dd-table-column prop="name" label="姓名"></dd-table-column>
-                    <dd-table-column
-                        prop="address"
-                        label="地址"
-                    ></dd-table-column>
+                    <dd-table-column prop="address"label="地址"></dd-table-column>
                     <dd-table-column label="操作">
                         <template slot-scope="scope">
-                            <dd-button size="small" @click="a(scope.row)"
-                                >编辑</dd-button
-                            >
-                            <dd-button size="small" type="danger"
-                                >删除</dd-button
-                            >
+                            <dd-button size="small" @click="a(scope.row)">编辑</dd-button>
+                            <dd-button size="small" type="danger">删除</dd-button>
                         </template>
                     </dd-table-column>
                 </dd-table>
