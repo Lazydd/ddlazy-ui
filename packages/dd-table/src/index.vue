@@ -3,7 +3,9 @@
         <table cellspacing="0">
             <thead>
                 <tr>
-                    <th v-for="(item, i) in vnode" :key="i">{{ item }}</th>
+                    <th v-for="(item, i) in vnode" :key="i">
+                        {{ item.label }}
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +25,7 @@
 </template>
 
 <script>
+import ddTableColumn from "../../dd-table-column";
 export default {
     name: "ddTable",
     props: {
@@ -47,8 +50,14 @@ export default {
         this.vnode = [];
         this.$slots.default.map((item, i) => {
             let { label } = item.componentOptions.propsData;
-            this.vnode.push(label);
+            this.vnode.push({
+                label,
+                children: item.componentOptions.children,
+            });
         });
+    },
+    components: {
+        ddTableColumn,
     },
     // render: function (h) {
     //     let _this = this;
@@ -96,40 +105,50 @@ export default {
     //                                     Array.from({
     //                                         length: tableList.length,
     //                                     }).map((items, j) => {
-    //                                         return h(
-    //                                             "td",
-    //                                             {
-    //                                                 // style: {
-    //                                                 //     width: vnode[i].width
-    //                                                 //         ? vnode[i].width +
-    //                                                 //           "px"
-    //                                                 //         : (1 /
-    //                                                 //               Object.keys(
-    //                                                 //                   item
-    //                                                 //               ).length) *
-    //                                                 //               100 +
-    //                                                 //           "%",
-    //                                                 // },
-    //                                             },
-    //                                             [
-    //                                                 h(
-    //                                                     "div",
-    //                                                     {
-    //                                                         class: ["cell"],
-    //                                                     },
-    //                                                     _this.$slots.default
-    //                                                     // vnode[j].children
-    //                                                     //     ? vnode[j].children
-    //                                                     //     : item[
-    //                                                     //           Object.keys(
-    //                                                     //               item
-    //                                                     //           )[j]
-    //                                                     //       ]
-    //                                                 ),
-    //                                             ]
-    //                                         );
+    //                                         console.log(items);
+    //                                         return h("td", [
+    //                                             item.address
+    //                                         ]);
     //                                     }),
     //                                 ]
+    //                                 // [
+    //                                 //     Array.from({
+    //                                 //         length: tableList.length,
+    //                                 //     }).map((items, j) => {
+    //                                 //         return h(
+    //                                 //             "td",
+    //                                 //             {
+    //                                 //                 // style: {
+    //                                 //                 //     width: vnode[i].width
+    //                                 //                 //         ? vnode[i].width +
+    //                                 //                 //           "px"
+    //                                 //                 //         : (1 /
+    //                                 //                 //               Object.keys(
+    //                                 //                 //                   item
+    //                                 //                 //               ).length) *
+    //                                 //                 //               100 +
+    //                                 //                 //           "%",
+    //                                 //                 // },
+    //                                 //             },
+    //                                 //             [
+    //                                 //                 h(
+    //                                 //                     "div",
+    //                                 //                     {
+    //                                 //                         class: ["cell"],
+    //                                 //                     },
+    //                                 //                     _this.$slots.default
+    //                                 //                     // vnode[j].children
+    //                                 //                     //     ? vnode[j].children
+    //                                 //                     //     : item[
+    //                                 //                     //           Object.keys(
+    //                                 //                     //               item
+    //                                 //                     //           )[j]
+    //                                 //                     //       ]
+    //                                 //                 ),
+    //                                 //             ]
+    //                                 //         );
+    //                                 //     }),
+    //                                 // ]
     //                             );
     //                         }),
     //                     ]),
