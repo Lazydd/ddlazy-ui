@@ -1,31 +1,35 @@
 <template>
-    <div class="dd-table">
-        <table cellspacing="0">
+    <div :class="['dd-table', border ? 'dd-table_border' : '']">
+        <div style="display: none">
+            <slot />
+        </div>
+        <table cellspacing="0" cellpadding="0" border="0">
             <thead>
                 <tr>
-                    <th v-for="(item, i) in vnode" :key="i">
+                    <th
+                        v-for="(item, i) in vnode"
+                        :key="i"
+                        :class="[border ? 'dd-table_th-border' : '']"
+                        :style="`width:${
+                            item.width ? item.width + 'px' : ''
+                        };text-align:${item.headerAlign};
+                        `"
+                    >
                         {{ item.label }}
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <tr
-                    v-for="(item, i) in data"
-                    :key="i"
-                    :class="[
-                        'dd-table_cell',
-                        stripe && i % 2 !== 0 ? 'striped' : '',
-                    ]"
-                >
-                    <slot v-if="$slots.default" :row="data[i]"></slot>
-                </tr>
-            </tbody>
+            <table-body
+                :data="data"
+                :stripe="stripe"
+                :border="border"
+            ></table-body>
         </table>
     </div>
 </template>
 
 <script>
-import ddTableColumn from "../../dd-table-column";
+import TableBody from "./table-body.vue";
 export default {
     name: "ddTable",
     props: {
@@ -37,126 +41,48 @@ export default {
             type: Boolean,
             default: false,
         },
-        width: {
-            type: [String, Number],
+        border: {
+            type: Boolean,
+            default: false,
         },
     },
     data() {
         return {
             vnode: [],
+            column: [],
+            parameter: {},
         };
     },
-    created() {
-        this.vnode = [];
-        this.$slots.default.map((item, i) => {
-            let { label } = item.componentOptions.propsData;
-            this.vnode.push({
-                label,
-                children: item.componentOptions.children,
-            });
+    mounted() {
+        this.$children.map((item) => {
+            let item2 = item;
+            if (item.child) item2 = item.child;
+            if (item.$options.componentName == "ddTableColumn") {
+                this.column.push(item2);
+            }
         });
     },
-    components: {
-        ddTableColumn,
+    methods: {
+        getThead() {
+            this.vnode = [];
+            this.$slots.default.map((item, i) => {
+                let { label, width, headerAlign } =
+                    item.componentOptions.propsData;
+                this.vnode.push({
+                    label,
+                    width,
+                    headerAlign,
+                });
+            });
+            console.log(this.vnode);
+        },
     },
-    // render: function (h) {
-    //     let _this = this;
-    //     let tableList = this.$slots.default;
-    //     console.log(tableList);
-    //     let vnode = [];
-    //     tableList.map((item, i) => {
-    //         let { prop, label, width } = item.componentOptions.propsData;
-    //         vnode.push({
-    //             prop,
-    //             label,
-    //             width,
-    //             children: item.componentOptions.children,
-    //         });
-    //     });
-
-    //     return h(
-    //         "div",
-    //         {
-    //             class: ["dd-table"],
-    //         },
-    //         [
-    //             h(
-    //                 "table",
-    //                 {
-    //                     attrs: {
-    //                         cellspacing: 0,
-    //                     },
-    //                 },
-    //                 [
-    //                     // h("thead", [h("tr", {}, _this.$slots.default)]),
-    //                     h("tbody", [
-    //                         _this.data.map((item, i) => {
-    //                             return h(
-    //                                 "tr",
-    //                                 {
-    //                                     class: [
-    //                                         "dd-table_cell",
-    //                                         _this.stripe && i % 2 !== 0
-    //                                             ? "striped"
-    //                                             : "",
-    //                                     ],
-    //                                 },
-    //                                 [
-    //                                     Array.from({
-    //                                         length: tableList.length,
-    //                                     }).map((items, j) => {
-    //                                         console.log(items);
-    //                                         return h("td", [
-    //                                             item.address
-    //                                         ]);
-    //                                     }),
-    //                                 ]
-    //                                 // [
-    //                                 //     Array.from({
-    //                                 //         length: tableList.length,
-    //                                 //     }).map((items, j) => {
-    //                                 //         return h(
-    //                                 //             "td",
-    //                                 //             {
-    //                                 //                 // style: {
-    //                                 //                 //     width: vnode[i].width
-    //                                 //                 //         ? vnode[i].width +
-    //                                 //                 //           "px"
-    //                                 //                 //         : (1 /
-    //                                 //                 //               Object.keys(
-    //                                 //                 //                   item
-    //                                 //                 //               ).length) *
-    //                                 //                 //               100 +
-    //                                 //                 //           "%",
-    //                                 //                 // },
-    //                                 //             },
-    //                                 //             [
-    //                                 //                 h(
-    //                                 //                     "div",
-    //                                 //                     {
-    //                                 //                         class: ["cell"],
-    //                                 //                     },
-    //                                 //                     _this.$slots.default
-    //                                 //                     // vnode[j].children
-    //                                 //                     //     ? vnode[j].children
-    //                                 //                     //     : item[
-    //                                 //                     //           Object.keys(
-    //                                 //                     //               item
-    //                                 //                     //           )[j]
-    //                                 //                     //       ]
-    //                                 //                 ),
-    //                                 //             ]
-    //                                 //         );
-    //                                 //     }),
-    //                                 // ]
-    //                             );
-    //                         }),
-    //                     ]),
-    //                 ]
-    //             ),
-    //         ]
-    //     );
-    // },
+    created() {
+        this.getThead();
+    },
+    components: {
+        TableBody,
+    },
 };
 </script>
 
@@ -174,30 +100,19 @@ export default {
             -khtml-user-select: none; /*早期浏览器*/
             user-select: none;
         }
-        td,
+        thead {
+            color: #909399;
+            font-weight: 500;
+        }
         th {
             padding: 15px 10px;
-            // background-color: #fff;
+            text-align: left;
             border-bottom: 1px solid #ebeef5;
         }
-        th {
-            text-align: left;
-            color: "#909399";
-        }
-        td {
-            padding: 15px 0;
-            .cell {
-                padding: 0 10px;
-            }
-        }
-        .dd-table_cell {
-            &:hover {
-                transition: background-color 0.25s ease;
-                background-color: #f5f7fa !important;
-            }
-        }
-        .striped {
-            background-color: #fafafa;
+        .dd-table_th-border {
+            border: 1px solid #ebeef5;
+            border-top: none;
+            border-left: none;
         }
     }
     .isFix {
@@ -206,5 +121,10 @@ export default {
         background-color: #ffffff;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
     }
+}
+.dd-table_border {
+    border: 1px solid #ebeef5;
+    border-bottom: none;
+    border-right: none;
 }
 </style>

@@ -9,20 +9,7 @@
                 <dd-table :data="tableData" style="width: 100%">
                     <dd-table-column prop="date" label="日期"></dd-table-column>
                     <dd-table-column prop="name" label="姓名"></dd-table-column>
-                    <dd-table-column
-                        prop="address"
-                        label="地址"
-                    ></dd-table-column>
-                    <dd-table-column label="操作">
-                        <template slot-scope="scope">
-                            <dd-button size="small" @click="a(scope.row)"
-                                >编辑</dd-button
-                            >
-                            <dd-button size="small" type="danger"
-                                >删除</dd-button
-                            >
-                        </template>
-                    </dd-table-column>
+                    <dd-table-column prop="address"label="地址"></dd-table-column>
                 </dd-table>
             </template>
         </dd-block>
@@ -31,44 +18,96 @@
                 <dd-table :data="tableData" stripe style="width: 100%">
                     <dd-table-column prop="date" label="日期"></dd-table-column>
                     <dd-table-column prop="name" label="姓名"></dd-table-column>
-                    <dd-table-column
-                        prop="address"
-                        label="地址"
-                    ></dd-table-column>
-                    <dd-table-column label="操作">
-                        <template slot-scope="scope">
-                            <dd-button size="small" @click="a(scope.row)"
-                                >编辑</dd-button
-                            >
-                            <dd-button size="small" type="danger"
-                                >删除</dd-button
-                            >
-                        </template>
-                    </dd-table-column>
+                    <dd-table-column prop="address" label="地址"></dd-table-column>
                 </dd-table>
             </template>
         </dd-block>
         <dd-block title="固定宽度" :code="code3">
             <template #source>
                 <dd-table :data="tableData" stripe style="width: 100%">
+                    <dd-table-column prop="date" label="日期" width="180"></dd-table-column>
+                    <dd-table-column prop="name" label="姓名" width="180"></dd-table-column>
+                    <dd-table-column prop="address" label="地址"></dd-table-column>
+                </dd-table>
+            </template>
+        </dd-block>
+        <dd-block title="序号" :code="code4">
+            <template #source>
+                <dd-table :data="tableData" stripe style="width: 100%">
+                    <dd-table-column type="index" label="序号"></dd-table-column>
+                    <dd-table-column prop="date" label="日期"></dd-table-column>
+                    <dd-table-column prop="name" label="姓名"></dd-table-column>
+                    <dd-table-column prop="address" label="地址"></dd-table-column>
+                </dd-table>
+            </template>
+        </dd-block>
+        <dd-block title="居中" :code="code5">
+            <template #source>
+                <dd-table :data="tableData" stripe style="width: 100%">
                     <dd-table-column
                         prop="date"
                         label="日期"
-                        width="180"
+                        header-align="center"
+                        align="center"
                     ></dd-table-column>
                     <dd-table-column
                         prop="name"
                         label="姓名"
-                        width="180"
+                        header-align="center"
+                        align="center"
                     ></dd-table-column>
                     <dd-table-column
                         prop="address"
                         label="地址"
-                        width="180"
+                        header-align="center"
+                        align="center"
                     ></dd-table-column>
+                </dd-table>
+            </template>
+        </dd-block>
+        <dd-block title="带边框表格" :code="code6">
+            <template #source>
+                <dd-table :data="tableData" border style="width: 100%">
+                    <dd-table-column prop="date" label="日期"></dd-table-column>
+                    <dd-table-column prop="name" label="姓名"></dd-table-column>
+                    <dd-table-column prop="address" label="地址"></dd-table-column>
+                </dd-table>
+            </template>
+        </dd-block>
+        <dd-block title="多选" :code="code7">
+            <template #source>
+                <dd-table :data="tableData" style="width: 100%">
+                    <dd-table-column type="selection"></dd-table-column>
+                    <dd-table-column prop="date" label="日期"></dd-table-column>
+                    <dd-table-column prop="name" label="姓名"></dd-table-column>
+                    <dd-table-column prop="address" label="地址"></dd-table-column>
+                </dd-table>
+            </template>
+        </dd-block>
+        <dd-block title="自定义内容" :code="code8">
+            <template #source>
+                <dd-table :data="tableData" style="width: 100%">
+                    <dd-table-column prop="date" label="日期">
+                        <template slot-scope="scope">
+                            <dd-icon
+                                icon="icon-ontimeshipment"
+                                style="font-size: 15px"
+                            ></dd-icon>
+                            <span style="margin-left: 10px">{{
+                                scope.row.date
+                            }}</span>
+                        </template>
+                    </dd-table-column>
+                    <dd-table-column prop="name" label="姓名"></dd-table-column>
+                    <dd-table-column prop="address" label="地址">
+                        <template slot-scope="scope">
+                            <dd-tag>标签一</dd-tag>
+                            <dd-tag>标签一</dd-tag>
+                        </template>
+                    </dd-table-column>
                     <dd-table-column label="操作">
                         <template slot-scope="scope">
-                            <dd-button size="small" @click="a(scope.row)"
+                            <dd-button size="small" @click="edit(scope)"
                                 >编辑</dd-button
                             >
                             <dd-button size="small" type="danger"
@@ -110,25 +149,11 @@ export default {
                 },
             ],
             code1: `
-                <dd-table :data="tableData">
+                <dd-table :data="tableData" style="width: 100%">
                     <dd-table-column prop="date" label="日期"></dd-table-column>
                     <dd-table-column prop="name" label="姓名"></dd-table-column>
-                    <dd-table-column
-                        prop="address"
-                        label="地址"
-                    ></dd-table-column>
-                    <dd-table-column label="操作">
-                        <template slot-scope="scope">
-                            <dd-button size="small" @click="a(scope.row)"
-                                >编辑</dd-button
-                            >
-                            <dd-button size="small" type="danger"
-                                >删除</dd-button
-                            >
-                        </template>
-                    </dd-table-column>
+                    <dd-table-column prop="address"label="地址"></dd-table-column>
                 </dd-table>
-
 
                 tableData: [
                     {
@@ -154,16 +179,87 @@ export default {
                 ],
             `,
             code2: `
-                <dd-table :data="tableData" stripe>
+                <dd-table :data="tableData" stripe style="width: 100%">
                     <dd-table-column prop="date" label="日期"></dd-table-column>
                     <dd-table-column prop="name" label="姓名"></dd-table-column>
+                    <dd-table-column prop="address" label="地址"></dd-table-column>
+                </dd-table>
+            `,
+            code3: `
+                <dd-table :data="tableData" stripe style="width: 100%">
+                    <dd-table-column prop="date" label="日期" width="180"></dd-table-column>
+                    <dd-table-column prop="name" label="姓名" width="180"></dd-table-column>
+                    <dd-table-column prop="address" label="地址"></dd-table-column>
+                </dd-table>
+            `,
+            code4: `
+                <dd-table :data="tableData" stripe style="width: 100%">
+                    <dd-table-column type="index" label="序号"></dd-table-column>
+                    <dd-table-column prop="date" label="日期"></dd-table-column>
+                    <dd-table-column prop="name" label="姓名"></dd-table-column>
+                    <dd-table-column prop="address" label="地址"></dd-table-column>
+                </dd-table>
+            `,
+            code5: `
+                <dd-table :data="tableData" stripe style="width: 100%">
+                    <dd-table-column
+                        prop="date"
+                        label="日期"
+                        header-align="center"
+                        align="center"
+                    ></dd-table-column>
+                    <dd-table-column
+                        prop="name"
+                        label="姓名"
+                        header-align="center"
+                        align="center"
+                    ></dd-table-column>
                     <dd-table-column
                         prop="address"
                         label="地址"
+                        header-align="center"
+                        align="center"
                     ></dd-table-column>
+                </dd-table>
+            `,
+            code6: `
+                <dd-table :data="tableData" border style="width: 100%">
+                    <dd-table-column prop="date" label="日期"></dd-table-column>
+                    <dd-table-column prop="name" label="姓名"></dd-table-column>
+                    <dd-table-column prop="address" label="地址"></dd-table-column>
+                </dd-table>
+            `,
+            code7: `
+                <dd-table :data="tableData" style="width: 100%">
+                    <dd-table-column type="selection"></dd-table-column>
+                    <dd-table-column prop="date" label="日期"></dd-table-column>
+                    <dd-table-column prop="name" label="姓名"></dd-table-column>
+                    <dd-table-column prop="address" label="地址"></dd-table-column>
+                </dd-table>
+            `,
+            code8: `
+                <dd-table :data="tableData" style="width: 100%">
+                    <dd-table-column prop="date" label="日期">
+                        <template slot-scope="scope">
+                            <dd-icon
+                                icon="icon-ontimeshipment"
+                                style="font-size: 15px"
+                            ></dd-icon>
+                            <span style="margin-left: 10px">{{
+                                scope.row.date
+                            }}</span>
+                        </template>
+                    </dd-table-column>
+                    <dd-table-column prop="name" label="姓名"></dd-table-column>
+                    <dd-table-column prop="address" label="地址">
+                        <template slot-scope="scope">
+                            <dd-tag>标签一</dd-tag>
+                            <dd-tag>标签一</dd-tag>
+                        </template>
+                    </dd-table-column>
                     <dd-table-column label="操作">
                         <template slot-scope="scope">
-                            <dd-button size="small" @click="a(scope.row)"
+                            <dd-button size="small" @click="edit(scope)"
                                 >编辑</dd-button
                             >
                             <dd-button size="small" type="danger"
@@ -173,13 +269,10 @@ export default {
                     </dd-table-column>
                 </dd-table>
             `,
-            code3: `
-
-            `,
         };
     },
     methods: {
-        a(item) {
+        edit(item) {
             console.log(item);
         },
     },
