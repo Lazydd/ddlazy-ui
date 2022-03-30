@@ -3,7 +3,7 @@
         <div class="dd-tree-node" v-for="(item, i) in myTree" :key="i">
             <div
                 class="dd-tree-node_content"
-                :style="`padding-left:${level * 18}px`"
+                :style="`padding-left:${node.nodeLevel * 18}px`"
                 v-if="item.label"
                 @click="tree_header(item, i)"
             >
@@ -30,6 +30,7 @@
                         :data="load ? null : item.children"
                         :load="load ? load : null"
                         :props="props"
+                        :node="item"
                         :level="level + 1"
                     ></dd-tree>
                 </transition>
@@ -62,6 +63,10 @@ export default {
             type: Number,
             default: 0,
         },
+        node: {
+            type: Object,
+            default: () => ({}),
+        },
         load: {
             type: Function,
         },
@@ -80,6 +85,15 @@ export default {
         };
     },
     methods: {
+        initTree() {
+            if (this.$parent?.nodeLevel) {
+                let parentNodeLevel = this.$parent.nodeLevel;
+                this.$set(this.node, "nodeLevel", parentNodeLevel + 1);
+                this.nodeLevel = parentNodeLevel + 1;
+            } else {
+                this.$set(this.node, "nodeLevel", 1);
+            }
+        },
         initLoad() {
             let node = {
                 level: 0,
@@ -104,6 +118,7 @@ export default {
         },
     },
     created() {
+        this.initTree();
         if (this.load) {
             this.initLoad();
         }
