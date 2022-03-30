@@ -36,6 +36,8 @@
                 </dd-link>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-footer left="Button 按钮" right="Radio 单选框"></dd-footer>
     </div>
 </template>
 
@@ -68,6 +70,43 @@ export default {
                 <dd-link icon="icon-map">默认链接</dd-link>
                 <dd-link>默认链接<dd-icon icon="icon-good"></dd-icon></dd-link>
             `,
+            Attributes: [
+                {
+                    parameter: "type",
+                    explain: "类型",
+                    type: "string",
+                    optional: "primary / success / warning / danger / info",
+                    default: "default",
+                },
+                {
+                    parameter: "underline",
+                    explain: "是否下划线",
+                    type: "boolean",
+                    optional: "—",
+                    default: "true",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "是否禁用状态",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "href",
+                    explain: "原生 href 属性",
+                    type: "boolean",
+                    optional: "string",
+                    default: "-",
+                },
+                {
+                    parameter: "icon",
+                    explain: "图标类名",
+                    type: "boolean",
+                    optional: "string",
+                    default: "-",
+                },
+            ],
         };
     },
 };

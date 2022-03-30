@@ -75,6 +75,7 @@
                 </div>
             </template>
         </dd-block>
+        <dd-footer left="快速上手" right="Layout 布局"></dd-footer>
     </div>
 </template>
 

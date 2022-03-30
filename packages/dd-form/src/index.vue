@@ -49,6 +49,16 @@ export default {
             this.$children.map((item) => {
                 item.resetFields();
             });
+            // console.log(this.$options.data().model);
+            // this.model = this.$options.data().model;
+        },
+        clearValidate() {
+            this.$children.map((item) => {
+                item.resetFields();
+            });
+        },
+        ischange() {
+            this.$emit("validate");
         },
     },
 };

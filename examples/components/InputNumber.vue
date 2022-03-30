@@ -35,6 +35,9 @@
                 <dd-input-number v-model="num6" controls-position="right" :min="1" :max="10"></dd-input-number>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Events" :data="Attributes2" events></dd-describe>
+        <dd-footer left="Input 输入框" right="Select 选择器"></dd-footer>
     </div>
 </template>
 
@@ -69,7 +72,89 @@ export default {
             `,
             code6:`
                 <dd-input-number v-model="num6" controls-position="right" :min="1" :max="10"></dd-input-number>
-            `
+            `,
+            Attributes: [
+                {
+                    parameter: "value / v-model",
+                    explain: "绑定值",
+                    type: "number",
+                    optional: "—",
+                    default: "0",
+                },
+                {
+                    parameter: "min",
+                    explain: "设置计数器允许的最小值",
+                    type: "number",
+                    optional: "—",
+                    default: "-Infinity",
+                },
+                {
+                    parameter: "max",
+                    explain: "设置计数器允许的最大值",
+                    type: "number",
+                    optional: "—",
+                    default: "Infinity",
+                },
+                {
+                    parameter: "step",
+                    explain: "计数器步长",
+                    type: "number",
+                    optional: "—",
+                    default: "1",
+                },
+                {
+                    parameter: "precision",
+                    explain: "数值精度",
+                    type: "	number",
+                    optional: "—",
+                    default: "	—",
+                },
+                {
+                    parameter: "size",
+                    explain: "计数器尺寸",
+                    type: "string",
+                    optional: "medium  /  small  /  mini",
+                    default: "false",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "禁用",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "size",
+                    explain: "输入框尺寸",
+                    type: "string",
+                    optional: "medium / small / mini",
+                    default: "—",
+                },
+                {
+                    parameter: "placeholder",
+                    explain: "输入框默认 placeholder",
+                    type: "string",
+                    optional: "-",
+                    default: "-",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "change",
+                    explain: "绑定值被改变时触发",
+                    backParameter: "currentValue, oldValue",
+                },
+                {
+                    name: "blur",
+                    explain: "在组件 Input 失去焦点时触发",
+                    backParameter: "(event: Event)",
+                },
+                {
+                    name: "focus",
+                    explain: "在组件 Input 获得焦点时触发",
+                    backParameter: "(event: Event)",
+                },
+            ],
         };
     },
 };

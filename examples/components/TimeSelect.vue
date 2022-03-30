@@ -91,6 +91,10 @@
                 </dd-time-select>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Time Select Options" :data="Attributes2"></dd-describe>
+        <dd-describe title="Events" :data="Attributes3" events></dd-describe>
+        <dd-footer left="Slider 滑块" right="Transfer 穿梭框"></dd-footer>
     </div>
 </template>
 
@@ -140,7 +144,12 @@ export default {
                 </dd-time-select>
             `,
             code3: `
-
+                <dd-time-picker
+                    placeholder="任意时间点"
+                    v-model="value1"
+                    style="margin-right: 15px"
+                >
+                </dd-time-picker>
             `,
             code5: `
                 <dd-time-select
@@ -179,11 +188,91 @@ export default {
                 >
                 </dd-time-select>
             `,
+            Attributes: [
+                {
+                    parameter: "value / v-model",
+                    explain: "绑定值",
+                    type: "date(TimePicker) / string(TimeSelect)",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "是否禁用",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "size",
+                    explain: "输入框尺寸",
+                    type: "string",
+                    optional: "medium / small / mini",
+                    default: "—",
+                },
+                {
+                    parameter: "picker-options",
+                    explain: "当前时间日期选择器特有的选项参考下表",
+                    type: "object",
+                    optional: "—",
+                    default: "{}",
+                },
+            ],
+            Attributes2: [
+                {
+                    parameter: "start",
+                    explain: "开始时间",
+                    type: "string",
+                    optional: "—",
+                    default: "09:00",
+                },
+                {
+                    parameter: "end",
+                    explain: "结束时间",
+                    type: "string",
+                    optional: "—",
+                    default: "18:00",
+                },
+                {
+                    parameter: "step",
+                    explain: "间隔时间",
+                    type: "string",
+                    optional: "—",
+                    default: "00:30",
+                },
+                {
+                    parameter: "minTime",
+                    explain: "最小时间，小于该时间的时间段将被禁用",
+                    type: "string",
+                    optional: "—",
+                    default: "00:00",
+                },
+                // {
+                //     parameter: "maxTime",
+                //     explain: "	最大时间，大于该时间的时间段将被禁用",
+                //     type: "string",
+                //     optional: "—",
+                //     default: "—",
+                // },
+            ],
+            Attributes3: [
+                {
+                    name: "change",
+                    explain: "用户确认选定的值时触发",
+                    backParameter: "组件绑定值",
+                },
+                {
+                    name: "blur",
+                    explain: "当 input 失去焦点时触发",
+                    backParameter: "组件实例",
+                },
+                {
+                    name: "focus",
+                    explain: "当 input 获得焦点时触发",
+                    backParameter: "组件实例",
+                },
+            ],
         };
-    },
-    created() {
-        console.log(typeof this.value1);
-        console.log( this.value1);
     },
 };
 </script>

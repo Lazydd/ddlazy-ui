@@ -34,7 +34,7 @@ export default {
     name: "ddSwitch",
     props: {
         value: {
-            type: Boolean,
+            type: [Boolean, String],
             default: false,
         },
         activeColor: {

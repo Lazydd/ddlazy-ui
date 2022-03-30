@@ -133,6 +133,12 @@
                 </dd-form>
             </template>
         </dd-block>
+        <dd-describe title="Form Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Form Methods" :data="Attributes2" methods></dd-describe>
+        <dd-describe title="Form Events" :data="Attributes3" events></dd-describe>
+        
+        <dd-describe title="Methods" :data="Attributes3" methods></dd-describe>
+        <dd-footer left="Transfer 穿梭框" right="Table 表格"></dd-footer>
     </div>
 </template>
 
@@ -151,6 +157,7 @@ export default {
             },
             form1: {
                 type: [],
+                desc: "描述",
             },
             rules: {
                 name: [
@@ -389,9 +396,53 @@ export default {
                 if (this.$refs[formName]) this.$refs[formName].resetFields();
             },
             `,
-            code3: `
-
-            `,
+            Attributes: [
+                {
+                    parameter: "model",
+                    explain: "表单数据对象",
+                    type: "	object",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "rules",
+                    explain: "表单验证规则",
+                    type: "object",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "label-width",
+                    explain: "表单域标签的宽度，例如 '50px'。作为 Form 直接子元素的 form-item 会继承该值。支持 auto。",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "validate",
+                    explain: "对整个表单进行校验的方法，参数为一个回调函数。该回调函数会在校验结束后被调用，并传入两个参数：是否校验成功和未通过校验的字段。若不传入回调函数，则会返回一个 promise",
+                    parameter: "Function(callback: Function(boolean, object))",
+                },
+                // {
+                //     name: "resetFields",
+                //     explain: "对整个表单进行重置，将所有字段值重置为初始值并移除校验结果",
+                //     parameter: "—",
+                // },
+                {
+                    name: "clearValidate",
+                    explain: "移除整个表单的校验结果",
+                    parameter: "—",
+                },
+            ],
+            Attributes3: [
+                {
+                    name: "validate",
+                    explain: "任一表单项被校验后触发",
+                    backParameter: "被校验的表单项 prop 值，校验是否通过，错误消息（如果存在）",
+                },
+            ],
         };
     },
     methods: {
@@ -409,7 +460,7 @@ export default {
             });
         },
         resetForm(formName) {
-            if (this.$refs[formName]) this.$refs[formName].resetFields();
+            if (this.$refs[formName]) this.$refs[formName].clearValidate();
         },
     },
 };

@@ -95,6 +95,11 @@
                 </dd-select>
             </template>
         </dd-block>
+        <dd-describe title="Select Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Select Events" :data="Attributes2" events></dd-describe>
+        <dd-describe title="Option Attributes" :data="Attributes3"></dd-describe>
+        <dd-describe title="Methods" :data="Attributes4" methods></dd-describe>
+        <dd-footer left="InputNumber 计数器" right="Cascader 级联选择器"></dd-footer>
     </div>
 </template>
 
@@ -284,6 +289,98 @@ export default {
             value3: "",
             value4: "选项5",
             value5: "",
+            Attributes: [
+                {
+                    parameter: "value / v-model",
+                    explain: "绑定值",
+                    type: "string / number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "是否禁用",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "size",
+                    explain: "输入框尺寸",
+                    type: "	string",
+                    optional: "medium/small/mini",
+                    default: "—",
+                },
+                {
+                    parameter: "clearable",
+                    explain: "是否可以清空选项",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "change",
+                    explain: "选中值发生变化时触发",
+                    backParameter: "目前的选中值",
+                },
+                {
+                    name: "visible-change",
+                    explain: "下拉框出现/隐藏时触发",
+                    backParameter: "出现则为 true，隐藏则为 false",
+                },
+                {
+                    name: "clear",
+                    explain: "可清空的单选模式下用户点击清空按钮时触发",
+                    backParameter: "—",
+                },
+                {
+                    name: "blur",
+                    explain: "当 input 失去焦点时触发",
+                    backParameter: "(event: Event)",
+                },
+                {
+                    name: "focus",
+                    explain: "当 input 获得焦点时触发",
+                    backParameter: "(event: Event)",
+                },
+            ],
+            Attributes3: [
+                {
+                    parameter: "label",
+                    explain: "选项的标签，若不设置则默认与 value 相同",
+                    type: "string / number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "value",
+                    explain: "是选项的值否禁用",
+                    type: "string / number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "是否禁用该选项",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ],
+            Attributes4: [
+                {
+                    name: "blur",
+                    explain: "使 input 失去焦点，并隐藏下拉框",
+                    parameter: "-",
+                },
+                {
+                    name: "focus",
+                    explain: "当 input 获得焦点时触发",
+                    parameter: "-",
+                },
+            ],
         };
     },
 };

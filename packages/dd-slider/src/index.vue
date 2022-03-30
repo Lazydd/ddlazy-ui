@@ -30,6 +30,7 @@ export default {
     props: {
         value: {
             type: [Number, String],
+            default: 0,
         },
         min: {
             type: Number,
@@ -61,6 +62,7 @@ export default {
                 if (this.left > 100) this.left = 100;
                 if (this.left < 0) this.left = 0;
                 this.radio = this.left.toFixed(0);
+                this.$emit("change", this.radio);
             }
         },
         mousedownIn() {

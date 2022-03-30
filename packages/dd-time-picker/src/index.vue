@@ -86,6 +86,12 @@ export default {
                         click(e) {
                             _this.isShow_dropdown = !_this.isShow_dropdown;
                         },
+                        "on-blur"(e) {
+                            this.$emit("blur", _this.$el);
+                        },
+                        "on-focus"(e) {
+                            this.$emit("focus", _this.$el);
+                        },
                     },
                 }),
                 _this.activeTime
@@ -182,6 +188,10 @@ export default {
                                                                                           click() {
                                                                                               _this.activeHour =
                                                                                                   item;
+                                                                                              _this.$emit(
+                                                                                                  "change",
+                                                                                                  item
+                                                                                              );
                                                                                           },
                                                                                       },
                                                                                   }

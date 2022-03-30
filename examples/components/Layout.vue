@@ -174,9 +174,11 @@
                     <dd-col :span="6">
                         <div class="grid-content bg-purple"></div>
                     </dd-col>
-                </dd-row>
-			</template
+                </dd-row> </template
         ></dd-block>
+        <dd-describe title="Row Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Col Attributes" :data="Attributes2"></dd-describe>
+        <dd-footer left="内置过渡动画" right="Icon 图标"></dd-footer>
     </div>
 </template>
 
@@ -362,6 +364,66 @@ export default {
                     </dd-col>
                 </dd-row>
 			`,
+            Attributes: [
+                {
+                    parameter: "gutter",
+                    explain: "栅格间隔",
+                    type: "number",
+                    optional: "—",
+                    default: "0",
+                },
+                {
+                    parameter: "type",
+                    explain: "布局模式，可选 flex，现代浏览器下有效",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "justify",
+                    explain: "flex 布局下的水平排列方式",
+                    type: "string",
+                    optional: "start/end/center/space-around/space-between",
+                    default: "start",
+                },
+                {
+                    parameter: "align",
+                    explain: "flex 布局下的垂直排列方式",
+                    type: "string",
+                    optional: "top/middle/bottom",
+                    default: "—",
+                },
+            ],
+            Attributes2: [
+                {
+                    parameter: "span",
+                    explain: "栅格占据的列数",
+                    type: "number",
+                    optional: "—",
+                    default: "24",
+                },
+                {
+                    parameter: "offset",
+                    explain: "栅格左侧的间隔格数",
+                    type: "number",
+                    optional: "—",
+                    default: "0",
+                },
+                // {
+                //     parameter: "push",
+                //     explain: "栅格向右移动格数",
+                //     type: "number",
+                //     optional: "start/end/center/space-around/space-between",
+                //     default: "0",
+                // },
+                // {
+                //     parameter: "pull",
+                //     explain: "栅格向左移动格数",
+                //     type: "number",
+                //     optional: "top/middle/bottom",
+                //     default: "0",
+                // },
+            ],
         };
     },
 };

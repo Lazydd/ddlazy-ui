@@ -140,6 +140,7 @@ export default {
         dd_input_delete() {
             this.input_value = "";
             this.$emit("input", this.input_value);
+            this.$emit("clear");
             this.input.focus();
         },
         dd_input_showPWD() {

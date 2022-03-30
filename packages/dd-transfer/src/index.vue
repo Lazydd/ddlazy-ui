@@ -169,6 +169,7 @@ export default {
             this.isIndeterminateLeft =
                 checkedCount > 0 &&
                 checkedCount < this.checkedLeftList.length - disabledCount;
+            this.$emit("left-check-change", this.checkedLeftList);
         },
         handleCheckedRightChange(val) {
             let checkedCount = val.length;
@@ -183,6 +184,7 @@ export default {
             this.isIndeterminateRight =
                 checkedCount > 0 &&
                 checkedCount < this.checkedRightList.length - disabledCount;
+            this.$emit("right-check-change", this.checkedRightList);
         },
         checkdLeftClick() {
             let arr = [];
@@ -231,6 +233,11 @@ export default {
     },
     created() {
         this.initTransfer();
+    },
+    watch: {
+        checkedRight(val) {
+            this.$emit("change", val);
+        },
     },
     components: {
         ddCheckbox,

@@ -67,6 +67,12 @@
                 </dd-checkbox-group>
             </template>
         </dd-block>
+        <dd-describe title="Checkbox Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Checkbox Events" :data="Attributes2" events></dd-describe>
+        <dd-describe title="Checkbox-group Attributes" :data="Attributes3" ></dd-describe>
+        <dd-describe title="Checkbox-group Events" :data="Attributes4" events></dd-describe>
+        <dd-describe title="Checkbox-button Attributes" :data="Attributes5" ></dd-describe>
+        <dd-footer left="Radio 单选框" right="Input 输入框"></dd-footer>
     </div>
 </template>
 
@@ -155,6 +161,82 @@ export default {
                     <dd-checkbox-button label="深圳"></dd-checkbox-button>
                 </dd-checkbox-group>
             `,
+            Attributes: [
+                {
+                    parameter: "value / v-model",
+                    explain: "绑定值",
+                    type: "string / number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "label",
+                    explain: "选中状态的值（只有在checkbox-group或者绑定对象类型为array时有效）",
+                    type: "string / number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "是否禁用",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "change",
+                    explain: "绑定值变化时触发的事件",
+                    backParameter: "更新后的值",
+                },
+            ],
+            Attributes3: [
+                {
+                    parameter: "value / v-model",
+                    explain: "绑定值",
+                    type: "array",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "是否禁用",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "size",
+                    explain: "多选框组尺寸，仅对按钮形式的 Checkbox 或带有边框的 Checkbox 有效",
+                    type: "string",
+                    optional: "medium / small / mini",
+                    default: "—",
+                },
+            ],
+            Attributes4: [
+                {
+                    name: "change",
+                    explain: "绑定值变化时触发的事件",
+                    backParameter: "更新后的值",
+                },
+            ],
+            Attributes5: [
+                {
+                    parameter: "label",
+                    explain: "选中状态的值（只有在checkbox-group或者绑定对象类型为array时有效）",
+                    type: "string / number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "是否禁用",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ],
         };
     },
     methods:{

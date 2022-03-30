@@ -2,7 +2,7 @@
     <div class="page-component">
         <h3 class="_title">{{ title }}</h3>
         <div class="content>">
-            <dd-table :data="data">
+            <dd-table :data="data" v-if="!events && !methods">
                 <dd-table-column
                     prop="parameter"
                     label="参数"
@@ -16,6 +16,22 @@
                 <dd-table-column
                     prop="default"
                     label="默认值"
+                ></dd-table-column>
+            </dd-table>
+            <dd-table :data="data" v-if="events">
+                <dd-table-column prop="name" label="事件名称"></dd-table-column>
+                <dd-table-column prop="explain" label="说明"></dd-table-column>
+                <dd-table-column
+                    prop="backParameter"
+                    label="回调参数"
+                ></dd-table-column>
+            </dd-table>
+            <dd-table :data="data" v-if="methods">
+                <dd-table-column prop="name" label="方法名"></dd-table-column>
+                <dd-table-column prop="explain" label="说明"></dd-table-column>
+                <dd-table-column
+                    prop="parameter"
+                    label="参数"
                 ></dd-table-column>
             </dd-table>
         </div>
@@ -34,6 +50,14 @@ export default {
         },
         data: {
             type: Array,
+        },
+        events: {
+            type: Boolean,
+            default: false,
+        },
+        methods: {
+            type: Boolean,
+            default: false,
         },
     },
     components: {

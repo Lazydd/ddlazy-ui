@@ -69,6 +69,12 @@ export default {
                         click(e) {
                             _this.isShow_dropdown = !_this.isShow_dropdown;
                         },
+                        "on-blur"(e) {
+                            this.$emit("blur", e);
+                        },
+                        "on-focus"(e) {
+                            this.$emit("focus", e);
+                        },
                     },
                 }),
                 h(
@@ -96,7 +102,8 @@ export default {
                                     if (_this.clearable) {
                                         _this.activeIndex = "";
                                         _this.activeSelect = "";
-                                        _this.$emit("input", "");
+                                        _this.$emit("input");
+                                        _this.$emit("clear");
                                     }
                                     _this.isShow_dropdown =
                                         !_this.isShow_dropdown;
@@ -208,6 +215,7 @@ export default {
     watch: {
         isShow_dropdown(val) {
             this.isActive = val ? true : false;
+            this.$emit("visible-change", val);
         },
     },
 };

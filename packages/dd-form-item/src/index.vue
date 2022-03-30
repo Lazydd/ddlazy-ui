@@ -83,6 +83,11 @@ export default {
             return message.join(",");
         },
     },
+    watch: {
+        isValidate(val) {
+            this.$parent.ischange();
+        },
+    },
     components: {
         ddTransition,
     },

@@ -18,6 +18,9 @@
                 </div>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Events" :data="Attributes2" events></dd-describe>
+        <dd-footer left="Switch 开关" right="TimePicker 时间选择器"></dd-footer>
     </div>
 </template>
 
@@ -47,6 +50,34 @@ export default {
             value1: 0,
             value2: 100,
             value3: 20,
+            Attributes: [
+                {
+                    parameter: "value / v-model",
+                    explain: "绑定值",
+                    type: "number / string",
+                    optional: "—",
+                    default: "0",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "是否禁用",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "change",
+                    explain: "值改变时触发（使用鼠标拖曳时，只在松开鼠标后触发）",
+                    backParameter: "改变后的值",
+                },
+                {
+                    name: "input",
+                    explain: "数据改变时触发（使用鼠标拖曳时，活动过程实时触发）",
+                    backParameter: "改变后的值",
+                },
+            ],
         };
     },
 };

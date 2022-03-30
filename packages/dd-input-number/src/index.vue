@@ -100,7 +100,10 @@
 export default {
     name: "ddInputNumber",
     props: {
-        value: {},
+        value: {
+            type: Number,
+            default: 0,
+        },
         disabled: {
             type: Boolean,
             default: false,
@@ -144,6 +147,7 @@ export default {
             this.$emit("focus", e);
         },
         input_onBlur(e) {
+            let oldvalue = parseFloat(this.input_value);
             if (e.target.value > this.max) {
                 if (this.precision >= 0) {
                     this.max = parseFloat(this.max).toFixed(this.precision);
@@ -165,10 +169,11 @@ export default {
                 );
             }
             this.$emit("input", this.input_value);
-            this.$emit("handleChange", this.input_value);
+            this.$emit("change", this.input_value, oldvalue);
             this.$emit("blur", e);
         },
         dd_changeNumber(type) {
+            let oldvalue = parseFloat(this.input_value);
             if (this.precision >= 0) {
                 this.input_value = parseFloat(this.input_value).toFixed(
                     this.precision
@@ -184,7 +189,7 @@ export default {
                 ).toFixed(this.precision);
             }
             this.$emit("input", this.input_value);
-            this.$emit("handleChange", this.input_value);
+            this.$emit("change", this.input_value, oldvalue);
         },
     },
     computed: {
@@ -196,8 +201,8 @@ export default {
         value(val) {
             this.input_value = val;
         },
-        input_value(val) {
-            this.$emit("handleChange", val);
+        input_value(val, old) {
+            this.$emit("change", val, old);
         },
     },
 };

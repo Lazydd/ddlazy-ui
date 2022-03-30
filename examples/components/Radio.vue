@@ -58,6 +58,12 @@
                 </dd-radio-group>
             </template>
         </dd-block>
+        <dd-describe title="Radio Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Radio Events" :data="Attributes2" events></dd-describe>
+        <dd-describe title="Radio-group Attributes" :data="Attributes3" ></dd-describe>
+        <dd-describe title="Radio-group Events" :data="Attributes4" events></dd-describe>
+        <dd-describe title="Radio-button Attributes" :data="Attributes5" ></dd-describe>
+        <dd-footer left="Link 文字链接" right="CheckBox 多选框"></dd-footer>
     </div>
 </template>
 
@@ -121,7 +127,90 @@ export default {
                     <dd-radio-button  label="广州" ></dd-radio-button>
                     <dd-radio-button  label="深圳" ></dd-radio-button>
                 </dd-radio-group>
-            `
+            `,
+            Attributes: [
+                {
+                    parameter: "value / v-model",
+                    explain: "绑定值",
+                    type: "string / number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "label",
+                    explain: "Radio 的 value",
+                    type: "string / number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "是否禁用",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "change",
+                    explain: "绑定值变化时触发的事件",
+                    backParameter: "选中的 Radio label 值",
+                },
+            ],
+            Attributes3: [
+                {
+                    parameter: "value / v-model",
+                    explain: "绑定值",
+                    type: "string / number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "label",
+                    explain: "Radio 的 value",
+                    type: "string / number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "是否禁用",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "size",
+                    explain: "Radio 的尺寸",
+                    type: "string",
+                    optional: "medium / small / mini",
+                    default: "—",
+                },
+            ],
+            Attributes4: [
+                {
+                    name: "change",
+                    explain: "绑定值变化时触发的事件",
+                    backParameter: "选中的 Radio label 值",
+                },
+            ],
+            Attributes5: [
+                {
+                    parameter: "label",
+                    explain: "Radio 的 value",
+                    type: "string / number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "是否禁用",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ],
         };
     },
 };

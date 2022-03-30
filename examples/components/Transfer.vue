@@ -30,6 +30,9 @@
                 ></dd-transfer>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Events" :data="Attributes2" events></dd-describe>
+        <dd-footer left="TimePicker 时间选择器" right="Form 表单"></dd-footer>
     </div>
 </template>
 
@@ -79,8 +82,74 @@ export default {
                 ></dd-transfer>
             `,
             code3: `
-                <dd-transfer v-model="value" :data="data"></dd-transfer>
+                <dd-transfer
+                    v-model="value"
+                    :data="data"
+                    :button-texts="['到左边', '到右边']"
+                    :titles="['Source', 'Target']"
+                ></dd-transfer>
             `,
+            Attributes: [
+                {
+                    parameter: "value / v-model",
+                    explain: "绑定值",
+                    type: "array",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "data",
+                    explain: "Transfer 的数据源",
+                    type: "array[{ key, label, disabled }]",
+                    optional: "—",
+                    default: "[ ]",
+                },
+                {
+                    parameter: "titles",
+                    explain: "自定义列表标题",
+                    type: "array",
+                    optional: "—",
+                    default: "['列表 1', '列表 2']",
+                },
+                {
+                    parameter: "button-texts",
+                    explain: "自定义按钮文案",
+                    type: "array",
+                    optional: "—",
+                    default: "[ ]",
+                },
+                {
+                    parameter: "props",
+                    explain: "数据源的字段别名",
+                    type: "object{key, label, disabled}",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "inactive-color",
+                    explain: "switch 关闭时的背景色",
+                    type: "string",
+                    optional: "—",
+                    default: "#C0CCDA",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "change",
+                    explain: "右侧列表元素变化时触发",
+                    backParameter: "当前值",
+                },
+                {
+                    name: "left-check-change",
+                    explain: "左侧列表元素被用户选中 / 取消选中时触发",
+                    backParameter: "当前被选中的元素的 key 数组",
+                },
+                {
+                    name: "right-check-change",
+                    explain: "右侧列表元素被用户选中 / 取消选中时触发",
+                    backParameter: "当前被选中的元素的 key 数组",
+                },
+            ],
         };
     },
 };
