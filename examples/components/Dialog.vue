@@ -153,6 +153,7 @@
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
         <dd-describe title="Events" :data="Attributes2" events></dd-describe>
+        <dd-footer left="Steps 步骤条" right="Tooltip 文字提示"></dd-footer>
     </div>
 </template>
 

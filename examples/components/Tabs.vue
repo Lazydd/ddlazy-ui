@@ -7,7 +7,7 @@
                 <dd-tabs v-model="activeName" @tab-click="handleClick">
                     <dd-tab-pane label="用户管理" name="first">用户管理</dd-tab-pane>
                     <dd-tab-pane label="配置管理" name="second">配置管理</dd-tab-pane>
-                    <dd-tab-pane label="角色管理" name="third">角色管理</dd-tab-pane>
+                    <dd-tab-pane label="角色管理" :disabled='true' name="third">角色管理</dd-tab-pane>
                     <dd-tab-pane label="定时任务补偿管理" name="fourth">定时任务补偿管理</dd-tab-pane>
                 </dd-tabs>
             </template>
@@ -17,7 +17,7 @@
                 <dd-tabs v-model="activeName1" type="card" @tab-click="handleClick">
                     <dd-tab-pane label="用户管理" name="first">用户管理</dd-tab-pane>
                     <dd-tab-pane label="配置管理" name="second">配置管理</dd-tab-pane>
-                    <dd-tab-pane label="角色管理" name="third">角色管理</dd-tab-pane>
+                    <dd-tab-pane label="角色管理" :disabled='true' name="third">角色管理</dd-tab-pane>
                     <dd-tab-pane label="定时任务补偿管理" name="fourth">定时任务补偿管理</dd-tab-pane>
                 </dd-tabs>
             </template>
@@ -27,7 +27,7 @@
                 <dd-tabs v-model="activeName2" type="border-card" @tab-click="handleClick">
                     <dd-tab-pane label="用户管理" name="first">用户管理</dd-tab-pane>
                     <dd-tab-pane label="配置管理" name="second">配置管理</dd-tab-pane>
-                    <dd-tab-pane label="角色管理" name="third">角色管理</dd-tab-pane>
+                    <dd-tab-pane label="角色管理" :disabled='true' name="third">角色管理</dd-tab-pane>
                     <dd-tab-pane label="定时任务补偿管理" name="fourth">定时任务补偿管理</dd-tab-pane>
                 </dd-tabs>
             </template>
@@ -37,7 +37,7 @@
                 <dd-tabs v-model="activeName3" type="border-card" @tab-click="handleClick">
                     <dd-tab-pane icon="icon-calendar" label="用户管理" name="first">用户管理</dd-tab-pane>
                     <dd-tab-pane icon="icon-cry" label="配置管理" name="second">配置管理</dd-tab-pane>
-                    <dd-tab-pane icon="icon-messagecenter" label="角色管理" name="third">角色管理</dd-tab-pane>
+                    <dd-tab-pane icon="icon-messagecenter" :disabled='true' label="角色管理" name="third">角色管理</dd-tab-pane>
                     <dd-tab-pane icon="icon-store" label="定时任务补偿管理" name="fourth">定时任务补偿管理</dd-tab-pane>
                 </dd-tabs>
             </template>
@@ -45,6 +45,7 @@
         <dd-describe title="Tabs Attributes" :data="Attributes"></dd-describe>
         <dd-describe title="Tabs Events" :data="Attributes2" events></dd-describe>
         <dd-describe title="Tab-pane Attributes" :data="Attributes3"></dd-describe>
+        <dd-footer left="MessageBox 弹框" right="Breadcrumb 面包屑"></dd-footer>
     </div>
 </template>
 
@@ -61,7 +62,7 @@ export default {
                 <dd-tabs v-model="activeName" @tab-click="handleClick">
                     <dd-tab-pane label="用户管理" name="first">用户管理</dd-tab-pane>
                     <dd-tab-pane label="配置管理" name="second">配置管理</dd-tab-pane>
-                    <dd-tab-pane label="角色管理" name="third">角色管理</dd-tab-pane>
+                    <dd-tab-pane label="角色管理" :disabled='true' name="third">角色管理</dd-tab-pane>
                     <dd-tab-pane label="定时任务补偿管理" name="fourth">定时任务补偿管理</dd-tab-pane>
                 </dd-tabs>
             `,
@@ -119,6 +120,13 @@ export default {
                     type: "string",
                     optional: "—",
                     default: "—",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "禁用",
+                    type: "boolean",
+                    optional: "true/false",
+                    default: "false",
                 },
                 {
                     parameter: "name",

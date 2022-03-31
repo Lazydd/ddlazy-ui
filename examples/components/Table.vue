@@ -120,6 +120,7 @@
         </dd-block>
         <dd-describe title="AttribuTable Attributestes" :data="Attributes"></dd-describe>
         <dd-describe title="Table-column Attributes" :data="Attributes2"></dd-describe>
+        <dd-footer left="Form 表单" right="Tag 标签"></dd-footer>
     </div>
 </template>
 

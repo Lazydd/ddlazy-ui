@@ -43,6 +43,7 @@
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
         <dd-describe title="Events" :data="Attributes2" events></dd-describe>
+        <dd-footer left="Scroll 滚动条"></dd-footer>
     </div>
 </template>
 

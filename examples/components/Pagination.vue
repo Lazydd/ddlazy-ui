@@ -36,6 +36,7 @@
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
         <dd-describe title="Form Events" :data="Attributes2" events></dd-describe>
+        <dd-footer left="ColorPicker 颜色选择器" right="Badge 标记"></dd-footer>
     </div>
 </template>
 

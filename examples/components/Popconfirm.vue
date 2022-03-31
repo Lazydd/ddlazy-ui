@@ -26,6 +26,7 @@
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
         <dd-describe title="Events" :data="Attributes2" events></dd-describe>
+        <dd-footer left="Tooltip 文字提示" right="Card 卡片"></dd-footer>
     </div>
 </template>
 

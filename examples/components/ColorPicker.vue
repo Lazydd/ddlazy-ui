@@ -24,7 +24,17 @@
                 </div>
             </template>
         </dd-block>
-        <dd-block title="不同尺寸" :code="code3">
+        <dd-block title="禁用" :code="code3">
+            <template #source>
+                <div class="block">
+                    <dd-color-picker
+                        v-model="color1"
+                        disabled
+                    ></dd-color-picker>
+                </div>
+            </template>
+        </dd-block>
+        <dd-block title="不同尺寸" :code="code4">
             <template #source>
                 <div class="block">
                     <dd-color-picker v-model="color4"></dd-color-picker>
@@ -48,6 +58,7 @@
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
         <dd-describe title="Events" :data="Attributes2" events></dd-describe>
+        <dd-footer left="Upload 上传" right="Pagination 分页"></dd-footer>
     </div>
 </template>
 
@@ -84,6 +95,16 @@ export default {
                 color3: "rgba(85, 231, 71, 0.8)",
             `,
             code3: `
+                <div class="block">
+                    <dd-color-picker
+                        v-model="color3"
+                        disabled
+                    ></dd-color-picker>
+                </div>
+
+                color3: "rgba(85, 231, 71, 0.8)",
+            `,
+            code4: `
                 <div class="block">
                     <dd-color-picker v-model="color3"></dd-color-picker>
                     <dd-color-picker
@@ -123,6 +144,13 @@ export default {
                 {
                     parameter: "show-alpha",
                     explain: "是否支持透明度选择",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "是否禁用",
                     type: "boolean",
                     optional: "—",
                     default: "false",

@@ -60,6 +60,7 @@
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
         <dd-describe title="Events" :data="Attributes2" events></dd-describe>
+        <dd-footer left="Table 表格" right="Progress 进度条"></dd-footer>
     </div>
 </template>
 

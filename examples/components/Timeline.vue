@@ -66,6 +66,7 @@
         <dd-describe title="Timeline Attributes" :data="Attributes"></dd-describe>
         <dd-describe title="Timeline-item Attributes" :data="Attributes2"></dd-describe>
         <dd-describe title="Events" :data="Attributes3" events></dd-describe>
+        <dd-footer left="Collapse 折叠面板" right="Divider 分割线"></dd-footer>
     </div>
 </template>
 

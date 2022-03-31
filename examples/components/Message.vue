@@ -12,6 +12,7 @@
         </dd-block>
         <dd-describe title="Options" :data="Attributes"></dd-describe>
         <dd-describe title="方法" :data="Attributes2" events></dd-describe>
+        <dd-footer left="Loading 加载" right="MessageBox 弹框"></dd-footer>
     </div>
 </template>
 

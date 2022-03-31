@@ -5,10 +5,15 @@
             <dd-table :data="data" v-if="!events && !methods && !slots">
                 <dd-table-column
                     prop="parameter"
+                    width="150"
                     label="参数"
                 ></dd-table-column>
                 <dd-table-column prop="explain" label="说明"></dd-table-column>
-                <dd-table-column prop="type" label="类型"></dd-table-column>
+                <dd-table-column
+                    prop="type"
+                    label="类型"
+                    width="150"
+                ></dd-table-column>
                 <dd-table-column
                     prop="optional"
                     label="可选值"

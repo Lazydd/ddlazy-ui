@@ -1,6 +1,10 @@
 <template>
     <div :class="['dd-color-picker', size]" ref="dd-color_dropdown">
-        <div class="color-picker_trigger" @click="isShow = !isShow">
+        <div :class="{ 'dd-color-picker_mask': disabled }"></div>
+        <div
+            :class="['color-picker_trigger']"
+            @click="!disabled ? dd_color_pickerClick() : null"
+        >
             <div
                 class="color-picker_color-box"
                 :style="
@@ -79,6 +83,10 @@ export default {
         size: {
             type: String,
         },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {
@@ -98,6 +106,7 @@ export default {
     },
     methods: {
         hsv2rgb(h, s, v) {
+            console.log(h);
             let r, g, b, i, f, p, q, t;
             if (arguments.length === 1) {
                 (s = h.s), (v = h.v), (h = h.h);
@@ -132,6 +141,37 @@ export default {
                 g: Math.round(g * 255),
                 b: Math.round(b * 255),
             };
+        },
+        _changeBg(top, h) {
+            // 侧栏一共分为六个区域，每块区域的长度
+            this.top = top;
+            let total = h / 6;
+            let rgb = [];
+            if (top <= (h * 1) / 6) {
+                let g = this._getValue(top, total, 0);
+                rgb = [255, g, 0];
+            } else if (top <= (h * 2) / 6) {
+                let r = this._getValue(top, total, 1);
+                rgb = [255 - r, 255, 0];
+            } else if (top <= (h * 3) / 6) {
+                let b = this._getValue(top, total, 2);
+                rgb = [0, 255, b];
+            } else if (top <= (h * 4) / 6) {
+                let g = this._getValue(top, total, 3);
+                rgb = [0, 255 - g, 255];
+            } else if (top < (h * 5) / 6) {
+                let r = this._getValue(top, total, 4);
+                rgb = [r, 0, 255];
+            } else if (top <= (h * 6) / 6) {
+                let b = this._getValue(top, total, 5);
+                rgb = [255, 0, 255 - b];
+            }
+            const bgColor = {
+                r: rgb[0],
+                g: rgb[1],
+                b: rgb[2],
+            };
+            this.$emit("input", bgColor);
         },
         rgb2hsv(r, g, b, a) {
             (r /= 255), (g /= 255), (b /= 255);
@@ -203,6 +243,9 @@ export default {
         dd_color_determine() {
             this.isShow = false;
             this.$emit("input", this.isHex ? this.hex : this.RGB);
+        },
+        dd_color_pickerClick() {
+            this.isShow = !this.isShow;
         },
         except(e) {
             let isSelf = this.$refs["dd-color_dropdown"].contains(e.target);
@@ -336,6 +379,18 @@ export default {
                 this.noChangeRGB.b
             );
         },
+        hex(val) {
+            if (this.isHex) {
+                this.$emit("change", val);
+                this.$emit("active-change", val);
+            }
+        },
+        RGB(val) {
+            if (!this.isHex) {
+                this.$emit("change", val);
+                this.$emit("active-change", val);
+            }
+        },
     },
 };
 </script>
@@ -346,6 +401,7 @@ export default {
     width: 40px;
     height: 40px;
     display: inline-block;
+
     .color-picker_color-box {
         width: 100%;
         height: 100%;
@@ -372,6 +428,17 @@ export default {
             height: 100%;
             text-align: center;
         }
+    }
+    .dd-color-picker_mask {
+        height: 38px;
+        width: 38px;
+        border-radius: 4px;
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        z-index: 9;
+        cursor: not-allowed;
+        background-color: rgba(255, 255, 255, 0.7);
     }
     .dd-color_dropdown {
         transform-origin: center top;

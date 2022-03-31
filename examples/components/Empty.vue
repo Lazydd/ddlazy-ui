@@ -28,6 +28,7 @@
             </template>
         </dd-block>
         <dd-describe title="Empty Attributes" :data="Attributes"></dd-describe>
+        <dd-footer left="Skeleton 骨架屏" right="Loading 加载"></dd-footer>
     </div>
 </template>
 

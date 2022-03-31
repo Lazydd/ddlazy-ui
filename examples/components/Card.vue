@@ -79,6 +79,7 @@
             </template>
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-footer left="Popconfirm 气泡确认框" right="Carousel 走马灯"></dd-footer>
     </div>
 </template>
 

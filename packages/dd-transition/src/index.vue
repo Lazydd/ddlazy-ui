@@ -122,16 +122,16 @@ export default {
         transform-origin: center bottom;
     }
 
-    .list-enter-active,
-    .list-leave-active {
+    .collapse-enter-active,
+    .collapse-leave-active {
         transition: all 0.2s;
     }
-    .list-enter,
-    .list-leave-to {
+    .collapse-enter,
+    .collapse-leave-to {
         height: 0;
     }
-    .list-enter-to,
-    .list-leave {
+    .collapse-enter-to,
+    .collapse-leave {
         height: 100%;
     }
 }

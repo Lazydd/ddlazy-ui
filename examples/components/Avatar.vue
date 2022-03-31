@@ -87,6 +87,7 @@
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
         <dd-describe title="Events" :data="Attributes2" events></dd-describe>
         <dd-describe title="Slot" :data="Attributes3" slots></dd-describe>
+        <dd-footer left="Badge 标记" right="Skeleton 骨架屏"></dd-footer>
     </div>
 </template>
 

@@ -37,6 +37,7 @@
             </template>
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-footer left="Tag 标签" right="Tree 树形控件"></dd-footer>
     </div>
 </template>
 

@@ -26,8 +26,9 @@ export default {
         this.tabLength = tabList.length;
         tabList.map((item, i) => {
             vnodeObj[item.componentOptions.propsData.name] = item;
-            let { name, label, icon } = item.componentOptions.propsData;
-            vnode.push({ name, label, icon });
+            let { name, label, icon, disabled } =
+                item.componentOptions.propsData;
+            vnode.push({ name, label, icon, disabled });
             if (name == this.activeTab) this.tabIndex = i;
         });
         return h(
@@ -87,6 +88,9 @@ export default {
                                                 _this.tabIndex == i
                                                     ? "dd-tabs_item-border"
                                                     : "",
+                                                vnode[i].disabled
+                                                    ? "dd-tabs_item-disabled"
+                                                    : "",
                                             ],
                                             style: {
                                                 "border-left":
@@ -99,15 +103,17 @@ export default {
                                             ref: `ddTabItem${i}`,
                                             on: {
                                                 click(e) {
-                                                    _this.activeTab =
-                                                        vnode[i].name;
-                                                    _this.tabIndex = i;
-                                                    _this.updataLine();
-                                                    _this.$emit(
-                                                        "tab-click",
-                                                        tabList[i].context,
-                                                        e
-                                                    );
+                                                    if (!vnode[i].disabled) {
+                                                        _this.activeTab =
+                                                            vnode[i].name;
+                                                        _this.tabIndex = i;
+                                                        _this.updataLine();
+                                                        _this.$emit(
+                                                            "tab-click",
+                                                            tabList[i].context,
+                                                            e
+                                                        );
+                                                    }
                                                 },
                                             },
                                         },
@@ -237,6 +243,13 @@ export default {
                 color: #409eff;
             }
         }
+        .dd-tabs_item-disabled {
+            color: #c0c4cc;
+            cursor: default;
+            &:hover {
+                color: #c0c4cc;
+            }
+        }
         .ml0 {
             padding-left: 0;
         }
@@ -271,6 +284,13 @@ export default {
             background: #e4e7ed;
             .dd-tabs__item {
                 color: #909399;
+            }
+            .dd-tabs_item-disabled {
+                color: #c0c4cc;
+                cursor: default;
+                &:hover {
+                    color: #c0c4cc;
+                }
             }
             .is-active {
                 color: #409eff;

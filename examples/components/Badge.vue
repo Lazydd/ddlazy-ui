@@ -69,6 +69,7 @@
             </template>
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-footer left="Pagination 分页" right="Avatar 头像"></dd-footer>
     </div>
 </template>
 

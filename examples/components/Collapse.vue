@@ -168,6 +168,7 @@
         <dd-describe title="Collapse Attributes" :data="Attributes"></dd-describe>
         <dd-describe title="Collapse Events" :data="Attributes2" events></dd-describe>
         <dd-describe title="Collapse Item Attributes" :data="Attributes3"></dd-describe>
+        <dd-footer left="Carousel 走马灯" right="Timeline 时间线"></dd-footer>
     </div>
 </template>
 

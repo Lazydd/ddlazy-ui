@@ -104,6 +104,7 @@
         </dd-block>
         <dd-describe title="Steps Attributes" :data="Attributes"></dd-describe>
         <dd-describe title="Step Attributes" :data="Attributes2"></dd-describe>
+        <dd-footer left="Dropdown 下拉菜单" right="Dialog 对话框"></dd-footer>
     </div>
 </template>
 

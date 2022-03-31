@@ -13,6 +13,7 @@
                 </div>
             </template>
         </dd-block>
+        <dd-footer left="Divider 分割线" right="Backtop 回到顶部"></dd-footer>
     </div>
 </template>
 

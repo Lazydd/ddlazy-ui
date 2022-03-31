@@ -64,7 +64,7 @@
                 <div class="fold">
                     <dd-button @click="show3 = !show3">Click Me</dd-button>
                     <div style="height: 320px">
-                        <dd-transition name="list">
+                        <dd-transition name="collapse">
                             <div v-show="show3">
                                 <div class="transition-box">折叠</div>
                                 <div class="transition-box">折叠</div>

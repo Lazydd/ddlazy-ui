@@ -37,7 +37,7 @@ export default {
             if (this.left > _hubSliderWidth) this.left = _hubSliderWidth;
             if (this.left < 0) this.left = 0;
             this.radio = (this.left / _hubSliderWidth).toFixed(6);
-            this.$emit("input", this.radio * 360);
+            this.$emit("input", this.radio * 180);
         },
         mousedownIn() {
             document.onmousemove = (e) => {
@@ -47,7 +47,7 @@ export default {
                 if (left > _hubSliderWidth) left = _hubSliderWidth;
                 this.left = left;
                 this.radio = (this.left / _hubSliderWidth).toFixed(6);
-                this.$emit("input", this.radio * 360);
+                this.$emit("input", this.radio * 180);
             };
         },
         mousedownOut(event) {
@@ -65,7 +65,7 @@ export default {
                 }
                 this.left = endx;
                 this.radio = (endx / _hubSliderWidth).toFixed(6);
-                this.$emit("input", this.radio * 360);
+                this.$emit("input", this.radio * 180);
             };
         },
         mouseup() {

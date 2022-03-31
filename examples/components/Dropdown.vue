@@ -103,6 +103,7 @@
         <dd-describe title="Dropdown Attributes" :data="Attributes"></dd-describe>
         <dd-describe title="Step Attributes" :data="Attributes2"></dd-describe>
         <dd-describe title="Dropdown Menu Item Attributes" :data="Attributes3"></dd-describe>
+        <dd-footer left="Breadcrumb 面包屑" right="Steps 步骤条"></dd-footer>
     </div>
 </template>
 

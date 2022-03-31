@@ -1,6 +1,6 @@
 <template>
     <div class="dd-tab-pane">
-        <slot  v-if="$slots.default" />
+        <slot v-if="$slots.default" />
     </div>
 </template>
 
@@ -16,6 +16,10 @@ export default {
         },
         icon: {
             type: String,
+        },
+        disabled: {
+            type: Boolean,
+            default: false,
         },
     },
 };
