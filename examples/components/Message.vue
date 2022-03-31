@@ -10,8 +10,8 @@
                 <dd-button @click="open3">打开消息框</dd-button>
             </template>
         </dd-block>
-        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
-        <dd-describe title="Events" :data="Attributes2" events></dd-describe>
+        <dd-describe title="Options" :data="Attributes"></dd-describe>
+        <dd-describe title="方法" :data="Attributes2" events></dd-describe>
     </div>
 </template>
 

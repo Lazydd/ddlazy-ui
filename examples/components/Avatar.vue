@@ -84,6 +84,9 @@
                 </div>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Events" :data="Attributes2" events></dd-describe>
+        <dd-describe title="Slot" :data="Attributes3" slots></dd-describe>
     </div>
 </template>
 
@@ -181,6 +184,56 @@ export default {
                 fits: ["fill", "contain", "cover", "none", "scale-down"],
                 url: "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
             `,
+            Attributes: [
+                {
+                    parameter: "icon",
+                    explain: "设置头像的图标类型，参考 Icon 组件",
+                    type: "string",
+                    optional: "",
+                    default: "",
+                },
+                {
+                    parameter: "size",
+                    explain: "设置头像的大小",
+                    type: "number/string",
+                    optional: "number / large / medium / small",
+                    default: "large",
+                },
+                {
+                    parameter: "shape",
+                    explain: "设置头像的形状",
+                    type: "string",
+                    optional: "	circle / square",
+                    default: "circle",
+                },
+                {
+                    parameter: "src",
+                    explain: "图片头像的资源地址",
+                    type: "string",
+                    optional: "",
+                    default: "",
+                },
+                {
+                    parameter: "fit",
+                    explain: "当展示类型为图片的时候，设置图片如何适应容器框",
+                    type: "string",
+                    optional: "fill / contain / cover / none / scale-down",
+                    default: "cover",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "error",
+                    explain: "图片类头像加载失败的回调， 返回 false 会关闭组件默认的 fallback 行为",
+                    backParameter: "(e: Event)",
+                },
+            ],
+            Attributes3: [
+                {
+                    name: "default",
+                    explain: "自定义头像展示内容",
+                },
+            ],
         };
     },
 };

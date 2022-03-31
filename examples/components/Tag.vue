@@ -58,6 +58,8 @@
                 <dd-tag size="mini">超小标签</dd-tag>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Events" :data="Attributes2" events></dd-describe>
     </div>
 </template>
 
@@ -152,6 +154,41 @@ export default {
                 <dd-tag size="small">小型标签标签</dd-tag>
                 <dd-tag size="mini">超小标签</dd-tag>
             `,
+            Attributes: [
+                {
+                    parameter: "type",
+                    explain: "类型",
+                    type: "string",
+                    optional: "success/info/warning/danger",
+                    default: "—",
+                },
+                {
+                    parameter: "size",
+                    explain: "尺寸",
+                    type: "string",
+                    optional: "medium / small / mini",
+                    default: "—",
+                },
+                {
+                    parameter: "closable",
+                    explain: "是否可关闭",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "click",
+                    explain: "点击 Tag 时触发的事件",
+                    backParameter: "—",
+                },
+                {
+                    name: "close",
+                    explain: "关闭 Tag 时触发的事件",
+                    backParameter: "—",
+                },
+            ],
         };
     },
     methods: {

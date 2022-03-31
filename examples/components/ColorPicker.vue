@@ -46,6 +46,8 @@
                 </div>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Events" :data="Attributes2" events></dd-describe>
     </div>
 </template>
 
@@ -103,6 +105,41 @@ export default {
 
                 color4: "#55e747",
             `,
+            Attributes: [
+                {
+                    parameter: "value / v-model",
+                    explain: "绑定值",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "size",
+                    explain: "尺寸",
+                    type: "string",
+                    optional: "medium / small / mini",
+                    default: "—",
+                },
+                {
+                    parameter: "show-alpha",
+                    explain: "是否支持透明度选择",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "change",
+                    explain: "当绑定值变化时触发",
+                    backParameter: "当前值",
+                },
+                {
+                    name: "active-change",
+                    explain: "面板中当前显示的颜色发生改变时触发",
+                    backParameter: "当前显示的颜色值",
+                },
+            ],
         };
     },
 };

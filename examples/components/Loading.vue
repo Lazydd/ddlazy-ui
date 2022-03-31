@@ -21,6 +21,7 @@
                 >
             </template>
         </dd-block>
+        <dd-describe title="Options" :data="Attributes"></dd-describe>
     </div>
 </template>
 
@@ -102,6 +103,29 @@ export default {
                     this.$loading.close();
                 }, 3000);
             `,
+            Attributes: [
+                {
+                    parameter: "text",
+                    explain: "显示在加载图标下方的加载文案",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "spinner",
+                    explain: "自定义加载图标类名",
+                    type: "String",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "background",
+                    explain: "遮罩背景色",
+                    type: "String",
+                    optional: "—",
+                    default: "—",
+                },
+            ],
         };
     },
     methods: {

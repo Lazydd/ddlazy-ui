@@ -34,6 +34,8 @@
                 ></dd-pagination>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Form Events" :data="Attributes2" events></dd-describe>
     </div>
 </template>
 
@@ -69,6 +71,86 @@ export default {
                     :page-sizes="10"
                 ></dd-pagination>
             `,
+            Attributes: [
+                {
+                    parameter: "total",
+                    explain: "总条目数",
+                    type: "number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "layout",
+                    explain: "组件布局，子组件名用逗号分隔",
+                    type: "String",
+                    optional: "'prev, pager, next, jumper, ->, total'",
+                    default: "'prev, pager, next, jumper, ->, total'",
+                },
+                {
+                    parameter: "current-page",
+                    explain: "当前页数，支持 .sync 修饰符",
+                    type: "number",
+                    optional: "—",
+                    default: "1",
+                },
+                {
+                    parameter: "page-size",
+                    explain: "每页显示条目个数，支持 .sync 修饰符",
+                    type: "number",
+                    optional: "—",
+                    default: "10",
+                },
+                {
+                    parameter: "page-sizes",
+                    explain: "每页显示个数选择器的选项设置",
+                    type: "number[]",
+                    optional: "—",
+                    default: "[10, 20, 30, 40, 50, 100]",
+                },
+                {
+                    parameter: "page-count",
+                    explain: "总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能；如果要支持 page-sizes 的更改，则需要使用 total 属性",
+                    type: "number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "background",
+                    explain: "是否为分页按钮添加背景色	",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "small",
+                    explain: "是否使用小型分页样式",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "size-change",
+                    explain: "pageSize 改变时会触发",
+                    backParameter: "每页条数",
+                },
+                {
+                    name: "current-change",
+                    explain: "currentPage 改变时会触发",
+                    backParameter: "当前页",
+                },
+                {
+                    name: "prev-click",
+                    explain: "用户点击上一页按钮改变当前页后触发",
+                    backParameter: "当前页",
+                },
+                {
+                    name: "next-click",
+                    explain: "用户点击下一页按钮改变当前页后触发",
+                    backParameter: "当前页",
+                },
+            ],
         };
     },
 };

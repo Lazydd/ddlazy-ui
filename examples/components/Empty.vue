@@ -27,6 +27,7 @@
                 <dd-empty><dd-button type="primary">按钮</dd-button></dd-empty>
             </template>
         </dd-block>
+        <dd-describe title="Empty Attributes" :data="Attributes"></dd-describe>
     </div>
 </template>
 
@@ -52,6 +53,29 @@ export default {
             code4: `
                 <dd-empty><dd-button type="primary">按钮</dd-button></dd-empty>
             `,
+            Attributes: [
+                {
+                    parameter: "image",
+                    explain: "图片地址",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "image-size",
+                    explain: "图片大小（宽度）",
+                    type: "number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "description",
+                    explain: "文本描述",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+            ],
         };
     },
 };

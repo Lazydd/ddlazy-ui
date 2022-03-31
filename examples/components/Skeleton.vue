@@ -72,6 +72,7 @@
                 </dd-skeleton>
             </template>
         </dd-block>
+        <dd-describe title="Skeleton Attributes" :data="Attributes"></dd-describe>
     </div>
 </template>
 
@@ -137,6 +138,36 @@ export default {
                     </dd-card>
                 </dd-skeleton>
             `,
+            Attributes: [
+                {
+                    parameter: "animated",
+                    explain: "是否使用动画",
+                    type: "boolean",
+                    optional: "true / false",
+                    default: "false",
+                },
+                {
+                    parameter: "rows",
+                    explain: "骨架屏段落数量",
+                    type: "number",
+                    optional: "正整数",
+                    default: "4",
+                },
+                {
+                    parameter: "loading",
+                    explain: "是否显示 skeleton 骨架屏",
+                    type: "boolean",
+                    optional: "true / false",
+                    default: "false",
+                },
+                {
+                    parameter: "throttle",
+                    explain: "延迟占位 DOM 渲染的时间, 单位是毫秒",
+                    type: "number",
+                    optional: "正整数",
+                    default: "0",
+                },
+            ],
         };
     },
 };

@@ -132,9 +132,6 @@ export default {
             type: Boolean,
             default: false,
         },
-        layout: {
-            type: String,
-        },
     },
     data() {
         return {
@@ -154,14 +151,12 @@ export default {
         dd_toFirst() {
             this.currentPages = 1;
             this.dd_pagination_input = 1;
-            if (this.pageCounts > 7)
-                this.dd_pagination_auto(this.currentPages);
+            if (this.pageCounts > 7) this.dd_pagination_auto(this.currentPages);
         },
         dd_toLast() {
             this.currentPages = this.pageCounts;
             this.dd_pagination_input = this.pageCounts;
-            if (this.pageCounts > 7)
-                this.dd_pagination_auto(this.currentPages);
+            if (this.pageCounts > 7) this.dd_pagination_auto(this.currentPages);
         },
         dd_pagination_auto(page) {
             if (page >= 5 && page <= this.pageCounts - 4) {
@@ -179,8 +174,7 @@ export default {
         },
         pagerClick(page) {
             this.currentPages = page;
-            if (this.pageCounts > 7)
-                this.dd_pagination_auto(this.currentPages);
+            if (this.pageCounts > 7) this.dd_pagination_auto(this.currentPages);
             this.dd_pagination_input = this.currentPages;
             // this.$parent.currentPage = page;
             this.$emit("current-change", this.currentPages);
@@ -224,6 +218,7 @@ export default {
             this.pageInit();
             this.currentPages = 1;
             this.dd_pagination_input = 1;
+            this.$emit("size-change", this.pagesize);
         },
         pageInit() {
             this.pageCountsList = [];

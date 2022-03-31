@@ -24,6 +24,7 @@
                 ></dd-tree>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
     </div>
 </template>
 
@@ -284,6 +285,29 @@ export default {
             code3: `
 
             `,
+            Attributes: [
+                {
+                    parameter: "data",
+                    explain: "展示数据",
+                    type: "array",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "props",
+                    explain: "配置选项，具体看下表",
+                    type: "object",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "load",
+                    explain: "加载子树数据的方法",
+                    type: "function(node, resolve)",
+                    optional: "—",
+                    default: "—",
+                },
+            ],
         };
     },
     methods: {

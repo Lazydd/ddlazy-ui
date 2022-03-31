@@ -118,6 +118,8 @@
                 </dd-table>
             </template>
         </dd-block>
+        <dd-describe title="AttribuTable Attributestes" :data="Attributes"></dd-describe>
+        <dd-describe title="Table-column Attributes" :data="Attributes2"></dd-describe>
     </div>
 </template>
 
@@ -269,6 +271,80 @@ export default {
                     </dd-table-column>
                 </dd-table>
             `,
+            Attributes: [
+                {
+                    parameter: "data",
+                    explain: "显示的数据",
+                    type: "array",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "stripe",
+                    explain: "是否为斑马纹 table",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "border",
+                    explain: "是否带有纵向边框",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "align",
+                    explain: "对齐方式",
+                    type: "string",
+                    optional: "left/center/right",
+                    default: "left",
+                },
+            ],
+            Attributes2: [
+                {
+                    parameter: "type",
+                    explain: "对应列的类型。如果设置了 selection 则显示多选框；如果设置了 index 则显示该行的索引（从 1 开始计算）；",
+                    type: "string",
+                    optional: "selection/index",
+                    default: "—",
+                },
+                {
+                    parameter: "label",
+                    explain: "显示的标题",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "prop",
+                    explain: "对应列内容的字段名，也可以使用 property 属性",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "width",
+                    explain: "对应列的宽度",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "min-width",
+                    explain: "对应列的最小宽度，与 width 的区别是 width 是固定的，min-width 会把剩余宽度按比例分配给设置了 min-width 的列	",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "align",
+                    explain: "对齐方式",
+                    type: "string",
+                    optional: "left/center/right",
+                    default: "left",
+                },
+            ],
         };
     },
     methods: {

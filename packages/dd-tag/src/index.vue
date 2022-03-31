@@ -1,6 +1,6 @@
 <template>
     <transition name="list">
-        <div class="dd-tag">
+        <div class="dd-tag" @click="$emit('click')">
             <span :class="[type, size]">
                 <slot  v-if="$slots.default" />
                 <dd-icon

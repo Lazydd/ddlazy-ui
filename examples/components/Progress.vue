@@ -36,6 +36,7 @@
                 <dd-progress type="circle" :percentage="percentage" status="exception"></dd-progress>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
     </div>
 </template>
 
@@ -70,7 +71,58 @@ export default {
                 <dd-progress type="circle" :percentage="percentage" status="success" style="margin-right:15px"></dd-progress>
                 <dd-progress type="circle" :percentage="percentage" status="warning" style="margin-right:15px"></dd-progress>
                 <dd-progress type="circle" :percentage="percentage" status="exception"></dd-progress>
-            `
+            `,
+            Attributes: [
+                {
+                    parameter: "percentage",
+                    explain: "百分比（必填）",
+                    type: "number",
+                    optional: "0-100",
+                    default: "0",
+                },
+                {
+                    parameter: "type",
+                    explain: "进度条类型",
+                    type: "string",
+                    optional: "line/circle",
+                    default: "line",
+                },
+                {
+                    parameter: "stroke-width",
+                    explain: "进度条的宽度，单位 px",
+                    type: "number",
+                    optional: "—",
+                    default: "6",
+                },
+                {
+                    parameter: "text-inside",
+                    explain: "进度条显示文字内置在进度条内（只在 type=line 时可用）",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "status",
+                    explain: "进度条当前状态",
+                    type: "string",
+                    optional: "success/exception/warning",
+                    default: "—",
+                },
+                {
+                    parameter: "color",
+                    explain: "进度条背景色（会覆盖 status 状态颜色）",
+                    type: "string/function/array",
+                    optional: "—",
+                    default: "''",
+                },
+                {
+                    parameter: "format",
+                    explain: "指定进度条文字内容",
+                    type: "function(percentage)",
+                    optional: "—",
+                    default: "—",
+                },
+            ],
         };
     },
     methods:{

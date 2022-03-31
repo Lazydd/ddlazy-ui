@@ -68,6 +68,7 @@
                 </dd-badge>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
     </div>
 </template>
 
@@ -132,6 +133,43 @@ export default {
                     ></dd-button>
                 </dd-badge>
             `,
+            Attributes: [
+                {
+                    parameter: "value",
+                    explain: "显示值",
+                    type: "	string, number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "max",
+                    explain: "最大值，超过最大值会显示 '{max}+'，要求 value 是 Number 类型",
+                    type: "number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "is-dot",
+                    explain: "小圆点",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "hidden",
+                    explain: "隐藏 badge",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "type",
+                    explain: "类型",
+                    type: "string",
+                    optional: "primary / success / warning / danger / info",
+                    default: "—",
+                },
+            ],
         };
     },
 };
