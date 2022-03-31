@@ -42,6 +42,9 @@
                 </dd-tabs>
             </template>
         </dd-block>
+        <dd-describe title="Tabs Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Tabs Events" :data="Attributes2" events></dd-describe>
+        <dd-describe title="Tab-pane Attributes" :data="Attributes3"></dd-describe>
     </div>
 </template>
 
@@ -86,6 +89,52 @@ export default {
                     <dd-tab-pane label="定时任务补偿管理" name="fourth">定时任务补偿管理</dd-tab-pane>
                 </dd-tabs>
             `,
+            Attributes: [
+                {
+                    parameter: "value / v-model",
+                    explain: "绑定值，选中选项卡的 name",
+                    type: "string",
+                    optional: "—",
+                    default: "第一个选项卡的 name",
+                },
+                {
+                    parameter: "type",
+                    explain: "风格类型",
+                    type: "string",
+                    optional: "card/border-card",
+                    default: "—",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "tab-click",
+                    explain: "tab 被选中时触发",
+                    backParameter: "被选中的标签 tab 实例",
+                },
+            ],
+            Attributes3: [
+                {
+                    parameter: "label",
+                    explain: "选项卡标题",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "name",
+                    explain: "与选项卡绑定值 value 对应的标识符，表示选项卡别名",
+                    type: "string",
+                    optional: "card/border-card",
+                    default: "—",
+                },
+                {
+                    parameter: "icon",
+                    explain: "选项卡图标",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+            ],
         };
     },
     methods: {

@@ -17,6 +17,7 @@
                 <div class="dd-popconfirm-s"></div>
                 <p class="dd-popconfirm__main">
                     <svg
+                        v-if="!hideIcon"
                         class="icon"
                         aria-hidden="true"
                         :style="`color:${iconColor}`"
@@ -29,7 +30,11 @@
                     <button class="dd-popconfirm__action_clear" @click="cancel">
                         {{ cancelButtonText }}
                     </button>
-                    <dd-button size="mini" type="primary" @click="confirm">
+                    <dd-button
+                        size="mini"
+                        :type="confirmButtonType"
+                        @click="confirm"
+                    >
                         {{ confirmButtonText }}
                     </dd-button>
                 </div>
@@ -54,6 +59,10 @@ export default {
             type: String,
             default: "取消",
         },
+        confirmButtonType: {
+            type: String,
+            default: "primary",
+        },
         icon: {
             type: String,
             default: "icon-prompt-fill",
@@ -61,6 +70,10 @@ export default {
         iconColor: {
             type: String,
             default: "#f90",
+        },
+        hideIcon: {
+            type: Boolean,
+            default: false,
         },
     },
     data() {

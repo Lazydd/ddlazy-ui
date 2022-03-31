@@ -30,6 +30,7 @@
                 </div>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
     </div>
 </template>
 
@@ -60,6 +61,22 @@ export default {
                     <span>草木深</span>
                 </div>
             `,
+            Attributes: [
+                {
+                    parameter: "direction",
+                    explain: "设置分割线方向",
+                    type: "string",
+                    optional: "horizontal / vertical",
+                    default: "horizontal",
+                },
+                {
+                    parameter: "content-position",
+                    explain: "设置分割线文案的位置",
+                    type: "string",
+                    optional: "left / right / center",
+                    default: "center",
+                },
+            ]
         };
     },
 };

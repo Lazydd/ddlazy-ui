@@ -10,6 +10,8 @@
                 <dd-button @click="open3">打开消息框</dd-button>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Events" :data="Attributes2" events></dd-describe>
     </div>
 </template>
 
@@ -21,6 +23,43 @@ export default {
             code1: `
 
             `,
+            Attributes: [
+                {
+                    parameter: "message",
+                    explain: "消息文字",
+                    type: "string / VNode",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "type",
+                    explain: "string",
+                    type: "String",
+                    optional: "success/warning/info/error",
+                    default: "—",
+                },
+                {
+                    parameter: "showClose",
+                    explain: "是否显示关闭按钮",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "center",
+                    explain: "文字是否居中",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "close",
+                    explain: "关闭当前的 Message",
+                    backParameter: "—",
+                },
+            ],
         };
     },
     methods:{

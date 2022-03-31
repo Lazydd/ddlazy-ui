@@ -102,6 +102,8 @@
                 </dd-button>
             </template>
         </dd-block>
+        <dd-describe title="Steps Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Step Attributes" :data="Attributes2"></dd-describe>
     </div>
 </template>
 
@@ -210,7 +212,81 @@ export default {
                 <dd-button style="margin-top: 12px" @click="next">
                     下一步
                 </dd-button>
-            `
+            `,
+            Attributes: [
+                {
+                    parameter: "space",
+                    explain: "每个 step 的间距，不填写将自适应间距。支持百分比。",
+                    type: "number / string",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "direction",
+                    explain: "显示方向",
+                    type: "string",
+                    optional: "vertical/horizontal",
+                    default: "horizontal",
+                },
+                {
+                    parameter: "active",
+                    explain: "设置当前激活步骤",
+                    type: "number",
+                    optional: "—",
+                    default: "0",
+                },
+                {
+                    parameter: "finish-status",
+                    explain: "设置结束步骤的状态",
+                    type: "string",
+                    optional: "wait / process / finish / error / success",
+                    default: "finish",
+                },
+                {
+                    parameter: "align-center",
+                    explain: "进行居中对齐",
+                    type: "boolean",
+                    optional: "-",
+                    default: "false",
+                },
+                {
+                    parameter: "simple",
+                    explain: "是否应用简洁风格",
+                    type: "boolean",
+                    optional: "-",
+                    default: "false",
+                },
+            ],
+            Attributes2: [
+                {
+                    parameter: "title",
+                    explain: "标题",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "description",
+                    explain: "描述性文字",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "icon",
+                    explain: "图标",
+                    type: "传入 icon 的 class 全名来自定义 icon",
+                    optional: "string",
+                    default: "—",
+                },
+                {
+                    parameter: "status",
+                    explain: "设置当前步骤的状态，不设置则根据 steps 确定状态",
+                    type: "wait / process / finish / error / success",
+                    optional: "-",
+                    default: "",
+                },
+            ]
         };
     },
     methods: {

@@ -100,6 +100,9 @@
                 </dd-dropdown>
             </template>
         </dd-block> -->
+        <dd-describe title="Dropdown Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Step Attributes" :data="Attributes2"></dd-describe>
+        <dd-describe title="Dropdown Menu Item Attributes" :data="Attributes3"></dd-describe>
     </div>
 </template>
 
@@ -198,6 +201,52 @@ export default {
                     </dd-dropdown-menu>
                 </dd-dropdown>
             `,
+            Attributes: [
+                {
+                    parameter: "type",
+                    explain: "菜单按钮类型，同 Button 组件(只在split-button为 true 的情况下有效)",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "size",
+                    explain: "菜单尺寸，在split-button为 true 的情况下也对触发按钮生效",
+                    type: "string",
+                    optional: "medium / small / mini",
+                    default: "horizontal",
+                },
+                {
+                    parameter: "split-button",
+                    explain: "下拉触发元素呈现为按钮组",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "trigger",
+                    explain: "触发下拉的行为",
+                    type: "string",
+                    optional: "hover, click",
+                    default: "hover",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "visible-change",
+                    explain: "下拉框出现/隐藏时触发",
+                    backParameter: "出现则为 true，隐藏则为 false",
+                },
+            ],
+            Attributes3: [
+                {
+                    parameter: "disabled",
+                    explain: "禁用",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ]
         };
     },
 };

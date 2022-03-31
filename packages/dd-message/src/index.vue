@@ -42,6 +42,7 @@ export default {
             this.top = _MessageHeight * -1;
             setTimeout(() => {
                 this.visible = false;
+                this.$emit("close");
                 this.$destroy(true);
                 this.$el.parentNode.removeChild(this.$el); // 从DOM里将这个组件移除
             }, 500);

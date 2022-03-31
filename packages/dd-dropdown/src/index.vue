@@ -119,6 +119,7 @@ export default {
     watch: {
         activeValue(val) {
             this.$emit("input", val);
+            this.$emit("visible-change", val);
         },
     },
 };

@@ -165,6 +165,9 @@
                 </dd-collapse>
             </template>
         </dd-block>
+        <dd-describe title="Collapse Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Collapse Events" :data="Attributes2" events></dd-describe>
+        <dd-describe title="Collapse Item Attributes" :data="Attributes3"></dd-describe>
     </div>
 </template>
 
@@ -330,6 +333,52 @@ export default {
                     </dd-collapse-item>
                 </dd-collapse>
             `,
+            Attributes: [
+                {
+                    parameter: "value / v-model",
+                    explain: "当前激活的面板(如果是手风琴模式，绑定值类型需要为string，否则为array)",
+                    type: "string / array",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "accordion",
+                    explain: "是否手风琴模式",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "change",
+                    explain: "当前激活面板改变时触发(如果是手风琴模式，参数 activeNames 类型为string，否则为array)",
+                    backParameter: "(activeNames: array / string)",
+                },
+            ],
+            Attributes3: [
+                {
+                    parameter: "name",
+                    explain: "唯一标志符",
+                    type: "string / number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "title",
+                    explain: "面板标题",
+                    type: "string",
+                    optional: "—",
+                    default: "	—",
+                },
+                {
+                    parameter: "disabled",
+                    explain: "是否禁用",
+                    type: "boolean",
+                    optional: "—",
+                    default: "	—",
+                },
+            ],
         };
     },
     methods: {

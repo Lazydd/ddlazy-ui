@@ -151,6 +151,8 @@
                 </dd-dialog>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Events" :data="Attributes2" events></dd-describe>
     </div>
 </template>
 
@@ -351,6 +353,55 @@ export default {
                     </span>
                 </dd-dialog>
             `,
+            Attributes: [
+                {
+                    parameter: "visible",
+                    explain: "是否显示 Dialog，支持 .sync 修饰符",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "title",
+                    explain: "Dialog 的标题",
+                    type: "String",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "width",
+                    explain: "Dialog 的宽度",
+                    type: "String",
+                    optional: "—",
+                    default: "50%",
+                },
+                {
+                    parameter: "top",
+                    explain: "Dialog CSS 中的 margin-top 值",
+                    type: "String",
+                    optional: "—",
+                    default: "15vh",
+                },
+                {
+                    parameter: "center",
+                    explain: "是否对头部和底部采用居中布局",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "open",
+                    explain: "Dialog 打开的回调",
+                    backParameter: "—",
+                },
+                {
+                    name: "close",
+                    explain: "Dialog 关闭的回调",
+                    backParameter: "—",
+                },
+            ],
         };
     },
 };

@@ -1,7 +1,7 @@
 <template>
     <transition name="dialog-wrapper">
         <div class="dd-dialog_wrapper" v-show="isShowDialog">
-            <div class="dd-dialog" :style="`width:${width}`">
+            <div class="dd-dialog" :style="`width:${width};margin-top:${top}`">
                 <div class="dd-dialog_header" :cente="cente">
                     <span class="dd-dialog_title">
                         {{ title }}
@@ -41,6 +41,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        top: {
+            type: String,
+            default: "15vh",
+        },
     },
     data() {
         return {
@@ -73,6 +77,7 @@ export default {
             } else {
                 setTimeout(() => {
                     this.remove();
+                    this.$emit("close");
                 }, 300);
             }
         },
@@ -109,7 +114,6 @@ export default {
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         box-sizing: border-box;
         width: 50%;
-        margin-top: 15vh;
         width: 30%;
         .dd-dialog_header {
             padding: 20px 20px 10px;

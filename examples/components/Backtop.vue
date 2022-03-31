@@ -41,6 +41,8 @@
                 ></dd-backtop>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Events" :data="Attributes2" events></dd-describe>
     </div>
 </template>
 
@@ -82,6 +84,43 @@ export default {
                     :offsetTop="100"
                 ></dd-backtop>
             `,
+            Attributes: [
+                {
+                    parameter: "target",
+                    explain: "触发滚动的对象",
+                    type: "string",
+                    optional: "",
+                    default: "",
+                },
+                {
+                    parameter: "visibility-height",
+                    explain: "滚动高度达到此参数值才出现",
+                    type: "number",
+                    optional: "",
+                    default: "200",
+                },
+                {
+                    parameter: "right",
+                    explain: "控制其显示位置, 距离页面右边距",
+                    type: "number",
+                    optional: "",
+                    default: "40",
+                },
+                {
+                    parameter: "bottom",
+                    explain: "控制其显示位置, 距离页面底部距离",
+                    type: "number	",
+                    optional: "",
+                    default: "40",
+                },
+            ],
+            Attributes2: [
+                {
+                    name: "click",
+                    explain: "点击按钮触发的事件",
+                    backParameter: "点击事件",
+                },
+            ]
         };
     },
 };

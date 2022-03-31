@@ -22,6 +22,8 @@
                 </dd-breadcrumb>
             </template>
         </dd-block>
+        <dd-describe title="Breadcrumb Attributes" :data="Attributes"></dd-describe>
+        <dd-describe title="Breadcrumb Item Attributes" :data="Attributes2"></dd-describe>
     </div>
 </template>
 
@@ -46,6 +48,38 @@ export default {
                     <dd-breadcrumb-item>活动详情</dd-breadcrumb-item>
                 </dd-breadcrumb>
             `,
+            Attributes: [
+                {
+                    parameter: "separator",
+                    explain: "分隔符",
+                    type: "string",
+                    optional: "—",
+                    default: "斜杠'/'",
+                },
+                {
+                    parameter: "separator-class",
+                    explain: "图标分隔符 class",
+                    type: "string",
+                    optional: "—",
+                    default: "-",
+                },
+            ],
+            Attributes2: [
+                {
+                    parameter: "to",
+                    explain: "路由跳转对象，同 vue-router 的 to",
+                    type: "string/object",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "replace",
+                    explain: "在使用 to 进行路由跳转时，启用 replace 将不会向 history 添加新记录",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+            ]
         };
     },
 };

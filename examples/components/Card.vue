@@ -78,6 +78,7 @@
                 </div>
             </template>
         </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
     </div>
 </template>
 
@@ -146,6 +147,22 @@ export default {
                         </div>
                     </dd-card>
             `,
+            Attributes: [
+                {
+                    parameter: "body-style",
+                    explain: "设置 body 的样式",
+                    type: "object",
+                    optional: "—",
+                    default: "{ padding: '20px' }",
+                },
+                {
+                    parameter: "shadow",
+                    explain: "设置阴影显示时机",
+                    type: "string",
+                    optional: "always / hover / never",
+                    default: "always",
+                },
+            ],
         };
     },
 };
