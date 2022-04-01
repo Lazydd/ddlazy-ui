@@ -1,5 +1,4 @@
 <script>
-import ddTransition from "../../dd-transition";
 import ddScroll from "../../dd-scroll";
 import ddIcon from "../../dd-icon";
 import mixin from "../../dd-mixins/mixin";
@@ -114,7 +113,7 @@ export default {
                 ),
 
                 h(
-                    "dd-transition",
+                    "transition",
                     {
                         props: {
                             name: "dd-zoom-top",
@@ -210,7 +209,6 @@ export default {
     components: {
         ddIcon,
         ddScroll,
-        ddTransition,
     },
     watch: {
         isShow_dropdown(val) {

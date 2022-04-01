@@ -6,7 +6,7 @@
             <template #source>
                 <div style="width: 100%; height: 50%">
                     <dd-scroll>
-                        <div>
+                        <div style="width:1000px">
                             {{ content }}
                         </div>
                     </dd-scroll>
@@ -46,7 +46,7 @@ export default {
             code1: `
                 <div style="width: 100%; height: 50%">
                     <dd-scroll>
-                        <div>
+                        <div style="width:1000px">
                             {{ content }}
                         </div>
                     </dd-scroll>

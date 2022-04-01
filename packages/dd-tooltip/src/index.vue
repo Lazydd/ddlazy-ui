@@ -4,25 +4,29 @@
         @mouseenter="mouseenter"
         @mouseleave="mouseleave"
     >
-        <div class="dd-tooltip_box">
+        <!-- <div class="dd-tooltip_box" ref="dd-tooltip_box">
             <transition name="fale">
-                <div v-if="isShow">
-                    <div class="dd-tooltip_main-dropdown-s"></div>
+                <div
+                    v-if="isShow"
+                    class="dd-tooltip_container"
+                    :style="`max-width:${maxWidth}px`"
+                >
                     <div :class="['dd-tooltip', 'dd-tooltip_popper', effect]">
                         {{ content }}
+                        <div class="dd-tooltip_main-dropdown-s"></div>
                     </div>
                 </div>
             </transition>
-            <div>
-                <slot  v-if="$slots.default" />
-            </div>
-        </div>
+        </div> -->
+        <slot v-if="$slots.default" />
     </div>
 </template>
 
 <script>
+import mixin from "../../dd-mixins/mixin";
 export default {
     name: "ddTooltip",
+    mixins: [mixin],
     props: {
         effect: {
             type: String,
@@ -31,23 +35,66 @@ export default {
         content: {
             type: String,
         },
+        maxWidth: {
+            type: Number,
+            default: 300,
+        },
         placement: {
             type: String,
-            default: "bottom",
+            default: "top",
+        },
+        space: {
+            type: [Number, String],
+            default: 8,
         },
     },
     data() {
         return {
             isShow: false,
+            vnode: null,
+            abcde: null,
+            node: null,
         };
     },
     methods: {
+        append() {
+            if (!this.isShow) document.body.appendChild(this.node);
+        },
+        remove() {
+            if (this.isShow) document.body.removeChild(this.node);
+        },
         mouseenter(e) {
+            this.append();
             this.isShow = true;
         },
         mouseleave(e) {
+            this.remove();
             this.isShow = false;
         },
+        initNode() {
+            let node = document.createElement("div");
+            let { top, left, width, height } = this.getOffset(this.$el);
+            node.className = "dd-tooltip_box";
+            switch (this.placement) {
+                case "top-left":
+                    node.style.left = left + "px";
+                    node.style.top = top - height - this.space + "px";
+                case "top":
+                    node.style.transform = "translateX(-50%)";
+                    node.style.left = left + width / 2 + "px";
+                    node.style.top = top - height - this.space + "px";
+                case "top-right":
+                    node.style.left = left + "px";
+                    node.style.top = top - height - this.space + "px";
+            }
+            // node.style.left = left + "px";
+            // node.style.top = top - height - this.space + "px";
+            node.innerHTML = this.content;
+            this.node = node;
+        },
+    },
+    mounted() {
+        this.initNode();
     },
 };
 </script>
@@ -58,57 +105,8 @@ export default {
     display: inline-block;
     &:hover {
     }
-    .dd-tooltip_box {
-        width: 100%;
-        .dd-tooltip {
-            position: relative;
-        }
-        .dark {
-            background: #303133;
-            color: #fff;
-        }
-        .light {
-            background: #fff;
-            border: 1px solid #303133;
-        }
-        .dd-tooltip_popper {
-            position: absolute;
-            top: -150%;
-            border-radius: 4px;
-            padding: 10px;
-            z-index: 2000;
-            font-size: 12px;
-            line-height: 1.2;
-            min-width: 10px;
-            word-wrap: break-word;
-        }
-    }
 }
 
-.dd-tooltip_main-dropdown-s {
-    position: absolute;
-    width: 0;
-    height: 0;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 6px 6px 0px;
-    z-index: 1;
-    border-style: solid;
-    border-color: #303133 transparent transparent;
-    &::before {
-        // content: "";
-        // position: absolute;
-        // display: inline-block;
-        // width: 0;
-        // height: 0;
-        // z-index: 2;
-        // top: -5px;
-        // left: -6px;
-        // border: 6px solid;
-        // border-color: #fff transparent transparent;
-    }
-}
 .fale-enter-active,
 .fale-leave-active {
     transition: opacity 0.5s;

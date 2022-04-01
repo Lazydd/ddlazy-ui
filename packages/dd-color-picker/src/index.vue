@@ -19,7 +19,7 @@
                 ></div>
             </div>
         </div>
-        <dd-transition name="dd-zoom-top">
+        <transition name="dd-zoom-top">
             <div class="dd-color_dropdown dd-color-picker_pannel" v-if="isShow">
                 <color-sv-picker
                     v-model="sv"
@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-        </dd-transition>
+        </transition>
     </div>
 </template>
 
@@ -68,7 +68,6 @@
 import ColorHueSlider from "./color-hue-slider.vue";
 import ColorSvPicker from "./color-sv-picker.vue";
 import colorAlphaSlider from "./color-alpha-slider.vue";
-import ddTransition from "../../dd-transition";
 let newOptions = {};
 export default {
     name: "ddColorPicker",
@@ -359,7 +358,6 @@ export default {
         ColorHueSlider,
         ColorSvPicker,
         colorAlphaSlider,
-        ddTransition,
     },
     beforeDestroy() {
         document.removeEventListener("click", this.except);

@@ -24,7 +24,7 @@
                 class="dd-tree-node_children"
                 v-if="item.children && item.children.length"
             >
-                <transition name="fale">
+                <dd-transition>
                     <dd-tree
                         v-if="item.isActive"
                         :data="load ? null : item.children"
@@ -33,7 +33,7 @@
                         :node="item"
                         :level="level + 1"
                     ></dd-tree>
-                </transition>
+                </dd-transition>
             </div>
         </div>
     </div>
@@ -164,17 +164,5 @@ export default {
             }
         }
     }
-}
-.fale-enter-active,
-.fale-leave-active {
-    transition: opacity 0.3s;
-}
-.fale-enter,
-.fale-leave-to {
-    opacity: 0;
-}
-.fale-enter-to,
-.fale-leave {
-    opacity: 1;
 }
 </style>

@@ -9,11 +9,11 @@
                 <div>
                     <dd-button @click="show = !show">Click Me</dd-button>
                     <div style="display: flex; margin-top: 20px; height: 100px">
-                        <dd-transition name="dd-fade">
+                        <transition name="dd-fade">
                             <div v-show="show" class="transition-box">
                                 .dd-fade
                             </div>
-                        </dd-transition>
+                        </transition>
                     </div>
                 </div>
             </template>
@@ -23,38 +23,38 @@
                 <div>
                     <dd-button @click="show2 = !show2">Click Me</dd-button>
                     <div class="zoom">
-                        <dd-transition name="dd-zoom-center">
+                        <transition name="dd-zoom-center">
                             <div v-show="show2" class="transition-box">
                                 .dd-zoom-center
                             </div>
-                        </dd-transition>
-                        <dd-transition name="dd-zoom-left">
+                        </transition>
+                        <transition name="dd-zoom-left">
                             <div v-show="show2" class="transition-box">
                                 .dd-zoom-left
                             </div>
-                        </dd-transition>
-                        <dd-transition name="dd-zoom-right">
+                        </transition>
+                        <transition name="dd-zoom-right">
                             <div v-show="show2" class="transition-box">
                                 .dd-zoom-right
                             </div>
-                        </dd-transition>
+                        </transition>
                     </div>
                     <div class="zoom">
-                        <dd-transition name="dd-zoom-centerVertical">
+                        <transition name="dd-zoom-centerVertical">
                             <div v-show="show2" class="transition-box">
                                 .dd-zoom-centerVertical
                             </div>
-                        </dd-transition>
-                        <dd-transition name="dd-zoom-top">
+                        </transition>
+                        <transition name="dd-zoom-top">
                             <div v-show="show2" class="transition-box">
                                 .dd-zoom-top
                             </div>
-                        </dd-transition>
-                        <dd-transition name="dd-zoom-bottom">
+                        </transition>
+                        <transition name="dd-zoom-bottom">
                             <div v-show="show2" class="transition-box">
                                 .dd-zoom-bottom
                             </div>
-                        </dd-transition>
+                        </transition>
                     </div>
                 </div>
             </template>
@@ -62,9 +62,9 @@
         <dd-block title="collapse 展开折叠" :code="code3">
             <template #source>
                 <div class="fold">
-                    <dd-button @click="show3 = !show3">Click Me</dd-button>
+                    <dd-button @click="show3 = !show3" style="margin-bottom:10px">Click Me</dd-button>
                     <div style="height: 320px">
-                        <dd-transition name="collapse">
+                        <dd-transition>
                             <div v-show="show3">
                                 <div class="transition-box">折叠</div>
                                 <div class="transition-box">折叠</div>
@@ -88,41 +88,69 @@ export default {
             show2: true,
             show3: true,
             code1: `
-                 <div>
+                <div>
                     <dd-button @click="show = !show">Click Me</dd-button>
                     <div style="display: flex; margin-top: 20px; height: 100px">
-                        <dd-transition name="dd-fade">
+                        <transition name="dd-fade">
                             <div v-show="show" class="transition-box">
                                 .dd-fade
                             </div>
-                        </dd-transition>
+                        </transition>
                     </div>
                 </div>
             `,
             code2: `
                 <div>
                     <dd-button @click="show2 = !show2">Click Me</dd-button>
-                    <div style="display: flex; margin-top: 20px; height: 100px">
-                        <dd-transition name="dd-zoom-center">
+                    <div class="zoom">
+                        <transition name="dd-zoom-center">
                             <div v-show="show2" class="transition-box">
                                 .dd-zoom-center
                             </div>
-                        </dd-transition>
-                        <dd-transition name="dd-zoom-top">
+                        </transition>
+                        <transition name="dd-zoom-left">
+                            <div v-show="show2" class="transition-box">
+                                .dd-zoom-left
+                            </div>
+                        </transition>
+                        <transition name="dd-zoom-right">
+                            <div v-show="show2" class="transition-box">
+                                .dd-zoom-right
+                            </div>
+                        </transition>
+                    </div>
+                    <div class="zoom">
+                        <transition name="dd-zoom-centerVertical">
+                            <div v-show="show2" class="transition-box">
+                                .dd-zoom-centerVertical
+                            </div>
+                        </transition>
+                        <transition name="dd-zoom-top">
                             <div v-show="show2" class="transition-box">
                                 .dd-zoom-top
                             </div>
-                        </dd-transition>
-                        <dd-transition name="dd-zoom-bottom">
+                        </transition>
+                        <transition name="dd-zoom-bottom">
                             <div v-show="show2" class="transition-box">
                                 .dd-zoom-bottom
                             </div>
-                        </dd-transition>
+                        </transition>
                     </div>
                 </div>
             `,
             code3: `
-
+                <div class="fold">
+                    <dd-button @click="show3 = !show3">Click Me</dd-button>
+                    <div style="height: 320px">
+                        <dd-transition>
+                            <div v-show="show3">
+                                <div class="transition-box">折叠</div>
+                                <div class="transition-box">折叠</div>
+                                <div class="transition-box">折叠</div>
+                            </div>
+                        </dd-transition>
+                    </div>
+                </div>
             `,
         };
     },

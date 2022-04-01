@@ -7,11 +7,11 @@
                     <slot name="source"></slot>
                 </div>
             </div>
-            <transition name="fale">
+            <dd-transition>
                 <div v-if="isShow" class="code">
                     <pre v-highlightjs="code"><code class="html"></code></pre>
                 </div>
-            </transition>
+            </dd-transition>
             <div class="control" @click="show">
                 <dd-icon
                     :icon="isShow ? 'icon-arrow-up' : 'icon-arrow-down'"

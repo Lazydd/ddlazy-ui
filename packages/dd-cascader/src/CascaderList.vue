@@ -1,6 +1,6 @@
 <template>
     <div class="dd-cascader-item" v-if="options">
-        <dd-transition name="dd-zoom-top">
+        <transition name="dd-zoom-top">
             <div class="dd-cascader_dropdown">
                 <div class="dd-time-select-dropdown-s"></div>
                 <div class="dd-cascader-item-panel">
@@ -40,13 +40,12 @@
                     </div>
                 </div>
             </div>
-        </dd-transition>
+        </transition>
     </div>
 </template>
 
 <script>
 import ddIcon from "../../dd-icon";
-import ddTransition from "../../dd-transition";
 import ddScroll from "../../dd-scroll";
 export default {
     name: "CascaderList",
@@ -100,7 +99,6 @@ export default {
         this.initTree();
     },
     components: {
-        ddTransition,
         ddIcon,
         ddScroll,
     },

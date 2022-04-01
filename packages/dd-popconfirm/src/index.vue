@@ -12,7 +12,7 @@
         >
             <slot name="reference" />
         </div>
-        <dd-transition name="dd-fade">
+        <transition name="dd-fade">
             <div class="dd-popover" v-if="isShowPopconfirm">
                 <div class="dd-popconfirm-s"></div>
                 <p class="dd-popconfirm__main">
@@ -39,12 +39,11 @@
                     </dd-button>
                 </div>
             </div>
-        </dd-transition>
+        </transition>
     </div>
 </template>
 
 <script>
-import ddTransition from "../../dd-transition";
 export default {
     name: "ddPopconfirm",
     props: {
@@ -104,9 +103,6 @@ export default {
     },
     beforeDestroy() {
         document.removeEventListener("click", this.except);
-    },
-    components: {
-        ddTransition,
     },
 };
 </script>

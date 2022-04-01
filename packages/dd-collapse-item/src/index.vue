@@ -25,7 +25,7 @@
                 </svg>
             </div>
         </div>
-        <dd-transition name="dd-zoom-top">
+        <dd-transition>
             <div
                 class="dd-collapse-item__wrap"
                 v-if="
@@ -47,7 +47,6 @@
 <script>
 let newArr = [];
 import mixin from "../../dd-mixins/mixin";
-import ddTransition from "../../dd-transition";
 export default {
     name: "ddCollapseItem",
     mixins: [mixin],
@@ -122,9 +121,6 @@ export default {
                 this.isArray = false;
             }
         },
-    },
-    components: {
-        ddTransition,
     },
     created() {
         this.initCollapse();

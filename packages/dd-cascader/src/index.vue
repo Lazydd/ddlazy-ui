@@ -14,7 +14,6 @@
 
 <script>
 import ddIcon from "../../dd-icon";
-import ddTransition from "../../dd-transition";
 import ddScroll from "../../dd-scroll";
 import ddCascaderList from "./CascaderList.vue";
 export default {
@@ -44,7 +43,6 @@ export default {
         },
     },
     components: {
-        ddTransition,
         ddIcon,
         ddScroll,
         ddCascaderList,

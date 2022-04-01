@@ -7,7 +7,7 @@ import VueHighlightJS from 'vue-highlightjs'
 import 'highlight.js/styles/atom-one-dark.css'
 
 import ddlazyui from '../packages/index'
-import '../packages/css/global.css'
+import '../packages/css/global.less'
 
 
 Vue.use(VueHighlightJS)

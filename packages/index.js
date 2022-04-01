@@ -66,7 +66,7 @@ import ddTimeSelect from "./dd-time-select";
 import ddTransition from "./dd-transition";
 import ddTimePicker from "./dd-time-picker";
 import ddCascader from "./dd-cascader";
-import "./css/global.css";
+import "./css/global.less";
 Vue.use(Message);
 Vue.use(ddLoading);
 Vue.use(ddMessageBox);
