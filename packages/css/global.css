@@ -97,10 +97,18 @@ input::-ms-input-placeholder {
   color: #00a09c !important;
   font-style: normal !important;
 }
+@keyframes tooltip {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .dd-tooltip_box {
   position: absolute;
   z-index: 100;
-  background: #666;
+  background: #303133;
   color: #fff;
   padding: 8px 12px;
   line-height: 20px;
@@ -113,10 +121,50 @@ input::-ms-input-placeholder {
   display: inline-block;
   border: 5px solid transparent;
   position: absolute;
+}
+.dd-tooltip_box.top-left:before {
+  left: 15px;
+  bottom: -10px;
+  border-top-color: #303133;
+}
+.dd-tooltip_box.top:before {
   left: 50%;
   bottom: -10px;
-  border-top-color: #666;
   margin-left: -5px;
+  border-top-color: #303133;
+}
+.dd-tooltip_box.top-right:before {
+  right: 15px;
+  bottom: -10px;
+  border-top-color: #303133;
+}
+.dd-tooltip_box.left:before {
+  right: -10px;
+  top: 50%;
+  border-left-color: #303133;
+  margin-top: -5px;
+}
+.dd-tooltip_box.right:before {
+  left: -10px;
+  top: 50%;
+  border-right-color: #303133;
+  margin-top: -5px;
+}
+.dd-tooltip_box.bottom-left:before {
+  left: 15px;
+  top: -10px;
+  border-bottom-color: #303133;
+}
+.dd-tooltip_box.bottom:before {
+  left: 50%;
+  top: -10px;
+  border-bottom-color: #303133;
+  margin-left: -5px;
+}
+.dd-tooltip_box.bottom-right:before {
+  right: 15px;
+  top: -10px;
+  border-bottom-color: #303133;
 }
 /* Transition动画 */
 .dd-fade-enter-active,

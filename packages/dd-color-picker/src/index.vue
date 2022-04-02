@@ -250,13 +250,6 @@ export default {
             let isSelf = this.$refs["dd-color_dropdown"].contains(e.target);
             if (!isSelf) {
                 this.isShow = false;
-                // let { h, saturation, value } = newOptions;
-                // this.h = h;
-                // this.sv = { saturation, value };
-
-                // console.log(this.$options.data().sv);
-                // this.sv = this.$options.data().sv;
-                // this.h = this.$options.data().h;
                 this.$emit("input", this.isHex ? this.hex : this.RGB);
             }
         },

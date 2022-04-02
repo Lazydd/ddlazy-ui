@@ -1,6 +1,8 @@
 const mixin = {
     methods: {
-        move(e, node, width, height) {
+        move(e, node) {
+            let width = node.offsetWidth;
+            let height = node.offsetHeight;
             let left = e.clientX - node.getBoundingClientRect().left;
             let top = e.clientY - node.getBoundingClientRect().top;
             if (left > width) left = width;
@@ -20,11 +22,11 @@ const mixin = {
             let detail = node.getBoundingClientRect();
             let top =
                 detail.top +
-                window.pageYOffset -
+                (window.pageYOffset || document.documentElement.scrollTop) -
                 (document.documentElement.clientTop || 0);
             let left =
                 detail.left +
-                window.pageXOffset -
+                (window.pageXOffset || document.documentElement.scrollLeft) -
                 (document.documentElement.clientLeft || 0);
             let width = node.offsetWidth;
             let height = node.offsetHeight;
@@ -35,12 +37,16 @@ const mixin = {
                 height,
             };
         },
-        getWindow () {
+        getWindow() {
             // 返回窗口宽高
-            const width = document.documentElement.clientWidth || document.body.clientWidth
-            const height = document.documentElement.clientHeight || document.body.clientHeight
-            return {width: width, height: height}
-          },
+            let width =
+                document.documentElement.clientWidth ||
+                document.body.clientWidth;
+            let height =
+                document.documentElement.clientHeight ||
+                document.body.clientHeight;
+            return { width, height };
+        },
         multipleChoice(arr, name) {
             let newArr = [];
             for (let i = 0; i < arr.length; i++) {

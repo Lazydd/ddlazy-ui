@@ -21,7 +21,8 @@
             </article>
         </transition>
         <main class="main-box">
-            <transition name="dd-fade"> <router-view /></transition>
+            
+            <transition name="dd-fade"><router-view /></transition>
         </main>
     </div>
 </template>

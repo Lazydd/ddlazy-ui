@@ -43,12 +43,7 @@ export default {
     },
     methods: {
         pickerUp(e) {
-            let { left, top, radiox, radioy } = this.move(
-                e,
-                this.sc_picker,
-                _pickerWidth,
-                _pickerHeight
-            );
+            let { left, top, radiox, radioy } = this.move(e, this.sc_picker);
             this.left = left;
             this.top = top;
             this.radiox = radiox;
