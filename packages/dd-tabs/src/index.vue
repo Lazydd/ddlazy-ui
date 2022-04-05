@@ -28,9 +28,10 @@ export default {
             vnodeObj[item.componentOptions.propsData.name] = item;
             let { name, label, icon, disabled } =
                 item.componentOptions.propsData;
-            vnode.push({ name, label, icon, disabled });
+            vnode.push({ name, label, icon, disabled: !!disabled });
             if (name == this.activeTab) this.tabIndex = i;
         });
+        console.log(vnode);
         return h(
             "div",
             {

@@ -66,6 +66,10 @@ import ddTimeSelect from "./dd-time-select";
 import ddTransition from "./dd-transition";
 import ddTimePicker from "./dd-time-picker";
 import ddCascader from "./dd-cascader";
+import ddEcharts from "./dd-echarts";
+import ddUeditor from "./dd-ueditor";
+import ddPdf from "./dd-pdf";
+import ddMap from "./dd-map";
 import "./css/global.less";
 Vue.use(Message);
 Vue.use(ddLoading);
@@ -133,6 +137,10 @@ const components = [
     ddTransition,
     ddTimePicker,
     ddCascader,
+    ddEcharts,
+    ddUeditor,
+    ddPdf,
+    ddMap,
 ];
 
 const install = function (Vue) {
@@ -210,6 +218,10 @@ export {
     ddTransition,
     ddTimePicker,
     ddCascader,
+    ddEcharts,
+    ddUeditor,
+    ddPdf,
+    ddMap,
 };
 
 export default {
@@ -277,4 +289,8 @@ export default {
     ddTransition,
     ddTimePicker,
     ddCascader,
+    ddEcharts,
+    ddUeditor,
+    ddPdf,
+    ddMap,
 };

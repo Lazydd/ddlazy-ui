@@ -43,6 +43,8 @@ export default {
                     .catch((err) => {
                         return callback(false);
                     });
+            } else {
+                return callback(true);
             }
         },
         resetFields() {

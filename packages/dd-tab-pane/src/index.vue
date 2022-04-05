@@ -25,7 +25,4 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-.dd-tab-pane {
-}
-</style>
+<style lang="less" scoped></style>

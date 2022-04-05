@@ -1,6 +1,4 @@
-<template>
-    <div class="dd-dropdown-item"></div>
-</template>
+<template></template>
 
 <script>
 export default {
@@ -17,7 +15,4 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-.dd-dropdown-item {
-}
-</style>
+<style lang="less" scoped></style>

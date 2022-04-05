@@ -49,6 +49,10 @@ const TimeSelect = () => import("@/components/TimeSelect.vue");
 const Scroll = () => import("@/components/Scroll.vue");
 const Transition = () => import("@/components/Transition.vue");
 const Cascader = () => import("@/components/Cascader.vue");
+const Echarts = () => import("@/components/Echarts.vue");
+const Ueditor = () => import("@/components/Ueditor.vue");
+const PDF = () => import("@/components/PDF.vue");
+const Map = () => import("@/components/Map.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -291,6 +295,26 @@ const routes = [
                         path: "/component/cascader",
                         name: "Cascader",
                         component: Cascader,
+                    },
+                    {
+                        path: "/component/echarts",
+                        name: "Echarts",
+                        component: Echarts,
+                    },
+                    {
+                        path: "/component/ueditor",
+                        name: "Ueditor",
+                        component: Ueditor,
+                    },
+                    {
+                        path: "/component/pdf",
+                        name: "PDF",
+                        component: PDF,
+                    },
+                    {
+                        path: "/component/map",
+                        name: "Map",
+                        component: Map,
                     },
                 ],
             },

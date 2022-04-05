@@ -21,7 +21,6 @@
             </article>
         </transition>
         <main class="main-box">
-            
             <transition name="dd-fade"><router-view /></transition>
         </main>
     </div>
@@ -259,6 +258,27 @@ export default {
                         {
                             label: "Backtop 回到顶部",
                             path: "#/component/Backtop",
+                        },
+                    ],
+                },
+                {
+                    label: "Utils",
+                    children: [
+                        {
+                            label: "Echarts 图表",
+                            path: "#/component/echarts",
+                        },
+                        {
+                            label: "Ueditor 富文本编辑器",
+                            path: "#/component/ueditor",
+                        },
+                        {
+                            label: "PDF 阅读器",
+                            path: "#/component/pdf",
+                        },
+                        {
+                            label: "Map 地图",
+                            path: "#/component/map",
                         },
                     ],
                 },

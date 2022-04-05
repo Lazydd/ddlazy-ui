@@ -39,7 +39,7 @@ export default {
         let vnode = [];
         selectList.map((item, i) => {
             let { value, label, disabled } = item.componentOptions.propsData;
-            vnode.push({ value, label, disabled });
+            vnode.push({ value, label, disabled: !!disabled });
             if (label == this.value || value == this.value)
                 this.activeSelect = label || value;
         });
