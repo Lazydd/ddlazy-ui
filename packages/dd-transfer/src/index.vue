@@ -137,23 +137,28 @@ export default {
             });
         },
         handleCheckLeftChange(val) {
-            let arr = [];
-            this.checkedLeftList.map((item) => {
-                if (item[this.props.disabled] == false) {
-                    arr.push(item[this.props.label]);
-                }
-            });
-            this.checkedLeft = val ? [...arr] : [];
+            if (val) {
+                this.checkedLeft = this.checkedLeftList.reduce((pre, item) => {
+                    if (!item.disabled) pre.push(item.label);
+                    return [...pre];
+                }, []);
+            } else {
+                this.checkedLeft = [];
+            }
             this.isIndeterminateLeft = false;
         },
         handleCheckRightChange(val) {
-            let arr = [];
-            this.checkedRightList.map((item) => {
-                if (item[this.props.disabled] == false) {
-                    arr.push(item[this.props.label]);
-                }
-            });
-            this.checkedRight = val ? [...arr] : [];
+            if (val) {
+                this.checkedRight = this.checkedRightList.reduce(
+                    (pre, item) => {
+                        if (!item.disabled) pre.push(item.label);
+                        return [...pre];
+                    },
+                    []
+                );
+            } else {
+                this.checkedRight = [];
+            }
             this.isIndeterminateRight = false;
         },
         handleCheckedLeftChange(val) {
