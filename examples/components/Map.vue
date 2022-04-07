@@ -4,7 +4,9 @@
         <p class="_descript">基于ArcGis的地图组件</p>
         <dd-block title="基础用法" :code="code1">
             <template #source>
-                <dd-map></dd-map>
+                <div class="map-box">
+                    <dd-map :zoom="15" :extent="townExtent"></dd-map>
+                </div>
             </template>
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
@@ -19,6 +21,7 @@ export default {
     name: "ArcGis",
     data() {
         return {
+            townExtent: [],
             code1: `
                 
             `,
@@ -98,9 +101,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.content {
-    margin-top: 15px;
-    padding: 15px;
-    border: 1px solid #ebebeb;
+.map-box {
+    position: relative;
+    height: 600px;
 }
 </style>
