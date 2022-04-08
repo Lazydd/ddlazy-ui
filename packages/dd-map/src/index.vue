@@ -8,9 +8,11 @@
     </div>
 </template>
 <script>
-import * as esriLoader from "esri-loader";
-const CONST_MAP = "MAP";
-const CONST_MAPAnno = "MAPAnno";
+// import * as esriLoader from "esri-loader";
+
+import { loadModules } from "esri-loader";
+// const CONST_MAP = "MAP";
+// const CONST_MAPAnno = "MAPAnno";
 export default {
     name: "ddMap",
     props: {
@@ -23,8 +25,8 @@ export default {
     },
     data() {
         return {
-            x: 120.581807,
-            y: 28.040153,
+            x: 120.011272,
+            y: 30.298565,
             fullscreen: false, // 是否全屏
             polygonCenter: "", // 图形的中心点
             currentMapType: 1, // 1：天地图；2：卫星图
@@ -34,297 +36,269 @@ export default {
     },
     methods: {
         createMap() {
-            esriLoader.dojoRequire(
-                [
-                    "esri/map",
-                    "esri/layers/ArcGISTiledMapServiceLayer",
-                    "esri/layers/GraphicsLayer",
-                    "esri/graphic",
-                    "esri/geometry/Polygon",
-                    "esri/symbols/SimpleFillSymbol",
-                    "esri/symbols/SimpleLineSymbol",
-                    "esri/Color",
-                    "esri/InfoTemplate",
-                    "esri/symbols/PictureMarkerSymbol",
-                    "esri/geometry/Point",
-                    "esri/symbols/TextSymbol",
-                    "tdtlib/geoLayer",
-                    "tdtlib/TDTYXLayer",
-                    "tdtlib/TDTLayer",
-                    "tdtlib/TDTAnnoLayer",
-                    "esri",
-                    "esri/config",
-                    "esri/geometry/Extent",
-                    "esri/layers/WMSLayer",
-                    "dojo/domReady!",
-                ],
-                (
-                    Map,
-                    ArcGISTiledMapServiceLayer,
-                    GraphicsLayer,
-                    Graphic,
-                    Polygon,
-                    SimpleFillSymbol,
-                    SimpleLineSymbol,
-                    Color,
-                    InfoTemplate,
-                    PictureMarkerSymbol,
-                    Point,
-                    TextSymbol,
-                    GeoLayer,
-                    TDTYXLayer,
-                    TDTLayer,
-                    TDTAnnoLayer,
-                    esri,
-                    esriConfig,
-                    Extent,
-                    WMSLayer
-                ) => {
-                    this.map = new Map(this.$refs.map, {
-                        logo: false,
-                        center:
-                            this.data?.x && this.data?.y
-                                ? [this.data.x, this.data.y]
-                                : [this.x, this.y], //初始中心坐标经纬度
-                        zoom: this.zoom, //地图初始缩放大小
-                        sliderPosition: "bottom-left",
-                        // slider: false
+            loadModules(["esri/views/MapView", "esri/WebMap"])
+                .then(([MapView, WebMap]) => {
+                    // var webmap = new WebMap({
+                    //     portalItem: {
+                    //         id: "f2e9b762544945f390ca4ac3671cfa72",
+                    //     },
+                    // });
+                    var view = new MapView({
+                        // map: webmap,
+                        center: [this.x, this.y],
+                        container: "maps",
+                        zoom: this.zoom,
                     });
-
-                    // this.map.hideZoomSlider();
-                    // 定制缩放动画
-                    esriConfig.defaults.map.zoomDuration = 500; // time in milliseconds; default is 500
-                    esriConfig.defaults.map.zoomRate = 100; // refresh rate of zoom animation; default is 25
-                    var annoLayer = new TDTAnnoLayer({ id: CONST_MAPAnno });
-                    var basemap = new TDTLayer({ id: CONST_MAP });
-                    this.map.addLayers([basemap, annoLayer]);
-                    this.map.enableScrollWheelZoom();
-
-                    if (this.data?.x && this.data?.y) {
-                        this.addPoint();
-                    }
-                    // 添加小镇范围
-                    if (this.extent && this.extent.length) this.createExtent();
-                }
-            );
+                    view.on("click", function (e) {
+                        console.log("这里是点击事件", e);
+                    });
+                    view.on("mouse-wheel", (e) => {
+                        console.log("这里是鼠标滚轮事件", e);
+                    });
+                    // 全部的鼠标事件如下：
+                    const events = [
+                        "pointer-enter", //鼠标进入
+                        "pointer-leave", //鼠标离开
+                        "pointer-move", //鼠标移动
+                        "pointer-down", //鼠标点击
+                        "pointer-up", //鼠标点击结束
+                        "immediate-click", //直接点击
+                        "click", //点击
+                        "immediate-double-click", //直接双击
+                        "double-click", //双击
+                        "mouse-wheel", //鼠标滚轮
+                        "drag", //拖
+                        "hold", //持有
+                        "key-down", //响应按键
+                        "key-up", //提高
+                        "focus", //焦点
+                        "blur", //模糊
+                        "resize", //调整
+                    ];
+                })
+                .catch((err) => {
+                    // handle any errors
+                    console.error(err);
+                });
         },
         // 切换地图
-        changeMap() {
-            var type = this.currentMapType === 1 ? 0 : 1;
-            esriLoader.dojoRequire(
-                [
-                    "esri/map",
-                    "tdtlib/TDTYXLayer",
-                    "tdtlib/TDTLayer",
-                    "tdtlib/TDTAnnoLayer",
-                    "dojo/domReady!",
-                ],
-                (Map, TDTYXLayer, TDTLayer, TDTAnnoLayer) => {
-                    // 清除原来的底图
-                    this.map.removeLayer(this.map.getLayer(CONST_MAP));
-                    if (this.map.getLayer(CONST_MAPAnno))
-                        this.map.removeLayer(this.map.getLayer(CONST_MAPAnno));
+        // changeMap() {
+        //     var type = this.currentMapType === 1 ? 0 : 1;
+        //     esriLoader.dojoRequire(
+        //         [
+        //             "esri/map",
+        //             "tdtlib/TDTYXLayer",
+        //             "tdtlib/TDTLayer",
+        //             "tdtlib/TDTAnnoLayer",
+        //             "dojo/domReady!",
+        //         ],
+        //         (Map, TDTYXLayer, TDTLayer, TDTAnnoLayer) => {
+        //             // 清除原来的底图
+        //             this.map.removeLayer(this.map.getLayer(CONST_MAP));
+        //             if (this.map.getLayer(CONST_MAPAnno))
+        //                 this.map.removeLayer(this.map.getLayer(CONST_MAPAnno));
 
-                    if (type === 1) {
-                        var annoLayer = new TDTAnnoLayer({ id: CONST_MAPAnno });
-                        var basemap = new TDTLayer({ id: CONST_MAP });
-                        this.map.addLayers([basemap, annoLayer]);
-                        this.currentMapType = 1;
-                    } else if (type === 0) {
-                        var yx = new TDTYXLayer({ id: CONST_MAP });
-                        this.map.addLayer(yx, 0);
-                        this.currentMapType = 0;
-                    }
-                }
-            );
-        },
-        // 创建小镇范围
-        createExtent() {
-            // this.clear();
+        //             if (type === 1) {
+        //                 var annoLayer = new TDTAnnoLayer({ id: CONST_MAPAnno });
+        //                 var basemap = new TDTLayer({ id: CONST_MAP });
+        //                 this.map.addLayers([basemap, annoLayer]);
+        //                 this.currentMapType = 1;
+        //             } else if (type === 0) {
+        //                 var yx = new TDTYXLayer({ id: CONST_MAP });
+        //                 this.map.addLayer(yx, 0);
+        //                 this.currentMapType = 0;
+        //             }
+        //         }
+        //     );
+        // },
+        // // 创建小镇范围
+        // createExtent() {
+        //     // this.clear();
 
-            esriLoader.dojoRequire(
-                [
-                    "esri/layers/GraphicsLayer",
-                    "esri/graphic",
-                    "esri/geometry/Polygon",
-                    "esri/symbols/SimpleFillSymbol",
-                    "esri/symbols/SimpleLineSymbol",
-                    "esri/Color",
-                    "esri/InfoTemplate",
-                    "esri/symbols/PictureMarkerSymbol",
-                    "esri/geometry/Point",
-                    "esri/symbols/TextSymbol",
-                    "tdtlib/geoLayer",
-                    "tdtlib/TDTYXLayer",
-                    "tdtlib/TDTLayer",
-                    "esri",
-                    "esri/config",
-                    "dojo/domReady!",
-                ],
-                (
-                    GraphicsLayer,
-                    Graphic,
-                    Polygon,
-                    SimpleFillSymbol,
-                    SimpleLineSymbol,
-                    Color,
-                    InfoTemplate,
-                    PictureMarkerSymbol,
-                    Point,
-                    TextSymbol,
-                    GeoLayer,
-                    TDTYXLayer,
-                    TDTLayer,
-                    esri,
-                    esriConfig
-                ) => {
-                    var graphicLayer = new GraphicsLayer();
-                    this.extent.map((i) => {
-                        if (i) {
-                            var polygon = new Polygon({
-                                rings: i || [],
-                                spatialReference: {
-                                    wkid: 4326,
-                                },
-                            });
+        //     esriLoader.dojoRequire(
+        //         [
+        //             "esri/layers/GraphicsLayer",
+        //             "esri/graphic",
+        //             "esri/geometry/Polygon",
+        //             "esri/symbols/SimpleFillSymbol",
+        //             "esri/symbols/SimpleLineSymbol",
+        //             "esri/Color",
+        //             "esri/InfoTemplate",
+        //             "esri/symbols/PictureMarkerSymbol",
+        //             "esri/geometry/Point",
+        //             "esri/symbols/TextSymbol",
+        //             "tdtlib/geoLayer",
+        //             "tdtlib/TDTYXLayer",
+        //             "tdtlib/TDTLayer",
+        //             "esri",
+        //             "esri/config",
+        //             "dojo/domReady!",
+        //         ],
+        //         (
+        //             GraphicsLayer,
+        //             Graphic,
+        //             Polygon,
+        //             SimpleFillSymbol,
+        //             SimpleLineSymbol,
+        //             Color,
+        //             InfoTemplate,
+        //             PictureMarkerSymbol,
+        //             Point,
+        //             TextSymbol,
+        //             GeoLayer,
+        //             TDTYXLayer,
+        //             TDTLayer,
+        //             esri,
+        //             esriConfig
+        //         ) => {
+        //             var graphicLayer = new GraphicsLayer();
+        //             this.extent.map((i) => {
+        //                 if (i) {
+        //                     var polygon = new Polygon({
+        //                         rings: i || [],
+        //                         spatialReference: {
+        //                             wkid: 4326,
+        //                         },
+        //                     });
 
-                            var tmpSymbol = new SimpleFillSymbol(
-                                SimpleFillSymbol.STYLE_SOLID,
-                                new SimpleLineSymbol(
-                                    SimpleLineSymbol.STYLE_DASH,
-                                    new Color([24, 144, 255]),
-                                    3
-                                ),
-                                new Color([0, 110, 255, 0.34])
-                            );
-                            var graphic = new Graphic(polygon, tmpSymbol);
-                            graphicLayer.add(graphic);
-                            graphicLayer.id = this.CONST_SCOPE;
+        //                     var tmpSymbol = new SimpleFillSymbol(
+        //                         SimpleFillSymbol.STYLE_SOLID,
+        //                         new SimpleLineSymbol(
+        //                             SimpleLineSymbol.STYLE_DASH,
+        //                             new Color([24, 144, 255]),
+        //                             3
+        //                         ),
+        //                         new Color([0, 110, 255, 0.34])
+        //                     );
+        //                     var graphic = new Graphic(polygon, tmpSymbol);
+        //                     graphicLayer.add(graphic);
+        //                     graphicLayer.id = this.CONST_SCOPE;
 
-                            this.polygonCenter = polygon
-                                .getExtent()
-                                .getCenter();
-                            this.map.centerAt(this.polygonCenter);
-                        }
-                    });
-                    this.map.addLayer(graphicLayer, 0);
-                }
-            );
-        },
-        // 添加定位
-        addPoint() {
-            // this.clear();
-            esriLoader.dojoRequire(
-                [
-                    "esri/map",
-                    "esri/layers/ArcGISTiledMapServiceLayer",
-                    "esri/layers/GraphicsLayer",
-                    "esri/graphic",
-                    "esri/geometry/Polygon",
-                    "esri/symbols/SimpleFillSymbol",
-                    "esri/symbols/SimpleLineSymbol",
-                    "esri/Color",
-                    "esri/InfoTemplate",
-                    "esri/symbols/PictureMarkerSymbol",
-                    "esri/geometry/Point",
-                    "esri/symbols/TextSymbol",
-                    "tdtlib/geoLayer",
-                    "tdtlib/TDTYXLayer",
-                    "tdtlib/TDTLayer",
-                    "tdtlib/TDTAnnoLayer",
-                    "esri",
-                    "esri/config",
-                    "esri/geometry/Extent",
-                    "esri/layers/WMSLayer",
-                    "dojo/domReady!",
-                ],
-                (
-                    Map,
-                    ArcGISTiledMapServiceLayer,
-                    GraphicsLayer,
-                    Graphic,
-                    Polygon,
-                    SimpleFillSymbol,
-                    SimpleLineSymbol,
-                    Color,
-                    InfoTemplate,
-                    PictureMarkerSymbol,
-                    Point,
-                    TextSymbol,
-                    GeoLayer,
-                    TDTYXLayer,
-                    TDTLayer,
-                    TDTAnnoLayer,
-                    esri,
-                    esriConfig,
-                    Extent,
-                    WMSLayer
-                ) => {
-                    var graphicLayer = new GraphicsLayer();
-                    var symbol = new PictureMarkerSymbol({
-                        // url: require("@/assets/images/icon_point.png"),
-                        width: 35,
-                        height: 45,
-                        yoffset: 18,
-                    });
-                    var point = new Point(this.data.x, this.data.y);
-                    var panoGraphic = new Graphic(point, symbol);
-                    graphicLayer.id = this.CONST_MARKLAYER;
-                    graphicLayer.add(panoGraphic);
-                    this.map.addLayer(graphicLayer);
-                }
-            );
-        },
-        // 全屏、取消全屏切换
-        toggle() {
-            this.fullscreen = !this.fullscreen;
-            if (this.polygonCenter) {
-                this.$nextTick(() => {
-                    setTimeout(() => {
-                        this.map.centerAt(this.polygonCenter);
-                    }, 600);
-                });
-            }
-        },
-        clear() {
-            // 清除图层
-            if (this.map) {
-                let markLayer = this.map.getLayer(this.CONST_MARKLAYER);
-                let scopeLayer = this.map.getLayer(this.CONST_SCOPE);
+        //                     this.polygonCenter = polygon
+        //                         .getExtent()
+        //                         .getCenter();
+        //                     this.map.centerAt(this.polygonCenter);
+        //                 }
+        //             });
+        //             this.map.addLayer(graphicLayer, 0);
+        //         }
+        //     );
+        // },
+        // // 添加定位
+        // addPoint() {
+        //     // this.clear();
+        //     esriLoader.dojoRequire(
+        //         [
+        //             "esri/map",
+        //             "esri/layers/ArcGISTiledMapServiceLayer",
+        //             "esri/layers/GraphicsLayer",
+        //             "esri/graphic",
+        //             "esri/geometry/Polygon",
+        //             "esri/symbols/SimpleFillSymbol",
+        //             "esri/symbols/SimpleLineSymbol",
+        //             "esri/Color",
+        //             "esri/InfoTemplate",
+        //             "esri/symbols/PictureMarkerSymbol",
+        //             "esri/geometry/Point",
+        //             "esri/symbols/TextSymbol",
+        //             "tdtlib/geoLayer",
+        //             "tdtlib/TDTYXLayer",
+        //             "tdtlib/TDTLayer",
+        //             "tdtlib/TDTAnnoLayer",
+        //             "esri",
+        //             "esri/config",
+        //             "esri/geometry/Extent",
+        //             "esri/layers/WMSLayer",
+        //             "dojo/domReady!",
+        //         ],
+        //         (
+        //             Map,
+        //             ArcGISTiledMapServiceLayer,
+        //             GraphicsLayer,
+        //             Graphic,
+        //             Polygon,
+        //             SimpleFillSymbol,
+        //             SimpleLineSymbol,
+        //             Color,
+        //             InfoTemplate,
+        //             PictureMarkerSymbol,
+        //             Point,
+        //             TextSymbol,
+        //             GeoLayer,
+        //             TDTYXLayer,
+        //             TDTLayer,
+        //             TDTAnnoLayer,
+        //             esri,
+        //             esriConfig,
+        //             Extent,
+        //             WMSLayer
+        //         ) => {
+        //             var graphicLayer = new GraphicsLayer();
+        //             var symbol = new PictureMarkerSymbol({
+        //                 // url: require("@/assets/images/icon_point.png"),
+        //                 width: 35,
+        //                 height: 45,
+        //                 yoffset: 18,
+        //             });
+        //             var point = new Point(this.data.x, this.data.y);
+        //             var panoGraphic = new Graphic(point, symbol);
+        //             graphicLayer.id = this.CONST_MARKLAYER;
+        //             graphicLayer.add(panoGraphic);
+        //             this.map.addLayer(graphicLayer);
+        //         }
+        //     );
+        // },
+        // // 全屏、取消全屏切换
+        // toggle() {
+        //     this.fullscreen = !this.fullscreen;
+        //     if (this.polygonCenter) {
+        //         this.$nextTick(() => {
+        //             setTimeout(() => {
+        //                 this.map.centerAt(this.polygonCenter);
+        //             }, 600);
+        //         });
+        //     }
+        // },
+        // clear() {
+        //     // 清除图层
+        //     if (this.map) {
+        //         let markLayer = this.map.getLayer(this.CONST_MARKLAYER);
+        //         let scopeLayer = this.map.getLayer(this.CONST_SCOPE);
 
-                if (markLayer) this.map.removeLayer(markLayer);
-                if (scopeLayer) this.map.removeLayer(scopeLayer);
-            }
-        },
+        //         if (markLayer) this.map.removeLayer(markLayer);
+        //         if (scopeLayer) this.map.removeLayer(scopeLayer);
+        //     }
+        // },
     },
     mounted() {
-        if (!esriLoader.isLoaded()) {
-            esriLoader.bootstrap(
-                (err) => {
-                    if (err) {
-                        console.error(err);
-                    } else {
-                        this.createMap();
-                    }
-                },
-                {
-                    url: "https://oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/zjsfgwczc/cdn/sdk/3.35/init.js",
-                    dojoConfig: {
-                        // 想同时使用天地图的底图和标注的话，一定要配置此项
-                        async: true,
-                        packages: [
-                            {
-                                location:
-                                    "https://oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/zjsfgwczc/cdn/sdk/3.35/tdtlib",
-                                name: "tdtlib",
-                            },
-                        ],
-                    },
-                }
-            );
-        } else {
-            this.createMap();
-        }
+        this.createMap();
+        // if (!esriLoader.isLoaded()) {
+        //     esriLoader.bootstrap(
+        //         (err) => {
+        //             if (err) {
+        //                 console.error(err);
+        //             } else {
+        //                 this.createMap();
+        //             }
+        //         },
+        //         {
+        //             url: "https://oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/zjsfgwczc/cdn/sdk/3.35/init.js",
+        //             dojoConfig: {
+        //                 // 想同时使用天地图的底图和标注的话，一定要配置此项
+        //                 async: true,
+        //                 packages: [
+        //                     {
+        //                         location:
+        //                             "https://oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/zjsfgwczc/cdn/sdk/3.35/tdtlib",
+        //                         name: "tdtlib",
+        //                     },
+        //                 ],
+        //             },
+        //         }
+        //     );
+        // } else {
+        //     this.createMap();
+        // }
     },
     watch: {
         data(value) {
