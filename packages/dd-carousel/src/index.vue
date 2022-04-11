@@ -36,33 +36,34 @@ export default {
             type: String,
             default: "horizontal",
         },
+        duration: {
+            type: Number,
+            default: 1000,
+        },
+        move: {
+            type: Number,
+            default: 1,
+        },
+        showNumber: {
+            type: Number,
+            default: 1,
+        },
     },
     data() {
         return {
-            carouselIndex: 0,
             carouselLength: 0,
-            activeIndicator: 0,
             carouselList: [],
-            isLeft: false,
-            left: 0,
+            isAnimation: false,
+            width: 0,
+            index: 1,
+            duration2: 0,
+            moveDirection: 0,
         };
     },
     render: function (h) {
         const _this = this;
         this.carouselList = this.$slots.default;
-        if (this.loop) {
-            this.carouselLength = this.carouselList.length + 1;
-        } else {
-            this.carouselLength = this.carouselList.length;
-        }
-        // let vnode = [];
-        let vnodeObj = {};
-        this.carouselList.map((item, i) => {
-            vnodeObj[item.componentOptions.propsData.name] = item;
-            // let { name, label, icon } = item.componentOptions.propsData;
-            // vnode.push({ name, label, icon });
-        });
-
+        this.carouselLength = this.carouselList.length;
         return h(
             "div",
             {
@@ -83,6 +84,11 @@ export default {
                     "div",
                     {
                         class: ["dd-carousel_box"],
+                        ref: "dd-carousel_box",
+                        style: {
+                            height: this.height ? this.height + "px" : "",
+                            overflow: "hidden",
+                        },
                     },
                     [
                         h(
@@ -96,20 +102,7 @@ export default {
                                 ],
                                 on: {
                                     click(e) {
-                                        if (!_this.loop) {
-                                            if (_this.activeIndicator == 0) {
-                                                return;
-                                            } else {
-                                                _this.activeIndicator--;
-                                            }
-                                        } else {
-                                            if (_this.activeIndicator == 0) {
-                                                _this.activeIndicator =
-                                                    _this.carouselLength - 1;
-                                            } else {
-                                                _this.activeIndicator--;
-                                            }
-                                        }
+                                        _this._directionNavClick(-1);
                                     },
                                 },
                             },
@@ -135,23 +128,7 @@ export default {
                                 ],
                                 on: {
                                     click(e) {
-                                        if (!_this.loop) {
-                                            if (
-                                                _this.activeIndicator ==
-                                                _this.carouselLength - 1
-                                            ) {
-                                                return;
-                                            } else {
-                                                _this.activeIndicator++;
-                                            }
-                                        } else {
-                                            if (_this.activeIndicator == 5) {
-                                                _this.activeIndicator = 0;
-                                                _this.isLeft = true;
-                                            } else {
-                                                _this.activeIndicator++;
-                                            }
-                                        }
+                                        _this._directionNavClick(1);
                                     },
                                 },
                             },
@@ -166,66 +143,16 @@ export default {
                                 }),
                             ]
                         ),
-                        h("div", {
-                            domProps: {
-                                innerHTML:
-                                    _this.left +
-                                    "-----" +
-                                    _this.activeIndicator,
-                            },
-                        }),
                         h(
                             "div",
                             {
                                 class: ["dd-carousel_container"],
                                 ref: "dd-carousel_container",
-                                style: {
-                                    height:
-                                        _this.direction === "vertical"
-                                            ? _this.carouselLength * 100 + "%"
-                                            : _this.height + "px",
-                                    width:
-                                        _this.direction !== "vertical"
-                                            ? _this.type === "card"
-                                                ? _this.carouselLength * 45 +
-                                                  "%"
-                                                : _this.carouselLength * 100 +
-                                                  "%"
-                                            : "100%",
-                                    flexWrap:
-                                        _this.direction !== "vertical"
-                                            ? "nowrap"
-                                            : "wrap",
-                                    transition:
-                                        _this.activeIndicator == 5
-                                            ? ""
-                                            : "all 1s",
-                                },
+                                style: _this.style,
                             },
                             [
                                 _this.carouselList.map((item, i) => {
-                                    return h(
-                                        "div",
-                                        {
-                                            class: [
-                                                "dd-carousel-item",
-                                                _this.type === "card" &&
-                                                _this.activeIndicator != i
-                                                    ? "isCard"
-                                                    : "",
-                                            ],
-                                            ref: `carouselItem-${i}`,
-                                        },
-                                        [
-                                            _this.$slots.default[
-                                                i
-                                            ].componentOptions.children.map(
-                                                (item) => {
-                                                    return item;
-                                                }
-                                            ),
-                                        ]
-                                    );
+                                    return item;
                                 }),
                             ]
                         ),
@@ -251,16 +178,13 @@ export default {
                                 ],
                                 style: {
                                     backgroundColor:
-                                        _this.activeIndicator == i
+                                        _this.index == i + 1
                                             ? _this.activeColor
                                             : _this.inactiveColor,
                                 },
                                 on: {
                                     click(e) {
-                                        _this.activeIndicator = i;
-                                        _this.direction !== "vertical"
-                                            ? _this.carouselMove()
-                                            : _this.carouseMove_vertical();
+                                        _this._controlNavClick(i + 1);
                                     },
                                 },
                             });
@@ -271,8 +195,46 @@ export default {
         );
     },
     computed: {
-        carouselItem() {
-            return this.$refs[`carouselItem-${this.carouselIndex}`];
+        style() {
+            const len = this.carouselList.length;
+            let distance = this.width;
+            let translate = "translateX";
+            let isWrap = "nowrap";
+            let obj = {};
+            if (this.direction === "vertical") {
+                // 垂直方向
+                distance = this.height;
+                translate = "translateY";
+                isWrap = "wrap";
+            } else {
+                obj.width = len * distance + "px";
+            }
+            if (distance && len > 0) {
+                let moveWidth = -distance * this.move; // 每次移动的宽
+                let transformWidth = moveWidth * this.moveDirection;
+                if (this.loop) {
+                    transformWidth += moveWidth;
+                } else {
+                    transformWidth = moveWidth * (this.index - 1);
+                    if (this.direction === "h") {
+                        const maxX = this.$el.offsetWidth - len * distance; // 最大可移动距离
+                        if (transformWidth < maxX) {
+                            transformWidth = maxX; // 仿止右边出现空白
+                        }
+                    }
+                }
+                return Object.assign(
+                    {
+                        overflow: "hidden",
+                        transform: `${translate}(${transformWidth}px)`,
+                        transition: `transform ${this.duration2}ms`,
+                        flexWrap: isWrap,
+                    },
+                    obj
+                );
+            } else {
+                return {};
+            }
         },
     },
     components: {
@@ -280,49 +242,104 @@ export default {
     },
     methods: {
         getWidth() {
-            return this.carouselItem.offsetWidth;
+            this.width = this.$el.offsetWidth/this.showNumber;
         },
-        getHeight() {
-            return this.carouselItem.offsetHeight;
-        },
-        carouselMove() {
-            let left =
-                -(
-                    this.activeIndicator *
-                    (this.type === "card" ? this.getWidth() : 100)
-                ) + (this.type === "card" ? "px" : "%");
-            if (this.loop && this.activeIndicator == 5) {
-                left = 0;
+        _controlNavClick(page) {
+            this.duration2 = 1000;
+            if (page > this.index) {
+                this._unShiftPush(1, page - this.index);
+            } else {
+                this._unShiftPush(-1, this.index - page);
             }
-            this.left = left;
-            this.$refs["dd-carousel_container"].style.left = left;
+            this.index = page;
         },
-        carouseMove_vertical() {
-            this.$refs["dd-carousel_container"].style.top =
-                -(this.activeIndicator * 100) + "%";
+        _directionNavClick(type) {
+            if (this.isAnimation) {
+                return;
+            }
+            if (type === 1) {
+                // 下一页
+                if (this.carouselLength > this.index) {
+                    this.index++;
+                } else {
+                    if (this.loop) {
+                        this.index = 1;
+                    } else {
+                        return;
+                    }
+                }
+            } else {
+                // 上一页
+                if (this.index > 1) {
+                    this.index--;
+                } else {
+                    if (this.loop) {
+                        this.index = this.carouselLength;
+                    } else {
+                        return;
+                    }
+                }
+            }
+            this.isAnimation = true;
+            // this.$emit("slideBefore", this.index);
+            this.moveDirection = type;
+            this.duration2 = this.duration;
+            this._setTimeOutReset(type);
         },
-        // carouselMove() {
-        //     this.$refs["dd-carousel_container"].style.left =
-        //         -(this.getWidth() * this.activeIndicator) + "px";
-        // },
+        _setTimeOutReset(type) {
+            // 动画完成后回到初始translate
+            setTimeout(() => {
+                if (this.loop) {
+                    this.moveDirection = 0;
+                    this.duration2 = 0;
+                    this._unShiftPush(type);
+                }
+                this.isAnimation = false;
+                this.$emit("slideAfter", this.index);
+            }, this.duration);
+        },
+        _unShiftPush(type, move) {
+            if (!this.loop) {
+                return;
+            }
+            const moveNum = move || this.move;
+            if (type === 1) {
+                // 删除前面第N个，追加到最后
+                const pre = this.carouselList.slice(0, moveNum);
+                this.carouselList.splice(0, moveNum);
+                pre.forEach((item) => {
+                    this.carouselList.push(item);
+                });
+            } else {
+                // 将数组最后N条移动到最前面
+                const next = this.carouselList.slice(
+                    this.carouselList.length - moveNum
+                );
+                for (let i = next.length; i > 0; i--) {
+                    this.carouselList.unshift(next[i - 1]);
+                }
+                this.carouselList.splice(this.carouselList.length - moveNum);
+            }
+        },
+        resize() {
+            this.getWidth();
+        },
     },
     mounted() {
-        // if (this.loop) {
-        //     this.carouselList.push(this.carouselList[0]);
-        // }
-        if (this.loop) {
-            let vnode =
-                this.$refs["dd-carousel_container"].children[0].cloneNode(true);
-            this.$refs["dd-carousel_container"].appendChild(vnode);
+        let showPage = 0;
+        if (!this.loop && this.showNumber > 1) {
+            showPage = Math.ceil(this.showNumber / this.move) - 1; // 可视个数所占的页数
         }
-    },
-    watch: {
-        activeIndicator(val) {
-            // if (val == 5) this.activeIndicator = 1;
-            this.direction === "vertical"
-                ? this.carouseMove_vertical()
-                : this.carouselMove();
-        },
+        this.maxMove = Math.ceil(
+            (this.carouselList.length - showPage) / this.move
+        );
+        // 总个数大于每次单位移动个数时
+        if (this.loop && this.carouselList.length >= this.move) {
+            // 截取后面移动单位个数移动到前面,
+            this._unShiftPush(-1);
+        }
+        this.getWidth();
+        window.addEventListener("resize", this.resize);
     },
 };
 </script>
@@ -384,7 +401,6 @@ export default {
         }
         .dd-carousel_container {
             display: flex;
-            flex-wrap: nowrap;
             align-items: center;
             position: relative;
             left: 0;

@@ -1,5 +1,7 @@
 <template>
-    <div class="dd-carousel-item"></div>
+    <div class="dd-carousel-item">
+        <slot />
+    </div>
 </template>
 
 <script>
@@ -9,4 +11,8 @@ export default {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.dd-carousel-item{
+    width: 100%;
+}
+</style>

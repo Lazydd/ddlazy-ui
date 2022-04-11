@@ -81,7 +81,7 @@
             </template>
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
-        <dd-footer left="Slider 滑块" right="Transfer 穿梭框"></dd-footer>
+        <dd-footer left="Dialog 对话框" right="Popconfirm 气泡确认框"></dd-footer>
     </div>
 </template>
 

@@ -7,7 +7,11 @@
         <dd-block title="基础用法" :code="code1">
             <template #source>
                 <dd-carousel :height="150">
-                    <dd-carousel-item v-for="item in 4" :key="item">
+                    <dd-carousel-item
+                        v-for="item in 4"
+                        :key="item"
+                        :class="item % 2 == 0 ? 'a' : 'b'"
+                    >
                         <h3 class="small">{{ item }}</h3>
                     </dd-carousel-item>
                 </dd-carousel>
@@ -16,7 +20,11 @@
         <dd-block title="无限滚动" :code="code2">
             <template #source>
                 <dd-carousel :height="150" loop>
-                    <dd-carousel-item v-for="item in 4" :key="item">
+                    <dd-carousel-item
+                        v-for="item in 4"
+                        :key="item"
+                        :class="item % 2 == 0 ? 'a' : 'b'"
+                    >
                         <h3 class="small">{{ item }}</h3>
                     </dd-carousel-item>
                 </dd-carousel>
@@ -33,7 +41,11 @@
                     slide-type="rectangle"
                     indicator-position="outside"
                 >
-                    <dd-carousel-item v-for="item in 4" :key="item">
+                    <dd-carousel-item
+                        v-for="item in 4"
+                        :key="item"
+                        :class="item % 2 == 0 ? 'a' : 'b'"
+                    >
                         <h3 class="small">{{ item }}</h3>
                     </dd-carousel-item>
                 </dd-carousel>
@@ -43,11 +55,16 @@
             <template #source>
                 <dd-carousel
                     :height="150"
-                    loop
+                    :showNumber="3"
+                    
                     type="card"
                     indicator-position="outside"
                 >
-                    <dd-carousel-item v-for="item in 4" :key="item">
+                    <dd-carousel-item
+                        v-for="item in 4"
+                        :key="item"
+                        :class="item % 2 == 0 ? 'a' : 'b'"
+                    >
                         <h3 class="small">{{ item }}</h3>
                     </dd-carousel-item>
                 </dd-carousel>
@@ -56,12 +73,24 @@
         <dd-block title="方向" :code="code5">
             <template #source>
                 <dd-carousel :height="150" loop direction="vertical">
-                    <dd-carousel-item v-for="item in 4" :key="item">
+                    <dd-carousel-item
+                        v-for="item in 4"
+                        :key="item"
+                        :class="item % 2 == 0 ? 'a' : 'b'"
+                    >
                         <h3 class="small">{{ item }}</h3>
                     </dd-carousel-item>
                 </dd-carousel>
             </template>
         </dd-block>
+        <dd-describe
+            title="Carousel Attributes"
+            :data="Attributes"
+        ></dd-describe>
+        <dd-footer
+            left="Dialog 对话框"
+            right="Popconfirm 气泡确认框"
+        ></dd-footer>
     </div>
 </template>
 
@@ -72,15 +101,25 @@ export default {
         return {
             code1: `
                 <dd-carousel :height="150">
-                    <dd-carousel-item v-for="item in 4" :key="item">
+                    <dd-carousel-item
+                        v-for="item in 4"
+                        :key="item"
+                        :class="item % 2 == 0 ? 'a' : 'b'"
+                    >
                         <h3 class="small">{{ item }}</h3>
                     </dd-carousel-item>
                 </dd-carousel>
             `,
             code2: `
-                <dd-carousel-item v-for="item in 4" :key="item">
+                <dd-carousel :height="150" loop>
+                    <dd-carousel-item
+                        v-for="item in 4"
+                        :key="item"
+                        :class="item % 2 == 0 ? 'a' : 'b'"
+                    >
                         <h3 class="small">{{ item }}</h3>
-                </dd-carousel-item>
+                    </dd-carousel-item>
+                </dd-carousel>
             `,
             code3: `
                 <dd-carousel
@@ -92,7 +131,11 @@ export default {
                     slide-type="rectangle"
                     indicator-position="outside"
                 >
-                    <dd-carousel-item v-for="item in 4" :key="item">
+                    <dd-carousel-item
+                        v-for="item in 4"
+                        :key="item"
+                        :class="item % 2 == 0 ? 'a' : 'b'"
+                    >
                         <h3 class="small">{{ item }}</h3>
                     </dd-carousel-item>
                 </dd-carousel>
@@ -111,11 +154,73 @@ export default {
             `,
             code5: `
                 <dd-carousel :height="150" loop direction="vertical">
-                    <dd-carousel-item v-for="item in 4" :key="item">
+                    <dd-carousel-item
+                        v-for="item in 4"
+                        :key="item"
+                        :class="item % 2 == 0 ? 'a' : 'b'"
+                    >
                         <h3 class="small">{{ item }}</h3>
                     </dd-carousel-item>
                 </dd-carousel>
             `,
+            Attributes: [
+                {
+                    parameter: "height",
+                    explain: "走马灯高度",
+                    type: "number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "loop",
+                    explain: "是否循环显示",
+                    type: "boolean",
+                    optional: "-",
+                    default: "true",
+                },
+                {
+                    parameter: "activeColor",
+                    explain: "激活指示器颜色",
+                    type: "string",
+                    optional: "—",
+                    default: "#999",
+                },
+                {
+                    parameter: "inactiveColor",
+                    explain: "未激活指示器颜色",
+                    type: "string",
+                    optional: "—",
+                    default: "#c0c4cc",
+                },
+                {
+                    parameter: "slideType",
+                    explain: "指示器类型",
+                    type: "string",
+                    optional: "circle/rectangle",
+                    default: "circle",
+                },
+                {
+                    parameter: "duration",
+                    explain: "动画时间",
+                    type: "number",
+                    optional: "1000",
+                    default: "mm",
+                },
+                {
+                    parameter: "direction",
+                    explain: "走马灯展示的方向",
+                    type: "string",
+                    optional: "horizontal/vertical",
+                    default: "horizontal",
+                },
+                {
+                    parameter: "type",
+                    explain: "走马灯的类型",
+                    type: "string",
+                    optional: "card",
+                    default: "—",
+                },
+            ],
         };
     },
 };
@@ -125,15 +230,13 @@ export default {
 /deep/.dd-carousel-item {
     text-align: center;
 }
-/deep/.dd-carousel-item:nth-child(2n) {
+.a {
     background-color: #99a9bf;
-    // background: url("https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/lucheng/1644565026162.jpg");
+}
+.b {
+    background-color: #d3dce6;
 }
 
-/deep/.dd-carousel-item:nth-child(2n + 1) {
-    background-color: #d3dce6;
-    // background: url('https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/test/1638946365720.png');
-}
 /deep/.dd-carousel-item h3 {
     color: #475669;
     font-size: 14px;
