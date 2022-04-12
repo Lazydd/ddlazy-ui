@@ -4,8 +4,14 @@
         <p class="_descript">基于ArcGis的地图组件</p>
         <dd-block title="基础用法" :code="code1">
             <template #source>
+                {{ rings }}
                 <div class="map-box">
-                    <dd-map :zoom="15" :extent="townExtent"></dd-map>
+                    <dd-map
+                        :rings="rings"
+                        @change="change"
+                        :zoom="15"
+                        :extent="townExtent"
+                    ></dd-map>
                 </div>
             </template>
         </dd-block>
@@ -22,26 +28,27 @@ export default {
     data() {
         return {
             townExtent: [],
+            rings: [],
             code1: `
-                
+
             `,
             Attributes: [
                 {
-                    parameter: "value / v-model",
-                    explain: "绑定值",
-                    type: "—",
+                    parameter: "center",
+                    explain: "中心坐标",
+                    type: "object",
                     optional: "—",
-                    default: "—",
+                    default: `{x: 120.639868013671,y: 30.7606547455786}`,
                 },
                 {
-                    parameter: "height",
-                    explain: "可编辑区高度",
-                    type: "number",
-                    optional: "—",
-                    default: "500",
+                    parameter: "isShowZoom",
+                    explain: "是否显示放大缩小",
+                    type: "boolean",
+                    optional: "true/false",
+                    default: "true",
                 },
                 {
-                    parameter: "url",
+                    parameter: "rings",
                     explain: "上传地址",
                     type: "string",
                     optional: "—",
@@ -90,11 +97,8 @@ export default {
         };
     },
     methods: {
-        setDisabled() {
-            this.$refs.ueditor.setDisabled();
-        },
-        setEnabled() {
-            this.$refs.ueditor.setEnabled();
+        change(item) {
+            this.rings = item;
         },
     },
 };

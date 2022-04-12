@@ -74,7 +74,6 @@ export default {
                     headerAlign,
                 });
             });
-            console.log(this.vnode);
         },
     },
     created() {

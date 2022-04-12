@@ -460,6 +460,8 @@
               <li><dd-icon icon="icon-triangle-left-fill"></dd-icon><div><span>icon-triangle-left-fill</span></div></li>
               <li><dd-icon icon="icon-triangle-right-fill"></dd-icon><div><span>icon-triangle-right-fill</span></div></li>
               <li><dd-icon icon="icon-github-fill"></dd-icon><div><span>icon-github-fill</span></div></li>
+              <li><dd-icon icon="icon-fullscreen"></dd-icon><div><span>icon-fullscreen</span></div></li>
+              <li><dd-icon icon="icon-fullscreen-exit"></dd-icon><div><span>icon-fullscreen-exit</span></div></li>
             </ul>
             <dd-footer left="Layout 布局" right="Button 按钮"></dd-footer>
         </div>
