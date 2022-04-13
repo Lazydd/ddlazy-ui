@@ -109,11 +109,11 @@ export default {
                         Search,
                     ]) => {
                         const graphicsLayer = new GraphicsLayer();
-                        var map = new Map({
+                        let map = new Map({
                             basemap: "streets-navigation-vector",
                             layers: [graphicsLayer],
                         });
-                        var view = new MapView({
+                        let view = new MapView({
                             map: map,
                             center: [this.center.x, this.center.y],
                             container: "maps",
@@ -255,6 +255,7 @@ export default {
                             "topo-vector", //此矢量切片图层为世界提供了详细的底图，其中包含经典的Esri地形图样式，旨在用于浮雕地图。
                         ];
                         this.createExtent();
+                        this.addPoint();
                     }
                 )
                 .catch((err) => {
@@ -405,6 +406,71 @@ export default {
                 });
         },
         // // 添加定位
+        addPoint() {
+            loadModules([
+                "esri/Map",
+                "esri/views/MapView",
+                "esri/Graphic",
+                "esri/widgets/BasemapToggle",
+                "esri/widgets/BasemapGallery",
+                "esri/layers/GraphicsLayer",
+                "esri/widgets/Sketch",
+                "esri/widgets/Sketch/SketchViewModel",
+                "esri/widgets/support/SnappingControls",
+                "esri/geometry/SpatialReference",
+                "esri/geometry/support/webMercatorUtils",
+                "esri/geometry/Point",
+                "esri/tasks/GeometryService",
+                "esri/widgets/Search",
+                "esri/symbols/PictureMarkerSymbol",
+            ])
+                .then(
+                    ([
+                        Map,
+                        MapView,
+                        Graphic,
+                        BasemapToggle,
+                        BasemapGallery,
+                        GraphicsLayer,
+                        Sketch,
+                        SketchViewModel,
+                        SnappingControls,
+                        SpatialReference,
+                        webMercatorUtils,
+                        Point,
+                        GeometryService,
+                        Search,
+                        PictureMarkerSymbol,
+                    ]) => {
+                        let symbol = {
+                            type: "picture-marker", // autocasts as new PictureMarkerSymbol()
+                            url: "https://static.arcgis.com/images/Symbols/Shapes/BlackStarLargeB.png",
+                            width: "64px",
+                            height: "64px",
+                        };
+                        const polygon = {
+                            type: "polygon", // autocasts as new Polygon()
+                            rings: [
+                                [
+                                    [121.63586615782069, 31.7563584045408],
+                                    [121.63799046736054, 31.7571513059402],
+                                    [121.63700341444303, 31.753334255539144],
+                                    [121.63586615782069, 31.7563584045408],
+                                ],
+                            ],
+                        };
+                        const pointGraphic = new Graphic({
+                            geometry: polygon,
+                            symbol,
+                        });
+                        this.view.graphics.addMany([pointGraphic]); //多个用addMany，一个用add
+                    }
+                )
+                .catch((err) => {
+                    // handle any errors
+                    console.error(err);
+                });
+        },
         // addPoint() {
         //     // this.clear();
         //     esriLoader.dojoRequire(

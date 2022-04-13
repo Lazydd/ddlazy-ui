@@ -2,7 +2,7 @@
 
 ## Project setup
 ```
-npm install ddLazy-ui -S
+npm install ddLazy-ui
 ```
 
 ### Quick Start
