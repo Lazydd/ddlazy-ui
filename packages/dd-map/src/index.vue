@@ -3,7 +3,7 @@
         <div
             class="fullscreen-btn"
             :title="fullscreen ? '退出' : '全屏'"
-            @click="toggle"
+            @click="isfull"
         >
             <dd-icon v-if="!fullscreen" icon="icon-fullscreen" />
             <dd-icon v-if="fullscreen" icon="icon-fullscreen-exit" />
@@ -16,10 +16,13 @@ export default {
     name: "ddMap",
     props: {
         data: Object, // 选中的点位数据
-        extent: Array, // 网格范围数据
         zoom: {
             type: Number,
             default: 13,
+        },
+        isShowZoom: {
+            type: Boolean,
+            default: false,
         },
         maxZoom: {
             type: Number,
@@ -29,9 +32,30 @@ export default {
             type: Number,
             default: 6,
         },
-        isShowZoom: {
+        toggle: {
             type: Boolean,
             default: false,
+        },
+        search: {
+            type: Boolean,
+            default: false,
+        },
+        // 网格范围数据
+        extent: {
+            type: Array,
+            default() {
+                return [];
+            },
+        },
+        sketch: {
+            type: Boolean,
+            default: false,
+        },
+        polygonSymbol: {
+            type: Object,
+        },
+        lineSymbol: {
+            type: Object,
         },
         center: {
             type: Object,
@@ -61,6 +85,11 @@ export default {
                 "esri/widgets/Sketch",
                 "esri/widgets/Sketch/SketchViewModel",
                 "esri/widgets/support/SnappingControls",
+                "esri/geometry/SpatialReference",
+                "esri/geometry/support/webMercatorUtils",
+                "esri/geometry/Point",
+                "esri/tasks/GeometryService",
+                "esri/widgets/Search",
             ])
                 .then(
                     ([
@@ -73,6 +102,11 @@ export default {
                         Sketch,
                         SketchViewModel,
                         SnappingControls,
+                        SpatialReference,
+                        webMercatorUtils,
+                        Point,
+                        GeometryService,
+                        Search,
                     ]) => {
                         const graphicsLayer = new GraphicsLayer();
                         var map = new Map({
@@ -97,68 +131,89 @@ export default {
                         } else {
                             view.ui.remove("zoom"); //移除放大缩小
                         }
-                        //多种底图
-                        // const toggle = new BasemapGallery({
-                        //     view: view,
-                        //     // nextBasemap: "hybrid",
-                        // });
-                        //两个底图
-                        const toggle1 = new BasemapToggle({
-                            view: view,
-                            nextBasemap: "hybrid",
-                        });
-                        // view.ui.add(toggle, "top-right");
-                        view.ui.add(toggle1, "top-left");
+                        if (this.search) {
+                            const search = new Search({
+                                view: view,
+                            });
+                            view.ui.add(search, "top-left");
+                        }
+
+                        if (this.toggle) {
+                            //多种底图
+                            // const toggle = new BasemapGallery({
+                            //     view: view,
+                            //     // nextBasemap: "hybrid",
+                            // });
+                            //两个底图
+                            const toggle1 = new BasemapToggle({
+                                view: view,
+                                nextBasemap: "hybrid",
+                            });
+                            // view.ui.add(toggle, "top-right");
+                            view.ui.add(toggle1, "top-left");
+                        }
+
                         //工具
-                        view.when(() => {
-                            let viewModel = new SketchViewModel({
-                                //https://developers.arcgis.com/javascript/latest/sample-code/sketch-viewmodel-styler/
-                                view: view,
-                                layer: graphicsLayer,
-                                polygonSymbol: {
-                                    type: "simple-fill",
-                                    style: "solid",
-                                    color: "blue",
-                                    outline: {
-                                        width: 3,
-                                        style: "solid",
-                                        color: "red",
-                                    },
-                                },
-                            });
-                            let sketch = new Sketch({
-                                layer: graphicsLayer,
-                                view: view,
-                                viewModel: viewModel,
-                                creationMode: "update",
-                            });
-                            view.ui.add(sketch, "top-right");
-                            viewModel.on("create", (e) => {
-                                if (e.state === "complete") {
-                                    this.detail = [...this.detail, e.graphic];
-                                    this.$emit("change", this.detail);
-                                    // console.log(e.graphic.geometry.rings);
-                                }
-                            });
-                            sketch.on("delete", (e) => {
-                                e.graphics.forEach((item) => {
-                                    this.detail = this.detail.filter(
-                                        (items) => {
-                                            console.log(items.uid);
-                                            console.log(item.uid);
-                                            return items.uid != item.uid;
-                                        }
-                                    );
-                                    this.$emit("change", this.detail);
+                        if (this.sketch) {
+                            view.when(() => {
+                                let viewModel = new SketchViewModel({
+                                    //https://developers.arcgis.com/javascript/latest/sample-code/sketch-viewmodel-styler/
+                                    view: view,
+                                    layer: graphicsLayer,
+                                    polygonSymbol: this.polygonSymbol,
+                                });
+                                let sketch = new Sketch({
+                                    layer: graphicsLayer,
+                                    view: view,
+                                    viewModel: viewModel,
+                                    creationMode: "update",
+                                });
+                                view.ui.add(sketch, "top-right");
+                                viewModel.on("create", (e) => {
+                                    if (e.state === "complete") {
+                                        const geographicGeom =
+                                            webMercatorUtils.webMercatorToGeographic(
+                                                e.graphic.geometry
+                                            );
+                                        this.detail = [
+                                            ...this.detail,
+                                            geographicGeom,
+                                        ];
+                                        this.$emit("change", this.detail);
+                                    }
+                                });
+                                viewModel.on("update", (e) => {
+                                    if (e.state === "complete") {
+                                        e.graphics.map((items) => {
+                                            this.detail = this.detail.map(
+                                                (item) => {
+                                                    if (
+                                                        item.uid === items.uid
+                                                    ) {
+                                                        return items;
+                                                    } else {
+                                                        return item;
+                                                    }
+                                                }
+                                            );
+                                        });
+                                        this.$emit("change", this.detail);
+                                    }
+                                });
+                                sketch.on("delete", (e) => {
+                                    e.graphics.forEach((item) => {
+                                        this.detail = this.detail.filter(
+                                            (items) => {
+                                                return items.uid != item.uid;
+                                            }
+                                        );
+                                        this.$emit("change", this.detail);
+                                    });
                                 });
                             });
-                        });
-
-                        view.on("click", function (e) {
-                            console.log("这里是点击事件", e);
-                        });
+                        }
                         view.on("mouse-wheel", (e) => {
-                            console.log("这里是鼠标滚轮事件", e);
+                            this.$emit("mapRoller", e);
                         });
                         // 全部的鼠标事件如下：
                         const events = [
@@ -213,35 +268,35 @@ export default {
                 "esri/Map",
                 "esri/views/MapView",
                 "esri/Graphic",
-                "esri/widgets/Editor",
                 "esri/widgets/BasemapToggle",
                 "esri/widgets/BasemapGallery",
-                "esri/layers/OGCFeatureLayer",
+                "esri/layers/GraphicsLayer",
+                "esri/widgets/Sketch",
+                "esri/widgets/Sketch/SketchViewModel",
+                "esri/widgets/support/SnappingControls",
+                "esri/geometry/SpatialReference",
+                "esri/geometry/support/webMercatorUtils",
+                "esri/geometry/Point",
+                "esri/tasks/GeometryService",
+                "esri/widgets/Search",
             ])
                 .then(
                     ([
                         Map,
                         MapView,
                         Graphic,
-                        Editor,
                         BasemapToggle,
                         BasemapGallery,
-                        OGCFeatureLayer,
+                        GraphicsLayer,
+                        Sketch,
+                        SketchViewModel,
+                        SnappingControls,
+                        SpatialReference,
+                        webMercatorUtils,
+                        Point,
+                        GeometryService,
+                        Search,
                     ]) => {
-                        //线条
-                        const polyline = {
-                            type: "polyline", // autocasts as new Polyline()
-                            paths: [
-                                [
-                                    [120.639868013671, 30.7606547455786],
-                                    [120.643505089096, 30.7618992905615],
-                                    [120.644508235267, 30.7599090914725],
-                                    [120.643370978645, 30.7595013957022],
-                                    [120.640318624786, 30.7597481589316],
-                                    [120.639868013671, 30.7606547455786],
-                                ],
-                            ],
-                        };
                         //三角形
                         const polygon = {
                             type: "polygon", // autocasts as new Polygon()
@@ -258,8 +313,10 @@ export default {
                             longitude: -49.97,
                             latitude: 41.73,
                         };
+                        //线条样式//https://developers.arcgis.com/javascript/latest/api-reference/esri-symbols-SimpleLineSymbol.html
+                        const lineSymbol = this.lineSymbol;
                         //线条样式
-                        const lineSymbol = {
+                        const lineSymbol2 = {
                             type: "simple-line", // autocasts as SimpleLineSymbol()
                             color: [24, 144, 255],
                             width: 3,
@@ -301,36 +358,44 @@ export default {
                             Owner: "TransCanada",
                             Length: "3,456 km",
                         };
-                        //创建矩形范围
-                        const polylineGraphic = new Graphic({
-                            geometry: polyline,
-                            symbol: lineSymbol,
-                            attributes: lineAtt,
-                            popupTemplate: {
-                                // autocasts as new PopupTemplate()
-                                title: "{Name}",
-                                content: [
-                                    {
-                                        type: "fields",
-                                        fieldInfos: [
-                                            {
-                                                fieldName: "Name",
-                                            },
-                                            {
-                                                fieldName: "Owner",
-                                            },
-                                            {
-                                                fieldName: "Length",
-                                            },
-                                        ],
-                                    },
-                                ],
-                            },
+                        let arr = [];
+                        this.extent.map((item) => {
+                            let detail = {
+                                type: "polyline", // autocasts as new Polyline()
+                                paths: item.rings,
+                            };
+                            const polylineGraphic = new Graphic({
+                                geometry: detail,
+                                symbol: lineSymbol,
+                                // attributes: lineAtt,
+                                // popupTemplate: {
+                                //     // autocasts as new PopupTemplate()
+                                //     title: "{Name}",
+                                //     content: [
+                                //         {
+                                //             type: "fields",
+                                //             fieldInfos: [
+                                //                 {
+                                //                     fieldName: "Name",
+                                //                 },
+                                //                 {
+                                //                     fieldName: "Owner",
+                                //                 },
+                                //                 {
+                                //                     fieldName: "Length",
+                                //                 },
+                                //             ],
+                                //         },
+                                //     ],
+                                // },
+                            });
+                            arr = [...arr, polylineGraphic];
                         });
+                        console.log(arr);
                         this.view.graphics.addMany([
-                            polylineGraphic,
                             polygonGraphic,
                             pointGraphic,
+                            ...arr,
                         ]); //多个用addMany，一个用add
                     }
                 )
@@ -339,109 +404,6 @@ export default {
                     console.error(err);
                 });
         },
-        // 切换地图
-        // changeMap() {
-        //     var type = this.currentMapType === 1 ? 0 : 1;
-        //     esriLoader.dojoRequire(
-        //         [
-        //             "esri/map",
-        //             "tdtlib/TDTYXLayer",
-        //             "tdtlib/TDTLayer",
-        //             "tdtlib/TDTAnnoLayer",
-        //             "dojo/domReady!",
-        //         ],
-        //         (Map, TDTYXLayer, TDTLayer, TDTAnnoLayer) => {
-        //             // 清除原来的底图
-        //             this.map.removeLayer(this.map.getLayer(CONST_MAP));
-        //             if (this.map.getLayer(CONST_MAPAnno))
-        //                 this.map.removeLayer(this.map.getLayer(CONST_MAPAnno));
-
-        //             if (type === 1) {
-        //                 var annoLayer = new TDTAnnoLayer({ id: CONST_MAPAnno });
-        //                 var basemap = new TDTLayer({ id: CONST_MAP });
-        //                 this.map.addLayers([basemap, annoLayer]);
-        //                 this.currentMapType = 1;
-        //             } else if (type === 0) {
-        //                 var yx = new TDTYXLayer({ id: CONST_MAP });
-        //                 this.map.addLayer(yx, 0);
-        //                 this.currentMapType = 0;
-        //             }
-        //         }
-        //     );
-        // },
-        // // 创建小镇范围
-        // createExtent() {
-        //     // this.clear();
-
-        //     esriLoader.dojoRequire(
-        //         [
-        //             "esri/layers/GraphicsLayer",
-        //             "esri/graphic",
-        //             "esri/geometry/Polygon",
-        //             "esri/symbols/SimpleFillSymbol",
-        //             "esri/symbols/SimpleLineSymbol",
-        //             "esri/Color",
-        //             "esri/InfoTemplate",
-        //             "esri/symbols/PictureMarkerSymbol",
-        //             "esri/geometry/Point",
-        //             "esri/symbols/TextSymbol",
-        //             "tdtlib/geoLayer",
-        //             "tdtlib/TDTYXLayer",
-        //             "tdtlib/TDTLayer",
-        //             "esri",
-        //             "esri/config",
-        //             "dojo/domReady!",
-        //         ],
-        //         (
-        //             GraphicsLayer,
-        //             Graphic,
-        //             Polygon,
-        //             SimpleFillSymbol,
-        //             SimpleLineSymbol,
-        //             Color,
-        //             InfoTemplate,
-        //             PictureMarkerSymbol,
-        //             Point,
-        //             TextSymbol,
-        //             GeoLayer,
-        //             TDTYXLayer,
-        //             TDTLayer,
-        //             esri,
-        //             esriConfig
-        //         ) => {
-        //             var graphicLayer = new GraphicsLayer();
-        //             this.extent.map((i) => {
-        //                 if (i) {
-        //                     var polygon = new Polygon({
-        //                         rings: i || [],
-        //                         spatialReference: {
-        //                             wkid: 4326,
-        //                         },
-        //                     });
-
-        //                     var tmpSymbol = new SimpleFillSymbol(
-        //                         SimpleFillSymbol.STYLE_SOLID,
-        //                         new SimpleLineSymbol(
-        //                             SimpleLineSymbol.STYLE_DASH,
-        //                             new Color([24, 144, 255]),
-        //                             3
-        //                         ),
-        //                         new Color([0, 110, 255, 0.34])
-        //                     );
-        //                     var graphic = new Graphic(polygon, tmpSymbol);
-        //                     graphicLayer.add(graphic);
-        //                     graphicLayer.id = this.CONST_SCOPE;
-
-        //                     this.polygonCenter = polygon
-        //                         .getExtent()
-        //                         .getCenter();
-        //                     this.map.centerAt(this.polygonCenter);
-        //                 }
-        //             });
-        //             this.map.addLayer(graphicLayer, 0);
-        //         }
-        //     );
-        // },
         // // 添加定位
         // addPoint() {
         //     // this.clear();
@@ -507,7 +469,7 @@ export default {
         //     );
         // },
         // // 全屏、取消全屏切换
-        toggle() {
+        isfull() {
             this.fullscreen = !this.fullscreen;
             if (this.polygonCenter) {
                 this.$nextTick(() => {
@@ -517,16 +479,6 @@ export default {
                 });
             }
         },
-        // clear() {
-        //     // 清除图层
-        //     if (this.map) {
-        //         let markLayer = this.map.getLayer(this.CONST_MARKLAYER);
-        //         let scopeLayer = this.map.getLayer(this.CONST_SCOPE);
-
-        //         if (markLayer) this.map.removeLayer(markLayer);
-        //         if (scopeLayer) this.map.removeLayer(scopeLayer);
-        //     }
-        // },
     },
     mounted() {
         this.createMap();
