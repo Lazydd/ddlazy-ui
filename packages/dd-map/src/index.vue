@@ -47,12 +47,36 @@ export default {
                 return [];
             },
         },
+        mark: {
+            type: Array,
+            default() {
+                return [];
+            },
+        },
+        markSymbol: {
+            type: Object,
+        },
+        pointSymbol: {
+            type: Object,
+        },
+        markTopSymbox: {
+            type: Object,
+        },
         sketch: {
             type: Boolean,
             default: false,
         },
         polygonSymbol: {
             type: Object,
+            default() {
+                return {
+                    type: "picture-marker",
+                    url: "http://qiniu.mrxinchen.cn/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220414153853.png", //点位图片
+                    width: "30px",
+                    height: "30px",
+                    yoffset: "15px",
+                };
+            },
         },
         lineSymbol: {
             type: Object,
@@ -71,6 +95,11 @@ export default {
         return {
             fullscreen: false, // 是否全屏
             detail: [],
+            view: null,
+            map: null,
+            graphicsLayer: null,
+            pointLayer: null,
+            markLayer: null,
         };
     },
     methods: {
@@ -90,6 +119,9 @@ export default {
                 "esri/geometry/Point",
                 "esri/tasks/GeometryService",
                 "esri/widgets/Search",
+                "esri/symbols/PictureMarkerSymbol",
+                "esri/layers/FeatureLayer",
+                "esri/layers/GeoJSONLayer",
             ])
                 .then(
                     ([
@@ -107,11 +139,17 @@ export default {
                         Point,
                         GeometryService,
                         Search,
+                        PictureMarkerSymbol,
+                        FeatureLayer,
+                        GeoJSONLayer,
                     ]) => {
                         const graphicsLayer = new GraphicsLayer();
+                        const pointLayer = new GraphicsLayer();
+                        this.graphicsLayer = graphicsLayer;
+                        this.pointLayer = pointLayer;
                         let map = new Map({
                             basemap: "streets-navigation-vector",
-                            layers: [graphicsLayer],
+                            layers: [graphicsLayer, pointLayer],
                         });
                         let view = new MapView({
                             map: map,
@@ -119,11 +157,11 @@ export default {
                             container: "maps",
                             zoom: this.zoom,
                             constraints: {
-                                maxZoom: this.maxZoom, //最大缩放
-                                minZoom: this.minZoom, //最小缩放
+                                // maxZoom: this.maxZoom, //最大缩放
+                                // minZoom: this.minZoom, //最小缩放
                             },
                         });
-
+                        this.map = map;
                         this.view = view;
                         //线条
                         if (this.isShowZoom) {
@@ -215,6 +253,22 @@ export default {
                         view.on("mouse-wheel", (e) => {
                             this.$emit("mapRoller", e);
                         });
+
+                        view.on("click", (e) => {
+                            let { latitude, longitude } = e.mapPoint;
+                            let point = {
+                                type: "point",
+                                longitude,
+                                latitude,
+                            };
+                            let pointGraphic = new Graphic({
+                                geometry: point,
+                                symbol: this.pointSymbol,
+                            });
+                            pointLayer.removeAll();
+                            pointLayer.add(pointGraphic);
+                            this.$emit("click", e);
+                        });
                         // 全部的鼠标事件如下：
                         const events = [
                             "pointer-enter", //鼠标进入
@@ -235,6 +289,7 @@ export default {
                             "blur", //模糊
                             "resize", //调整
                         ];
+                        //自带的地图，部分可能会跨域
                         const basemap = [
                             "dark-gray", //深灰色画布底图设计用作舒缓背景贴图，用于覆盖并将注意力集中在其他地图图层上。
                             "dark-gray-vector", //此矢量切片图层为世界提供了详细的底图，其中性背景样式具有最少的颜色，标签和特征。
@@ -254,6 +309,7 @@ export default {
                             "topo", //地形图包括边界，城市，水景，地形特征，公园，地标，交通和建筑物。
                             "topo-vector", //此矢量切片图层为世界提供了详细的底图，其中包含经典的Esri地形图样式，旨在用于浮雕地图。
                         ];
+                        this.clustering();
                         this.createExtent();
                         this.addPoint();
                     }
@@ -280,6 +336,9 @@ export default {
                 "esri/geometry/Point",
                 "esri/tasks/GeometryService",
                 "esri/widgets/Search",
+                "esri/symbols/PictureMarkerSymbol",
+                "esri/layers/FeatureLayer",
+                "esri/layers/GeoJSONLayer",
             ])
                 .then(
                     ([
@@ -297,6 +356,9 @@ export default {
                         Point,
                         GeometryService,
                         Search,
+                        PictureMarkerSymbol,
+                        FeatureLayer,
+                        GeoJSONLayer,
                     ]) => {
                         //三角形
                         const polygon = {
@@ -423,6 +485,8 @@ export default {
                 "esri/tasks/GeometryService",
                 "esri/widgets/Search",
                 "esri/symbols/PictureMarkerSymbol",
+                "esri/layers/FeatureLayer",
+                "esri/layers/GeoJSONLayer",
             ])
                 .then(
                     ([
@@ -441,29 +505,39 @@ export default {
                         GeometryService,
                         Search,
                         PictureMarkerSymbol,
+                        FeatureLayer,
+                        GeoJSONLayer,
                     ]) => {
-                        let symbol = {
-                            type: "picture-marker", // autocasts as new PictureMarkerSymbol()
-                            url: "https://static.arcgis.com/images/Symbols/Shapes/BlackStarLargeB.png",
-                            width: "64px",
-                            height: "64px",
-                        };
-                        const polygon = {
-                            type: "polygon", // autocasts as new Polygon()
-                            rings: [
-                                [
-                                    [121.63586615782069, 31.7563584045408],
-                                    [121.63799046736054, 31.7571513059402],
-                                    [121.63700341444303, 31.753334255539144],
-                                    [121.63586615782069, 31.7563584045408],
-                                ],
-                            ],
-                        };
-                        const pointGraphic = new Graphic({
-                            geometry: polygon,
-                            symbol,
+                        const markLayer = new GraphicsLayer();
+                        this.markLayer = markLayer;
+                        let symbol = this.markSymbol;
+                        let markTopSymbox = this.markTopSymbox;
+
+                        this.mark.map((item) => {
+                            let polygon = {
+                                type: "point",
+                                longitude: item.x,
+                                latitude: item.y,
+                            };
+                            const pointGraphic = new Graphic({
+                                geometry: polygon,
+                                symbol,
+                                attributes: item.attributes,
+                            });
+                            this.markLayer.add(pointGraphic);
                         });
-                        this.view.graphics.addMany([pointGraphic]); //多个用addMany，一个用add
+                        this.map.layers.add(this.markLayer);
+                        this.view.when(() => {
+                            this.view.on("click", (e) => {
+                                this.view.hitTest(e).then((res) => {
+                                    if (res.results.length) {
+                                        console.log(
+                                            res.results[0]?.graphic?.attributes
+                                        );
+                                    }
+                                });
+                            });
+                        });
                     }
                 )
                 .catch((err) => {
@@ -471,69 +545,101 @@ export default {
                     console.error(err);
                 });
         },
-        // addPoint() {
-        //     // this.clear();
-        //     esriLoader.dojoRequire(
-        //         [
-        //             "esri/map",
-        //             "esri/layers/ArcGISTiledMapServiceLayer",
-        //             "esri/layers/GraphicsLayer",
-        //             "esri/graphic",
-        //             "esri/geometry/Polygon",
-        //             "esri/symbols/SimpleFillSymbol",
-        //             "esri/symbols/SimpleLineSymbol",
-        //             "esri/Color",
-        //             "esri/InfoTemplate",
-        //             "esri/symbols/PictureMarkerSymbol",
-        //             "esri/geometry/Point",
-        //             "esri/symbols/TextSymbol",
-        //             "tdtlib/geoLayer",
-        //             "tdtlib/TDTYXLayer",
-        //             "tdtlib/TDTLayer",
-        //             "tdtlib/TDTAnnoLayer",
-        //             "esri",
-        //             "esri/config",
-        //             "esri/geometry/Extent",
-        //             "esri/layers/WMSLayer",
-        //             "dojo/domReady!",
-        //         ],
-        //         (
-        //             Map,
-        //             ArcGISTiledMapServiceLayer,
-        //             GraphicsLayer,
-        //             Graphic,
-        //             Polygon,
-        //             SimpleFillSymbol,
-        //             SimpleLineSymbol,
-        //             Color,
-        //             InfoTemplate,
-        //             PictureMarkerSymbol,
-        //             Point,
-        //             TextSymbol,
-        //             GeoLayer,
-        //             TDTYXLayer,
-        //             TDTLayer,
-        //             TDTAnnoLayer,
-        //             esri,
-        //             esriConfig,
-        //             Extent,
-        //             WMSLayer
-        //         ) => {
-        //             var graphicLayer = new GraphicsLayer();
-        //             var symbol = new PictureMarkerSymbol({
-        //                 // url: require("@/assets/images/icon_point.png"),
-        //                 width: 35,
-        //                 height: 45,
-        //                 yoffset: 18,
-        //             });
-        //             var point = new Point(this.data.x, this.data.y);
-        //             var panoGraphic = new Graphic(point, symbol);
-        //             graphicLayer.id = this.CONST_MARKLAYER;
-        //             graphicLayer.add(panoGraphic);
-        //             this.map.addLayer(graphicLayer);
-        //         }
-        //     );
-        // },
+        //聚合
+        clustering() {
+            loadModules([
+                "esri/Map",
+                "esri/views/MapView",
+                "esri/Graphic",
+                "esri/widgets/BasemapToggle",
+                "esri/widgets/BasemapGallery",
+                "esri/layers/GraphicsLayer",
+                "esri/widgets/Sketch",
+                "esri/widgets/Sketch/SketchViewModel",
+                "esri/widgets/support/SnappingControls",
+                "esri/geometry/SpatialReference",
+                "esri/geometry/support/webMercatorUtils",
+                "esri/geometry/Point",
+                "esri/tasks/GeometryService",
+                "esri/widgets/Search",
+                "esri/symbols/PictureMarkerSymbol",
+                "esri/layers/FeatureLayer",
+                "esri/layers/GeoJSONLayer",
+            ])
+                .then(
+                    ([
+                        Map,
+                        MapView,
+                        Graphic,
+                        BasemapToggle,
+                        BasemapGallery,
+                        GraphicsLayer,
+                        Sketch,
+                        SketchViewModel,
+                        SnappingControls,
+                        SpatialReference,
+                        webMercatorUtils,
+                        Point,
+                        GeometryService,
+                        Search,
+                        PictureMarkerSymbol,
+                        FeatureLayer,
+                        GeoJSONLayer,
+                    ]) => {
+                        const clusterConfig = {
+                            type: "cluster",
+                            clusterRadius: "100px",
+                            clusterMinSize: "24px",
+                            clusterMaxSize: "60px",
+                            labelingInfo: [
+                                {
+                                    deconflictionStrategy: "none",
+                                    labelExpressionInfo: {
+                                        expression:
+                                            "Text($feature.cluster_count, '#,###')", //显示内容
+                                    },
+                                    symbol: {
+                                        type: "text",
+                                        color: "#004a5d", //字体颜色
+                                        font: {
+                                            weight: "bold",
+                                            family: "Noto Sans",
+                                            size: "12px",
+                                        },
+                                    },
+                                    labelPlacement: "center-center",
+                                },
+                            ],
+                        };
+                        const layer = new GeoJSONLayer({
+                            title: "Earthquakes from the last month",
+                            url: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson",
+                            copyright: "USGS Earthquakes",
+
+                            featureReduction: clusterConfig,
+                            renderer: {
+                                type: "simple",
+                                field: "mag",
+                                symbol: {
+                                    type: "simple-marker",
+                                    size: 4,
+                                    color: "red", //背景样式
+                                },
+                            },
+                        });
+                        this.map.layers.add(layer);
+                    }
+                )
+                .catch((err) => {
+                    // handle any errors
+                    console.error(err);
+                });
+        },
+        clearMap() {
+            this.markLayer.removeAll();
+            this.graphicsLayer.removeAll();
+            this.pointLayer.removeAll();
+        },
         // // 全屏、取消全屏切换
         isfull() {
             this.fullscreen = !this.fullscreen;

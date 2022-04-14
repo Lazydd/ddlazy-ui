@@ -6,11 +6,17 @@
             <template #source>
                 <div class="map-box">
                     <dd-map
+                        ref="myMap"
                         :rings="rings"
                         @change="change"
+                        @click="mapClick"
                         @mapRoller="mapRoller"
                         :zoom="15"
                         :extent="townExtent"
+                        :mark="mark"
+                        :markSymbol="markSymbol"
+                        :pointSymbol="pointSymbol"
+                        :markTopSymbox="markTopSymbox"
                         :polygonSymbol="polygonSymbol"
                         :lineSymbol="lineSymbol"
                         isShowZoom
@@ -19,6 +25,9 @@
                         search
                     ></dd-map>
                 </div>
+                <dd-button style="margin-top: 15px" @click="clearClick"
+                    >清空</dd-button
+                >
             </template>
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
@@ -90,6 +99,55 @@ export default {
                     ],
                 },
             ],
+            mark: [
+                {
+                    x: 120.63584470014857,
+                    y: 30.7586633323699,
+                    attributes: {
+                        content: "A坐标",
+                    },
+                },
+                {
+                    x: 120.6376256869345,
+                    y: 30.75938245855835,
+                    attributes: {
+                        content: "B坐标",
+                    },
+                },
+                {
+                    x: 120.63249730329782,
+                    y: 30.762646117592116,
+                    attributes: {
+                        content: "C坐标",
+                    },
+                },
+                {
+                    x: 120.63625239591882,
+                    y: 30.76209296283181,
+                    attributes: {
+                        content: "D坐标",
+                    },
+                },
+            ],
+            markSymbol: {
+                type: "picture-marker",
+                url: "https://static.arcgis.com/images/Symbols/Shapes/BlackStarLargeB.png", //点位图片
+                width: "64px",
+                height: "64px",
+            },
+            markTopSymbox: {
+                type: "picture-marker",
+                url: "http://qiniu.mrxinchen.cn/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220414152847.png", //点位图片
+                width: "201px",
+                height: "49px",
+            },
+            pointSymbol: {
+                type: "picture-marker",
+                url: "http://qiniu.mrxinchen.cn/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220414153853.png", //点位图片
+                width: "30px",
+                height: "30px",
+                yoffset: "15px",
+            },
             polygonSymbol: {
                 type: "picture-fill", //‘simple-fill', 'picture-fill', 'picture-marker', 'simple-line', 'simple-marker', 'text', 'label-3d', 'line-3d', 'mesh-3d', 'point-3d', 'polygon-3d', 'web-style', 'cim'
                 // style: "solid", // 内部样式 //dolid、vertical、none、horizontal、forward-diagonal、diagonal-cross、cross、backward-diagonal
@@ -300,6 +358,11 @@ export default {
                     explain: "地图上滚轮滚动的回调",
                     parameter: "event",
                 },
+                {
+                    name: "mapClick",
+                    explain: "地图上点击的回调",
+                    parameter: "event",
+                },
             ],
         };
     },
@@ -309,6 +372,12 @@ export default {
         },
         mapRoller(item) {
             console.log(item);
+        },
+        mapClick(item) {
+            // console.log(item);
+        },
+        clearClick() {
+            this.$refs.myMap.clearMap();
         },
     },
 };
