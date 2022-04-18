@@ -7,6 +7,7 @@
                 <div class="map-box">
                     <dd-map
                         ref="myMap"
+                        name="myMap"
                         :rings="rings"
                         @change="change"
                         @click="mapClick"
@@ -16,18 +17,47 @@
                         :mark="mark"
                         :markSymbol="markSymbol"
                         :pointSymbol="pointSymbol"
-                        :markTopSymbox="markTopSymbox"
+                        :markTopSymbol="markTopSymbol"
                         :polygonSymbol="polygonSymbol"
                         :lineSymbol="lineSymbol"
                         isShowZoom
                         sketch
                         toggle
                         search
+                        isGetPoint
                     ></dd-map>
                 </div>
                 <dd-button style="margin-top: 15px" @click="clearClick"
                     >清空</dd-button
                 >
+            </template>
+        </dd-block>
+        <dd-block title="天地图做底图" :code="code2">
+            <template #source>
+                <div class="map-box">
+                    <dd-map
+                        ref="myMap2"
+                        name="myMap2"
+                        :rings="rings"
+                        @change="change"
+                        @click="mapClick"
+                        @mapRoller="mapRoller"
+                        :zoom="15"
+                        :extent="townExtent"
+                        :mark="mark"
+                        :markSymbol="markSymbol"
+                        :pointSymbol="pointSymbol"
+                        :markTopSymbol="markTopSymbol"
+                        :polygonSymbol="polygonSymbol"
+                        :lineSymbol="lineSymbol"
+                        isShowZoom
+                        sketch
+                        toggle
+                        search
+                        isGetPoint
+                        :basemap="true"
+                    ></dd-map>
+                </div>
             </template>
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
@@ -135,7 +165,7 @@ export default {
                 width: "64px",
                 height: "64px",
             },
-            markTopSymbox: {
+            markTopSymbol: {
                 type: "picture-marker",
                 url: "http://qiniu.mrxinchen.cn/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220414152847.png", //点位图片
                 width: "201px",
@@ -275,7 +305,17 @@ export default {
                     height: 600px;
                 }
             `,
+            code2: `
+            
+            `,
             Attributes: [
+                {
+                    parameter: "name",
+                    explain: "地图名称(必须要传,且不能重复)",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
                 {
                     parameter: "center",
                     explain: "中心坐标",
@@ -345,6 +385,20 @@ export default {
                     type: "object",
                     optional: "—",
                     default: "—",
+                },
+                {
+                    parameter: "isGetPoint",
+                    explain: "是否鼠标点击获取坐标",
+                    type: "boolean",
+                    optional: "true/false",
+                    default: "false",
+                },
+                {
+                    parameter: "basemap",
+                    explain: "使用天地图做底图",
+                    type: "boolean",
+                    optional: "true/false",
+                    default: "false",
                 },
             ],
             Attributes3: [

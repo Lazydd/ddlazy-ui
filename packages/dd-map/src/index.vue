@@ -1,5 +1,10 @@
 <template>
-    <div class="dd-map" id="maps" ref="map" :class="{ fullscreen: fullscreen }">
+    <div
+        class="dd-map"
+        :id="name"
+        :ref="name"
+        :class="{ fullscreen: fullscreen }"
+    >
         <div
             class="fullscreen-btn"
             :title="fullscreen ? '退出' : '全屏'"
@@ -16,6 +21,9 @@ export default {
     name: "ddMap",
     props: {
         data: Object, // 选中的点位数据
+        name: {
+            type: String,
+        },
         zoom: {
             type: Number,
             default: 13,
@@ -40,6 +48,14 @@ export default {
             type: Boolean,
             default: false,
         },
+        basemap: {
+            typpe: Boolean,
+            default: false,
+        },
+        isGetPoint: {
+            type: Boolean,
+            default: false,
+        },
         // 网格范围数据
         extent: {
             type: Array,
@@ -59,7 +75,7 @@ export default {
         pointSymbol: {
             type: Object,
         },
-        markTopSymbox: {
+        markTopSymbol: {
             type: Object,
         },
         sketch: {
@@ -97,9 +113,11 @@ export default {
             detail: [],
             view: null,
             map: null,
-            graphicsLayer: null,
-            pointLayer: null,
-            markLayer: null,
+            graphicsLayer: null, //素描工具涂岑
+            pointLayer: null, //鼠标点击后的显示涂岑
+            markLayer: null, //点位图层
+            markTopLayer: null, //点位头上的图层
+            extentLayer: null, //范围涂岑
         };
     },
     methods: {
@@ -122,6 +140,9 @@ export default {
                 "esri/symbols/PictureMarkerSymbol",
                 "esri/layers/FeatureLayer",
                 "esri/layers/GeoJSONLayer",
+                "esri/layers/WebTileLayer",
+                "esri/core/urlUtils",
+                "esri/layers/support/TileInfo",
             ])
                 .then(
                     ([
@@ -142,19 +163,182 @@ export default {
                         PictureMarkerSymbol,
                         FeatureLayer,
                         GeoJSONLayer,
+                        WebTileLayer,
+                        urlUtils,
+                        TileInfo,
                     ]) => {
-                        const graphicsLayer = new GraphicsLayer();
-                        const pointLayer = new GraphicsLayer();
-                        this.graphicsLayer = graphicsLayer;
-                        this.pointLayer = pointLayer;
                         let map = new Map({
-                            basemap: "streets-navigation-vector",
-                            layers: [graphicsLayer, pointLayer],
+                            basemap: this.basemap
+                                ? ""
+                                : "streets-navigation-vector", //streets-navigation-vector
+                            // layers: [graphicsLayer, pointLayer],
                         });
+                        if (this.basemap) {
+                            const veccLayer = new WebTileLayer({
+                                urlTemplate:
+                                    "https://t.tianditu.gov.cn/vec_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=c&FORMAT=tiles&TILECOL={col}&TILEROW=256&TILEMATRIX={level}&tk=9edb9d19b65e3a7b049eaecac8e6d306",
+                                subDomains: [
+                                    "t0",
+                                    "t1",
+                                    "t2",
+                                    "t3",
+                                    "t4",
+                                    "t5",
+                                    "t6",
+                                    "t7",
+                                ],
+                                spatialReference: {
+                                    wkid: 4326,
+                                },
+                                tileInfo: new TileInfo({
+                                    dpi: 90.71428571427429,
+                                    size: 256,
+                                    origin: {
+                                        x: -180,
+                                        y: 90,
+                                    },
+                                    spatialReference: {
+                                        wkid: 4326,
+                                    },
+                                    lods: [
+                                        {
+                                            level: 2,
+                                            levelValue: 2,
+                                            resolution: 0.3515625,
+                                            scale: 147748796.52937502,
+                                        },
+                                        {
+                                            level: 3,
+                                            levelValue: 3,
+                                            resolution: 0.17578125,
+                                            scale: 73874398.264687508,
+                                        },
+                                        {
+                                            level: 4,
+                                            levelValue: 4,
+                                            resolution: 0.087890625,
+                                            scale: 36937199.132343754,
+                                        },
+                                        {
+                                            level: 5,
+                                            levelValue: 5,
+                                            resolution: 0.0439453125,
+                                            scale: 18468599.566171877,
+                                        },
+                                        {
+                                            level: 6,
+                                            levelValue: 6,
+                                            resolution: 0.02197265625,
+                                            scale: 9234299.7830859385,
+                                        },
+                                        {
+                                            level: 7,
+                                            levelValue: 7,
+                                            resolution: 0.010986328125,
+                                            scale: 4617149.8915429693,
+                                        },
+                                        {
+                                            level: 8,
+                                            levelValue: 8,
+                                            resolution: 0.0054931640625,
+                                            scale: 2308574.9457714846,
+                                        },
+                                        {
+                                            level: 9,
+                                            levelValue: 9,
+                                            resolution: 0.00274658203125,
+                                            scale: 1154287.4728857423,
+                                        },
+                                        {
+                                            level: 10,
+                                            levelValue: 10,
+                                            resolution: 0.001373291015625,
+                                            scale: 577143.73644287116,
+                                        },
+                                        {
+                                            level: 11,
+                                            levelValue: 11,
+                                            resolution: 0.0006866455078125,
+                                            scale: 288571.86822143558,
+                                        },
+                                        {
+                                            level: 12,
+                                            levelValue: 12,
+                                            resolution: 0.00034332275390625,
+                                            scale: 144285.93411071779,
+                                        },
+                                        {
+                                            level: 13,
+                                            levelValue: 13,
+                                            resolution: 0.000171661376953125,
+                                            scale: 72142.967055358895,
+                                        },
+                                        {
+                                            level: 14,
+                                            levelValue: 14,
+                                            resolution: 8.58306884765625e-5,
+                                            scale: 36071.483527679447,
+                                        },
+                                        {
+                                            level: 15,
+                                            levelValue: 15,
+                                            resolution: 4.291534423828125e-5,
+                                            scale: 18035.741763839724,
+                                        },
+                                        {
+                                            level: 16,
+                                            levelValue: 16,
+                                            resolution: 2.1457672119140625e-5,
+                                            scale: 9017.8708819198619,
+                                        },
+                                        {
+                                            level: 17,
+                                            levelValue: 17,
+                                            resolution: 1.0728836059570313e-5,
+                                            scale: 4508.9354409599309,
+                                        },
+                                        {
+                                            level: 18,
+                                            levelValue: 18,
+                                            resolution: 5.3644180297851563e-6,
+                                            scale: 2254.4677204799655,
+                                        },
+                                        {
+                                            level: 19,
+                                            levelValue: 19,
+                                            resolution: 2.68220901489257815e-6,
+                                            scale: 1127.23386023998275,
+                                        },
+                                        {
+                                            level: 20,
+                                            levelValue: 2,
+                                            resolution: 1.341104507446289075e-6,
+                                            scale: 563.616930119991375,
+                                        },
+                                    ],
+                                }),
+                                getTileUrl: function (level, row, col) {
+                                    return (
+                                        "http://t" +
+                                        (col % 8) +
+                                        ".tianditu.gov.cn/vec_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" +
+                                        level +
+                                        "&TILEROW=" +
+                                        row +
+                                        "&TILECOL=" +
+                                        col +
+                                        "&FORMAT=tiles&tk=9edb9d19b65e3a7b049eaecac8e6d306"
+                                        //dc8791201a2e51605c716b49eaad86a3
+                                    );
+                                },
+                            });
+                            map.add(veccLayer);
+                        }
+
                         let view = new MapView({
                             map: map,
                             center: [this.center.x, this.center.y],
-                            container: "maps",
+                            container: this.name,
                             zoom: this.zoom,
                             constraints: {
                                 // maxZoom: this.maxZoom, //最大缩放
@@ -190,9 +374,14 @@ export default {
                             // view.ui.add(toggle, "top-right");
                             view.ui.add(toggle1, "top-left");
                         }
-
+                        urlUtils.addProxyRule({
+                            urlPrefix: "",
+                            proxyUrl: "",
+                        });
                         //工具
                         if (this.sketch) {
+                            const graphicsLayer = new GraphicsLayer();
+                            this.graphicsLayer = graphicsLayer;
                             view.when(() => {
                                 let viewModel = new SketchViewModel({
                                     //https://developers.arcgis.com/javascript/latest/sample-code/sketch-viewmodel-styler/
@@ -248,27 +437,33 @@ export default {
                                         this.$emit("change", this.detail);
                                     });
                                 });
+                                this.map.layers.add(this.graphicsLayer);
                             });
                         }
                         view.on("mouse-wheel", (e) => {
                             this.$emit("mapRoller", e);
                         });
-
-                        view.on("click", (e) => {
-                            let { latitude, longitude } = e.mapPoint;
-                            let point = {
-                                type: "point",
-                                longitude,
-                                latitude,
-                            };
-                            let pointGraphic = new Graphic({
-                                geometry: point,
-                                symbol: this.pointSymbol,
+                        const pointLayer = new GraphicsLayer();
+                        this.pointLayer = pointLayer;
+                        if (this.isGetPoint) {
+                            view.on("click", (e) => {
+                                let { latitude, longitude } = e.mapPoint;
+                                let point = {
+                                    type: "point",
+                                    longitude,
+                                    latitude,
+                                };
+                                let pointGraphic = new Graphic({
+                                    geometry: point,
+                                    symbol: this.pointSymbol,
+                                });
+                                pointLayer.removeAll();
+                                pointLayer.add(pointGraphic);
+                                this.map.layers.add(this.pointLayer);
+                                this.$emit("click", e);
                             });
-                            pointLayer.removeAll();
-                            pointLayer.add(pointGraphic);
-                            this.$emit("click", e);
-                        });
+                        }
+
                         // 全部的鼠标事件如下：
                         const events = [
                             "pointer-enter", //鼠标进入
@@ -339,6 +534,9 @@ export default {
                 "esri/symbols/PictureMarkerSymbol",
                 "esri/layers/FeatureLayer",
                 "esri/layers/GeoJSONLayer",
+                "esri/layers/WebTileLayer",
+                "esri/core/urlUtils",
+                "esri/layers/support/TileInfo",
             ])
                 .then(
                     ([
@@ -359,8 +557,13 @@ export default {
                         PictureMarkerSymbol,
                         FeatureLayer,
                         GeoJSONLayer,
+                        WebTileLayer,
+                        urlUtils,
+                        TileInfo,
                     ]) => {
                         //三角形
+                        const extentLayer = new GraphicsLayer();
+                        this.extentLayer = extentLayer;
                         const polygon = {
                             type: "polygon", // autocasts as new Polygon()
                             rings: [
@@ -454,12 +657,18 @@ export default {
                             });
                             arr = [...arr, polylineGraphic];
                         });
-                        console.log(arr);
-                        this.view.graphics.addMany([
+                        extentLayer.addMany([
                             polygonGraphic,
                             pointGraphic,
                             ...arr,
-                        ]); //多个用addMany，一个用add
+                        ]);
+                        this.map.layers.add(extentLayer);
+                        // 下面是另一种添加，并且已经添加的不会不会呗被清除
+                        // this.view.graphics.addMany([
+                        //     polygonGraphic,
+                        //     pointGraphic,
+                        //     ...arr,
+                        // ]); //多个用addMany，一个用add
                     }
                 )
                 .catch((err) => {
@@ -487,6 +696,9 @@ export default {
                 "esri/symbols/PictureMarkerSymbol",
                 "esri/layers/FeatureLayer",
                 "esri/layers/GeoJSONLayer",
+                "esri/layers/WebTileLayer",
+                "esri/core/urlUtils",
+                "esri/layers/support/TileInfo",
             ])
                 .then(
                     ([
@@ -507,11 +719,16 @@ export default {
                         PictureMarkerSymbol,
                         FeatureLayer,
                         GeoJSONLayer,
+                        WebTileLayer,
+                        urlUtils,
+                        TileInfo,
                     ]) => {
                         const markLayer = new GraphicsLayer();
+                        const markTopLayer = new GraphicsLayer();
                         this.markLayer = markLayer;
+                        this.markTopLayer = markTopLayer;
                         let symbol = this.markSymbol;
-                        let markTopSymbox = this.markTopSymbox;
+                        let markTopSymbol = this.markTopSymbol;
 
                         this.mark.map((item) => {
                             let polygon = {
@@ -520,6 +737,11 @@ export default {
                                 latitude: item.y,
                             };
                             const pointGraphic = new Graphic({
+                                geometry: polygon,
+                                symbol,
+                                attributes: item.attributes,
+                            });
+                            const pointGraphicTop = new Graphic({
                                 geometry: polygon,
                                 symbol,
                                 attributes: item.attributes,
@@ -565,6 +787,9 @@ export default {
                 "esri/symbols/PictureMarkerSymbol",
                 "esri/layers/FeatureLayer",
                 "esri/layers/GeoJSONLayer",
+                "esri/layers/WebTileLayer",
+                "esri/core/urlUtils",
+                "esri/layers/support/TileInfo",
             ])
                 .then(
                     ([
@@ -585,6 +810,9 @@ export default {
                         PictureMarkerSymbol,
                         FeatureLayer,
                         GeoJSONLayer,
+                        WebTileLayer,
+                        urlUtils,
+                        TileInfo,
                     ]) => {
                         const clusterConfig = {
                             type: "cluster",
@@ -639,6 +867,8 @@ export default {
             this.markLayer.removeAll();
             this.graphicsLayer.removeAll();
             this.pointLayer.removeAll();
+            this.extentLayer.removeAll();
+            this.markTopLayer.removeAll();
         },
         // // 全屏、取消全屏切换
         isfull() {
@@ -654,33 +884,6 @@ export default {
     },
     mounted() {
         this.createMap();
-        // if (!esriLoader.isLoaded()) {
-        //     esriLoader.bootstrap(
-        //         (err) => {
-        //             if (err) {
-        //                 console.error(err);
-        //             } else {
-        //                 this.createMap();
-        //             }
-        //         },
-        //         {
-        //             url: "https://oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/zjsfgwczc/cdn/sdk/3.35/init.js",
-        //             dojoConfig: {
-        //                 // 想同时使用天地图的底图和标注的话，一定要配置此项
-        //                 async: true,
-        //                 packages: [
-        //                     {
-        //                         location:
-        //                             "https://oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/zjsfgwczc/cdn/sdk/3.35/tdtlib",
-        //                         name: "tdtlib",
-        //                     },
-        //                 ],
-        //             },
-        //         }
-        //     );
-        // } else {
-        //     this.createMap();
-        // }
     },
     watch: {
         data(value) {
