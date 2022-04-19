@@ -54,7 +54,6 @@
                         sketch
                         toggle
                         search
-                        isGetPoint
                         :basemap="true"
                     ></dd-map>
                 </div>

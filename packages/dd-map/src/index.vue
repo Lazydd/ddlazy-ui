@@ -6,6 +6,17 @@
         :class="{ fullscreen: fullscreen }"
     >
         <div
+            class="map-type"
+            @click="changeMap"
+            v-if="toggle && basemap"
+            onselectstart="return false"
+        >
+            <img
+                src="http://qiniu.mrxinchen.cn/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220419134123.png"
+            />
+            {{ currentMapType === 1 ? "影像图" : "矢量图" }}
+        </div>
+        <div
             class="fullscreen-btn"
             :title="fullscreen ? '退出' : '全屏'"
             @click="isfull"
@@ -110,14 +121,17 @@ export default {
     data() {
         return {
             fullscreen: false, // 是否全屏
+            currentMapType: 1, // 0：矢量图；1：影像图
             detail: [],
             view: null,
             map: null,
-            graphicsLayer: null, //素描工具涂岑
-            pointLayer: null, //鼠标点击后的显示涂岑
+            graphicsLayer: null, //素描工具涂图层
+            pointLayer: null, //鼠标点击后的显示图层
             markLayer: null, //点位图层
             markTopLayer: null, //点位头上的图层
-            extentLayer: null, //范围涂岑
+            extentLayer: null, //范围图层
+            veccLayer: null, //底图图层
+            veccNameLayer: null, //范注记图层
         };
     },
     methods: {
@@ -141,7 +155,6 @@ export default {
                 "esri/layers/FeatureLayer",
                 "esri/layers/GeoJSONLayer",
                 "esri/layers/WebTileLayer",
-                "esri/core/urlUtils",
                 "esri/layers/support/TileInfo",
             ])
                 .then(
@@ -164,7 +177,6 @@ export default {
                         FeatureLayer,
                         GeoJSONLayer,
                         WebTileLayer,
-                        urlUtils,
                         TileInfo,
                     ]) => {
                         let map = new Map({
@@ -174,9 +186,10 @@ export default {
                             // layers: [graphicsLayer, pointLayer],
                         });
                         if (this.basemap) {
+                            //矢量图
                             const veccLayer = new WebTileLayer({
                                 urlTemplate:
-                                    "https://t.tianditu.gov.cn/vec_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=c&FORMAT=tiles&TILECOL={col}&TILEROW=256&TILEMATRIX={level}&tk=9edb9d19b65e3a7b049eaecac8e6d306",
+                                    "https://t.tianditu.gov.cn/vec_c/wmts",
                                 subDomains: [
                                     "t0",
                                     "t1",
@@ -332,7 +345,165 @@ export default {
                                     );
                                 },
                             });
-                            map.add(veccLayer);
+                            //注记图
+                            const veccNameLayer = new WebTileLayer({
+                                urlTemplate:
+                                    "https://t.tianditu.gov.cn/cva_c/wmts",
+                                subDomains: [
+                                    "t0",
+                                    "t1",
+                                    "t2",
+                                    "t3",
+                                    "t4",
+                                    "t5",
+                                    "t6",
+                                    "t7",
+                                ],
+                                spatialReference: {
+                                    wkid: 4326,
+                                },
+                                tileInfo: new TileInfo({
+                                    dpi: 90.71428571427429,
+                                    size: 256,
+                                    origin: {
+                                        x: -180,
+                                        y: 90,
+                                    },
+                                    spatialReference: {
+                                        wkid: 4326,
+                                    },
+                                    lods: [
+                                        {
+                                            level: 2,
+                                            levelValue: 2,
+                                            resolution: 0.3515625,
+                                            scale: 147748796.52937502,
+                                        },
+                                        {
+                                            level: 3,
+                                            levelValue: 3,
+                                            resolution: 0.17578125,
+                                            scale: 73874398.264687508,
+                                        },
+                                        {
+                                            level: 4,
+                                            levelValue: 4,
+                                            resolution: 0.087890625,
+                                            scale: 36937199.132343754,
+                                        },
+                                        {
+                                            level: 5,
+                                            levelValue: 5,
+                                            resolution: 0.0439453125,
+                                            scale: 18468599.566171877,
+                                        },
+                                        {
+                                            level: 6,
+                                            levelValue: 6,
+                                            resolution: 0.02197265625,
+                                            scale: 9234299.7830859385,
+                                        },
+                                        {
+                                            level: 7,
+                                            levelValue: 7,
+                                            resolution: 0.010986328125,
+                                            scale: 4617149.8915429693,
+                                        },
+                                        {
+                                            level: 8,
+                                            levelValue: 8,
+                                            resolution: 0.0054931640625,
+                                            scale: 2308574.9457714846,
+                                        },
+                                        {
+                                            level: 9,
+                                            levelValue: 9,
+                                            resolution: 0.00274658203125,
+                                            scale: 1154287.4728857423,
+                                        },
+                                        {
+                                            level: 10,
+                                            levelValue: 10,
+                                            resolution: 0.001373291015625,
+                                            scale: 577143.73644287116,
+                                        },
+                                        {
+                                            level: 11,
+                                            levelValue: 11,
+                                            resolution: 0.0006866455078125,
+                                            scale: 288571.86822143558,
+                                        },
+                                        {
+                                            level: 12,
+                                            levelValue: 12,
+                                            resolution: 0.00034332275390625,
+                                            scale: 144285.93411071779,
+                                        },
+                                        {
+                                            level: 13,
+                                            levelValue: 13,
+                                            resolution: 0.000171661376953125,
+                                            scale: 72142.967055358895,
+                                        },
+                                        {
+                                            level: 14,
+                                            levelValue: 14,
+                                            resolution: 8.58306884765625e-5,
+                                            scale: 36071.483527679447,
+                                        },
+                                        {
+                                            level: 15,
+                                            levelValue: 15,
+                                            resolution: 4.291534423828125e-5,
+                                            scale: 18035.741763839724,
+                                        },
+                                        {
+                                            level: 16,
+                                            levelValue: 16,
+                                            resolution: 2.1457672119140625e-5,
+                                            scale: 9017.8708819198619,
+                                        },
+                                        {
+                                            level: 17,
+                                            levelValue: 17,
+                                            resolution: 1.0728836059570313e-5,
+                                            scale: 4508.9354409599309,
+                                        },
+                                        {
+                                            level: 18,
+                                            levelValue: 18,
+                                            resolution: 5.3644180297851563e-6,
+                                            scale: 2254.4677204799655,
+                                        },
+                                        {
+                                            level: 19,
+                                            levelValue: 19,
+                                            resolution: 2.68220901489257815e-6,
+                                            scale: 1127.23386023998275,
+                                        },
+                                        {
+                                            level: 20,
+                                            levelValue: 2,
+                                            resolution: 1.341104507446289075e-6,
+                                            scale: 563.616930119991375,
+                                        },
+                                    ],
+                                }),
+                                getTileUrl: function (level, row, col) {
+                                    return (
+                                        "http://t0.tianditu.gov.cn/cva_c/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cva&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" +
+                                        level +
+                                        "&TILEROW=" +
+                                        row +
+                                        "&TILECOL=" +
+                                        col +
+                                        "&FORMAT=tiles&tk=9edb9d19b65e3a7b049eaecac8e6d306"
+                                        //dc8791201a2e51605c716b49eaad86a3
+                                    );
+                                },
+                            });
+                            this.veccLayer = veccLayer;
+                            map.addMany([veccLayer, veccNameLayer]);
                         }
 
                         let view = new MapView({
@@ -360,7 +531,7 @@ export default {
                             view.ui.add(search, "top-left");
                         }
 
-                        if (this.toggle) {
+                        if (this.toggle && !this.basemap) {
                             //多种底图
                             // const toggle = new BasemapGallery({
                             //     view: view,
@@ -374,28 +545,24 @@ export default {
                             // view.ui.add(toggle, "top-right");
                             view.ui.add(toggle1, "top-left");
                         }
-                        urlUtils.addProxyRule({
-                            urlPrefix: "",
-                            proxyUrl: "",
-                        });
                         //工具
                         if (this.sketch) {
                             const graphicsLayer = new GraphicsLayer();
                             this.graphicsLayer = graphicsLayer;
-                            view.when(() => {
+                            this.view.when(() => {
                                 let viewModel = new SketchViewModel({
                                     //https://developers.arcgis.com/javascript/latest/sample-code/sketch-viewmodel-styler/
-                                    view: view,
+                                    view: this.view,
                                     layer: graphicsLayer,
                                     polygonSymbol: this.polygonSymbol,
                                 });
                                 let sketch = new Sketch({
                                     layer: graphicsLayer,
-                                    view: view,
+                                    view: this.view,
                                     viewModel: viewModel,
                                     creationMode: "update",
                                 });
-                                view.ui.add(sketch, "top-right");
+                                this.view.ui.add(sketch, "top-right");
                                 viewModel.on("create", (e) => {
                                     if (e.state === "complete") {
                                         const geographicGeom =
@@ -459,6 +626,8 @@ export default {
                                 });
                                 pointLayer.removeAll();
                                 pointLayer.add(pointGraphic);
+                                view.center = [longitude, latitude];
+                                // map.centerAt([e.mapPoint]);
                                 this.map.layers.add(this.pointLayer);
                                 this.$emit("click", e);
                             });
@@ -535,7 +704,6 @@ export default {
                 "esri/layers/FeatureLayer",
                 "esri/layers/GeoJSONLayer",
                 "esri/layers/WebTileLayer",
-                "esri/core/urlUtils",
                 "esri/layers/support/TileInfo",
             ])
                 .then(
@@ -558,7 +726,6 @@ export default {
                         FeatureLayer,
                         GeoJSONLayer,
                         WebTileLayer,
-                        urlUtils,
                         TileInfo,
                     ]) => {
                         //三角形
@@ -697,7 +864,6 @@ export default {
                 "esri/layers/FeatureLayer",
                 "esri/layers/GeoJSONLayer",
                 "esri/layers/WebTileLayer",
-                "esri/core/urlUtils",
                 "esri/layers/support/TileInfo",
             ])
                 .then(
@@ -720,7 +886,6 @@ export default {
                         FeatureLayer,
                         GeoJSONLayer,
                         WebTileLayer,
-                        urlUtils,
                         TileInfo,
                     ]) => {
                         const markLayer = new GraphicsLayer();
@@ -788,7 +953,6 @@ export default {
                 "esri/layers/FeatureLayer",
                 "esri/layers/GeoJSONLayer",
                 "esri/layers/WebTileLayer",
-                "esri/core/urlUtils",
                 "esri/layers/support/TileInfo",
             ])
                 .then(
@@ -811,7 +975,6 @@ export default {
                         FeatureLayer,
                         GeoJSONLayer,
                         WebTileLayer,
-                        urlUtils,
                         TileInfo,
                     ]) => {
                         const clusterConfig = {
@@ -843,7 +1006,6 @@ export default {
                             title: "Earthquakes from the last month",
                             url: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson",
                             copyright: "USGS Earthquakes",
-
                             featureReduction: clusterConfig,
                             renderer: {
                                 type: "simple",
@@ -881,22 +1043,407 @@ export default {
                 });
             }
         },
+        //切换底图
+        _changeMap(base1, note1, base2, note2) {
+            loadModules([
+                "esri/Map",
+                "esri/views/MapView",
+                "esri/Graphic",
+                "esri/widgets/BasemapToggle",
+                "esri/widgets/BasemapGallery",
+                "esri/layers/GraphicsLayer",
+                "esri/widgets/Sketch",
+                "esri/widgets/Sketch/SketchViewModel",
+                "esri/widgets/support/SnappingControls",
+                "esri/geometry/SpatialReference",
+                "esri/geometry/support/webMercatorUtils",
+                "esri/geometry/Point",
+                "esri/tasks/GeometryService",
+                "esri/widgets/Search",
+                "esri/symbols/PictureMarkerSymbol",
+                "esri/layers/FeatureLayer",
+                "esri/layers/GeoJSONLayer",
+                "esri/layers/WebTileLayer",
+                "esri/layers/support/TileInfo",
+            ]).then(
+                ([
+                    Map,
+                    MapView,
+                    Graphic,
+                    BasemapToggle,
+                    BasemapGallery,
+                    GraphicsLayer,
+                    Sketch,
+                    SketchViewModel,
+                    SnappingControls,
+                    SpatialReference,
+                    webMercatorUtils,
+                    Point,
+                    GeometryService,
+                    Search,
+                    PictureMarkerSymbol,
+                    FeatureLayer,
+                    GeoJSONLayer,
+                    WebTileLayer,
+                    TileInfo,
+                ]) => {
+                    if (this.veccLayer) this.veccLayer.destroy();
+                    if (this.veccNameLayer) this.veccNameLayer.destroy();
+                    //矢量图
+                    const veccLayer = new WebTileLayer({
+                        urlTemplate: `https://t.tianditu.gov.cn/${base1}/wmts`,
+                        subDomains: [
+                            "t0",
+                            "t1",
+                            "t2",
+                            "t3",
+                            "t4",
+                            "t5",
+                            "t6",
+                            "t7",
+                        ],
+                        spatialReference: {
+                            wkid: 4326,
+                        },
+                        tileInfo: new TileInfo({
+                            dpi: 90.71428571427429,
+                            size: 256,
+                            origin: {
+                                x: -180,
+                                y: 90,
+                            },
+                            spatialReference: {
+                                wkid: 4326,
+                            },
+                            lods: [
+                                {
+                                    level: 2,
+                                    levelValue: 2,
+                                    resolution: 0.3515625,
+                                    scale: 147748796.52937502,
+                                },
+                                {
+                                    level: 3,
+                                    levelValue: 3,
+                                    resolution: 0.17578125,
+                                    scale: 73874398.264687508,
+                                },
+                                {
+                                    level: 4,
+                                    levelValue: 4,
+                                    resolution: 0.087890625,
+                                    scale: 36937199.132343754,
+                                },
+                                {
+                                    level: 5,
+                                    levelValue: 5,
+                                    resolution: 0.0439453125,
+                                    scale: 18468599.566171877,
+                                },
+                                {
+                                    level: 6,
+                                    levelValue: 6,
+                                    resolution: 0.02197265625,
+                                    scale: 9234299.7830859385,
+                                },
+                                {
+                                    level: 7,
+                                    levelValue: 7,
+                                    resolution: 0.010986328125,
+                                    scale: 4617149.8915429693,
+                                },
+                                {
+                                    level: 8,
+                                    levelValue: 8,
+                                    resolution: 0.0054931640625,
+                                    scale: 2308574.9457714846,
+                                },
+                                {
+                                    level: 9,
+                                    levelValue: 9,
+                                    resolution: 0.00274658203125,
+                                    scale: 1154287.4728857423,
+                                },
+                                {
+                                    level: 10,
+                                    levelValue: 10,
+                                    resolution: 0.001373291015625,
+                                    scale: 577143.73644287116,
+                                },
+                                {
+                                    level: 11,
+                                    levelValue: 11,
+                                    resolution: 0.0006866455078125,
+                                    scale: 288571.86822143558,
+                                },
+                                {
+                                    level: 12,
+                                    levelValue: 12,
+                                    resolution: 0.00034332275390625,
+                                    scale: 144285.93411071779,
+                                },
+                                {
+                                    level: 13,
+                                    levelValue: 13,
+                                    resolution: 0.000171661376953125,
+                                    scale: 72142.967055358895,
+                                },
+                                {
+                                    level: 14,
+                                    levelValue: 14,
+                                    resolution: 8.58306884765625e-5,
+                                    scale: 36071.483527679447,
+                                },
+                                {
+                                    level: 15,
+                                    levelValue: 15,
+                                    resolution: 4.291534423828125e-5,
+                                    scale: 18035.741763839724,
+                                },
+                                {
+                                    level: 16,
+                                    levelValue: 16,
+                                    resolution: 2.1457672119140625e-5,
+                                    scale: 9017.8708819198619,
+                                },
+                                {
+                                    level: 17,
+                                    levelValue: 17,
+                                    resolution: 1.0728836059570313e-5,
+                                    scale: 4508.9354409599309,
+                                },
+                                {
+                                    level: 18,
+                                    levelValue: 18,
+                                    resolution: 5.3644180297851563e-6,
+                                    scale: 2254.4677204799655,
+                                },
+                                {
+                                    level: 19,
+                                    levelValue: 19,
+                                    resolution: 2.68220901489257815e-6,
+                                    scale: 1127.23386023998275,
+                                },
+                                {
+                                    level: 20,
+                                    levelValue: 2,
+                                    resolution: 1.341104507446289075e-6,
+                                    scale: 563.616930119991375,
+                                },
+                            ],
+                        }),
+                        getTileUrl: (level, row, col) => {
+                            return (
+                                "http://t" +
+                                (col % 8) +
+                                ".tianditu.gov.cn/" +
+                                base1 +
+                                "/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=" +
+                                note1 +
+                                "&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" +
+                                level +
+                                "&TILEROW=" +
+                                row +
+                                "&TILECOL=" +
+                                col +
+                                "&FORMAT=tiles&tk=9edb9d19b65e3a7b049eaecac8e6d306"
+                                //dc8791201a2e51605c716b49eaad86a3
+                            );
+                        },
+                    });
+                    //注记图
+                    const veccNameLayer = new WebTileLayer({
+                        urlTemplate: `https://t.tianditu.gov.cn/${base2}/wmts`,
+                        subDomains: [
+                            "t0",
+                            "t1",
+                            "t2",
+                            "t3",
+                            "t4",
+                            "t5",
+                            "t6",
+                            "t7",
+                        ],
+                        spatialReference: {
+                            wkid: 4326,
+                        },
+                        tileInfo: new TileInfo({
+                            dpi: 90.71428571427429,
+                            size: 256,
+                            origin: {
+                                x: -180,
+                                y: 90,
+                            },
+                            spatialReference: {
+                                wkid: 4326,
+                            },
+                            lods: [
+                                {
+                                    level: 2,
+                                    levelValue: 2,
+                                    resolution: 0.3515625,
+                                    scale: 147748796.52937502,
+                                },
+                                {
+                                    level: 3,
+                                    levelValue: 3,
+                                    resolution: 0.17578125,
+                                    scale: 73874398.264687508,
+                                },
+                                {
+                                    level: 4,
+                                    levelValue: 4,
+                                    resolution: 0.087890625,
+                                    scale: 36937199.132343754,
+                                },
+                                {
+                                    level: 5,
+                                    levelValue: 5,
+                                    resolution: 0.0439453125,
+                                    scale: 18468599.566171877,
+                                },
+                                {
+                                    level: 6,
+                                    levelValue: 6,
+                                    resolution: 0.02197265625,
+                                    scale: 9234299.7830859385,
+                                },
+                                {
+                                    level: 7,
+                                    levelValue: 7,
+                                    resolution: 0.010986328125,
+                                    scale: 4617149.8915429693,
+                                },
+                                {
+                                    level: 8,
+                                    levelValue: 8,
+                                    resolution: 0.0054931640625,
+                                    scale: 2308574.9457714846,
+                                },
+                                {
+                                    level: 9,
+                                    levelValue: 9,
+                                    resolution: 0.00274658203125,
+                                    scale: 1154287.4728857423,
+                                },
+                                {
+                                    level: 10,
+                                    levelValue: 10,
+                                    resolution: 0.001373291015625,
+                                    scale: 577143.73644287116,
+                                },
+                                {
+                                    level: 11,
+                                    levelValue: 11,
+                                    resolution: 0.0006866455078125,
+                                    scale: 288571.86822143558,
+                                },
+                                {
+                                    level: 12,
+                                    levelValue: 12,
+                                    resolution: 0.00034332275390625,
+                                    scale: 144285.93411071779,
+                                },
+                                {
+                                    level: 13,
+                                    levelValue: 13,
+                                    resolution: 0.000171661376953125,
+                                    scale: 72142.967055358895,
+                                },
+                                {
+                                    level: 14,
+                                    levelValue: 14,
+                                    resolution: 8.58306884765625e-5,
+                                    scale: 36071.483527679447,
+                                },
+                                {
+                                    level: 15,
+                                    levelValue: 15,
+                                    resolution: 4.291534423828125e-5,
+                                    scale: 18035.741763839724,
+                                },
+                                {
+                                    level: 16,
+                                    levelValue: 16,
+                                    resolution: 2.1457672119140625e-5,
+                                    scale: 9017.8708819198619,
+                                },
+                                {
+                                    level: 17,
+                                    levelValue: 17,
+                                    resolution: 1.0728836059570313e-5,
+                                    scale: 4508.9354409599309,
+                                },
+                                {
+                                    level: 18,
+                                    levelValue: 18,
+                                    resolution: 5.3644180297851563e-6,
+                                    scale: 2254.4677204799655,
+                                },
+                                {
+                                    level: 19,
+                                    levelValue: 19,
+                                    resolution: 2.68220901489257815e-6,
+                                    scale: 1127.23386023998275,
+                                },
+                                {
+                                    level: 20,
+                                    levelValue: 2,
+                                    resolution: 1.341104507446289075e-6,
+                                    scale: 563.616930119991375,
+                                },
+                            ],
+                        }),
+                        getTileUrl: function (level, row, col) {
+                            return (
+                                "http://t0.tianditu.gov.cn/" +
+                                base2 +
+                                "/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=" +
+                                note2 +
+                                "&STYLE=default&TILEMATRIXSET=c&TILEMATRIX=" +
+                                level +
+                                "&TILEROW=" +
+                                row +
+                                "&TILECOL=" +
+                                col +
+                                "&FORMAT=tiles&tk=9edb9d19b65e3a7b049eaecac8e6d306"
+                                //dc8791201a2e51605c716b49eaad86a3
+                            );
+                        },
+                    });
+                    this.veccLayer = veccLayer;
+                    this.veccNameLayer = veccNameLayer;
+                    this.map.layers.addMany([
+                        veccLayer,
+                        veccNameLayer,
+                        this.graphicsLayer,
+                        this.pointLayer,
+                    ]);
+                }
+            );
+        },
+        changeMap() {
+            this.currentMapType = this.currentMapType === 1 ? 2 : 1;
+            // this.map.destroy();
+            // this.clearMap();
+            if (this.currentMapType === 2) {
+                this._changeMap("img_c", "img", "cia_c", "cia");
+            } else if (this.currentMapType === 1) {
+                this._changeMap("vec_c", "vec", "cva_c", "cva");
+            }
+            this.createExtent();
+            this.addPoint();
+            this.clustering();
+        },
     },
     mounted() {
         this.createMap();
     },
-    watch: {
-        data(value) {
-            if (this.map) {
-                this.map.centerAt([value.x, value.y]);
-                this.addPoint();
-            }
-        },
-        extent() {
-            this.$nextTick(() => {
-                this.createExtent();
-            });
-        },
+    beforeDestroy() {
+        if (this.map) {
+            this.clearMap();
+            this.map.destroy();
+        }
     },
 };
 </script>
@@ -931,8 +1478,8 @@ export default {
         background: #ffffff;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.45);
         border-radius: 4px;
-        top: 24px;
-        left: 20px;
+        top: 60px;
+        left: 15px;
         z-index: 100;
         cursor: pointer;
         display: flex;
