@@ -1,95 +1,109 @@
 <template>
-    <vue-ueditor-wrap
-        v-model="content"
-        :config="myConfig"
-        @ready="ready"
-        :destroy="true"
-    ></vue-ueditor-wrap>
+    <div class="tinymce-container">
+        <editor
+            id="tinymce"
+            v-model="value"
+            :init="init"
+            :disabled="disabled"
+        ></editor>
+    </div>
 </template>
 
 <script>
-import VueUeditorWrap from "vue-ueditor-wrap";
+import tinymce from "tinymce";
+import Editor from "@tinymce/tinymce-vue";
+
+import "tinymce/themes/silver/theme";
+import "tinymce/plugins/image";
+import "tinymce/plugins/link";
+import "tinymce/plugins/code";
+import "tinymce/plugins/table";
+import "tinymce/plugins/lists";
+import "tinymce/plugins/wordcount"; // 字数统计插件
+
+import "tinymce/plugins/media"; // 插入视频插件
+import "tinymce/plugins/template"; // 模板插件
+import "tinymce/plugins/fullscreen";
+import "tinymce/plugins/preview";
+import "tinymce/plugins/contextmenu";
+import "tinymce/plugins/textcolor";
+import "tinymce/plugins/print";
+import "tinymce/plugins/hr";
+// import { uploadImg } from "@/api/common";
 export default {
     name: "ddUeditor",
+    components: {
+        Editor,
+        // uploadImg,
+    },
     props: {
-        value: {
-            type: String,
-        },
-        height: {
+        tinymceHtml: "",
+        tinymceHeight: {
             type: Number,
             default: 500,
         },
         url: {
             type: String,
         },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
         return {
-            content: "",
-            ueditor: "",
-            myConfig: {
-                // 编辑器不自动被内容撑高
-                autoHeightEnabled: false,
-                // 初始容器高度
-                initialFrameHeight: this.height,
-                // 初始容器宽度
-                initialFrameWidth: "100%",
-                // 上传文件接口（这个地址是我为了方便各位体验文件上传功能搭建的临时接口，请勿在生产环境使用！！！）
-                // serverUrl: "//ueditor.szcloudplus.com/cos",
-                serverUrl: this.url,
-                // UEditor 资源文件的存放路径，如果你使用的是 vue-cli 生成的项目，通常不需要设置该选项，vue-ueditor-wrap 会自动处理常见的情况，如果需要特殊配置，参考下方的常见问题2
-                UEDITOR_HOME_URL: "/UEditor/",
+            value: this.tinymceHtml,
+            //初始化配置
+            //http://tinymce.ax-z.cn/plugins/hr.php
+            init: {
+                selector: "#tinymce", //tinymce的id
+                language_url: "/static/tinymce/langs/zh_CN.js",
+                language: "zh_CN",
+                skin_url: "/static/skins/ui/oxide", //编辑器需要一个skin才能正常工作，所以要设置一个skin_url指向之前复制出来的skin文件
+                height: this.tinymceHeight,
+                plugins:
+                    "link lists image code table wordcount media fullscreen preview contextmenu textcolor print hr", //引入插件
+                toolbar:
+                    "fontselect fontsizeselect link lineheight forecolor backcolor bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | image media quicklink hr h2 h3 blockquote table numlist bullist preview fullscreen print contextmenu textcolor", //工具栏
+                browser_spellcheck: true, // 拼写检查
+                branding: false, // 去水印
+                elementpath: false, //禁用编辑器底部的状态栏
+                statusbar: false, // 隐藏编辑器底部的状态栏
+                paste_data_images: true, // 允许粘贴图像
+                menubar: false, // 隐藏最上方menu
+
+                file_picker_types: "image",
+                images_upload_credentials: true,
+                fontsize_formats:
+                    "14px 16px 18px 20px 24px 26px 28px 30px 32px 36px", //字体大小
+                font_formats:
+                    "微软雅黑=Microsoft YaHei,Helvetica Neue;PingFang SC;sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun;serifsans-serif;Terminal=terminal;monaco;Times New Roman=times new roman;times", //字体
+                images_upload_url: this.url,
+                images_upload_handler: function (blobInfo, success, failure) {
+                    let formdata = new FormData();
+                    formdata.append("image", blobInfo.blob());
+
+                    uploadImg(formdata)
+                        .then((res) => {
+                            console.log(res);
+                            success("https://qnsjk.huabeisky.com/" + res.data);
+                        })
+                        .catch((res) => {
+                            failure("error");
+                        });
+                },
             },
         };
     },
-    methods: {
-        ready(item) {
-            this.ueditor = item;
-            this.setContent(this.value);
-        },
-        //加入内容
-        setContent(item) {
-            if (item) {
-                this.ueditor.setContent(item);
-            }
-        },
-        //获取焦点
-        focus() {
-            this.ueditor.focus();
-        },
-        //失去焦点
-        blur() {
-            this.ueditor.blur();
-        },
-        //影藏编辑器
-        setHide() {
-            this.ueditor.setHide();
-        },
-        //显示编辑器
-        setShow() {
-            this.ueditor.setShow();
-        },
-        //不可编辑
-        setDisabled() {
-            this.ueditor.setDisabled();
-        },
-        //可编辑
-        setEnabled() {
-            this.ueditor.setEnabled();
-        },
+    mounted() {
+        tinymce.init({});
     },
-    components: {
-        VueUeditorWrap,
-    },
+    methods: {},
     watch: {
-        content(val) {
-            if (this.ueditor) {
-                this.$emit("input", val);
-                this.$emit("change", val);
-            }
+        value(val, oldV) {
+            this.$emit("change", val);
         },
     },
 };
 </script>
-
-<style lang="less" scoped></style>
+<style scoped lang="less"></style>
