@@ -51,7 +51,6 @@ const Transition = () => import("@/components/Transition.vue");
 const Cascader = () => import("@/components/Cascader.vue");
 const Echarts = () => import("@/components/Echarts.vue");
 const Ueditor = () => import("@/components/Ueditor.vue");
-const PDF = () => import("@/components/PDF.vue");
 const Map = () => import("@/components/Map.vue");
 Vue.use(VueRouter);
 
@@ -305,11 +304,6 @@ const routes = [
                         path: "/component/ueditor",
                         name: "Ueditor",
                         component: Ueditor,
-                    },
-                    {
-                        path: "/component/pdf",
-                        name: "PDF",
-                        component: PDF,
                     },
                     {
                         path: "/component/map",

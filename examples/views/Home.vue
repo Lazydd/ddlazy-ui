@@ -269,12 +269,8 @@ export default {
                             path: "#/component/echarts",
                         },
                         {
-                            label: "Ueditor 富文本编辑器",
+                            label: "Tinymce 富文本编辑器",
                             path: "#/component/ueditor",
-                        },
-                        {
-                            label: "PDF 阅读器",
-                            path: "#/component/pdf",
                         },
                         {
                             label: "Map 地图",

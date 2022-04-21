@@ -62,7 +62,7 @@
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
         <!-- <dd-describe title="Methods" :data="Attributes2" events></dd-describe> -->
         <dd-describe title="Methods" :data="Attributes3" methods></dd-describe>
-        <dd-footer left="PDF 阅读器"></dd-footer>
+        <dd-footer left="Tinymce 富文本编辑器"></dd-footer>
     </div>
 </template>
 

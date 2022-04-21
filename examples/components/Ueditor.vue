@@ -17,7 +17,7 @@
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
         <dd-describe title="Methods" :data="Attributes2" events></dd-describe>
-        <dd-footer left="Echarts 图表" right="PDF 阅读器"></dd-footer>
+        <dd-footer left="Echarts 图表" right="Map 地图"></dd-footer>
     </div>
 </template>
 

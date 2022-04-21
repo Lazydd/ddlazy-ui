@@ -68,7 +68,6 @@ import ddTimePicker from "./dd-time-picker";
 import ddCascader from "./dd-cascader";
 import ddEcharts from "./dd-echarts";
 import ddUeditor from "./dd-ueditor";
-import ddPdf from "./dd-pdf";
 import ddMap from "./dd-map";
 import "./css/global.less";
 Vue.use(Message);
@@ -139,7 +138,6 @@ const components = [
     ddCascader,
     ddEcharts,
     ddUeditor,
-    ddPdf,
     ddMap,
 ];
 
@@ -220,7 +218,6 @@ export {
     ddCascader,
     ddEcharts,
     ddUeditor,
-    ddPdf,
     ddMap,
 };
 
@@ -291,6 +288,5 @@ export default {
     ddCascader,
     ddEcharts,
     ddUeditor,
-    ddPdf,
     ddMap,
 };
