@@ -112,6 +112,10 @@ export default {
                             path: "#/component/timeSelect",
                         },
                         {
+                            label: "DatePicker 日期选择器",
+                            path: "#/component/datePicker",
+                        },
+                        {
                             label: "Transfer 穿梭框",
                             path: "#/component/transfer",
                         },

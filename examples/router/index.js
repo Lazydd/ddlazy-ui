@@ -46,6 +46,7 @@ const Carousel = () => import("@/components/Carousel.vue");
 const Timeline = () => import("@/components/Timeline.vue");
 const Dropdown = () => import("@/components/Dropdown.vue");
 const TimeSelect = () => import("@/components/TimeSelect.vue");
+const DatePicker = () => import("@/components/DatePicker.vue");
 const Scroll = () => import("@/components/Scroll.vue");
 const Transition = () => import("@/components/Transition.vue");
 const Cascader = () => import("@/components/Cascader.vue");
@@ -274,6 +275,11 @@ const routes = [
                         path: "/component/timeSelect",
                         name: "TimeSelect",
                         component: TimeSelect,
+                    },
+                    {
+                        path: "/component/datePicker",
+                        name: "DatePicker",
+                        component: DatePicker,
                     },
                     {
                         path: "/component/scroll",
