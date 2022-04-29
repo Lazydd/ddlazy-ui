@@ -21,7 +21,7 @@ export default {
     data() {
         return {
             code1: `
-                
+                <dd-date-picker></dd-date-picker>
             `,
             Attributes: [
                 {

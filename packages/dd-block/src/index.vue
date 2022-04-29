@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3 class="_title">{{ title }}</h3>
-        <div class="box">
+        <div class="box" ref="meta">
             <div class="dd-block">
                 <div class="source">
                     <slot name="source"></slot>
@@ -12,11 +12,17 @@
                     <pre v-highlightjs="code"><code class="html"></code></pre>
                 </div>
             </dd-transition>
-            <div class="control" @click="show">
+            <div
+                :class="['control', fixedControl ? 'is-fixed' : '']"
+                @click="show"
+                ref="control"
+            >
                 <dd-icon
                     :icon="isShow ? 'icon-arrow-up' : 'icon-arrow-down'"
                 ></dd-icon>
-                <span>{{ isShow ? "影藏代码" : "显示代码" }}</span>
+                <span>
+                    {{ isShow ? "影藏代码" : "显示代码" }}
+                </span>
             </div>
         </div>
     </div>
@@ -36,11 +42,51 @@ export default {
     data() {
         return {
             isShow: false,
+            fixedControl: false,
+            scrollParent: null,
         };
     },
     methods: {
         show() {
             this.isShow = !this.isShow;
+        },
+        scrollHandler() {
+            const { top, bottom, left } =
+                this.$refs.meta.getBoundingClientRect();
+            this.fixedControl =
+                bottom > document.documentElement.clientHeight &&
+                top + 44 <= document.documentElement.clientHeight;
+            // this.$refs.control.style.left = this.fixedControl
+            //     ? `${left}px`
+            //     : "0";
+        },
+        removeScrollHandler() {
+            this.scrollParent &&
+                this.scrollParent.removeEventListener(
+                    "scroll",
+                    this.scrollHandler
+                );
+        },
+    },
+    beforeDestroy() {
+        this.removeScrollHandler();
+    },
+    watch: {
+        isShow(val) {
+            if (!val) {
+                this.fixedControl = false;
+                this.removeScrollHandler();
+                return;
+            }
+            setTimeout(() => {
+                this.scrollParent = document.querySelector(".main-box");
+                this.scrollParent &&
+                    this.scrollParent.addEventListener(
+                        "scroll",
+                        this.scrollHandler
+                    );
+                this.scrollHandler();
+            }, 200);
         },
     },
 };
@@ -82,6 +128,7 @@ export default {
     border-top: none;
     color: #d3dce6;
     cursor: pointer;
+    transition: background-color 1s;
     span {
         transition: 0.5s;
         opacity: 0;
@@ -95,7 +142,12 @@ export default {
         span {
             opacity: 1;
         }
-        transition: background-color 1s;
+    }
+    &.is-fixed {
+        position: fixed;
+        bottom: 0;
+        // min-width: 945px;
+        min-width: 946px;
     }
 }
 .box {

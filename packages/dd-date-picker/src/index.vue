@@ -18,6 +18,12 @@ export default {
     },
     render: function (h) {
         let _this = this;
+        this.title.map((items, i) => {
+            this.dateArr.slice(i * 7, (i + 1) * 7).map((item, j) => {
+                console.log(item);
+            });
+            console.log("----------------------------------------");
+        });
         return h(
             "div",
             {
@@ -112,9 +118,8 @@ export default {
                                                                   _this.dateArr
                                                                       .slice(
                                                                           i * 7,
-                                                                          i *
-                                                                              7 +
-                                                                              6
+                                                                          (i+1) *
+                                                                              7
                                                                       )
                                                                       .map(
                                                                           (
@@ -127,7 +132,7 @@ export default {
                                                                                           "dd-picker-content_day",
                                                                                       ],
                                                                                   },
-                                                                                    item.d
+                                                                                  item.d
                                                                               );
                                                                           }
                                                                       )
