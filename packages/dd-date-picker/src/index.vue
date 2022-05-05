@@ -8,22 +8,18 @@ export default {
             type: String,
             default: "medium",
         },
+        value: {},
     },
     data() {
         return {
             dateArr: [],
             isShow_dropdown: false,
             title: ["日", "一", "二", "三", "四", "五", "六"],
+            activeDate: "" || this.value,
         };
     },
     render: function (h) {
         let _this = this;
-        this.title.map((items, i) => {
-            this.dateArr.slice(i * 7, (i + 1) * 7).map((item, j) => {
-                console.log(item);
-            });
-            console.log("----------------------------------------");
-        });
         return h(
             "div",
             {
@@ -33,6 +29,9 @@ export default {
             [
                 h("input", {
                     class: ["dd-date-picker_inner", _this.size],
+                    domProps: {
+                        value: _this.activeDate,
+                    },
                     attrs: {
                         readonly: "readonly",
                     },
@@ -113,12 +112,13 @@ export default {
                                                               return h(
                                                                   "div",
                                                                   {
-                                                                      class: "",
+                                                                      class: "dd-picker-tb_row",
                                                                   },
                                                                   _this.dateArr
                                                                       .slice(
                                                                           i * 7,
-                                                                          (i+1) *
+                                                                          (i +
+                                                                              1) *
                                                                               7
                                                                       )
                                                                       .map(
@@ -131,6 +131,19 @@ export default {
                                                                                       class: [
                                                                                           "dd-picker-content_day",
                                                                                       ],
+                                                                                      on: {
+                                                                                          click(
+                                                                                              e
+                                                                                          ) {
+                                                                                              _this.activeDate =
+                                                                                                  item.y +
+                                                                                                  "-" +
+                                                                                                  item.m +
+                                                                                                  "-" +
+                                                                                                  item.d;
+                                                                                              _this.isShow_dropdown = false;
+                                                                                          },
+                                                                                      },
                                                                                   },
                                                                                   item.d
                                                                               );
@@ -274,7 +287,7 @@ export default {
             .dd-picker-tb {
                 display: flex;
                 align-items: center;
-                // flex-wrap: wrap;
+                flex-wrap: wrap;
                 justify-content: space-between;
                 .dd-picker-content_day {
                     width: 42px;
@@ -283,6 +296,12 @@ export default {
                     padding: 4px 0;
                     box-sizing: border-box;
                     cursor: pointer;
+                    &:hover {
+                        color: #409eff;
+                    }
+                }
+                .dd-picker-tb_row {
+                    display: flex;
                 }
             }
         }

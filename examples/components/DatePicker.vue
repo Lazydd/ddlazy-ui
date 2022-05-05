@@ -2,9 +2,10 @@
     <div class="page-box">
         <h2 class="_title">DatePicker 日期选择器</h2>
         <p class="_descript">用于选择或输入日期</p>
+        {{ value1 }}
         <dd-block title="基础用法" :code="code1">
             <template #source>
-                <dd-date-picker></dd-date-picker>
+                <dd-date-picker v-model="value1"></dd-date-picker>
             </template>
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
@@ -20,6 +21,7 @@ export default {
     name: "DatePicker",
     data() {
         return {
+            value1: "2020",
             code1: `
                 <dd-date-picker></dd-date-picker>
             `,
