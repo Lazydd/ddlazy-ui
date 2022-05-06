@@ -101,7 +101,7 @@ export default {
     name: "ddInputNumber",
     props: {
         value: {
-            type: Number,
+            type: [Number, String],
             default: 0,
         },
         disabled: {

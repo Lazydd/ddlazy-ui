@@ -91,7 +91,7 @@
               <li><dd-icon icon="icon-cut"></dd-icon><div><span>icon-cut</span></div></li>
               <li><dd-icon icon="icon-Moneymanagement-fill"></dd-icon><div><span>icon-Moneymanagement-fill</span></div></li>
               <li><dd-icon icon="icon-descending"></dd-icon><div><span>icon-descending</span></div></li>
-              <li><dd-icon icon="icon-double-arro-right"></dd-icon><div><span>icon-double-arro-right</span></div></li>
+              <li><dd-icon icon="icon-double-arrow-right"></dd-icon><div><span>icon-double-arrow-right</span></div></li>
               <li><dd-icon icon="icon-customization"></dd-icon><div><span>icon-customization</span></div></li>
               <li><dd-icon icon="icon-double-arrow-left"></dd-icon><div><span>icon-double-arrow-left</span></div></li>
               <li><dd-icon icon="icon-discount"></dd-icon><div><span>icon-discount</span></div></li>

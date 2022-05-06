@@ -1,5 +1,6 @@
 <script>
 import mixin from "../../dd-mixins/mixin";
+import moment from "moment";
 export default {
     name: "ddDatePicker",
     mixins: [mixin],
@@ -8,6 +9,10 @@ export default {
             type: String,
             default: "medium",
         },
+        clearable: {
+            type: Boolean,
+            default: false,
+        },
         value: {},
     },
     data() {
@@ -15,7 +20,12 @@ export default {
             dateArr: [],
             isShow_dropdown: false,
             title: ["日", "一", "二", "三", "四", "五", "六"],
-            activeDate: "" || this.value,
+            activeDate: null,
+            isShowClear: false,
+            nowDate: moment().format("YYYY-MM-DD"),
+            showDate: moment(this.value ? this.value : new Date()).format(
+                "YYYY-MM-DD"
+            ),
         };
     },
     render: function (h) {
@@ -25,6 +35,18 @@ export default {
             {
                 class: "dd-date-picker",
                 ref: "dd-date-picker",
+                on: {
+                    mouseenter(e) {
+                        _this.isShowClear = _this.clearable
+                            ? _this.activeDate
+                                ? true
+                                : false
+                            : false;
+                    },
+                    mouseleave(e) {
+                        _this.isShowClear = false;
+                    },
+                },
             },
             [
                 h("input", {
@@ -38,6 +60,12 @@ export default {
                     on: {
                         click(e) {
                             _this.isShow_dropdown = !_this.isShow_dropdown;
+                        },
+                        "on-blur"(e) {
+                            this.$emit("blur", e);
+                        },
+                        "on-focus"(e) {
+                            this.$emit("focus", e);
                         },
                     },
                 }),
@@ -58,6 +86,29 @@ export default {
                         }),
                     ]
                 ),
+                _this.isShowClear
+                    ? h(
+                          "span",
+                          {
+                              class: ["dd-input_suffix_clear"],
+                          },
+                          [
+                              h("dd-icon", {
+                                  class: [],
+                                  props: {
+                                      icon: "icon-reeor",
+                                  },
+                                  on: {
+                                      click(e) {
+                                          _this.activeDate = "";
+                                          _this.isShow_dropdown = false;
+                                          _this.$emit("clear");
+                                      },
+                                  },
+                              }),
+                          ]
+                      )
+                    : "",
                 h(
                     "transition",
                     {
@@ -73,9 +124,164 @@ export default {
                                       class: "dd-picker-body",
                                   },
                                   [
-                                      h("div", {
-                                          class: "dd-picker-header",
-                                      }),
+                                      h(
+                                          "div",
+                                          {
+                                              class: "dd-picker-header",
+                                          },
+                                          [
+                                              h(
+                                                  "div",
+                                                  {
+                                                      class: [
+                                                          "dd-picker-panel-icon",
+                                                          "dd-picker_pre-btn",
+                                                      ],
+                                                      style: {
+                                                          marginRight: "6px",
+                                                      },
+                                                  },
+                                                  [
+                                                      h("dd-icon", {
+                                                          class: [],
+                                                          props: {
+                                                              icon: "icon-double-arrow-left",
+                                                          },
+                                                          on: {
+                                                              click(e) {
+                                                                  _this.showDate =
+                                                                      moment(
+                                                                          _this.showDate
+                                                                      ).subtract(
+                                                                          "1",
+                                                                          "year"
+                                                                      );
+                                                                  _this.getData(
+                                                                      moment(
+                                                                          _this.showDate
+                                                                      )
+                                                                  );
+                                                              },
+                                                          },
+                                                      }),
+                                                  ]
+                                              ),
+                                              h(
+                                                  "div",
+                                                  {
+                                                      class: [
+                                                          "dd-picker-panel-icon",
+                                                          "dd-picker_pre-btn",
+                                                      ],
+                                                  },
+                                                  [
+                                                      h("dd-icon", {
+                                                          class: [],
+                                                          props: {
+                                                              icon: "icon-arrow-left",
+                                                          },
+                                                          on: {
+                                                              click(e) {
+                                                                  _this.showDate =
+                                                                      moment(
+                                                                          _this.showDate
+                                                                      ).subtract(
+                                                                          "1",
+                                                                          "months"
+                                                                      );
+                                                                  _this.getData(
+                                                                      moment(
+                                                                          _this.showDate
+                                                                      )
+                                                                  );
+                                                              },
+                                                          },
+                                                      }),
+                                                  ]
+                                              ),
+                                              h(
+                                                  "span",
+                                                  moment(_this.showDate).format(
+                                                      "YYYY"
+                                                  ) + "年"
+                                              ),
+                                              h(
+                                                  "span",
+                                                  moment(_this.showDate).format(
+                                                      "MM"
+                                                  ) + "月"
+                                              ),
+                                              h(
+                                                  "div",
+                                                  {
+                                                      class: [
+                                                          "dd-picker-panel-icon",
+                                                          "dd-picker_nex-btn",
+                                                      ],
+                                                  },
+                                                  [
+                                                      h("dd-icon", {
+                                                          class: [],
+                                                          props: {
+                                                              icon: "icon-double-arrow-right",
+                                                          },
+                                                          on: {
+                                                              click(e) {
+                                                                  _this.showDate =
+                                                                      moment(
+                                                                          _this.showDate
+                                                                      ).add(
+                                                                          "1",
+                                                                          "year"
+                                                                      );
+                                                                  _this.getData(
+                                                                      moment(
+                                                                          _this.showDate
+                                                                      )
+                                                                  );
+                                                              },
+                                                          },
+                                                      }),
+                                                  ]
+                                              ),
+                                              h(
+                                                  "div",
+                                                  {
+                                                      class: [
+                                                          "dd-picker-panel-icon",
+                                                          "dd-picker_nex-btn",
+                                                      ],
+                                                      style: {
+                                                          marginRight: "6px",
+                                                      },
+                                                  },
+                                                  [
+                                                      h("dd-icon", {
+                                                          class: [],
+                                                          props: {
+                                                              icon: "icon-arrow-right",
+                                                          },
+                                                          on: {
+                                                              click(e) {
+                                                                  _this.showDate =
+                                                                      moment(
+                                                                          _this.showDate
+                                                                      ).add(
+                                                                          "1",
+                                                                          "months"
+                                                                      );
+                                                                  _this.getData(
+                                                                      moment(
+                                                                          _this.showDate
+                                                                      )
+                                                                  );
+                                                              },
+                                                          },
+                                                      }),
+                                                  ]
+                                              ),
+                                          ]
+                                      ),
                                       h(
                                           "div",
                                           {
@@ -130,6 +336,40 @@ export default {
                                                                                   {
                                                                                       class: [
                                                                                           "dd-picker-content_day",
+                                                                                          item.pre
+                                                                                              ? "notNowMonth"
+                                                                                              : "",
+                                                                                          item.nex
+                                                                                              ? "notNowMonth"
+                                                                                              : "",
+                                                                                          _this.nowDate ==
+                                                                                          item.y +
+                                                                                              "-" +
+                                                                                              (item.m <
+                                                                                              10
+                                                                                                  ? `0${item.m}`
+                                                                                                  : item.m) +
+                                                                                              "-" +
+                                                                                              (item.d <
+                                                                                              10
+                                                                                                  ? `0${item.d}`
+                                                                                                  : item.d)
+                                                                                              ? "nowDate"
+                                                                                              : "",
+                                                                                          _this.activeDate ==
+                                                                                          item.y +
+                                                                                              "-" +
+                                                                                              (item.m <
+                                                                                              10
+                                                                                                  ? `0${item.m}`
+                                                                                                  : item.m) +
+                                                                                              "-" +
+                                                                                              (item.d <
+                                                                                              10
+                                                                                                  ? `0${item.d}`
+                                                                                                  : item.d)
+                                                                                              ? "activeDate"
+                                                                                              : "",
                                                                                       ],
                                                                                       on: {
                                                                                           click(
@@ -138,14 +378,38 @@ export default {
                                                                                               _this.activeDate =
                                                                                                   item.y +
                                                                                                   "-" +
-                                                                                                  item.m +
+                                                                                                  (item.m <
+                                                                                                  10
+                                                                                                      ? `0${item.m}`
+                                                                                                      : item.m) +
                                                                                                   "-" +
-                                                                                                  item.d;
+                                                                                                  (item.d <
+                                                                                                  10
+                                                                                                      ? `0${item.d}`
+                                                                                                      : item.d);
                                                                                               _this.isShow_dropdown = false;
+                                                                                              _this.$emit(
+                                                                                                  "change",
+                                                                                                  _this.activeDate
+                                                                                              );
+                                                                                              _this.$emit(
+                                                                                                  "input",
+                                                                                                  _this.activeDate
+                                                                                              );
+                                                                                              _this.getData(
+                                                                                                  moment(
+                                                                                                      _this.activeDate
+                                                                                                  )
+                                                                                              );
                                                                                           },
                                                                                       },
                                                                                   },
-                                                                                  item.d
+                                                                                  [
+                                                                                      h(
+                                                                                          "span",
+                                                                                          item.d
+                                                                                      ),
+                                                                                  ]
                                                                               );
                                                                           }
                                                                       )
@@ -165,9 +429,9 @@ export default {
         );
     },
     methods: {
-        getData() {
+        getData(times) {
+            let time1 = new Date(times);
             let dateArr = [];
-            let time1 = new Date();
             const year = time1.getFullYear();
             const month = time1.getMonth();
             let days = new Date(year, month + 1, 0);
@@ -181,22 +445,31 @@ export default {
                 dateArr.push({
                     d: lastDay - i + 1,
                     y: month > 0 ? year : year - 1, // 0为1月，即上一年
-                    m: month > 0 ? month : 11,
+                    m: month > 0 ? month : 12,
                     pre: true,
                 });
             }
-            for (let i = 1; i < days.getDate(); i++) {
-                dateArr.push({ d: i, y: year, m: month + 1 });
+            for (let i = 1; i <= days.getDate(); i++) {
+                dateArr.push({
+                    d: i,
+                    y: year,
+                    m: month + 1,
+                });
             }
             for (let i = 1; dateArr.length < 42; i++) {
                 dateArr.push({
                     d: i,
-                    y: month > 12 ? year : year + 1, // 0为1月，即上一年
-                    m: month > 12 ? month : 1,
+                    y: month < 11 ? year : year + 1, // 0为1月，即上一年
+                    m: month < 11 ? month + 2 : 1,
                     nex: true,
                 });
             }
             this.dateArr = dateArr;
+        },
+        initData() {
+            if (this.value) {
+                this.activeDate = moment(this.value).format("YYYY-MM-DD");
+            }
         },
         except(e) {
             let isSelf = this.$refs["dd-date-picker"]?.contains(e.target);
@@ -212,7 +485,13 @@ export default {
         document.removeEventListener("click", this.except);
     },
     created() {
-        this.getData();
+        this.getData(new Date());
+        this.initData();
+    },
+    watch: {
+        isShow_dropdown(val) {
+            this.$emit("visible-change", val);
+        },
     },
 };
 </script>
@@ -255,6 +534,15 @@ export default {
         color: #c0c4cc;
         font-size: 20px;
     }
+    .dd-input_suffix_clear {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 5px;
+        cursor: pointer;
+        color: #c0c4cc;
+        font-size: 20px;
+    }
     .dd-picker-body {
         position: absolute;
         width: 322px;
@@ -267,6 +555,25 @@ export default {
         margin: 5px 0;
         z-index: 1000;
         .dd-picker-header {
+            margin: 12px;
+            text-align: center;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            .dd-picker-panel-icon {
+                font-size: 16px;
+                color: #303133;
+                border: 0;
+                background: transparent;
+                cursor: pointer;
+                outline: none;
+            }
+            .dd-picker_pre-btn {
+                float: left;
+            }
+            .dd-picker_nex-btn {
+                float: right;
+            }
         }
         .dd-picker-content {
             margin: 15px;
@@ -290,14 +597,44 @@ export default {
                 flex-wrap: wrap;
                 justify-content: space-between;
                 .dd-picker-content_day {
+                    position: relative;
                     width: 42px;
                     text-align: center;
                     height: 38px;
                     padding: 4px 0;
                     box-sizing: border-box;
                     cursor: pointer;
+                    span {
+                        width: 24px;
+                        height: 24px;
+                        display: block;
+                        margin: 0 auto;
+                        line-height: 24px;
+                        position: absolute;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        border-radius: 50%;
+                    }
                     &:hover {
+                        span {
+                            color: #409eff;
+                        }
+                    }
+                }
+                .notNowMonth {
+                    span {
+                        color: #c0c4cc;
+                    }
+                }
+                .nowDate {
+                    span {
                         color: #409eff;
+                    }
+                }
+                .activeDate {
+                    span {
+                        color: #fff !important;
+                        background-color: #409eff;
                     }
                 }
                 .dd-picker-tb_row {
