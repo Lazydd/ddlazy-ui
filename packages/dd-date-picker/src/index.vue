@@ -1,6 +1,7 @@
 <script>
 import mixin from "../../dd-mixins/mixin";
 import moment from "moment";
+import year from "./year.vue";
 export default {
     name: "ddDatePicker",
     mixins: [mixin],
@@ -12,6 +13,14 @@ export default {
         clearable: {
             type: Boolean,
             default: false,
+        },
+        placeholder: {
+            type: String,
+            default: "选择日期",
+        },
+        type: {
+            type: String,
+            default: "date",
         },
         value: {},
     },
@@ -56,6 +65,7 @@ export default {
                     },
                     attrs: {
                         readonly: "readonly",
+                        placeholder: _this.placeholder,
                     },
                     on: {
                         click(e) {
@@ -117,318 +127,331 @@ export default {
                         },
                     },
                     [
-                        _this.isShow_dropdown
-                            ? h(
-                                  "div",
-                                  {
-                                      class: "dd-picker-body",
-                                  },
-                                  [
-                                      h(
-                                          "div",
-                                          {
-                                              class: "dd-picker-header",
-                                          },
-                                          [
-                                              h(
-                                                  "div",
-                                                  {
-                                                      class: [
-                                                          "dd-picker-panel-icon",
-                                                          "dd-picker_pre-btn",
-                                                      ],
-                                                      style: {
-                                                          marginRight: "6px",
-                                                      },
-                                                  },
-                                                  [
-                                                      h("dd-icon", {
-                                                          class: [],
-                                                          props: {
-                                                              icon: "icon-double-arrow-left",
-                                                          },
-                                                          on: {
-                                                              click(e) {
-                                                                  _this.showDate =
-                                                                      moment(
-                                                                          _this.showDate
-                                                                      ).subtract(
-                                                                          "1",
-                                                                          "year"
-                                                                      );
-                                                                  _this.getData(
-                                                                      moment(
-                                                                          _this.showDate
-                                                                      )
-                                                                  );
-                                                              },
-                                                          },
-                                                      }),
-                                                  ]
-                                              ),
-                                              h(
-                                                  "div",
-                                                  {
-                                                      class: [
-                                                          "dd-picker-panel-icon",
-                                                          "dd-picker_pre-btn",
-                                                      ],
-                                                  },
-                                                  [
-                                                      h("dd-icon", {
-                                                          class: [],
-                                                          props: {
-                                                              icon: "icon-arrow-left",
-                                                          },
-                                                          on: {
-                                                              click(e) {
-                                                                  _this.showDate =
-                                                                      moment(
-                                                                          _this.showDate
-                                                                      ).subtract(
-                                                                          "1",
-                                                                          "months"
-                                                                      );
-                                                                  _this.getData(
-                                                                      moment(
-                                                                          _this.showDate
-                                                                      )
-                                                                  );
-                                                              },
-                                                          },
-                                                      }),
-                                                  ]
-                                              ),
-                                              h(
-                                                  "span",
-                                                  moment(_this.showDate).format(
-                                                      "YYYY"
-                                                  ) + "年"
-                                              ),
-                                              h(
-                                                  "span",
-                                                  moment(_this.showDate).format(
-                                                      "MM"
-                                                  ) + "月"
-                                              ),
-                                              h(
-                                                  "div",
-                                                  {
-                                                      class: [
-                                                          "dd-picker-panel-icon",
-                                                          "dd-picker_nex-btn",
-                                                      ],
-                                                  },
-                                                  [
-                                                      h("dd-icon", {
-                                                          class: [],
-                                                          props: {
-                                                              icon: "icon-double-arrow-right",
-                                                          },
-                                                          on: {
-                                                              click(e) {
-                                                                  _this.showDate =
-                                                                      moment(
-                                                                          _this.showDate
-                                                                      ).add(
-                                                                          "1",
-                                                                          "year"
-                                                                      );
-                                                                  _this.getData(
-                                                                      moment(
-                                                                          _this.showDate
-                                                                      )
-                                                                  );
-                                                              },
-                                                          },
-                                                      }),
-                                                  ]
-                                              ),
-                                              h(
-                                                  "div",
-                                                  {
-                                                      class: [
-                                                          "dd-picker-panel-icon",
-                                                          "dd-picker_nex-btn",
-                                                      ],
-                                                      style: {
-                                                          marginRight: "6px",
-                                                      },
-                                                  },
-                                                  [
-                                                      h("dd-icon", {
-                                                          class: [],
-                                                          props: {
-                                                              icon: "icon-arrow-right",
-                                                          },
-                                                          on: {
-                                                              click(e) {
-                                                                  _this.showDate =
-                                                                      moment(
-                                                                          _this.showDate
-                                                                      ).add(
-                                                                          "1",
-                                                                          "months"
-                                                                      );
-                                                                  _this.getData(
-                                                                      moment(
-                                                                          _this.showDate
-                                                                      )
-                                                                  );
-                                                              },
-                                                          },
-                                                      }),
-                                                  ]
-                                              ),
-                                          ]
-                                      ),
-                                      h(
-                                          "div",
-                                          {
-                                              class: "dd-picker-content",
-                                          },
-                                          [
-                                              h(
-                                                  "div",
-                                                  {
-                                                      class: "dd-picker-td",
-                                                  },
-                                                  [
-                                                      _this.title.map(
-                                                          (item) => {
-                                                              return h(
-                                                                  "div",
-                                                                  {
-                                                                      class: "dd-picker-title",
-                                                                  },
-                                                                  item
-                                                              );
-                                                          }
-                                                      ),
-                                                  ]
-                                              ),
-                                              h(
-                                                  "div",
-                                                  {
-                                                      class: "dd-picker-tb",
-                                                  },
-                                                  [
-                                                      _this.title.map(
-                                                          (items, i) => {
-                                                              return h(
-                                                                  "div",
-                                                                  {
-                                                                      class: "dd-picker-tb_row",
-                                                                  },
-                                                                  _this.dateArr
-                                                                      .slice(
-                                                                          i * 7,
-                                                                          (i +
-                                                                              1) *
-                                                                              7
-                                                                      )
-                                                                      .map(
-                                                                          (
-                                                                              item
-                                                                          ) => {
-                                                                              return h(
-                                                                                  "div",
-                                                                                  {
-                                                                                      class: [
-                                                                                          "dd-picker-content_day",
-                                                                                          item.pre
-                                                                                              ? "notNowMonth"
-                                                                                              : "",
-                                                                                          item.nex
-                                                                                              ? "notNowMonth"
-                                                                                              : "",
-                                                                                          _this.nowDate ==
-                                                                                          item.y +
-                                                                                              "-" +
-                                                                                              (item.m <
-                                                                                              10
-                                                                                                  ? `0${item.m}`
-                                                                                                  : item.m) +
-                                                                                              "-" +
-                                                                                              (item.d <
-                                                                                              10
-                                                                                                  ? `0${item.d}`
-                                                                                                  : item.d)
-                                                                                              ? "nowDate"
-                                                                                              : "",
-                                                                                          _this.activeDate ==
-                                                                                          item.y +
-                                                                                              "-" +
-                                                                                              (item.m <
-                                                                                              10
-                                                                                                  ? `0${item.m}`
-                                                                                                  : item.m) +
-                                                                                              "-" +
-                                                                                              (item.d <
-                                                                                              10
-                                                                                                  ? `0${item.d}`
-                                                                                                  : item.d)
-                                                                                              ? "activeDate"
-                                                                                              : "",
-                                                                                      ],
-                                                                                      on: {
-                                                                                          click(
-                                                                                              e
-                                                                                          ) {
-                                                                                              _this.activeDate =
-                                                                                                  item.y +
-                                                                                                  "-" +
-                                                                                                  (item.m <
-                                                                                                  10
-                                                                                                      ? `0${item.m}`
-                                                                                                      : item.m) +
-                                                                                                  "-" +
-                                                                                                  (item.d <
-                                                                                                  10
-                                                                                                      ? `0${item.d}`
-                                                                                                      : item.d);
-                                                                                              _this.isShow_dropdown = false;
-                                                                                              _this.$emit(
-                                                                                                  "change",
-                                                                                                  _this.activeDate
-                                                                                              );
-                                                                                              _this.$emit(
-                                                                                                  "input",
-                                                                                                  _this.activeDate
-                                                                                              );
-                                                                                              _this.getData(
-                                                                                                  moment(
-                                                                                                      _this.activeDate
-                                                                                                  )
-                                                                                              );
-                                                                                          },
-                                                                                      },
-                                                                                  },
-                                                                                  [
-                                                                                      h(
-                                                                                          "span",
-                                                                                          item.d
-                                                                                      ),
-                                                                                  ]
-                                                                              );
-                                                                          }
-                                                                      )
-                                                              );
-                                                          }
-                                                      ),
-                                                  ]
-                                              ),
-                                          ]
-                                      ),
-                                  ]
-                              )
-                            : "",
+                        _this.isShow_dropdown ? (
+                            _this.type === "date" ? (
+                                h(
+                                    "div",
+                                    {
+                                        class: "dd-picker-body",
+                                    },
+                                    [
+                                        h(
+                                            "div",
+                                            {
+                                                class: "dd-picker-header",
+                                            },
+                                            [
+                                                h(
+                                                    "div",
+                                                    {
+                                                        class: [
+                                                            "dd-picker-panel-icon",
+                                                            "dd-picker_pre-btn",
+                                                        ],
+                                                        style: {
+                                                            marginRight: "6px",
+                                                        },
+                                                    },
+                                                    [
+                                                        h("dd-icon", {
+                                                            class: [],
+                                                            props: {
+                                                                icon: "icon-double-arrow-left",
+                                                            },
+                                                            on: {
+                                                                click(e) {
+                                                                    _this.showDate =
+                                                                        moment(
+                                                                            _this.showDate
+                                                                        ).subtract(
+                                                                            "1",
+                                                                            "year"
+                                                                        );
+                                                                    _this.getData(
+                                                                        moment(
+                                                                            _this.showDate
+                                                                        )
+                                                                    );
+                                                                },
+                                                            },
+                                                        }),
+                                                    ]
+                                                ),
+                                                h(
+                                                    "div",
+                                                    {
+                                                        class: [
+                                                            "dd-picker-panel-icon",
+                                                            "dd-picker_pre-btn",
+                                                        ],
+                                                    },
+                                                    [
+                                                        h("dd-icon", {
+                                                            class: [],
+                                                            props: {
+                                                                icon: "icon-arrow-left",
+                                                            },
+                                                            on: {
+                                                                click(e) {
+                                                                    _this.showDate =
+                                                                        moment(
+                                                                            _this.showDate
+                                                                        ).subtract(
+                                                                            "1",
+                                                                            "months"
+                                                                        );
+                                                                    _this.getData(
+                                                                        moment(
+                                                                            _this.showDate
+                                                                        )
+                                                                    );
+                                                                },
+                                                            },
+                                                        }),
+                                                    ]
+                                                ),
+                                                h(
+                                                    "span",
+                                                    moment(
+                                                        _this.showDate
+                                                    ).format("YYYY") + "年"
+                                                ),
+                                                h(
+                                                    "span",
+                                                    moment(
+                                                        _this.showDate
+                                                    ).format("MM") + "月"
+                                                ),
+                                                h(
+                                                    "div",
+                                                    {
+                                                        class: [
+                                                            "dd-picker-panel-icon",
+                                                            "dd-picker_nex-btn",
+                                                        ],
+                                                    },
+                                                    [
+                                                        h("dd-icon", {
+                                                            class: [],
+                                                            props: {
+                                                                icon: "icon-double-arrow-right",
+                                                            },
+                                                            on: {
+                                                                click(e) {
+                                                                    _this.showDate =
+                                                                        moment(
+                                                                            _this.showDate
+                                                                        ).add(
+                                                                            "1",
+                                                                            "year"
+                                                                        );
+                                                                    _this.getData(
+                                                                        moment(
+                                                                            _this.showDate
+                                                                        )
+                                                                    );
+                                                                },
+                                                            },
+                                                        }),
+                                                    ]
+                                                ),
+                                                h(
+                                                    "div",
+                                                    {
+                                                        class: [
+                                                            "dd-picker-panel-icon",
+                                                            "dd-picker_nex-btn",
+                                                        ],
+                                                        style: {
+                                                            marginRight: "6px",
+                                                        },
+                                                    },
+                                                    [
+                                                        h("dd-icon", {
+                                                            class: [],
+                                                            props: {
+                                                                icon: "icon-arrow-right",
+                                                            },
+                                                            on: {
+                                                                click(e) {
+                                                                    _this.showDate =
+                                                                        moment(
+                                                                            _this.showDate
+                                                                        ).add(
+                                                                            "1",
+                                                                            "months"
+                                                                        );
+                                                                    _this.getData(
+                                                                        moment(
+                                                                            _this.showDate
+                                                                        )
+                                                                    );
+                                                                },
+                                                            },
+                                                        }),
+                                                    ]
+                                                ),
+                                            ]
+                                        ),
+                                        h(
+                                            "div",
+                                            {
+                                                class: "dd-picker-content",
+                                            },
+                                            [
+                                                h(
+                                                    "div",
+                                                    {
+                                                        class: "dd-picker-td",
+                                                    },
+                                                    [
+                                                        _this.title.map(
+                                                            (item) => {
+                                                                return h(
+                                                                    "div",
+                                                                    {
+                                                                        class: "dd-picker-title",
+                                                                    },
+                                                                    item
+                                                                );
+                                                            }
+                                                        ),
+                                                    ]
+                                                ),
+                                                h(
+                                                    "div",
+                                                    {
+                                                        class: "dd-picker-tb",
+                                                    },
+                                                    [
+                                                        _this.title.map(
+                                                            (items, i) => {
+                                                                return h(
+                                                                    "div",
+                                                                    {
+                                                                        class: "dd-picker-tb_row",
+                                                                    },
+                                                                    _this.dateArr
+                                                                        .slice(
+                                                                            i *
+                                                                                7,
+                                                                            (i +
+                                                                                1) *
+                                                                                7
+                                                                        )
+                                                                        .map(
+                                                                            (
+                                                                                item
+                                                                            ) => {
+                                                                                return h(
+                                                                                    "div",
+                                                                                    {
+                                                                                        class: [
+                                                                                            "dd-picker-content_day",
+                                                                                            item.pre
+                                                                                                ? "notNowMonth"
+                                                                                                : "",
+                                                                                            item.nex
+                                                                                                ? "notNowMonth"
+                                                                                                : "",
+                                                                                            _this.nowDate ==
+                                                                                            item.y +
+                                                                                                "-" +
+                                                                                                (item.m <
+                                                                                                10
+                                                                                                    ? `0${item.m}`
+                                                                                                    : item.m) +
+                                                                                                "-" +
+                                                                                                (item.d <
+                                                                                                10
+                                                                                                    ? `0${item.d}`
+                                                                                                    : item.d)
+                                                                                                ? "nowDate"
+                                                                                                : "",
+                                                                                            _this.activeDate ==
+                                                                                            item.y +
+                                                                                                "-" +
+                                                                                                (item.m <
+                                                                                                10
+                                                                                                    ? `0${item.m}`
+                                                                                                    : item.m) +
+                                                                                                "-" +
+                                                                                                (item.d <
+                                                                                                10
+                                                                                                    ? `0${item.d}`
+                                                                                                    : item.d)
+                                                                                                ? "activeDate"
+                                                                                                : "",
+                                                                                        ],
+                                                                                        on: {
+                                                                                            click(
+                                                                                                e
+                                                                                            ) {
+                                                                                                _this.activeDate =
+                                                                                                    item.y +
+                                                                                                    "-" +
+                                                                                                    (item.m <
+                                                                                                    10
+                                                                                                        ? `0${item.m}`
+                                                                                                        : item.m) +
+                                                                                                    "-" +
+                                                                                                    (item.d <
+                                                                                                    10
+                                                                                                        ? `0${item.d}`
+                                                                                                        : item.d);
+                                                                                                _this.isShow_dropdown = false;
+                                                                                                _this.$emit(
+                                                                                                    "change",
+                                                                                                    _this.activeDate
+                                                                                                );
+                                                                                                _this.$emit(
+                                                                                                    "input",
+                                                                                                    _this.activeDate
+                                                                                                );
+                                                                                                _this.getData(
+                                                                                                    moment(
+                                                                                                        _this.activeDate
+                                                                                                    )
+                                                                                                );
+                                                                                            },
+                                                                                        },
+                                                                                    },
+                                                                                    [
+                                                                                        h(
+                                                                                            "span",
+                                                                                            item.d
+                                                                                        ),
+                                                                                    ]
+                                                                                );
+                                                                            }
+                                                                        )
+                                                                );
+                                                            }
+                                                        ),
+                                                    ]
+                                                ),
+                                            ]
+                                        ),
+                                    ]
+                                )
+                            ) : _this.type === "year" ? (
+                                <year value={_this.years} on-change={_this.change}></year>
+                            ) : (
+                                ""
+                            )
+                        ) : (
+                            ""
+                        ),
                     ]
                 ),
             ]
         );
     },
     methods: {
+        change(data){
+            console.log(111, data)
+            this.$emit('input', data);
+        },
         getData(times) {
             let time1 = new Date(times);
             let dateArr = [];
@@ -471,6 +494,11 @@ export default {
                 this.activeDate = moment(this.value).format("YYYY-MM-DD");
             }
         },
+        dd_changes() {
+            setTimeout(() => {
+                this.isShow_dropdown = false;
+            });
+        },
         except(e) {
             let isSelf = this.$refs["dd-date-picker"]?.contains(e.target);
             if (!isSelf) {
@@ -488,9 +516,20 @@ export default {
         this.getData(new Date());
         this.initData();
     },
+    computed: {
+        years() {
+            return this.value;
+        },
+    },
+    components: {
+        year,
+    },
     watch: {
         isShow_dropdown(val) {
             this.$emit("visible-change", val);
+        },
+        years(val) {
+            console.log('555555555555555555555555',val);
         },
     },
 };

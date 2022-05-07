@@ -2,7 +2,6 @@
     <div class="page-box">
         <h2 class="_title">DatePicker 日期选择器</h2>
         <p class="_descript">用于选择或输入日期</p>
-        {{ value1 }}
         <dd-block title="基础用法" :code="code1">
             <template #source>
                 <dd-date-picker v-model="value1"></dd-date-picker>
@@ -11,6 +10,37 @@
         <dd-block title="可清空单选" :code="code2">
             <template #source>
                 <dd-date-picker v-model="value2" clearable></dd-date-picker>
+            </template>
+        </dd-block>
+        {{ value3 }}
+        <dd-block title="其他日期单位" :code="code3">
+            <template #source>
+                <div class="container">
+                    <div class="block">
+                        <span class="demonstration">年</span>
+                        <dd-date-picker
+                            v-model="value3"
+                            clearable
+                            type="year"
+                        ></dd-date-picker>
+                    </div>
+                    <div class="block">
+                        <span class="demonstration">月</span>
+                        <dd-date-picker
+                            v-model="value4"
+                            clearable
+                            type="month"
+                        ></dd-date-picker>
+                    </div>
+                    <div class="block">
+                        <span class="demonstration">日</span>
+                        <dd-date-picker
+                            v-model="value5"
+                            clearable
+                            type="date"
+                        ></dd-date-picker>
+                    </div>
+                </div>
             </template>
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
@@ -29,6 +59,9 @@ export default {
         return {
             value1: new Date(),
             value2: "",
+            value3: "",
+            value4: "",
+            value5: "",
             code1: `
                 <dd-date-picker v-model="value1"></dd-date-picker>
 
@@ -38,6 +71,9 @@ export default {
                 <dd-date-picker v-model="value2" clearable></dd-date-picker>
 
                 value2: "",
+            `,
+            code3: `
+            
             `,
             Attributes: [
                 {
@@ -109,7 +145,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.dd-link {
-    margin: 0 5px;
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    .demonstration {
+        display: block;
+        color: #8492a6;
+        font-size: 14px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
 }
 </style>
