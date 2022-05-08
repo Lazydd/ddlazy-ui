@@ -12,7 +12,6 @@
                 <dd-date-picker v-model="value2" clearable></dd-date-picker>
             </template>
         </dd-block>
-        {{ value3 }}
         <dd-block title="其他日期单位" :code="code3">
             <template #source>
                 <div class="container">
@@ -40,7 +39,27 @@
                             type="date"
                         ></dd-date-picker>
                     </div>
+                    <div class="block">
+                        <span class="demonstration">多个日期</span>
+                        <dd-date-picker
+                            v-model="value6"
+                            clearable
+                            type="dates"
+                        ></dd-date-picker>
+                    </div>
                 </div>
+            </template>
+        </dd-block>
+        <dd-block title="禁用状态" :code="code4">
+            <template #source>
+                <dd-date-picker v-model="value7" disabled></dd-date-picker>
+            </template>
+        </dd-block>
+        <dd-block title="尺寸" :code="code5">
+            <template #source>
+                <dd-date-picker v-model="value8" size="medium" style="margin-right: 20px"></dd-date-picker>
+                <dd-date-picker v-model="value8" size="small" type="month" style="margin-right: 20px"></dd-date-picker>
+                <dd-date-picker v-model="value8" size="mini" type="year"></dd-date-picker>
             </template>
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
@@ -59,9 +78,12 @@ export default {
         return {
             value1: new Date(),
             value2: "",
-            value3: "",
-            value4: "",
+            value3: new Date(),
+            value4: "2020-12",
             value5: "",
+            value6: "",
+            value7: new Date(),
+            value8: new Date(),
             code1: `
                 <dd-date-picker v-model="value1"></dd-date-picker>
 
@@ -73,22 +95,65 @@ export default {
                 value2: "",
             `,
             code3: `
-            
+                <div class="container">
+                    <div class="block">
+                        <span class="demonstration">年</span>
+                        <dd-date-picker
+                            v-model="value3"
+                            clearable
+                            type="year"
+                        ></dd-date-picker>
+                    </div>
+                    <div class="block">
+                        <span class="demonstration">月</span>
+                        <dd-date-picker
+                            v-model="value4"
+                            clearable
+                            type="month"
+                        ></dd-date-picker>
+                    </div>
+                    <div class="block">
+                        <span class="demonstration">日</span>
+                        <dd-date-picker
+                            v-model="value5"
+                            clearable
+                            type="date"
+                        ></dd-date-picker>
+                    </div>
+                    <div class="block">
+                        <span class="demonstration">多个日期</span>
+                        <dd-date-picker
+                            v-model="value6"
+                            clearable
+                            type="dates"
+                        ></dd-date-picker>
+                    </div>
+                </div>
+
+                value3: new Date(),
+                value4: "2020-12",
+                value5: "",
+                value6: ""
+            `,
+            code4: `
+                <dd-date-picker v-model="value7" disabled></dd-date-picker>
+
+                value7: new Date(),
+            `,
+            code5: `
+                <dd-date-picker v-model="value8" size="medium" style="margin-right: 20px"></dd-date-picker>
+                <dd-date-picker v-model="value8" size="small" style="margin-right: 20px"></dd-date-picker>
+                <dd-date-picker v-model="value8" size="mini"></dd-date-picker>
+
+                value8: new Date(),
             `,
             Attributes: [
                 {
-                    parameter: "type",
-                    explain: "类型",
-                    type: "string",
-                    optional: "primary / success / warning / danger / info",
-                    default: "default",
-                },
-                {
-                    parameter: "underline",
-                    explain: "是否下划线",
-                    type: "boolean",
+                    parameter: "model",
+                    explain: "绑定值",
+                    type: "date(DatePicker) / array(DateRangePicker)",
                     optional: "—",
-                    default: "true",
+                    default: "—",
                 },
                 {
                     parameter: "disabled",
@@ -98,18 +163,25 @@ export default {
                     default: "false",
                 },
                 {
-                    parameter: "href",
-                    explain: "原生 href 属性",
+                    parameter: "clearable",
+                    explain: "是否显示清除按钮",
                     type: "boolean",
-                    optional: "string",
-                    default: "-",
+                    optional: "true/false",
+                    default: "false",
                 },
                 {
-                    parameter: "icon",
-                    explain: "图标类名",
-                    type: "boolean",
-                    optional: "string",
-                    default: "-",
+                    parameter: "size",
+                    explain: "输入框尺寸",
+                    type: "string",
+                    optional: "large, small, mini",
+                    default: "—",
+                },
+                {
+                    parameter: "type",
+                    explain: "显示类型",
+                    type: "string",
+                    optional: "year/month/date/dates",
+                    default: "date",
                 },
             ],
             Attributes2: [
@@ -148,12 +220,25 @@ export default {
 .container {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
     .demonstration {
         display: block;
         color: #8492a6;
         font-size: 14px;
         margin-bottom: 20px;
         text-align: center;
+    }
+}
+@media screen and(max-width:1900px) {
+    .block {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &:nth-child(3),
+        &:nth-child(4) {
+            margin-top: 20px;
+        }
     }
 }
 </style>

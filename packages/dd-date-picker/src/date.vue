@@ -8,7 +8,9 @@ export default {
         return {
             dateArr: [],
             title: ["日", "一", "二", "三", "四", "五", "六"],
-            activeDate: null,
+            activeDate: this.value
+                ? moment(this.value + "").format("YYYY-MM-DD")
+                : null,
             nowDate: moment().format("YYYY-MM-DD"),
             showDate: moment(this.value ? this.value : new Date()).format(
                 "YYYY-MM-DD"
@@ -79,6 +81,7 @@ export default {
                     ),
                     h("span", moment(_this.showDate).format("YYYY") + "年"),
                     h("span", moment(_this.showDate).format("MM") + "月"),
+                    h("span", moment(_this.showDate).format("DD") + "日"),
                     h(
                         "div",
                         {
@@ -220,25 +223,11 @@ export default {
                                                                 (item.d < 10
                                                                     ? `0${item.d}`
                                                                     : item.d);
-                                                            _this.$parent.dd_changes(
+                                                            _this.$emit(
                                                                 "change",
                                                                 _this.activeDate
                                                             );
-                                                            _this.$parent.dd_changes(
-                                                                "input",
-                                                                _this.activeDate
-                                                            );
-                                                            _this.getData(
-                                                                moment(
-                                                                    _this.activeDate
-                                                                )
-                                                            );
-                                                            _this.$parent.activeDate =
-                                                                _this.activeDate;
-                                                            _this.$parent.isShow_dropdown = false;
-                                                            console.log(
-                                                                _this.value
-                                                            );
+                                                            _this.$parent.dd_changes();
                                                         },
                                                     },
                                                 },
@@ -290,128 +279,103 @@ export default {
                 });
             }
             this.dateArr = dateArr;
-            console.log(this.dateArr);
-        },
-        initData() {
-            if (this.value) {
-                this.activeDate = moment(this.value).format("YYYY-MM-DD");
-            }
         },
     },
     created() {
-        this.getData(new Date());
-        this.initData();
-    },
-    watch: {
-        "$parent.activeDate"(val) {
-            console.log(val);
-        },
-        value(val){
-            console.log(222222222222222);
-            this.initData()
-        }
+        this.getData(this.value ? this.value + "" : new Date());
     },
 };
 </script>
 
 <style scoped lang="less">
-.dd-picker-body {
-    position: absolute;
-    width: 322px;
-    color: #606266;
-    border: 1px solid #e4e7ed;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-    background: #fff;
-    border-radius: 4px;
-    line-height: 30px;
-    margin: 5px 0;
-    z-index: 1000;
-    .dd-picker-header {
-        margin: 12px;
-        text-align: center;
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-        .dd-picker-panel-icon {
-            font-size: 16px;
-            color: #303133;
-            border: 0;
-            background: transparent;
-            cursor: pointer;
-            outline: none;
-        }
-        .dd-picker_pre-btn {
-            float: left;
-        }
-        .dd-picker_nex-btn {
-            float: right;
+.dd-picker-header {
+    margin: 12px;
+    text-align: center;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    .dd-picker-panel-icon {
+        font-size: 16px;
+        color: #303133;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        outline: none;
+        &:hover {
+            color: #409eff;
         }
     }
-    .dd-picker-content {
-        margin: 15px;
-        font-size: 12px;
-        .dd-picker-td {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #ebeef5;
-            .dd-picker-title {
-                padding: 5px;
-                width: 42px;
-                text-align: center;
-                color: #606266;
-                font-weight: 400;
-            }
+    .dd-picker_pre-btn {
+        float: left;
+    }
+    .dd-picker_nex-btn {
+        float: right;
+    }
+}
+.dd-picker-content {
+    margin: 15px;
+    font-size: 12px;
+    .dd-picker-td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #ebeef5;
+        .dd-picker-title {
+            padding: 5px;
+            width: 42px;
+            text-align: center;
+            color: #606266;
+            font-weight: 400;
         }
-        .dd-picker-tb {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            .dd-picker-content_day {
-                position: relative;
-                width: 42px;
-                text-align: center;
-                height: 38px;
-                padding: 4px 0;
-                box-sizing: border-box;
-                cursor: pointer;
-                span {
-                    width: 24px;
-                    height: 24px;
-                    display: block;
-                    margin: 0 auto;
-                    line-height: 24px;
-                    position: absolute;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    border-radius: 50%;
-                }
-                &:hover {
-                    span {
-                        color: #409eff;
-                    }
-                }
+    }
+    .dd-picker-tb {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .dd-picker-content_day {
+            position: relative;
+            width: 42px;
+            text-align: center;
+            height: 38px;
+            padding: 4px 0;
+            box-sizing: border-box;
+            cursor: pointer;
+            span {
+                width: 24px;
+                height: 24px;
+                display: block;
+                margin: 0 auto;
+                line-height: 24px;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 50%;
             }
-            .notNowMonth {
-                span {
-                    color: #c0c4cc;
-                }
-            }
-            .nowDate {
+            &:hover {
                 span {
                     color: #409eff;
                 }
             }
-            .activeDate {
-                span {
-                    color: #fff !important;
-                    background-color: #409eff;
-                }
+        }
+        .notNowMonth {
+            span {
+                color: #c0c4cc;
             }
-            .dd-picker-tb_row {
-                display: flex;
+        }
+        .nowDate {
+            span {
+                color: #409eff;
             }
+        }
+        .activeDate {
+            span {
+                color: #fff !important;
+                background-color: #409eff;
+            }
+        }
+        .dd-picker-tb_row {
+            display: flex;
         }
     }
 }

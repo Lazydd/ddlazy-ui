@@ -146,7 +146,6 @@ export default {
     &.is-fixed {
         position: fixed;
         bottom: 0;
-        // min-width: 945px;
         min-width: 946px;
     }
 }

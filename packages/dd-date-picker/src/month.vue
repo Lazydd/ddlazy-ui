@@ -6,13 +6,14 @@ export default {
     },
     data() {
         return {
-            yearArr: [],
-            activeYear: this.value
-                ? moment(this.value + "").format("YYYY")
+            monthArr: [],
+            activeMonth: this.value
+                ? moment(this.value + "").format("YYYY-MM")
                 : null,
+            nowMonth: moment().format("YYYY-MM"),
             nowYear: moment().format("YYYY"),
-            showYear: moment(this.value ? this.value + "" : new Date()).format(
-                "YYYY"
+            showMonth: moment(this.value ? this.value + "" : new Date()).format(
+                "YYYY-MM"
             ),
         };
     },
@@ -49,18 +50,22 @@ export default {
                                     },
                                     on: {
                                         click(e) {
-                                            _this.showYear = moment(
-                                                _this.showYear
-                                            ).subtract("12", "year");
-                                            _this.getYear(
-                                                moment(_this.showYear)
+                                            _this.showMonth = moment(
+                                                _this.showMonth
+                                            ).subtract("1", "year");
+                                            _this.getMonth(
+                                                moment(_this.showMonth)
                                             );
                                         },
                                     },
                                 }),
                             ]
                         ),
-                        h("span", moment(_this.showYear).format("YYYY") + "年"),
+                        h(
+                            "span",
+                            moment(_this.showMonth).format("YYYY") + "年"
+                        ),
+                        h("span", moment(_this.showMonth).format("MM") + "月"),
                         h(
                             "div",
                             {
@@ -77,11 +82,11 @@ export default {
                                     },
                                     on: {
                                         click(e) {
-                                            _this.showYear = moment(
-                                                _this.showYear
-                                            ).add("12", "year");
-                                            _this.getYear(
-                                                moment(_this.showYear)
+                                            _this.showMonth = moment(
+                                                _this.showMonth
+                                            ).add("1", "year");
+                                            _this.getMonth(
+                                                moment(_this.showMonth)
                                             );
                                         },
                                     },
@@ -99,34 +104,55 @@ export default {
                         h(
                             "div",
                             {
-                                class: "dd-picker-tb-year",
+                                class: "dd-picker-tb-month",
                             },
                             [
-                                _this.yearArr.map((item) => {
+                                _this.monthArr.map((item) => {
                                     return h(
                                         "div",
                                         {
                                             class: [
-                                                "dd-picker-content_year",
-                                                _this.nowYear == item
-                                                    ? "nowYear"
+                                                "dd-picker-content_month",
+                                                _this.nowMonth ==
+                                                moment(item.y + "").format(
+                                                    "YYYY"
+                                                ) +
+                                                    "-" +
+                                                    moment(item.m + "").format(
+                                                        "MM"
+                                                    )
+                                                    ? "nowMonth"
                                                     : "",
-                                                _this.activeYear == item
-                                                    ? "activeYear"
+                                                _this.activeMonth ==
+                                                moment(item.y + "").format(
+                                                    "YYYY"
+                                                ) +
+                                                    "-" +
+                                                    moment(item.m + "").format(
+                                                        "MM"
+                                                    )
+                                                    ? "activeMonth"
                                                     : "",
                                             ],
                                             on: {
                                                 click(e) {
-                                                    _this.activeYear = item;
+                                                    _this.activeMonth =
+                                                        moment(
+                                                            item.y + ""
+                                                        ).format("YYYY") +
+                                                        "-" +
+                                                        moment(
+                                                            item.m + ""
+                                                        ).format("MM");
                                                     _this.$emit(
                                                         "change",
-                                                        _this.activeYear
+                                                        _this.activeMonth
                                                     );
                                                     _this.$parent.dd_changes();
                                                 },
                                             },
                                         },
-                                        [h("span", item)]
+                                        [h("span", item.m + "月")]
                                     );
                                 }),
                             ]
@@ -137,17 +163,18 @@ export default {
         );
     },
     methods: {
-        getYear(year) {
-            let yearArr = [];
-            let years = new Date(year).getFullYear();
-            for (let i = years - 5; i < years + 7; i++) {
-                yearArr.push(i);
+        getMonth(month) {
+            let monthArr = [];
+            let time1 = new Date(month);
+            const year = time1.getFullYear();
+            for (let i = 1; i <= 12; i++) {
+                monthArr.push({ m: i, y: year });
             }
-            this.yearArr = yearArr;
+            this.monthArr = monthArr;
         },
     },
     created() {
-        this.getYear(this.value ? this.value + "" : new Date());
+        this.getMonth(this.value ? this.value + "" : new Date());
     },
 };
 </script>
@@ -177,12 +204,12 @@ export default {
         float: right;
     }
 }
-.dd-picker-tb-year {
+.dd-picker-tb-month {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
-    .dd-picker-content_year {
+    .dd-picker-content_month {
         text-align: center;
         padding: 20px 3px;
         cursor: pointer;
@@ -197,11 +224,11 @@ export default {
             }
         }
     }
-    .nowYear {
+    .nowMonth {
         color: #409eff;
         font-weight: 700;
     }
-    .activeYear {
+    .activeMonth {
         color: #409eff;
     }
 }
