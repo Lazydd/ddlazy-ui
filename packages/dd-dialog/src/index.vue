@@ -1,6 +1,10 @@
 <template>
     <transition name="dialog-wrapper">
-        <div class="dd-dialog_wrapper" v-show="isShowDialog">
+        <div
+            class="dd-dialog_wrapper"
+            v-show="isShowDialog"
+            @click.self="closeOnClickModalOther"
+        >
             <div class="dd-dialog" :style="`width:${width};margin-top:${top}`">
                 <div class="dd-dialog_header" :cente="cente">
                     <span class="dd-dialog_title">
@@ -45,6 +49,10 @@ export default {
             type: String,
             default: "15vh",
         },
+        closeOnClickModal: {
+            type: Boolean,
+            default: true,
+        },
     },
     data() {
         return {
@@ -57,6 +65,11 @@ export default {
             this.$emit("update:visible", false);
             this.$emit("close");
             this.isShowDialog = false;
+        },
+        closeOnClickModalOther() {
+            if (this.closeOnClickModal) {
+                this.dialog_headerbtn();
+            }
         },
         append() {
             if (this.vnode) document.body.appendChild(this.vnode);

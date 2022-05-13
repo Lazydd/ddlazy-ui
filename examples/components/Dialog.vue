@@ -133,6 +133,7 @@
                 <dd-dialog
                     title="提示"
                     :visible.sync="dialogVisible3"
+                    :close-on-click-modal="false"
                     width="30%"
                     cente
                 >
@@ -337,6 +338,7 @@ export default {
                 <dd-dialog
                     title="提示"
                     :visible.sync="dialogVisible3"
+                    :close-on-click-modal="false"
                     width="30%"
                     cente
                 >
@@ -359,7 +361,7 @@ export default {
                     parameter: "visible",
                     explain: "是否显示 Dialog，支持 .sync 修饰符",
                     type: "boolean",
-                    optional: "—",
+                    optional: "true/false",
                     default: "false",
                 },
                 {
@@ -387,8 +389,15 @@ export default {
                     parameter: "center",
                     explain: "是否对头部和底部采用居中布局",
                     type: "boolean",
-                    optional: "—",
+                    optional: "true/false",
                     default: "false",
+                },
+                {
+                    parameter: "close-on-click-modal",
+                    explain: "是否可以通过点击 modal 关闭 Dialog",
+                    type: "boolean",
+                    optional: "true/false",
+                    default: "true",
                 },
             ],
             Attributes2: [
