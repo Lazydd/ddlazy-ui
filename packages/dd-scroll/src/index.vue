@@ -38,9 +38,9 @@ export default {
             /*滚动条里面轨道*/
             background: #fff;
         }
-        &:hover::-webkit-scrollbar-thumb{
+        &:hover::-webkit-scrollbar-thumb {
             background: #eee;
-            visibility:visible ;
+            visibility: visible;
             border-radius: 5px;
         }
     }
