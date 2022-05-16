@@ -8,7 +8,7 @@
                 </div>
             </div>
             <dd-transition>
-                <div v-if="isShow" class="code">
+                <div v-if="isShow" class="code" ref="codeWidth">
                     <pre v-highlightjs="code"><code class="html"></code></pre>
                 </div>
             </dd-transition>
@@ -56,9 +56,9 @@ export default {
             this.fixedControl =
                 bottom > document.documentElement.clientHeight &&
                 top + 44 <= document.documentElement.clientHeight;
-            // this.$refs.control.style.left = this.fixedControl
-            //     ? `${left}px`
-            //     : "0";
+            this.$refs.control.style.width = this.fixedControl
+                ? `${this.codeWidth}px`
+                : "100%";
         },
         removeScrollHandler() {
             this.scrollParent &&
@@ -66,6 +66,19 @@ export default {
                     "scroll",
                     this.scrollHandler
                 );
+        },
+    },
+    mounted() {
+        // 手机端监听或者用touchmove
+        // window.onscroll = () => {
+        //     this.scrollHandler();
+        // };
+    },
+    computed: {
+        //此处有bug，暂时无法监听宽度的变化
+        //https://developer.mozilla.org/zh-CN/docs/Web/API/ResizeObserver
+        codeWidth() {
+            return this.$refs.codeWidth.offsetWidth;
         },
     },
     beforeDestroy() {
@@ -146,7 +159,7 @@ export default {
     &.is-fixed {
         position: fixed;
         bottom: 0;
-        min-width: 946px;
+        // min-width: 946px;
     }
 }
 .box {

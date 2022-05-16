@@ -14,6 +14,9 @@ export default {
         width: {
             type: [Number, String],
         },
+        minWidth: {
+            type: [Number, String],
+        },
         type: {
             type: String,
         },

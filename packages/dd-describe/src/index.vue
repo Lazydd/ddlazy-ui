@@ -12,15 +12,17 @@
                 <dd-table-column
                     prop="type"
                     label="类型"
-                    width="150"
+                    minWidth="200"
                 ></dd-table-column>
                 <dd-table-column
                     prop="optional"
                     label="可选值"
+                    minWidth="100"
                 ></dd-table-column>
                 <dd-table-column
                     prop="default"
                     label="默认值"
+                    minWidth="100"
                 ></dd-table-column>
             </dd-table>
             <dd-table :data="data" v-if="events">

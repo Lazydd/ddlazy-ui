@@ -12,7 +12,9 @@
                         :class="[border ? 'dd-table_th-border' : '']"
                         :style="`width:${
                             item.width ? item.width + 'px' : ''
-                        };text-align:${item.headerAlign};
+                        };text-align:${item.headerAlign};min-width:${
+                            item.minWidth ? item.minWidth + 'px' : ''
+                        }
                         `"
                     >
                         {{ item.label }}
@@ -66,11 +68,12 @@ export default {
         getThead() {
             this.vnode = [];
             this.$slots.default.map((item, i) => {
-                let { label, width, headerAlign } =
+                let { label, width, headerAlign, minWidth } =
                     item.componentOptions.propsData;
                 this.vnode.push({
                     label,
                     width,
+                    minWidth,
                     headerAlign,
                 });
             });

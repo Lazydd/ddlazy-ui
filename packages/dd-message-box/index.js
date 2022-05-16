@@ -3,13 +3,11 @@ import Vue from "vue";
 const ddMessageBox = Vue.extend(require("./src/index.vue").default);
 
 let nId = 1;
-let close = null;
 const MessageBoxShow = (container, title, options) => {
-    let { dd_resolve, dd_reject, beforeClose } = options;
+    let { dd_resolve, dd_reject } = options;
     let id = "notice-" + nId++;
     title = title || null;
     container = container || null;
-
     const instance = new ddMessageBox({
         data: {
             title,
@@ -22,9 +20,6 @@ const MessageBoxShow = (container, title, options) => {
             },
             cancel(tips) {
                 dd_reject ? dd_reject(tips) : null;
-            },
-            dd_beforeClose() {
-                beforeClose ? beforeClose(instance) : null;
             },
         },
     });
@@ -42,15 +37,17 @@ const MessageBoxShow = (container, title, options) => {
 };
 
 const MessageBox = (container, title, options) => {
+    let obj = {}
     return new Promise((dd_resolve, dd_reject) => {
-        MessageBoxShow(container, title, { ...options, dd_resolve, dd_reject });
+        if (!options.callback) obj = { dd_resolve, dd_reject }
+        MessageBoxShow(container, title, { ...options, ...obj });
     });
 };
 
 export default {
     text: MessageBox,
     install(Vue) {
-        Vue.prototype.$alert = MessageBox;
+        Vue.prototype.$alert = MessageBoxShow;
         Vue.prototype.$confirm = MessageBox;
         Vue.MessageBox = MessageBox;
     },

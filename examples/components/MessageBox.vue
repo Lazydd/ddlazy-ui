@@ -82,24 +82,30 @@ export default {
             code3: `
                 <dd-button @click="open3">点击打开 Message Box</dd-button>
 
-                open3() {
-                    this.$confirm("这是一段内容", "标题名称", {
-                        confirmButtonText: "确定",
-                        closeOnClickModal: false,
-                        confirmButtonLoading: true,
-                        beforeClose: (instance) => {
-                            instance.confirmButtonText = "执行中...";
-                            setTimeout(() => {
-                                instance.confirmButtonLoading = false;
-                            }, 3000);
-                        },
-                    }).then((action) => {
+                this.$confirm("这是一段内容", "标题名称", {
+                    confirmButtonText: "确定",
+                    closeOnClickModal: false,
+                    beforeClose: (instance) => {
+                        confirmButtonLoading: true;
+                        instance.confirmButtonText = "执行中...";
+                        console.log(1111111111111111111);
+                        setTimeout(() => {
+                            instance.confirmButtonLoading = false;
+                        }, 3000);
+                    },
+                })
+                .then((action) => {
                         this.$message({
                             type: "info",
                             message: "action: " + action,
                         });
-                    });
-                },
+                    })
+                .catch(() => {
+                        this.$message({
+                            type: "info",
+                            message: "已取消删除",
+                        });
+                });
             `,
             code4: `
                 <dd-button @click="open4">点击打开 Message Box</dd-button>
@@ -111,7 +117,7 @@ export default {
                     });
                 },
             `,
-            code5:`
+            code5: `
                 <dd-button @click="open5">点击打开 Message Box</dd-button>
 
                 open5() {
@@ -183,7 +189,7 @@ export default {
                 {
                     parameter: "beforeClose",
                     explain: "MessageBox 关闭前的回调，会暂停实例的关闭",
-                    type: "function(action, instance)，action 的值为'confirm', 'cancel'或'close'；instance 为 MessageBox 实例，可以通过它访问实例上的属性和方法",
+                    type: "function(action, instance, done)，action 的值为'confirm', 'cancel'或'close'；instance 为 MessageBox 实例，可以通过它访问实例上的属性和方法；done 用于关闭 MessageBox 实例",
                     optional: "—",
                     default: "false",
                 },
@@ -275,19 +281,30 @@ export default {
             this.$confirm("这是一段内容", "标题名称", {
                 confirmButtonText: "确定",
                 closeOnClickModal: false,
-                confirmButtonLoading: true,
-                beforeClose: (instance) => {
-                    instance.confirmButtonText = "执行中...";
-                    setTimeout(() => {
-                        instance.confirmButtonLoading = false;
-                    }, 3000);
+                beforeClose: (action, instance, done) => {
+                    if (action === "confirm") {
+                        instance.confirmButtonLoading = true;
+                        instance.confirmButtonText = "执行中...";
+                        setTimeout(() => {
+                            instance.confirmButtonLoading = false;
+                        }, 3000);
+                    } else {
+                        done();
+                    }
                 },
-            }).then((action) => {
-                this.$message({
-                    type: "info",
-                    message: "action: " + action,
+            })
+                .then((action) => {
+                    this.$message({
+                        type: "info",
+                        message: "action: " + action,
+                    });
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消删除",
+                    });
                 });
-            });
         },
         open4() {
             this.$alert("<strong>这是 <i>HTML</i> 片段</strong>", "HTML 片段", {

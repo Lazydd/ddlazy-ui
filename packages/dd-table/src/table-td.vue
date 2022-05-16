@@ -9,9 +9,6 @@ export default {
             <td
                 style={{
                     "text-align": column.align,
-                    // "border-bottom": $parent.border
-                    //     ? "none"
-                    //     : "1px solid #ebeef5",
                 }}
                 class={
                     this.$parent.border

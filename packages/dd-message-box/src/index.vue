@@ -133,35 +133,34 @@ export default {
     },
     methods: {
         dd_message_confirm() {
+            this.dd_useDestroy("confirm", "confirm");
             if (this.confirmButtonLoading) {
-                this.dd_beforeClose ? this.dd_beforeClose(type, this) : null;
                 this.isLoading = true;
-            } else {
-                this.confirm("confirm");
             }
-            this.callback ? this.callback("confirm", this) : null;
-            this.visible ? this.destroy("confirm") : null;
         },
         dd_message_cancel() {
-            this.cancel("cancel");
-            this.callback ? this.callback("cancel", this) : null;
-            this.visible ? this.destroy("cancel") : null;
+            this.dd_useDestroy("cancel", "cancel");
         },
         dd_message_box_closeBtn() {
-            this.cancel("close");
-            this.callback ? this.callback("close", this) : null;
-            this.visible ? this.destroy("close") : null;
+            this.dd_useDestroy("cancel", "close");
+        },
+        dd_useDestroy(type, tips) {
+            this.beforeClose
+                ? this.beforeClose(tips, this, () => this.destroy(type, tips))
+                : null;
+            this.callback ? this.callback(tips, this) : null;
+            this.visible ? this.destroy(type, tips) : null;
         },
         closeOnClickModalOther() {
             if (this.closeOnClickModal) {
-                this.destroy();
+                this.destroy("cancel", "cancel");
             }
         },
-        destroy(type) {
+        destroy(type, tips) {
             if (!this.confirmButtonLoading) {
                 this.$emit("close");
                 this.isLoading = false;
-                this.confirm("confirm");
+                this[type](tips);
                 this.visible = false;
                 setTimeout(() => {
                     this.$destroy(true);
@@ -188,7 +187,7 @@ export default {
     watch: {
         confirmButtonLoading(val) {
             if (!val) {
-                this.destroy();
+                this.destroy("confirm", "confirm");
             }
         },
     },
