@@ -66,6 +66,7 @@ import ddTimeSelect from "./dd-time-select";
 import ddTransition from "./dd-transition";
 import ddTimePicker from "./dd-time-picker";
 import ddCascader from "./dd-cascader";
+import ddImage from "./dd-image";
 import ddDatePicker from "./dd-date-picker";
 import ddEcharts from "./dd-echarts";
 import ddUeditor from "./dd-ueditor";
@@ -137,6 +138,7 @@ const components = [
     ddTransition,
     ddTimePicker,
     ddCascader,
+    ddImage,
     ddDatePicker,
     ddEcharts,
     ddUeditor,
@@ -218,6 +220,7 @@ export {
     ddTransition,
     ddTimePicker,
     ddCascader,
+    ddImage,
     ddDatePicker,
     ddEcharts,
     ddUeditor,
@@ -289,6 +292,7 @@ export default {
     ddTransition,
     ddTimePicker,
     ddCascader,
+    ddImage,
     ddDatePicker,
     ddEcharts,
     ddUeditor,

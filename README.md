@@ -1,5 +1,11 @@
 # ddlazy-ui
 
+<!-- <p align="center">
+  <a href="https://www.npmjs.com/package/ddlazy-ui">
+    <img src="https://img.shields.io/npm/v/element-ui.svg">
+  </a>
+</p> -->
+
 ## Project setup
 ```
 npm install ddLazy-ui

@@ -48,6 +48,7 @@ const Dropdown = () => import("@/components/Dropdown.vue");
 const TimeSelect = () => import("@/components/TimeSelect.vue");
 const DatePicker = () => import("@/components/DatePicker.vue");
 const Scroll = () => import("@/components/Scroll.vue");
+const Image = () => import("@/components/Image.vue");
 const Transition = () => import("@/components/Transition.vue");
 const Cascader = () => import("@/components/Cascader.vue");
 const Echarts = () => import("@/components/Echarts.vue");
@@ -285,6 +286,11 @@ const routes = [
                         path: "/component/scroll",
                         name: "Scroll",
                         component: Scroll,
+                    },
+                    {
+                        path: "/component/image",
+                        name: "Image",
+                        component: Image,
                     },
                     {
                         path: "/component/installation",

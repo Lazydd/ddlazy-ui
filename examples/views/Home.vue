@@ -260,6 +260,10 @@ export default {
                             path: "#/component/scroll",
                         },
                         {
+                            label: "Image 图片",
+                            path: "#/component/image",
+                        },
+                        {
                             label: "Backtop 回到顶部",
                             path: "#/component/Backtop",
                         },
