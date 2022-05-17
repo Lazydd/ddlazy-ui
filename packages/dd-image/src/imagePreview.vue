@@ -1,33 +1,70 @@
 <template>
-    <div class="imagePreview" :style="`z-index:${zIndex}`">
+    <div class="imagePreview" :style="`z-index:${zIndex}`" @wheel="handleWheel">
         <div class="dd-image-viewer_mask"></div>
-        <div class="dd-image-viewer_btn dd-image-viewer_close">
+        <div class="dd-image-viewer_btn dd-image-viewer_close" @click="onClose">
             <dd-icon icon="icon-close"></dd-icon>
         </div>
-        <div class="dd-image-viewer_btn dd-image-viewer_prev">
+        <div
+            class="dd-image-viewer_btn dd-image-viewer_prev"
+            @click="ddImageAction('prev')"
+        >
             <dd-icon icon="icon-arrow-left"></dd-icon>
         </div>
-        <div class="dd-image-viewer_btn dd-image-viewer_next">
+        <div
+            class="dd-image-viewer_btn dd-image-viewer_next"
+            @click="ddImageAction('next')"
+        >
             <dd-icon icon="icon-arrow-right"></dd-icon>
         </div>
         <div class="dd-image-viewer_btn dd-image-viewer_actions">
             <div class="dd-image-viewer_actions_inner">
-                <dd-icon icon="icon-viewlarger"></dd-icon>
-                <dd-icon icon="icon-suoxiao"></dd-icon>
-                <dd-icon icon="icon-fullscreen"></dd-icon>
-                <dd-icon icon="icon-fullscreen-exit"></dd-icon>
-                <dd-icon icon="icon-xiangzuoxuanzhuan"></dd-icon>
-                <dd-icon icon="icon-xiangyouxuanzhuan"></dd-icon>
+                <dd-icon
+                    icon="icon-viewlarger"
+                    @click="ddImageAction('out')"
+                ></dd-icon>
+                <dd-icon
+                    icon="icon-suoxiao"
+                    @click="ddImageAction('in')"
+                ></dd-icon>
+                <dd-icon
+                    v-if="!options.screen"
+                    icon="icon-fullscreen"
+                    @click="ddImageAction('screenTrue')"
+                ></dd-icon>
+                <dd-icon
+                    v-if="options.screen"
+                    icon="icon-fullscreen-exit"
+                    @click="ddImageAction('screenFalse')"
+                ></dd-icon>
+                <dd-icon
+                    icon="icon-xiangzuoxuanzhuan"
+                    @click="ddImageAction('leftRotate')"
+                ></dd-icon>
+                <dd-icon
+                    icon="icon-xiangyouxuanzhuan"
+                    @click="ddImageAction('rightRotate')"
+                ></dd-icon>
             </div>
         </div>
         <div class="dd-image-viewer_canvas">
-            {{ previewSrcList }}
-            <!-- <img
-                v-for="(item, i) in previewSrcList"
+            <img
+                v-for="(item, i) in urlList"
+                v-if="i === index"
                 :key="i"
                 :src="item"
                 alt=""
-            /> -->
+                :style="`transform: scale(${options.scale}) rotate(${
+                    options.rotate
+                }deg);
+                    margin-left: 0px;
+                    margin-top: 0px;
+                    transition: transform 0.3s ease 0s;
+                    ${
+                        !options.screen
+                            ? 'max-height: 100%;max-width: 100%;'
+                            : ''
+                    }`"
+            />
         </div>
     </div>
 </template>
@@ -40,15 +77,107 @@ export default {
             type: Number,
             default: 2000,
         },
-        previewSrcList: {
+        urlList: {
             type: Array,
+        },
+        appendToBody: {
+            type: Boolean,
+            default: true,
+        },
+        onClose: {
+            type: Function,
+            default: () => {},
+        },
+        initIndex: {
+            type: [Number, String],
         },
     },
     data() {
-        return {};
+        return {
+            index: this.initIndex,
+            options: {
+                scale: 1,
+                rotate: 0,
+                screen: false,
+            },
+        };
     },
-    methods: {},
-    created() {},
+    mounted() {
+        if (this.appendToBody) {
+            document.body.appendChild(this.$el);
+        }
+    },
+    methods: {
+        ddImageChange(type) {
+            this.options = this.$options.data().options;
+            if (type === "next") {
+                this.index++;
+                if (this.index > this.urlList.length - 1) {
+                    this.index = 0;
+                }
+            } else if (type == "prev") {
+                this.index--;
+                if (this.index < 0) {
+                    this.index = this.urlList.length - 1;
+                }
+            }
+        },
+        ddImageAction(type, step) {
+            let { options } = this;
+            switch (type) {
+                case "out":
+                    options.scale = parseFloat(
+                        (options.scale + (step ? step : 0.2)).toFixed(3)
+                    );
+                    break;
+                case "in":
+                    if (options.scale > 0.4) {
+                        let finalValue = parseFloat(
+                            (options.scale - (step ? step : 0.2)).toFixed(3)
+                        );
+                        options.scale = finalValue < 0.4 ? 0.4 : finalValue;
+                    }
+                    break;
+                case "leftRotate":
+                    options.rotate -= 90;
+                    break;
+                case "rightRotate":
+                    options.rotate += 90;
+                    break;
+                case "screenTrue":
+                    options.scale = 1;
+                    options.rotate = 0;
+                    options.screen = true;
+                    break;
+                case "screenFalse":
+                    options.scale = 1;
+                    options.rotate = 0;
+                    options.screen = false;
+                    break;
+                case "prev":
+                    this.ddImageChange("prev");
+                    break;
+                case "next":
+                    this.ddImageChange("next");
+                    break;
+            }
+        },
+        handleWheel(e) {
+            e.stopPropagation();
+            if (e.deltaY > 0) {
+                //向下
+                this.ddImageAction("in", 0.1);
+            } else if (e.deltaY < 0) {
+                //向上
+                this.ddImageAction("out", 0.1);
+            }
+        },
+    },
+    watch: {
+        index(val) {
+            this.$emit("change", val);
+        },
+    },
 };
 </script>
 

@@ -8,7 +8,7 @@
             :alt="alt"
             @load="load"
             @error="error"
-            @click="previewSrcList.length ? ddImage_preview : null"
+            @click="preview ? ddImage_preview() : null"
             :style="lazy ? 'object-fit:none' : `object-fit:${fit}`"
         />
         <template v-if="$slots.placeholder && !Error">
@@ -27,7 +27,17 @@
                 <slot name="placeholder" />
             </div>
         </template>
-        <image-preview v-if="showViewer" v-bind="$attrs"></image-preview>
+        <template v-if="preview">
+            <transition name="dd-fade">
+                <image-preview
+                    v-if="showViewer"
+                    :on-close="closeViewer"
+                    :url-list="previewSrcList"
+                    :init-index="initIndex"
+                    v-on="$listeners"
+                ></image-preview
+            ></transition>
+        </template>
     </div>
 </template>
 
@@ -58,11 +68,15 @@ export default {
                 return [];
             },
         },
+        initIndex: {
+            type: [Number, String],
+            default: 0,
+        },
     },
     data() {
         return {
             Error: true,
-            showViewer: true,
+            showViewer: false,
         };
     },
     mounted() {
@@ -106,6 +120,14 @@ export default {
         ddImage_preview() {
             // if (!this.showViewer) return;
             this.showViewer = true;
+        },
+        closeViewer() {
+            this.showViewer = false;
+        },
+    },
+    computed: {
+        preview() {
+            return this.previewSrcList && this.previewSrcList.length > 0;
         },
     },
     components: {

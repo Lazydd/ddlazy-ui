@@ -159,6 +159,7 @@ export default {
             if (this.pageCounts > 7) this.dd_pagination_auto(this.currentPages);
         },
         dd_pagination_auto(page) {
+            if (this.pageCounts == 7) return;
             if (page >= 5 && page <= this.pageCounts - 4) {
                 this.pageCountsListItem = this.pageCountsList.slice(
                     page - 3,
