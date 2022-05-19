@@ -129,7 +129,7 @@ export default {
                 error(res){
                     this.$message.error(res.statusText)
                 },
-                
+
                 .upload-demo {
                     width: 360px;
                 }
@@ -326,7 +326,8 @@ export default {
                 },
                 {
                     parameter: "file-list",
-                    explain: "上传的文件列表, 例如: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}]",
+                    explain:
+                        "上传的文件列表, 例如: [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}]",
                     type: "array",
                     optional: "—",
                     default: "[]",
@@ -359,8 +360,8 @@ export default {
         success(res) {
             console.log(res);
         },
-        error(res){
-            this.$message.error(res.statusText)
+        error(res) {
+            this.$message.error(res.statusText);
         },
         beforeUpload(file) {
             console.log(file);

@@ -124,6 +124,9 @@ export default {
             type: String,
             default: "text",
         },
+        data: {
+            type: Object,
+        },
         headers: {
             type: Object,
         },
@@ -198,13 +201,18 @@ export default {
             if (this.limit && this.fileLists.length >= this.limit) {
                 this.onExceed(this.fileLists);
             } else {
-                let { action, headers, name } = this;
+                let { action, headers, name, data } = this;
                 let file =
                     type === 2 ? e.dataTransfer.files[0] : e.target.files[0];
                 if (file == null || file == "undefined" || file === "undefined")
                     return true;
                 let param = new FormData();
                 param.append(name, file, file.name);
+                if (data) {
+                    Object.keys(data).map((key) => {
+                        param.append(key, data[key]);
+                    });
+                }
                 this.beforeUpload(file);
                 ajax(
                     { action, param, headers },
