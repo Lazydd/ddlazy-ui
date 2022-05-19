@@ -465,6 +465,7 @@
               <li><dd-icon icon="icon-warning-fill-1"></dd-icon><div><span>icon-warning-fill-1</span></div></li>
               <li><dd-icon icon="icon-xiangzuoxuanzhuan"></dd-icon><div><span>icon-xiangzuoxuanzhuan</span></div></li>
               <li><dd-icon icon="icon-xiangyouxuanzhuan"></dd-icon><div><span>icon-xiangyouxuanzhuan</span></div></li>
+              <li><dd-icon icon="icon-yunshangchuan"></dd-icon><div><span>icon-yunshangchuan</span></div></li>
             </ul>
             <dd-footer left="Layout 布局" right="Button 按钮"></dd-footer>
         </div>

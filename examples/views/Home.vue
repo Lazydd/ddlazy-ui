@@ -116,6 +116,10 @@ export default {
                             path: "#/component/datePicker",
                         },
                         {
+                            label: "Upload 上传",
+                            path: "#/component/upload",
+                        },
+                        {
                             label: "Transfer 穿梭框",
                             path: "#/component/transfer",
                         },
@@ -143,10 +147,6 @@ export default {
                         {
                             label: "Tree 树形控件",
                             path: "#/component/tree",
-                        },
-                        {
-                            label: "Upload 上传",
-                            path: "#/component/upload",
                         },
                         {
                             label: "ColorPicker 颜色选择器",
