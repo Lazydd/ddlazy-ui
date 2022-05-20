@@ -51,6 +51,7 @@ const Scroll = () => import("@/components/Scroll.vue");
 const Image = () => import("@/components/Image.vue");
 const Transition = () => import("@/components/Transition.vue");
 const Cascader = () => import("@/components/Cascader.vue");
+const Menu = () => import("@/components/Menu.vue");
 const Echarts = () => import("@/components/Echarts.vue");
 const Ueditor = () => import("@/components/Ueditor.vue");
 const Map = () => import("@/components/Map.vue");
@@ -306,6 +307,11 @@ const routes = [
                         path: "/component/cascader",
                         name: "Cascader",
                         component: Cascader,
+                    },
+                    {
+                        path: "/component/menu",
+                        name: "Menu",
+                        component: Menu,
                     },
                     {
                         path: "/component/echarts",

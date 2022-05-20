@@ -68,6 +68,10 @@ import ddTimePicker from "./dd-time-picker";
 import ddCascader from "./dd-cascader";
 import ddImage from "./dd-image";
 import ddDatePicker from "./dd-date-picker";
+import ddMenu from "./dd-menu";
+import ddMenuItem from "./dd-menu-item";
+import ddMenuItemGroup from "./dd-menu-item-group";
+import ddSubmenu from "./dd-submenu";
 import ddEcharts from "./dd-echarts";
 import ddUeditor from "./dd-ueditor";
 import ddMap from "./dd-map";
@@ -140,6 +144,10 @@ const components = [
     ddCascader,
     ddImage,
     ddDatePicker,
+    ddMenu,
+    ddMenuItem,
+    ddMenuItemGroup,
+    ddSubmenu,
     ddEcharts,
     ddUeditor,
     ddMap,
@@ -222,6 +230,10 @@ export {
     ddCascader,
     ddImage,
     ddDatePicker,
+    ddMenu,
+    ddMenuItem,
+    ddMenuItemGroup,
+    ddSubmenu,
     ddEcharts,
     ddUeditor,
     ddMap,
@@ -294,6 +306,10 @@ export default {
     ddCascader,
     ddImage,
     ddDatePicker,
+    ddMenu,
+    ddMenuItem,
+    ddMenuItemGroup,
+    ddSubmenu,
     ddEcharts,
     ddUeditor,
     ddMap,

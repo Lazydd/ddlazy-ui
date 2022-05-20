@@ -194,10 +194,10 @@ export default {
                 {
                     label: "Navigation",
                     children: [
-                        // {
-                        //     label: "NavMenu 导航菜单",
-                        //     path: "#/component/quickstart",
-                        // },
+                        {
+                            label: "NavMenu 导航菜单",
+                            path: "#/component/menu",
+                        },
                         {
                             label: "Tabs 标签页",
                             path: "#/component/tabs",
