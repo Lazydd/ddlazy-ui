@@ -308,6 +308,11 @@ export default {
             this.getsize();
         });
     },
+    watch: {
+        $route(menu) {
+            this.activeMenu = "#" + menu.path;
+        },
+    },
 };
 </script>
 

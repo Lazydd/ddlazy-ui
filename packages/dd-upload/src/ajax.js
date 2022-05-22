@@ -1,5 +1,4 @@
 export default function upload(detail, callback, error) {
-    console.log(111);
     let { action, headers, param } = detail
     const xhr = new XMLHttpRequest();
     xhr.open("post", action, true);
