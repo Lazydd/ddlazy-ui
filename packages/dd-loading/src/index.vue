@@ -1,6 +1,6 @@
 <template>
-    <transition name="loading"
-        ><div
+    <transition name="loading">
+        <div
             ref="ddLoading"
             v-show="visible"
             :style="`background-color: ${
@@ -20,8 +20,8 @@
                 </div>
                 <p class="dd-loading-text">{{ text }}</p>
             </div>
-        </div></transition
-    >
+        </div>
+    </transition>
 </template>
 
 <script>

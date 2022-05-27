@@ -69,7 +69,7 @@ Vue.directive("loading", {
                 area: el,
             });
         } else {
-            close(); //次处有bug
+            close(); //此处有bug
         }
     },
     unbind: () => close(),

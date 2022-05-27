@@ -46,7 +46,7 @@ export default {
             code1: `
                 <div style="width: 100%; height: 50%">
                     <dd-scroll>
-                        <div style="width:1000px">
+                        <div>
                             {{ content }}
                         </div>
                     </dd-scroll>

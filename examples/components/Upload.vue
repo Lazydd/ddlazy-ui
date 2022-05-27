@@ -22,7 +22,7 @@
         <dd-block title="照片墙" :code="code2">
             <template #source>
                 <dd-upload
-                    action="/abcdef/mengxiangTown/upload/fileToBase"
+                    action="/abcdef"
                     name="uploadFile"
                     :file-list="fileList"
                     list-type="picture-card"
@@ -38,7 +38,7 @@
         <dd-block title="拖拽上传" :code="code3">
             <template #source>
                 <dd-upload
-                    action="/abcdef/mengxiangTown/upload/fileToBase"
+                    action="/abcdef"
                     name="uploadFile"
                     drag
                     :limit="4"
@@ -136,7 +136,7 @@ export default {
             `,
             code2: `
                  <dd-upload
-                    action="/abcdef/mengxiangTown/upload/fileToBase"
+                    action="/abcdef"
                     name="uploadFile"
                     :file-list="fileList"
                     list-type="picture-card"
