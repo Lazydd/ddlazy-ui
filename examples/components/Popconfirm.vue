@@ -111,8 +111,8 @@ export default {
                     backParameter: "—",
                 },
                 {
-                    name: "cancel",
-                    explain: "点击取消按钮时触发",
+                    name: "stopMoving",
+                    explain: "松开鼠标的回调",
                     backParameter: "—",
                 },
             ],

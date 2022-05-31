@@ -52,9 +52,11 @@ const Image = () => import("@/components/Image.vue");
 const Transition = () => import("@/components/Transition.vue");
 const Cascader = () => import("@/components/Cascader.vue");
 const Menu = () => import("@/components/Menu.vue");
+const InfiniteScroll = () => import("@/components/InfiniteScroll.vue");
 const Echarts = () => import("@/components/Echarts.vue");
 const Ueditor = () => import("@/components/Ueditor.vue");
 const Map = () => import("@/components/Map.vue");
+const Signature = () => import("@/components/Signature.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -314,6 +316,11 @@ const routes = [
                         component: Menu,
                     },
                     {
+                        path: "/component/infiniteScroll",
+                        name: "InfiniteScroll",
+                        component: InfiniteScroll,
+                    },
+                    {
                         path: "/component/echarts",
                         name: "Echarts",
                         component: Echarts,
@@ -327,6 +334,11 @@ const routes = [
                         path: "/component/map",
                         name: "Map",
                         component: Map,
+                    },
+                    {
+                        path: "/component/Signature",
+                        name: "Signature",
+                        component: Signature,
                     },
                 ],
             },

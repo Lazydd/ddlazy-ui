@@ -267,6 +267,10 @@ export default {
                             label: "Backtop 回到顶部",
                             path: "#/component/Backtop",
                         },
+                        {
+                            label: "InfiniteScroll 无限滚动",
+                            path: "#/component/infiniteScroll",
+                        },
                     ],
                 },
                 {
@@ -283,6 +287,10 @@ export default {
                         {
                             label: "Map 地图",
                             path: "#/component/map",
+                        },
+                        {
+                            label: "Signature 签名",
+                            path: "#/component/Signature",
                         },
                     ],
                 },

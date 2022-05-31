@@ -69,12 +69,15 @@ import ddCascader from "./dd-cascader";
 import ddImage from "./dd-image";
 import ddDatePicker from "./dd-date-picker";
 import ddMenu from "./dd-menu";
+import ddInfiniteScroll from "./dd-infinite-scroll";
 import ddEcharts from "./dd-echarts";
 import ddUeditor from "./dd-ueditor";
 import ddMap from "./dd-map";
+import ddSignature from "./dd-signature";
 import "./css/global.less";
 Vue.use(Message);
 Vue.use(ddLoading);
+Vue.use(ddInfiniteScroll);
 Vue.use(ddMessageBox);
 const components = [
     ddBlock,
@@ -145,6 +148,7 @@ const components = [
     ddEcharts,
     ddUeditor,
     ddMap,
+    ddSignature,
 ];
 
 const install = function (Vue) {
@@ -228,6 +232,7 @@ export {
     ddEcharts,
     ddUeditor,
     ddMap,
+    ddSignature,
 };
 
 export default {
@@ -301,4 +306,5 @@ export default {
     ddEcharts,
     ddUeditor,
     ddMap,
+    ddSignature,
 };
