@@ -175,7 +175,7 @@ export default {
     },
     watch: {
         index(val) {
-            this.$emit("change", val);
+            this.$emit("change", val); //通过$listeners传递
         },
     },
 };
