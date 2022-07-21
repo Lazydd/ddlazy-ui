@@ -23,6 +23,7 @@
 
 <script>
 let _MessageHeight = 0;
+let _MessageTotalHeight = 30;
 export default {
     name: "ddMessage",
     data() {
@@ -39,7 +40,8 @@ export default {
             this.visible ? this.destroy() : null;
         },
         destroy() {
-            this.top = _MessageHeight * -1;
+            _MessageTotalHeight -= _MessageHeight + 20;
+            this.top = (_MessageTotalHeight + 20) * -1;
             setTimeout(() => {
                 this.visible = false;
                 this.$emit("close");
@@ -51,9 +53,10 @@ export default {
     mounted() {
         setTimeout(() => {
             _MessageHeight = this.$refs.ddMessage.offsetHeight;
-            this.top = -1 * _MessageHeight;
-            // this.top = _MessageHeight;
-            this.top = 50;
+            _MessageTotalHeight += _MessageHeight + 20;
+            this.top = -1 * _MessageTotalHeight;
+            this.top = _MessageTotalHeight;
+            // this.top = 50;
         }, 100);
         setTimeout(() => {
             this.visible ? this.destroy() : null;

@@ -27,15 +27,8 @@ const InfiniteScroll = (options) => {
 };
 
 Vue.directive("infinite-scroll", {
-    inserted: (el, binding) => {
-        binding.value &&
-            InfiniteScroll({
-                background: "",
-                spinner: "",
-                text: "InfiniteScroll",
-                type: "service",
-                visible: "true",
-            });
+    bind: (el, binding) => {
+        
     },
     update: (el, bingding) => {
 

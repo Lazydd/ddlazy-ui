@@ -78,7 +78,7 @@ export default {
         },
         open3(){
             // this.$message({type:'success',message:'33333'})
-            this.$message.warning('啊啊啊啊啊啊阿')
+            this.$message.warning('啊啊啊啊啊啊的点点滴滴多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多多的点点滴滴多多多多多阿')
         },
     }
 };
