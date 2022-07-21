@@ -57,7 +57,7 @@ export default {
         },
         lazy: {
             type: Boolean,
-            dfeatures: false,
+            default: false,
         },
         alt: {
             type: String,
