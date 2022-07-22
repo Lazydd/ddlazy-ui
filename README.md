@@ -1,10 +1,8 @@
 # ddlazy-ui
 
-<!-- <p align="center">
-  <a href="https://www.npmjs.com/package/ddlazy-ui">
-    <img src="https://img.shields.io/npm/v/element-ui.svg">
-  </a>
-</p> -->
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg" alt="MIT"></a>
+<a href="https://github.com/Lazydd"><img src="https://img.shields.io/badge/github-Lazydd-brightgreen.svg" alt="github"></a>
+<a href="https://github.com/facebook/react"><img src="https://img.shields.io/badge/npm-%5E2.6.11-blue" alt="react"></a>
 
 ## Project setup
 ```
