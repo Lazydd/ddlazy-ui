@@ -39,6 +39,7 @@ export default {
                     "dd-tabs-top",
                     _this.type == "card" ? "cardStyel" : "",
                     _this.type == "border-card" ? "dd-tabs-border-card" : "",
+                    _this.type == "segmented" ? "segmented" : "",
                 ],
             },
             [
@@ -64,6 +65,10 @@ export default {
                                     style: {
                                         width: `${_this.width}px`,
                                         transform: `translateX(${_this.left}px)`,
+                                        display:
+                                            _this.type == "border-card"
+                                                ? "none"
+                                                : "",
                                     },
                                 }),
                                 tabList.map((item, i) => {
@@ -246,7 +251,7 @@ export default {
         }
         .dd-tabs_item-disabled {
             color: #c0c4cc;
-            cursor: default;
+            cursor: not-allowed;
             &:hover {
                 color: #c0c4cc;
             }
@@ -288,7 +293,7 @@ export default {
             }
             .dd-tabs_item-disabled {
                 color: #c0c4cc;
-                cursor: default;
+                cursor: not-allowed;
                 &:hover {
                     color: #c0c4cc;
                 }
@@ -321,6 +326,28 @@ export default {
         }
         .dd-tabs_nav:first-child {
             border-left: none;
+        }
+    }
+}
+.segmented {
+    .dd-tabs {
+        display: inline-block;
+        padding: 2px;
+        color: #000000a6;
+        background-color: #0000000a;
+        border-radius: 2px;
+        &::after {
+            content: unset;
+        }
+        .dd-tabs__active-bar {
+            bottom: 2px;
+            height: calc(100% - 4px);
+            background-color: #fff;
+            border-radius: 2px;
+            box-shadow: 0 2px 8px -2px #0000000d, 0 1px 4px -1px #00000012,
+                0 0 1px #00000014;
+            color: #262626;
+            z-index: 0;
         }
     }
 }

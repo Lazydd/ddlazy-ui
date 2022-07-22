@@ -42,6 +42,16 @@
                 </dd-tabs>
             </template>
         </dd-block>
+        <dd-block title="分段控制" :code="code5">
+            <template #source>
+                <dd-tabs v-model="activeName4" type="segmented" @tab-click="handleClick">
+                    <dd-tab-pane icon="icon-calendar" label="用户管理" name="first">用户管理</dd-tab-pane>
+                    <dd-tab-pane icon="icon-cry" label="配置管理" name="second">配置管理</dd-tab-pane>
+                    <dd-tab-pane icon="icon-messagecenter" :disabled='true' label="角色管理" name="third">角色管理</dd-tab-pane>
+                    <dd-tab-pane icon="icon-store" label="定时任务补偿管理" name="fourth">定时任务补偿管理</dd-tab-pane>
+                </dd-tabs>
+            </template>
+        </dd-block>
         <dd-describe title="Tabs Attributes" :data="Attributes"></dd-describe>
         <dd-describe title="Tabs Events" :data="Attributes2" events></dd-describe>
         <dd-describe title="Tab-pane Attributes" :data="Attributes3"></dd-describe>
@@ -58,6 +68,7 @@ export default {
             activeName1: "first",
             activeName2: "first",
             activeName3: "first",
+            activeName4: "first",
             code1: `
                 <dd-tabs v-model="activeName" @tab-click="handleClick">
                     <dd-tab-pane label="用户管理" name="first">用户管理</dd-tab-pane>
@@ -90,6 +101,14 @@ export default {
                     <dd-tab-pane label="定时任务补偿管理" name="fourth">定时任务补偿管理</dd-tab-pane>
                 </dd-tabs>
             `,
+            code5:`
+                <dd-tabs v-model="activeName4" type="segmented" @tab-click="handleClick">
+                    <dd-tab-pane icon="icon-calendar" label="用户管理" name="first">用户管理</dd-tab-pane>
+                    <dd-tab-pane icon="icon-cry" label="配置管理" name="second">配置管理</dd-tab-pane>
+                    <dd-tab-pane icon="icon-messagecenter" :disabled='true' label="角色管理" name="third">角色管理</dd-tab-pane>
+                    <dd-tab-pane icon="icon-store" label="定时任务补偿管理" name="fourth">定时任务补偿管理</dd-tab-pane>
+                </dd-tabs>
+            `,
             Attributes: [
                 {
                     parameter: "value / v-model",
@@ -102,7 +121,7 @@ export default {
                     parameter: "type",
                     explain: "风格类型",
                     type: "string",
-                    optional: "card/border-card",
+                    optional: "card/border-card/segmented",
                     default: "—",
                 },
             ],
