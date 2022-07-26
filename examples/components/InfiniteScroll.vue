@@ -1,6 +1,6 @@
 <template>
     <div class="page-box">
-        <h2 class="_title">InfiniteScroll 无限滚动</h2>
+        <h2 class="_title">InfiniteScroll 无限滚动（待完成）</h2>
         <p class="_descript">滚动至底部时，加载更多数据。</p>
         <dd-block title="基础用法" :code="code1">
             <template #source>

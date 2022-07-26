@@ -5,7 +5,6 @@ export default {
     name: "ddDropdownMenu",
     props: {},
     render: function (h) {
-        console.log(this.$parent);
         let _this = this;
         let vnodeArr = [];
         zIndex++;

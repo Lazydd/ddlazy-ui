@@ -271,6 +271,10 @@ export default {
                             label: "InfiniteScroll 无限滚动",
                             path: "#/component/infiniteScroll",
                         },
+                        {
+                            label: "VirtualizedList 虚拟滚动列表",
+                            path: "#/component/virtualized-list",
+                        },
                     ],
                 },
                 {

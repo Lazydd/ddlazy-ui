@@ -115,7 +115,6 @@ export default {
             this.$emit("click", item);
             item.isActive = !item.isActive;
             if (item.href) this.$router.push(item.href);
-            console.log(item);
             if (!item.children) {
                 this.activeMenu = item.keys || item.title;
                 this.$emit("change", this.activeMenu);

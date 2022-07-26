@@ -85,7 +85,6 @@ export default {
 
                     uploadImg(formdata)
                         .then((res) => {
-                            console.log(res);
                             success("https://qnsjk.huabeisky.com/" + res.data);
                         })
                         .catch((res) => {

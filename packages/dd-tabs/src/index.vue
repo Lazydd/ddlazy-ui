@@ -31,7 +31,6 @@ export default {
             vnode.push({ name, label, icon, disabled: !!disabled });
             if (name == this.activeTab) this.tabIndex = i;
         });
-        console.log(vnode);
         return h(
             "div",
             {

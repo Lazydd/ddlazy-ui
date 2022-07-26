@@ -53,6 +53,7 @@ const Transition = () => import("@/components/Transition.vue");
 const Cascader = () => import("@/components/Cascader.vue");
 const Menu = () => import("@/components/Menu.vue");
 const InfiniteScroll = () => import("@/components/InfiniteScroll.vue");
+const VirtualizedList = () => import("@/components/VirtualizedList.vue");
 const Echarts = () => import("@/components/Echarts.vue");
 const Ueditor = () => import("@/components/Ueditor.vue");
 const Map = () => import("@/components/Map.vue");
@@ -319,6 +320,11 @@ const routes = [
                         path: "/component/infiniteScroll",
                         name: "InfiniteScroll",
                         component: InfiniteScroll,
+                    },
+                    {
+                        path: "/component/virtualized-list",
+                        name: "VirtualizedList",
+                        component: VirtualizedList,
                     },
                     {
                         path: "/component/echarts",

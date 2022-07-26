@@ -75,17 +75,14 @@ export default {
     methods: {
         ddCascader_click(index, isLastItem) {
             this.index = index;
-            console.log(this.options[this.index]);
             this.activeValue[this.index] = null;
             this.$set(this.activeValue, index, this.options[this.index].value);
-            console.log(this.activeValue);
             if (!isLastItem) this.isActive = true;
         },
         ddCascader_Twoclick(index) {
             this.towIndex = index;
         },
         initTree() {
-            console.log(this.$parent?.nodeLevel);
             if (this.$parent?.nodeLevel) {
                 let parentNodeLevel = this.$parent.nodeLevel;
                 this.$set(this.node, "nodeLevel", parentNodeLevel + 1);
