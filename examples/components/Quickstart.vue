@@ -50,6 +50,7 @@ export default {
 					<div>ddCheckboxButton,</div>
 					<div>ddInput,</div>
 					<div>ddInputNumber,</div>
+					<div>ddNumber,</div>
 					<div>ddSelect,</div>
 					<div>ddOption,</div>
 					<div>ddScroll,</div>
@@ -93,6 +94,14 @@ export default {
 					<div>ddTransition,</div>
 					<div>ddTimePicker,</div>
 					<div>ddCascader,</div>
+					<div>ddImage,</div>
+					<div>ddDatePicker,</div>
+					<div>ddMenu,</div>
+					<div>ddEcharts,</div>
+					<div>ddUeditor,</div>
+					<div>ddMap,</div>
+					<div>ddSignature,</div>
+					<div>ddPrint,</div>
 
 					<div>Message,</div>
 					<div>ddLoading,</div>
@@ -157,6 +166,14 @@ export default {
 					<div>Vue.use(ddTransition),</div>
 					<div>Vue.use(ddTimePicker),</div>
 					<div>Vue.use(ddCascader),</div>
+					<div>Vue.use(ddImage),</div>
+					<div>Vue.use(ddDatePicker),</div>
+					<div>Vue.use(ddMenu),</div>
+					<div>Vue.use(ddEcharts),</div>
+					<div>Vue.use(ddUeditor),</div>
+					<div>Vue.use(ddMap),</div>
+					<div>Vue.use(ddSignature),</div>
+					<div>Vue.use(ddPrint),</div>
 					<br />
 					<div>Vue.use(Message);</div>
 					<div>Vue.use(ddLoading);</div>

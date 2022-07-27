@@ -15,6 +15,7 @@ const Radio = () => import("@/components/Radio.vue");
 const Checkbox = () => import("@/components/Checkbox.vue");
 const Input = () => import("@/components/Input.vue");
 const InputNumber = () => import("@/components/InputNumber.vue");
+const Number = () => import("@/components/Number.vue");
 const Select = () => import("@/components/Select.vue");
 const Switch = () => import("@/components/Switch.vue");
 const Slider = () => import("@/components/Slider.vue");
@@ -58,6 +59,7 @@ const Echarts = () => import("@/components/Echarts.vue");
 const Ueditor = () => import("@/components/Ueditor.vue");
 const Map = () => import("@/components/Map.vue");
 const Signature = () => import("@/components/Signature.vue");
+const PrintArea = () => import("@/components/PrintArea.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -125,6 +127,11 @@ const routes = [
                         path: "/component/input-number",
                         name: "InputNumber",
                         component: InputNumber,
+                    },
+                    {
+                        path: "/component/number",
+                        name: "Number",
+                        component: Number,
                     },
                     {
                         path: "/component/select",
@@ -342,9 +349,14 @@ const routes = [
                         component: Map,
                     },
                     {
-                        path: "/component/Signature",
+                        path: "/component/signature",
                         name: "Signature",
                         component: Signature,
+                    },
+                    {
+                        path: "/component/printArea",
+                        name: "PrintArea",
+                        component: PrintArea,
                     },
                 ],
             },

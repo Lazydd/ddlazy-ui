@@ -20,6 +20,7 @@ import ddCheckboxGroup from "./dd-checkbox-group";
 import ddCheckboxButton from "./dd-checkbox-button";
 import ddInput from "./dd-input";
 import ddInputNumber from "./dd-input-number";
+import ddNumber from "./dd-number";
 import ddSelect from "./dd-select";
 import ddOption from "./dd-option";
 import ddScroll from "./dd-scroll";
@@ -74,11 +75,14 @@ import ddEcharts from "./dd-echarts";
 import ddUeditor from "./dd-ueditor";
 import ddMap from "./dd-map";
 import ddSignature from "./dd-signature";
+import ddPrint from "./dd-print";
+import Print from 'vue-print-nb';
 import "./css/global.less";
 Vue.use(Message);
 Vue.use(ddLoading);
 Vue.use(ddInfiniteScroll);
 Vue.use(ddMessageBox);
+Vue.use(Print);
 const components = [
     ddBlock,
     ddDescribe,
@@ -99,6 +103,7 @@ const components = [
     ddCheckboxButton,
     ddInput,
     ddInputNumber,
+    ddNumber,
     ddSelect,
     ddOption,
     ddScroll,
@@ -149,6 +154,7 @@ const components = [
     ddUeditor,
     ddMap,
     ddSignature,
+    ddPrint,
 ];
 
 const install = function (Vue) {
@@ -183,6 +189,7 @@ export {
     ddCheckboxButton,
     ddInput,
     ddInputNumber,
+    ddNumber,
     ddSelect,
     ddOption,
     ddScroll,
@@ -233,6 +240,7 @@ export {
     ddUeditor,
     ddMap,
     ddSignature,
+    ddPrint,
 };
 
 export default {
@@ -257,6 +265,7 @@ export default {
     ddCheckboxButton,
     ddInput,
     ddInputNumber,
+    ddNumber,
     ddSelect,
     ddOption,
     ddScroll,
@@ -307,4 +316,5 @@ export default {
     ddUeditor,
     ddMap,
     ddSignature,
+    ddPrint,
 };

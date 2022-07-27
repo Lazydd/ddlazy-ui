@@ -130,13 +130,13 @@ export default {
                                       h("div", {
                                           class: ["dd-select-dropdown-s"],
                                       }),
-                                      h("dd-scroll", {}, [
-                                          h(
-                                              "ul",
-                                              {
-                                                  class: [""],
-                                              },
-                                              [
+                                      h(
+                                          "dd-scroll",
+                                          {
+                                              ref: "dd-scroll-dropdown",
+                                          },
+                                          [
+                                              h("ul", [
                                                   vnode.map((item, i) => {
                                                       return h("li", {
                                                           class: [
@@ -181,9 +181,9 @@ export default {
                                                           },
                                                       });
                                                   }),
-                                              ]
-                                          ),
-                                      ]),
+                                              ]),
+                                          ]
+                                      ),
                                   ]
                               )
                             : "",
@@ -214,6 +214,18 @@ export default {
         isShow_dropdown(val) {
             this.isActive = val ? true : false;
             this.$emit("visible-change", val);
+            if (this.isActive) {
+                this.$nextTick(() => {
+                    let scrollNod =
+                        this.$refs["dd-scroll-dropdown"].$refs[
+                            "dd-scrollbar_srap"
+                        ];
+                    if (scrollNod)
+                        scrollNod.scrollTo({
+                            top: this.activeIndex * 34,
+                        });
+                });
+            }
         },
     },
 };

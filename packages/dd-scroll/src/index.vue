@@ -1,6 +1,6 @@
 <template>
     <div class="dd-scroll">
-        <div class="dd-scrollbar_srap">
+        <div class="dd-scrollbar_srap" ref="dd-scrollbar_srap">
             <slot v-if="$slots.default" />
         </div>
     </div>

@@ -92,6 +92,10 @@ export default {
                             path: "#/component/input-number",
                         },
                         {
+                            label: "Number 数字滚动",
+                            path: "#/component/number",
+                        },
+                        {
                             label: "Select 选择器",
                             path: "#/component/select",
                         },
@@ -294,7 +298,11 @@ export default {
                         },
                         {
                             label: "Signature 签名",
-                            path: "#/component/Signature",
+                            path: "#/component/signature",
+                        },
+                        {
+                            label: "PrintArea 打印",
+                            path: "#/component/printArea",
                         },
                     ],
                 },

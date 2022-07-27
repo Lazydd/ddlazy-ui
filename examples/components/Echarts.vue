@@ -30,7 +30,7 @@
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
         <dd-footer
-            left="Backtop 回到顶部"
+            left="VirtualizedList 虚拟滚动列表"
             right="Ueditor 富文本编辑器"
         ></dd-footer>
     </div>
