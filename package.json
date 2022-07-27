@@ -47,5 +47,6 @@
   ],
   "directories": {
     "example": "examples"
-  }
+  },
+  "homepage": "."
 }
