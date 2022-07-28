@@ -37,7 +37,12 @@ export default {
     },
     methods: {
         dd_timer() {
-            if (!this.value || this.endValue == this.pauseValue) return;
+            if (
+                this.value == null ||
+                this.value == undefined ||
+                this.endValue == this.pauseValue
+            )
+                return;
             this.dd_timerMethod = setInterval(async () => {
                 if (this.pauseValue) await this.dd_sleep(Math.pow(2, 31) - 1);
                 if (this.startValue < this.endValue) {

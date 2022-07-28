@@ -217,6 +217,8 @@ export default {
                         </div>
                     </dd-collapse-item>
                 </dd-collapse>
+
+                activeNames: ["1"],
             `,
             code2: `
                 <dd-collapse-item title="一致性 Consistency" name="1">
@@ -252,6 +254,8 @@ export default {
                             结果可控：用户可以自由的进行操作，包括撤销、回退和终止当前操作等。
                         </div>
                     </dd-collapse-item>
+
+                    activeNames1: "1",
             `,
             code3: `
                 <dd-collapse v-model="activeNames2" accordion>
@@ -296,6 +300,8 @@ export default {
                         </div>
                     </dd-collapse-item>
                 </dd-collapse>
+
+                activeNames2: ["1"],
             `,
             code4: `
                 <dd-collapse v-model="activeNames3" accordion>
@@ -333,6 +339,8 @@ export default {
                         </div>
                     </dd-collapse-item>
                 </dd-collapse>
+
+                activeNames3: "2",
             `,
             Attributes: [
                 {

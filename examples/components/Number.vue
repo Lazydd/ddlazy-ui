@@ -7,7 +7,7 @@
                 <dd-number class="number" v-model="value" :time="1000" />
             </template>
         </dd-block>
-        <dd-block title="基础用法" :code="code1">
+        <dd-block title="基础用法" :code="code2">
             <template #source>
                 <dd-button @click="pause = false">开始</dd-button>
                 <dd-button @click="pause = true">暂停</dd-button>
@@ -33,7 +33,29 @@ export default {
     data() {
         return {
             code1: `
-                <dd-number :value="50" :time="1000" />
+                <dd-number class="number" v-model="value" :time="1000" />
+
+                value: 500,
+            `,
+            code2:`
+                <dd-button @click="pause = false">开始</dd-button>
+                <dd-button @click="pause = true">暂停</dd-button>
+                <dd-button @click="clear">清空</dd-button>
+                <dd-number
+                    class="number"
+                    v-model="value2"
+                    :time="1000"
+                    :mounte="false"
+                    :pause="pause"
+                />
+
+                pause: true,
+                value2: 500,
+
+                clear() {
+                    this.pause = true;
+                    this.value2 = 0;
+                },
             `,
             Attributes: [
                 {

@@ -65,7 +65,6 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: "",
-        name: "Index",
         component: Index,
         children: [
             {

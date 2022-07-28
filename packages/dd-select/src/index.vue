@@ -288,8 +288,8 @@ export default {
         line-height: 40px;
     }
     .small {
-        height: 30px;
-        line-height: 30px;
+        height: 32px;
+        line-height: 32px;
     }
     .mini {
         height: 28px;
