@@ -10,11 +10,8 @@
                         :key="submenu.label"
                         @click="changeMenu(submenu)"
                     >
-                        <a
-                            :class="{ active: submenu.path == activeMenu }"
-                            a
-                            :href="submenu.path"
-                            >{{ submenu.label }}
+                        <a :class="{ active: submenu.path == activeMenu }">
+                            {{ submenu.label }}
                         </a>
                     </li>
                 </ul>
@@ -39,15 +36,15 @@ export default {
                     children: [
                         {
                             label: "安装",
-                            path: "#/component/installation",
+                            path: "/component/installation",
                         },
                         {
                             label: "快速上手",
-                            path: "#/component/quickstart",
+                            path: "/component/quickstart",
                         },
                         {
                             label: "内置过渡动画",
-                            path: "#/component/transition",
+                            path: "/component/transition",
                         },
                     ],
                 },
@@ -56,19 +53,19 @@ export default {
                     children: [
                         {
                             label: "Layout 布局",
-                            path: "#/component/layout",
+                            path: "/component/layout",
                         },
                         {
                             label: "Icon 图标",
-                            path: "#/component/icon",
+                            path: "/component/icon",
                         },
                         {
                             label: "Button 按钮",
-                            path: "#/component/button",
+                            path: "/component/button",
                         },
                         {
                             label: "Link 文字链接",
-                            path: "#/component/link",
+                            path: "/component/link",
                         },
                     ],
                 },
@@ -77,59 +74,59 @@ export default {
                     children: [
                         {
                             label: "Radio 单选框",
-                            path: "#/component/radio",
+                            path: "/component/radio",
                         },
                         {
                             label: "Checkbox 多选框",
-                            path: "#/component/checkbox",
+                            path: "/component/checkbox",
                         },
                         {
                             label: "Input 输入框",
-                            path: "#/component/input",
+                            path: "/component/input",
                         },
                         {
                             label: "InputNumber 计数器",
-                            path: "#/component/input-number",
+                            path: "/component/input-number",
                         },
                         {
                             label: "Number 数字滚动",
-                            path: "#/component/number",
+                            path: "/component/number",
                         },
                         {
                             label: "Select 选择器",
-                            path: "#/component/select",
+                            path: "/component/select",
                         },
                         {
                             label: "Cascader 级联选择器",
-                            path: "#/component/cascader",
+                            path: "/component/cascader",
                         },
                         {
                             label: "Switch 开关",
-                            path: "#/component/switch",
+                            path: "/component/switch",
                         },
                         {
                             label: "Slider 滑块",
-                            path: "#/component/slider",
+                            path: "/component/slider",
                         },
                         {
                             label: "TimePicker 时间选择器",
-                            path: "#/component/timeSelect",
+                            path: "/component/timeSelect",
                         },
                         {
                             label: "DatePicker 日期选择器",
-                            path: "#/component/datePicker",
+                            path: "/component/datePicker",
                         },
                         {
                             label: "Upload 上传",
-                            path: "#/component/upload",
+                            path: "/component/upload",
                         },
                         {
                             label: "Transfer 穿梭框",
-                            path: "#/component/transfer",
+                            path: "/component/transfer",
                         },
                         {
                             label: "Form 表单",
-                            path: "#/component/form",
+                            path: "/component/form",
                         },
                     ],
                 },
@@ -138,43 +135,43 @@ export default {
                     children: [
                         {
                             label: "Table 表格",
-                            path: "#/component/table",
+                            path: "/component/table",
                         },
                         {
                             label: "Tag 标签",
-                            path: "#/component/tag",
+                            path: "/component/tag",
                         },
                         {
                             label: "Progress 进度条",
-                            path: "#/component/progress",
+                            path: "/component/progress",
                         },
                         {
                             label: "Tree 树形控件",
-                            path: "#/component/tree",
+                            path: "/component/tree",
                         },
                         {
                             label: "ColorPicker 颜色选择器",
-                            path: "#/component/color-picker",
+                            path: "/component/color-picker",
                         },
                         {
                             label: "Pagination 分页",
-                            path: "#/component/pagination",
+                            path: "/component/pagination",
                         },
                         {
                             label: "Badge 标记",
-                            path: "#/component/badge",
+                            path: "/component/badge",
                         },
                         {
                             label: "Avatar 头像",
-                            path: "#/component/avatar",
+                            path: "/component/avatar",
                         },
                         {
                             label: "Skeleton 骨架屏",
-                            path: "#/component/skeleton",
+                            path: "/component/skeleton",
                         },
                         {
                             label: "Empty 空状态",
-                            path: "#/component/empty",
+                            path: "/component/empty",
                         },
                     ],
                 },
@@ -183,15 +180,15 @@ export default {
                     children: [
                         {
                             label: "Loading 加载",
-                            path: "#/component/loading",
+                            path: "/component/loading",
                         },
                         {
                             label: "Message 消息提示",
-                            path: "#/component/message",
+                            path: "/component/message",
                         },
                         {
                             label: "MessageBox 弹框",
-                            path: "#/component/message-box",
+                            path: "/component/message-box",
                         },
                     ],
                 },
@@ -200,23 +197,23 @@ export default {
                     children: [
                         {
                             label: "NavMenu 导航菜单",
-                            path: "#/component/menu",
+                            path: "/component/menu",
                         },
                         {
                             label: "Tabs 标签页",
-                            path: "#/component/tabs",
+                            path: "/component/tabs",
                         },
                         {
                             label: "Breadcrumb 面包屑",
-                            path: "#/component/breadcrumb",
+                            path: "/component/breadcrumb",
                         },
                         {
                             label: "Dropdown 下拉菜单",
-                            path: "#/component/dropdown",
+                            path: "/component/dropdown",
                         },
                         {
                             label: "Steps 步骤条",
-                            path: "#/component/steps",
+                            path: "/component/steps",
                         },
                     ],
                 },
@@ -225,11 +222,11 @@ export default {
                     children: [
                         {
                             label: "Dialog 对话框",
-                            path: "#/component/dialog",
+                            path: "/component/dialog",
                         },
                         {
                             label: "Tooltip 文字提示",
-                            path: "#/component/tooltip",
+                            path: "/component/tooltip",
                         },
                         // {
                         //     label: "Popover 弹出框",
@@ -237,47 +234,47 @@ export default {
                         // },
                         {
                             label: "Popconfirm 气泡确认框",
-                            path: "#/component/popconfirm",
+                            path: "/component/popconfirm",
                         },
                         {
                             label: "Card 卡片",
-                            path: "#/component/card",
+                            path: "/component/card",
                         },
                         {
                             label: "Carousel 走马灯",
-                            path: "#/component/carousel",
+                            path: "/component/carousel",
                         },
                         {
                             label: "Collapse 折叠面板",
-                            path: "#/component/collapse",
+                            path: "/component/collapse",
                         },
                         {
                             label: "Timeline 时间线",
-                            path: "#/component/timeline",
+                            path: "/component/timeline",
                         },
                         {
                             label: "Divider 分割线",
-                            path: "#/component/divider",
+                            path: "/component/divider",
                         },
                         {
                             label: "Scroll 滚动条",
-                            path: "#/component/scroll",
+                            path: "/component/scroll",
                         },
                         {
                             label: "Image 图片",
-                            path: "#/component/image",
+                            path: "/component/image",
                         },
                         {
                             label: "Backtop 回到顶部",
-                            path: "#/component/Backtop",
+                            path: "/component/Backtop",
                         },
                         {
                             label: "InfiniteScroll 无限滚动",
-                            path: "#/component/infiniteScroll",
+                            path: "/component/infiniteScroll",
                         },
                         {
                             label: "VirtualizedList 虚拟滚动列表",
-                            path: "#/component/virtualized-list",
+                            path: "/component/virtualized-list",
                         },
                     ],
                 },
@@ -286,33 +283,34 @@ export default {
                     children: [
                         {
                             label: "Echarts 图表",
-                            path: "#/component/echarts",
+                            path: "/component/echarts",
                         },
                         {
                             label: "Tinymce 富文本编辑器",
-                            path: "#/component/ueditor",
+                            path: "/component/ueditor",
                         },
                         {
                             label: "Map 地图",
-                            path: "#/component/map",
+                            path: "/component/map",
                         },
                         {
                             label: "Signature 签名",
-                            path: "#/component/signature",
+                            path: "/component/signature",
                         },
                         {
                             label: "PrintArea 打印",
-                            path: "#/component/printArea",
+                            path: "/component/printArea",
                         },
                     ],
                 },
             ],
-            activeMenu: "#" + this.$route.path || "#/component/quickstart",
+            activeMenu: "" + this.$route.path || "/component/quickstart",
         };
     },
     methods: {
         changeMenu(menu) {
             this.activeMenu = menu.path;
+            this.$router.push(menu);
         },
         getsize() {
             this.size = {
@@ -330,7 +328,7 @@ export default {
     },
     watch: {
         $route(menu) {
-            this.activeMenu = "#" + menu.path;
+            this.activeMenu = menu.path;
         },
     },
 };
@@ -409,6 +407,7 @@ a:focus {
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 font-weight: 400;
+                cursor: pointer;
                 &:hover,
                 &:focus {
                     color: #409eff;
