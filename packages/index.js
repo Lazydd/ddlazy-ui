@@ -70,7 +70,7 @@ import ddCascader from "./dd-cascader";
 import ddImage from "./dd-image";
 import ddDatePicker from "./dd-date-picker";
 import ddMenu from "./dd-menu";
-import ddInfiniteScroll from "./dd-infinite-scroll";
+import InfiniteScroll from "./dd-infinite-scroll";
 import ddEcharts from "./dd-echarts";
 import ddUeditor from "./dd-ueditor";
 import ddMap from "./dd-map";
@@ -80,7 +80,6 @@ import Print from 'vue-print-nb';
 import "./css/global.less";
 Vue.use(Message);
 Vue.use(ddLoading);
-// Vue.use(ddInfiniteScroll);
 Vue.use(ddMessageBox);
 Vue.use(Print);
 const components = [

@@ -57,5 +57,4 @@ Vue.directive("infinite-scroll", {
         el.removeEventListener(time)
         document.removeEventListener(timer)
     }
-
 });
