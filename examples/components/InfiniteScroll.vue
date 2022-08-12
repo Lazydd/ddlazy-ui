@@ -21,7 +21,7 @@
             </template>
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
-        <dd-footer left="Button 按钮" right="Radio 单选框"></dd-footer>
+        <dd-footer left="Backtop 回到顶部" right="VirtualizedList 虚拟滚动列表"></dd-footer>
     </div>
 </template>
 
@@ -92,39 +92,25 @@ export default {
             `,
             Attributes: [
                 {
-                    parameter: "type",
-                    explain: "类型",
-                    type: "string",
-                    optional: "primary / success / warning / danger / info",
-                    default: "default",
-                },
-                {
-                    parameter: "underline",
-                    explain: "是否下划线",
+                    parameter: "infinite-scroll-disabled",
+                    explain: "是否禁用",
                     type: "boolean",
-                    optional: "—",
-                    default: "true",
-                },
-                {
-                    parameter: "disabled",
-                    explain: "是否禁用状态",
-                    type: "boolean",
-                    optional: "—",
+                    optional: "-",
                     default: "false",
                 },
                 {
-                    parameter: "href",
-                    explain: "原生 href 属性",
-                    type: "boolean",
-                    optional: "string",
-                    default: "-",
+                    parameter: "infinite-scroll-delay",
+                    explain: "节流时延，单位为ms",
+                    type: "number",
+                    optional: "-",
+                    default: "200",
                 },
                 {
-                    parameter: "icon",
-                    explain: "图标类名",
-                    type: "boolean",
-                    optional: "string",
-                    default: "-",
+                    parameter: "infinite-scroll-distance",
+                    explain: "触发加载的距离阈值，单位为px",
+                    type: "number",
+                    optional: "-",
+                    default: "0",
                 },
             ],
             loading: false,
@@ -165,11 +151,11 @@ export default {
         margin: 10px;
         color: #7dbcfc;
     }
-}
-p {
-    text-align: center;
-    font-size: 14px;
-    color: #5e6d82;
-    line-height: 1.5em;
+    p {
+        text-align: center;
+        font-size: 14px;
+        color: #5e6d82;
+        line-height: 1.5em;
+    }
 }
 </style>
