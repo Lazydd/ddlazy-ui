@@ -1,17 +1,22 @@
 <template>
     <div class="page-box">
-        <h2 class="_title">InfiniteScroll 无限滚动（待完成）</h2>
+        <h2 class="_title">InfiniteScroll 无限滚动</h2>
         <p class="_descript">滚动至底部时，加载更多数据。</p>
-        <dd-block title="基础用法" :code="code1">
+        <dd-block title="基础用法" :code="code">
             <template #source>
                 <ul
                     class="infinite-list"
                     v-infinite-scroll="load"
                     style="overflow: auto"
+                    infinite-scroll-distance="20"
+                    infinite-scroll-delay="200"
+                    :infinite-scroll-disabled="disabled"
                 >
                     <li v-for="i in count" class="infinite-list-item">
                         {{ i }}
                     </li>
+                    <p v-if="loading">加载中...</p>
+                    <p v-if="noMore">没有更多了</p>
                 </ul>
             </template>
         </dd-block>
@@ -26,13 +31,64 @@ export default {
     data() {
         return {
             count: 10,
-            code1: `
-                <dd-link href="http://www.baidu.com">默认链接</dd-link>
-                <dd-link type="primary">主要链接</dd-link>
-                <dd-link type="success">成功链接</dd-link>
-                <dd-link type="warning">警告链接</dd-link>
-                <dd-link type="danger">危险链接</dd-link>
-                <dd-link type="info">信息链接</dd-link>
+            code: `
+                <ul
+                    class="infinite-list"
+                    v-infinite-scroll="load"
+                    style="overflow: auto"
+                    infinite-scroll-distance="20"
+                    infinite-scroll-delay="200"
+                    :infinite-scroll-disabled="disabled"
+                >
+                    <li v-for="i in count" class="infinite-list-item">
+                        {{ i }}
+                    </li>
+                </ul>
+                <p v-if="loading">加载中...</p>
+                <p v-if="noMore">没有更多了</p>
+
+                count: 10,
+                loading: false,
+
+                methods: {
+                    load() {
+                        this.loading = true;
+                        setTimeout(() => {
+                            this.count += 2;
+                            this.loading = false;
+                        }, 2000);
+                    },
+                },
+                computed: {
+                    noMore() {
+                        return this.count >= 20;
+                    },
+                    disabled() {
+                        return this.loading || this.noMore;
+                    },
+                },
+
+                .infinite-list {
+                    height: 300px;
+                    padding: 0;
+                    margin: 0;
+                    list-style: none;
+                }
+                .infinite-list-item {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 50px;
+                    background: #e8f3fe;
+                    margin: 10px;
+                    color: #7dbcfc;
+                }
+                p {
+                    text-align: center;
+                    font-size: 14px;
+                    color: #5e6d82;
+                    line-height: 1.5em;
+                }
             `,
             Attributes: [
                 {
@@ -71,11 +127,24 @@ export default {
                     default: "-",
                 },
             ],
+            loading: false,
         };
     },
     methods: {
         load() {
-            this.count += 2;
+            this.loading = true;
+            setTimeout(() => {
+                this.count += 2;
+                this.loading = false;
+            }, 2000);
+        },
+    },
+    computed: {
+        noMore() {
+            return this.count >= 20;
+        },
+        disabled() {
+            return this.loading || this.noMore;
         },
     },
 };
@@ -96,5 +165,11 @@ export default {
         margin: 10px;
         color: #7dbcfc;
     }
+}
+p {
+    text-align: center;
+    font-size: 14px;
+    color: #5e6d82;
+    line-height: 1.5em;
 }
 </style>

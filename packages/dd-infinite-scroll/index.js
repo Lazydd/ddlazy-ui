@@ -1,44 +1,61 @@
 import Vue from "vue";
+let time = null
+let timer = null
 
-const ddInfiniteScroll = Vue.extend(require("./src/index.vue").default);
-
-let nId = 1;
-const InfiniteScroll = (options) => {
-    let id = "notice-" + nId++;
-
-    options = options || {};
-    if (typeof options === "string") {
-        //如果只传入字符串，将其设置为显示的信息
-        options = {
-            text: options, //这里的InfiniteScroll就是InfiniteScroll.vue中data中的message
-        };
-    }
-
-    const instance = new ddInfiniteScroll({
-        data: options,
-    });
-    instance.id = id;
-    instance.vm = instance.$mount();
-    instance.vm.visible = true; //这里修改InfiniteScroll.vue数据中的visible,这样InfiniteScroll组件就显示出来
-
-    instance.dom = instance.vm.$el; //获取到本实例的dom元素
-    // instance.dom.style.top = -500 + "px";
-    return instance.vm;
+const getPositionSize = (el, prop) => {
+    return el === window || el === document
+        ? document.documentElement[prop]
+        : el[prop];
 };
 
+const getValue = (el, key) => {
+    return el.getAttribute(`infinite-scroll-${key}`)
+}
+
+const attributes = {
+    distance: {
+        type: Number,
+        default: 0
+    },
+    delay: {
+        type: Number,
+        default: 200
+    },
+    disabled: {
+        type: Boolean,
+        default: false
+    }
+}
 Vue.directive("infinite-scroll", {
     bind: (el, binding) => {
-        
+        let { distance, delay } = attributes;
+        Object.keys(attributes).map(item => {
+            attributes[item].value =
+                getValue(el, item)
+        })
+        time = el.addEventListener("scroll", () => {
+            if (!!Boolean(attributes.disabled.value)) return
+
+            if (timer) clearTimeout(timer);
+            timer = setTimeout(async () => {
+                const scrollBottom = el.scrollTop + getPositionSize(el, 'clientHeight')
+
+                if (el.scrollHeight - scrollBottom <= distance.value) {
+                    binding.value && binding.value()
+                }
+
+            }, delay.value ? delay.value : delay.default)
+        })
     },
     update: (el, bingding) => {
-
+        Object.keys(attributes).map(item => {
+            attributes[item].value =
+                getValue(el, item)
+        })
     },
+    unbind: (el, bingding) => {
+        el.removeEventListener(time)
+        document.removeEventListener(timer)
+    }
+
 });
-
-export default {
-    text: InfiniteScroll,
-
-    install(Vue) {
-        Vue.InfiniteScroll = InfiniteScroll;
-    },
-};

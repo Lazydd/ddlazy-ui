@@ -80,7 +80,7 @@ import Print from 'vue-print-nb';
 import "./css/global.less";
 Vue.use(Message);
 Vue.use(ddLoading);
-Vue.use(ddInfiniteScroll);
+// Vue.use(ddInfiniteScroll);
 Vue.use(ddMessageBox);
 Vue.use(Print);
 const components = [

@@ -91,7 +91,4 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-.dd-number {
-}
-</style>
+<style lang="less" scoped></style>
