@@ -1,6 +1,6 @@
 {
   "name": "ddlazy-ui",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "private": false,
   "author": "lazy",
   "license": "MIT",
@@ -38,6 +38,7 @@
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [

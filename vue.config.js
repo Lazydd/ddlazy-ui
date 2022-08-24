@@ -1,8 +1,35 @@
 const path = require("path");
+
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const isProduction = process.env.NODE_ENV === 'production';
+
 function resolve(dir) {
     return path.join(__dirname, dir);
 }
 module.exports = {
+    configureWebpack: config => {
+        const plugins = [];
+        if (isProduction) {
+            plugins.push(
+                new UglifyJsPlugin({
+                    uglifyOptions: {
+                        output: {
+                            comments: false, // 去掉注释
+                        },
+                        warnings: false,
+                        compress: {
+                            drop_console: true,
+                            drop_debugger: false,
+                            pure_funcs: ['console.log']//移除console
+                        }
+                    }
+                })
+            )
+        }
+    },
+
+    // 生产环境是否生成 sourceMap 文件
+    productionSourceMap: false,
     // 修改 src 为 examples
     pages: {
         // lintOnSave: false,
