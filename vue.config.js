@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production';
@@ -26,6 +27,7 @@ module.exports = {
                 })
             )
         }
+        config.plugins = [...config.plugins, ...plugins];
     },
 
     // 生产环境是否生成 sourceMap 文件
@@ -57,6 +59,14 @@ module.exports = {
                 // 修改它的选项...
                 return options;
             });
+        //删除 moment 语言包
+        config
+            .plugin("ignore")
+            .use(
+                new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn$/)
+            );
+
+        return config;
     },
     publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
     outputDir: 'dist/ddlazy-ui/'
