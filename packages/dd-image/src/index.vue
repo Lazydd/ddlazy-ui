@@ -3,7 +3,11 @@
         <img
             :class="{ 'dd-image_preview': previewSrcList.length }"
             v-if="src && Error"
-            :src="lazy ? 'http://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif' : src"
+            :src="
+                lazy
+                    ? 'http://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif'
+                    : src
+            "
             :data-src="lazy ? src : ''"
             :alt="alt"
             @load="load"
@@ -145,10 +149,8 @@ export default {
     width: 100%;
     height: 100%;
     > img {
-        display: block;
         height: 100%;
         width: 100%;
-        vertical-align: middle;
     }
     .dd-image_error {
         display: flex;
