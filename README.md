@@ -4,6 +4,8 @@
 <a href="https://github.com/Lazydd"><img src="https://img.shields.io/badge/github-Lazydd-brightgreen.svg" alt="github"></a>
 <a href="https://github.com/facebook/react"><img src="https://img.shields.io/badge/npm-%5E2.6.11-blue" alt="react"></a>
 
+[预览地址](https://ddlazy.cn/)
+
 ## Project setup
 ```
 npm install ddLazy-ui
