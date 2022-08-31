@@ -7,7 +7,7 @@
                 <dd-upload
                     class="upload-demo"
                     action="/abcdef"
-                    name="uploadFile"
+                    name="files"
                     accept=".jpg,.jpeg,.png,.gif"
                     :on-success="success"
                     :on-error="error"
@@ -85,15 +85,15 @@ export default {
             fileList: [
                 {
                     name: "test1.png",
-                    url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652854244293.png",
+                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
                 },
                 {
                     name: "test2.gif",
-                    url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652854262055.gif",
+                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
                 },
                 {
                     name: "test3.gif",
-                    url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652930538167.gif",
+                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
                 },
             ],
             code1: `
@@ -113,16 +113,16 @@ export default {
 
                 fileList: [
                     {
-                        name: "test1.png",
-                        url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652854244293.png",
+                    name: "test1.png",
+                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
                     },
                     {
                         name: "test2.gif",
-                        url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652854262055.gif",
+                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
                     },
                     {
                         name: "test3.gif",
-                        url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652930538167.gif",
+                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
                     },
                 ],
 
@@ -150,16 +150,16 @@ export default {
 
                 fileList: [
                     {
-                        name: "test1.png",
-                        url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652854244293.png",
+                    name: "test1.png",
+                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
                     },
                     {
                         name: "test2.gif",
-                        url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652854262055.gif",
+                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
                     },
                     {
                         name: "test3.gif",
-                        url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652930538167.gif",
+                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
                     },
                 ],
             `,
@@ -182,16 +182,16 @@ export default {
 
                 fileList: [
                     {
-                        name: "test1.png",
-                        url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652854244293.png",
+                    name: "test1.png",
+                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
                     },
                     {
                         name: "test2.gif",
-                        url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652854262055.gif",
+                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
                     },
                     {
                         name: "test3.gif",
-                        url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652930538167.gif",
+                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
                     },
                 ],
 
@@ -226,16 +226,16 @@ export default {
 
                 fileList: [
                     {
-                        name: "test1.png",
-                        url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652854244293.png",
+                    name: "test1.png",
+                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
                     },
                     {
                         name: "test2.gif",
-                        url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652854262055.gif",
+                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
                     },
                     {
                         name: "test3.gif",
-                        url: "https://zjsfgwczc.oss-cn-hangzhou-zwynet-d01-a.internet.cloud.zj.gov.cn/FGWSYSTEM/files/mengxiang/1652930538167.gif",
+                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
                     },
                 ],
             `,

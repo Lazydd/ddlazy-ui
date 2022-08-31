@@ -12,7 +12,7 @@
             onselectstart="return false"
         >
             <img
-                src="http://qiniu.mrxinchen.cn/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220419134123.png"
+                src="http://cdn.ddlazy.cn/fastboot/2022/08/31/114712633/portrait.png"
             />
             {{ currentMapType === 1 ? "影像图" : "矢量图" }}
         </div>
@@ -98,7 +98,7 @@ export default {
             default() {
                 return {
                     type: "picture-marker",
-                    url: "http://qiniu.mrxinchen.cn/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220414153853.png", //点位图片
+                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114812934/address.png", //点位图片
                     width: "30px",
                     height: "30px",
                     yoffset: "15px",
