@@ -1,10 +1,5 @@
 <template>
     <div :class="['container', value ? 'night' : '']">
-        <div
-            class="loading"
-            v-if="isShowLoading"
-            :style="`width:${width}px`"
-        ></div>
         <header>
             <dd-icon
                 class="cetegory"
@@ -56,44 +51,18 @@ export default {
             width: 0,
             timer: null,
             color: "rgb(70, 159, 252)",
-            isShowLoading: false,
             icon: "icon-salescenter",
             value: false,
             activeNav: "组件",
         };
     },
-    mounted() {
-        this.isShowLoading = true;
-        this.timer = setInterval(() => {
-            this.width += 20;
-        }, 20);
-        this.getsize();
-        window.addEventListener("resize", () => {
-            this.getsize();
-        });
-    },
     methods: {
-        getsize() {
-            this.size = {
-                width: window.innerWidth,
-                height: window.innerHeight,
-            };
-            this.isShow = this.size.width < 1024 ? false : true;
-        },
         articeChange() {
             this.isShow = true;
         },
         changeNav(nav) {
             this.activeNav = nav.label;
             this.$router.push(nav.path);
-        },
-    },
-    watch: {
-        width(val) {
-            if (val >= window.innerWidth) {
-                clearInterval(this.timer);
-                this.isShowLoading = false;
-            }
         },
     },
 };
@@ -131,25 +100,6 @@ export default {
     /deep/ header {
         background-color: #fff;
         transition: all 1s;
-    }
-    .loading {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 1px;
-        background: red;
-        z-index: 99999;
-        &::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            right: 0;
-            display: inline-block;
-            width: 30px;
-            height: 1px;
-            background: blue;
-            z-index: 99999999;
-        }
     }
     header {
         display: flex;
