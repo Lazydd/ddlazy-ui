@@ -4,7 +4,7 @@ const instance = axios.create({
     // baseUrl: "http://",
     // timeout: 30000,
 });
-let appkey = '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' //chatGPT开发者申请的appkey
+let appkey = '' //chatGPT开发者申请的appkey
 instance.interceptors.request.use((request) => {
     if (
         request.data &&
