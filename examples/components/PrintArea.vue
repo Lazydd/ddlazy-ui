@@ -10,7 +10,7 @@
                 </dd-print>
             </template>
         </dd-block>
-        <dd-footer left="Signature 签名" right=""></dd-footer>
+        <dd-footer left="chatGPT" right=""></dd-footer>
     </div>
 </template>
 

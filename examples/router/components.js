@@ -51,9 +51,10 @@ const Menu = () => import("@/components/Menu.vue");
 const InfiniteScroll = () => import("@/components/InfiniteScroll.vue");
 const VirtualizedList = () => import("@/components/VirtualizedList.vue");
 const Echarts = () => import("@/components/Echarts.vue");
-const Ueditor = () => import("@/components/Ueditor.vue");
+const Tinymce = () => import("@/components/Tinymce.vue");
 const Map = () => import("@/components/Map.vue");
 const Signature = () => import("@/components/Signature.vue");
+const ChatGPT = () => import("@/components/ChatGPT.vue");
 const PrintArea = () => import("@/components/PrintArea.vue");
 
 export default [
@@ -323,9 +324,9 @@ export default [
         component: Echarts,
     },
     {
-        path: "/component/ueditor",
-        name: "Ueditor",
-        component: Ueditor,
+        path: "/component/tinymce",
+        name: "Tinymce",
+        component: Tinymce,
     },
     {
         path: "/component/map",
@@ -336,6 +337,11 @@ export default [
         path: "/component/signature",
         name: "Signature",
         component: Signature,
+    },
+    {
+        path: "/component/chatGPT",
+        name: "ChatGPT",
+        component: ChatGPT,
     },
     {
         path: "/component/printArea",

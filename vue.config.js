@@ -42,17 +42,22 @@ module.exports = {
         },
     },
     devServer: {
-		proxy: {
-			'/fastboot': {
-				target: 'http://127.0.0.1:8888',
-				secure: false
-			}
-		},
-		// 跨域
-		headers: {
-			'Access-Control-Allow-Origin': '*'
-		}
-	},
+        proxy: {
+            '/fastboot': {
+                target: 'http://127.0.0.1:8888',
+                secure: false
+            },
+            '/v1': {
+                target: 'https://api.openai.com',
+                changeOrigin: true,
+                secure: false,
+            }
+        },
+        // 跨域
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        }
+    },
     // 扩展 webpack 配置，使 packages 加入编译
     chainWebpack: (config) => {
         config.resolve.alias

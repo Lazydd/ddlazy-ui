@@ -287,7 +287,7 @@ export default {
                         },
                         {
                             label: "Tinymce 富文本编辑器",
-                            path: "/component/ueditor",
+                            path: "/component/tinymce",
                         },
                         {
                             label: "Map 地图",
@@ -296,6 +296,10 @@ export default {
                         {
                             label: "Signature 签名",
                             path: "/component/signature",
+                        },
+                        {
+                            label: "chatGPT",
+                            path: "/component/chatGPT",
                         },
                         {
                             label: "PrintArea 打印",

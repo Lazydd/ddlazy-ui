@@ -66,7 +66,7 @@ export default {
         node: {
             type: Object,
             default: () => ({}),
-        },
+        }, 
         load: {
             type: Function,
         },

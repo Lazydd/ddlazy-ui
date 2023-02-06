@@ -22,7 +22,7 @@
             </template>
         </dd-block>
         <dd-describe title="Events" :data="Attributes" events></dd-describe>
-        <dd-footer left="Map 地图" right="Print 打印"></dd-footer>
+        <dd-footer left="Map 地图" right="chatGPT"></dd-footer>
     </div>
 </template>
 
