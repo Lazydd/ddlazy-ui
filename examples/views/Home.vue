@@ -441,6 +441,7 @@ a:focus {
         }
     }
 }
+
 .fale-enter-active,
 .fale-leave-active {
     transition: all 0.5s linear;
