@@ -56,7 +56,6 @@
                 <dd-carousel
                     :height="150"
                     :showNumber="3"
-                    
                     type="card"
                     indicator-position="outside"
                 >
@@ -227,7 +226,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-/deep/.dd-carousel-item {
+:deep(.dd-carousel-item) {
     text-align: center;
 }
 .a {
@@ -237,7 +236,7 @@ export default {
     background-color: #d3dce6;
 }
 
-/deep/.dd-carousel-item h3 {
+:deep(.dd-carousel-item) h3 {
     color: #475669;
     font-size: 14px;
     opacity: 0.75;

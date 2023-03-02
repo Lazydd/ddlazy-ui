@@ -71,16 +71,16 @@ export default {
 <style scoped lang="less">
 .night {
     background: rgb(30, 30, 30) !important;
-    /deep/ ._title {
+    :deep(._title) {
         color: #999;
         transition: all 1s;
     }
-    /deep/ .code {
+    :deep(.code) {
         border-left: 1px solid #eaeaea;
         border-right: 1px solid #eaeaea;
         transition: all 1s;
     }
-    /deep/ header {
+    :deep(header) {
         background-color: rgb(30, 30, 30) !important;
         transition: all 1s;
     }
@@ -92,12 +92,12 @@ export default {
     min-width: 1200px;
     background-color: #fff;
     transition: all 1s;
-    /deep/ .code {
+    :deep(.code) {
         border-left: 1px solid #eaeaea;
         border-right: 1px solid #eaeaea;
         transition: all 1s;
     }
-    /deep/ header {
+    :deep(header) {
         background-color: #fff;
         transition: all 1s;
     }

@@ -86,7 +86,7 @@ export default {
     .dd-cascader-item {
         z-index: 99;
     }
-    /deep/.children {
+    :deep(.children) {
         .dd-cascader-item .dd-cascader_dropdown {
             box-shadow: none;
             border: none;

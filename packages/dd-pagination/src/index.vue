@@ -405,10 +405,10 @@ export default {
         margin-right: 10px;
         font-weight: 400;
         color: #606266;
-        /deep/.dd-select .dd-select_inner {
+        :deep(.dd-select) .dd-select_inner {
             width: 100px;
         }
-        /deep/.dd-select .dd-select-dropdown {
+        :deep(.dd-select) .dd-select-dropdown {
             min-width: 110px;
         }
     }

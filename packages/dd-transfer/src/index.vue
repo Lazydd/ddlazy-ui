@@ -302,17 +302,17 @@ export default {
                     padding-left: 15px;
                     display: block !important;
 
-                    /deep/.dd-checkbox {
+                    :deep(.dd-checkbox) {
                         display: flex;
                         align-items: center;
                         &:hover {
                             color: #409eff;
                         }
                     }
-                    /deep/.checkbox_input {
+                    :deep(.checkbox_input) {
                         position: absolute;
                     }
-                    /deep/.checkbox__label {
+                    :deep(.checkbox__label) {
                         width: 100%;
                         overflow: hidden;
                         text-overflow: ellipsis;
@@ -331,8 +331,8 @@ export default {
         vertical-align: middle;
         padding: 0 30px;
         .dd-button {
-            /deep/.des,
-            /deep/.dd-icon {
+            :deep(.des),
+            :deep(.dd-icon) {
                 font-size: 18px;
             }
         }

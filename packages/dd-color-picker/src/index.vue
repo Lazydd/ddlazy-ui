@@ -441,10 +441,10 @@ export default {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            /deep/.dd-color_clear button {
+            :deep(.dd-color_clear) button {
                 color: #409eff;
             }
-            /deep/.dd-input .dd-input_inner {
+            :deep(.dd-input) .dd-input_inner {
                 width: 190px;
             }
         }

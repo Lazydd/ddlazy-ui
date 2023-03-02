@@ -1454,7 +1454,7 @@ export default {
     right: 0;
     bottom: 0;
     left: 0;
-    /deep/.esri-attribution.esri-widget {
+    :deep(.esri-attribution.esri-widget) {
         display: none;
     }
     .fullscreen-btn {

@@ -158,10 +158,10 @@ export default {
             padding: 10px 20px 20px;
             text-align: right;
             box-sizing: border-box;
-            /deep/.dd-button:first-child {
+            :deep(.dd-button:first-child) {
                 margin-right: 10px;
             }
-            /deep/.dd-button:last-child {
+            :deep(.dd-button:last-child) {
                 margin-left: 10px;
             }
         }
