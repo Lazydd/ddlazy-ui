@@ -391,9 +391,7 @@ a:focus {
             border-radius: 5px;
             height: 10px;
         }
-        // position: fixed;
-        // top: 0;
-        // bottom: 0;
+ 
         h4 {
             font-size: 12px;
             color: #999;
