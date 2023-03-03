@@ -7,6 +7,7 @@ export default function upload(detail, callback, error) {
             xhr.setRequestHeader(item, headers[item]);
         }
     }
+    
     xhr.send(param);
 
     xhr.onreadystatechange = function () {
