@@ -22,7 +22,6 @@
             <div
                 v-if="isShow.prev"
                 class="btn-pre control"
-                onselectstart="return false"
                 @click="!disabled ? (!disabledPre ? btn_pre() : null) : null"
                 :disabled="disabled ? disabled : disabledPre || pageCounts == 1"
             >
@@ -67,7 +66,6 @@
             <div
                 v-if="isShow.next"
                 class="btn-next control"
-                onselectstart="return false"
                 @click="!disabled ? (!disabledNext ? btn_next() : null) : null"
                 :disabled="
                     disabled ? disabled : disabledNext || pageCounts == 1
@@ -364,6 +362,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
+        user-select: none;
     }
     [disabled] {
         color: #c0c4cc;

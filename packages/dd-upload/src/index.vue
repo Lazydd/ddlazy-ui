@@ -6,11 +6,7 @@
         @drop.prevent="handleDrag"
         @dragleave.prevent="isDrogAcitve = false"
     >
-        <ul
-            class="dd-upload-picture-card"
-            onselectstart="return false"
-            v-if="listType === 'picture-card'"
-        >
+        <ul class="dd-upload-picture-card" v-if="listType === 'picture-card'">
             <li
                 v-for="item in fileLists"
                 :key="item.uid"
@@ -362,6 +358,7 @@ export default {
     .dd-upload-picture-card {
         display: flex;
         align-items: center;
+        user-select: none;
         li {
             position: relative;
             margin-right: 10px;

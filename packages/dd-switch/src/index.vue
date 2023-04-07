@@ -8,7 +8,6 @@
         >
         <div
             :class="['dd-switch']"
-            onselectstart="return false"
             :disabled="disabled"
             :switch_value="!switch_value && disabled"
             :style="{
@@ -83,6 +82,7 @@ export default {
     border-radius: 10px;
     box-sizing: border-box;
     background: #dcdfe6;
+    user-select: none;
     cursor: pointer;
     transition: border-color 0.3s, background-color 0.3s;
     vertical-align: middle;

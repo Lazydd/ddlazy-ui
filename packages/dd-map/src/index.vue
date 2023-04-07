@@ -9,7 +9,6 @@
             class="map-type"
             @click="changeMap"
             v-if="toggle && basemap"
-            onselectstart="return false"
         >
             <img
                 src="http://cdn.ddlazy.cn/fastboot/2022/08/31/114712633/portrait.png"
@@ -1480,6 +1479,7 @@ export default {
         border-radius: 4px;
         top: 60px;
         left: 15px;
+        user-select: none;
         z-index: 100;
         cursor: pointer;
         display: flex;

@@ -2,7 +2,6 @@
     <div class="dd-menu dd-menu-vertical">
         <div
             class="dd-tree"
-            onselectstart="return false"
             v-for="(item, i) in myTree"
             :key="item.key"
         >
@@ -154,6 +153,7 @@ export default {
     .dd-tree {
         white-space: nowrap;
         outline: none;
+        user-select: none;
         .dd-menu_children {
             display: block;
         }
