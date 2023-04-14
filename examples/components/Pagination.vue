@@ -23,7 +23,23 @@
                 ></dd-pagination>
             </template>
         </dd-block>
-        <dd-block title="小型分页" :code="code3">
+        <dd-block title="当只有一页时隐藏分页" :code="code3">
+            <template #source>
+                <dd-switch
+                    v-model="value"
+                    style="margin-bottom: 20px"
+                ></dd-switch>
+                <dd-pagination
+                    background
+                    layout="prev, pager, next"
+                    :current-page.sync="page"
+                    :total="52"
+                    :page-size="52"
+                    :hide-on-single-page="value"
+                ></dd-pagination>
+            </template>
+        </dd-block>
+        <dd-block title="小型分页" :code="code4">
             <template #source>
                 <dd-pagination
                     small
@@ -35,7 +51,11 @@
             </template>
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
-        <dd-describe title="Form Events" :data="Attributes2" events></dd-describe>
+        <dd-describe
+            title="Form Events"
+            :data="Attributes2"
+            events
+        ></dd-describe>
         <dd-footer left="ColorPicker 颜色选择器" right="Badge 标记"></dd-footer>
     </div>
 </template>
@@ -64,6 +84,22 @@ export default {
                 ></dd-pagination>
             `,
             code3: `
+                <dd-switch
+                    v-model="value"
+                    style="margin-bottom: 20px"
+                ></dd-switch>
+                <dd-pagination
+                    background
+                    layout="prev, pager, next"
+                    :current-page.sync="page"
+                    :total="52"
+                    :page-size="52"
+                    :hide-on-single-page="value"
+                ></dd-pagination>
+
+                value: false,
+            `,
+            code4: `
                 <dd-pagination
                     small
                     layout="prev, pager, next"
@@ -72,6 +108,7 @@ export default {
                     :page-sizes="10"
                 ></dd-pagination>
             `,
+            value: false,
             Attributes: [
                 {
                     parameter: "total",
@@ -110,7 +147,8 @@ export default {
                 },
                 {
                     parameter: "page-count",
-                    explain: "总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能；如果要支持 page-sizes 的更改，则需要使用 total 属性",
+                    explain:
+                        "总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能；如果要支持 page-sizes 的更改，则需要使用 total 属性",
                     type: "number",
                     optional: "—",
                     default: "—",
@@ -118,6 +156,13 @@ export default {
                 {
                     parameter: "background",
                     explain: "是否为分页按钮添加背景色	",
+                    type: "boolean",
+                    optional: "—",
+                    default: "false",
+                },
+                {
+                    parameter: "hide-on-single-page",
+                    explain: "当只有一页时隐藏分页	",
                     type: "boolean",
                     optional: "—",
                     default: "false",

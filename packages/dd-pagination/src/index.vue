@@ -1,5 +1,8 @@
 <template>
-    <div :class="['dd-pagination', background ? 'is-background' : '']">
+    <div
+        v-if="hideOnSinglePage ? total / pageSize > 1 : true"
+        :class="['dd-pagination', background ? 'is-background' : '']"
+    >
         <div :small="small">
             <div v-if="isShow.total" class="dd-pagination_total">
                 共 {{ total }} 条
@@ -127,6 +130,10 @@ export default {
             default: false,
         },
         disabled: {
+            type: Boolean,
+            default: false,
+        },
+        "hide-on-single-page": {
             type: Boolean,
             default: false,
         },
@@ -292,7 +299,7 @@ export default {
 <style lang="less" scoped>
 .dd-pagination {
     white-space: nowrap;
-    padding: 2px 5px;
+    // padding: 2px 5px;
     color: #303133;
     font-weight: 700;
     vertical-align: middle;
@@ -480,11 +487,16 @@ export default {
         }
     }
     .control {
-        margin: 0 5px;
         background-color: #f4f4f5;
         color: #606266;
         min-width: 30px;
         border-radius: 2px;
+    }
+    .btn-pre {
+        margin: 0 5px 0 0;
+    }
+    .btn-next {
+        margin: 0 0 0 5px;
     }
     [disabled] {
         color: #c0c4cc;
@@ -516,8 +528,13 @@ export default {
         .control {
             height: 22px;
             font-size: 15px;
-            margin: 0 3px;
             min-width: 22px;
+        }
+        .btn-pre {
+            margin: 0 3px 0 0;
+        }
+        .btn-next {
+            margin: 0 0 0 3px;
         }
     }
 }
