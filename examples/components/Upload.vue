@@ -73,7 +73,10 @@
             </template>
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
-        <dd-footer left="DatePicker 日期选择器" right="Transfer 穿梭框"></dd-footer>
+        <dd-footer
+            left="DatePicker 日期选择器"
+            right="Transfer 穿梭框"
+        ></dd-footer>
     </div>
 </template>
 
@@ -251,6 +254,13 @@ export default {
                     parameter: "headers",
                     explain: "设置上传的请求头部",
                     type: "object",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "multiple",
+                    explain: "是否支持多选文件",
+                    type: "boolean",
                     optional: "—",
                     default: "—",
                 },
