@@ -6,15 +6,45 @@
         </p>
         <dd-block title="基础用法" :code="code1">
             <template #source>
-                <div class="list-box" ref="listBox" @scroll="scrollChange">
-                    <div class="scroll-box" ref="scrollBox"></div>
-                    <div class="list-group" ref="listGroup">
-                        <li v-for="(item, i) in lists" :key="i">{{ item }}</li>
-                    </div>
-                </div>
+                <dd-virtualized-list
+                    :date="list"
+                    :date-key="'id'"
+                    :config-obj="{
+                        displayCount: 20,
+                        innerHieght: 60,
+                    }"
+                    class="virtual-list"
+                >
+                    <template #default="{ item }">
+                        <div>{{ item.name }}</div>
+                    </template>
+                </dd-virtualized-list>
             </template>
         </dd-block>
-        <dd-footer left="InfiniteScroll 无限滚动" right="Echarts 图表"></dd-footer>
+        <dd-block title="类型grid" :code="code2">
+            <template #source>
+                <dd-virtualized-list
+                    :date="list"
+                    :date-key="'id'"
+                    :type="'grid'"
+                    :config-obj="{
+                        displayCount: 32,
+                        innerHieght: 60,
+                        gridTemplateColumns: 4,
+                    }"
+                    class="virtual-list"
+                >
+                    <template #default="{ item }">
+                        <div>{{ item.name }}</div>
+                    </template>
+                </dd-virtualized-list>
+            </template>
+        </dd-block>
+        <dd-describe title="Attributes" :data="Attributes"></dd-describe>
+        <dd-footer
+            left="InfiniteScroll 无限滚动"
+            right="Echarts 图表"
+        ></dd-footer>
     </div>
 </template>
 
@@ -24,122 +54,91 @@ export default {
     data() {
         return {
             code1: `
-                <div class="list-box" ref="listBox" @scroll="scrollChange">
-                    <div class="scroll-box" ref="scrollBox"></div>
-                    <div class="list-group" ref="listGroup">
-                        <li v-for="(item, i) in lists" :key="i">{{ item }}</li>
-                    </div>
-                </div>
+                <dd-virtualized-list
+                    :date="list"
+                    :date-key="'id'"
+                    :config-obj="{
+                        displayCount: 20,
+                        innerHieght: 60,
+                    }"
+                    class="virtual-list"
+                >
+                    <template #default="{ item }">
+                        <div>{{ item.name }}</div>
+                    </template>
+                </dd-virtualized-list>
 
-                .list-box {
-                    position: relative;
-                    border: 1px solid skyblue;
-                    overflow-y: auto;
-                    margin: 0 auto;
-                }
-                .list-group {
-                    position: absolute;
-                    top: 0;
-                    width: 100%;
-                }
-                li {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 50px;
-                    background: #e8f3fe;
-                    margin: 10px;
-                    color: #7dbcfc;
-                }
-
-                data() {
-                    return {
-                        list: [],
-                        innerHieght: 50,
-                        number: 10,
-                        start: 0,
-                        end: 10,
-                    }
-                },
-
-                computed: {
-                    lists() {
-                        return this.list.slice(this.start, this.end);
-                    },
-                },
                 mounted() {
                     for (let i = 0; i < 100000; i++) {
-                        this.list.push("列表" + i);
+                        this.list.push({ name: "列表" + i, id: i });
                     }
+                },
 
-                    this.$refs.listBox.style.height = this.number * this.innerHieght + "px";
-                    this.$refs.scrollBox.style.height =
-                        this.list.length * this.innerHieght + "px";
-                },
-                methods: {
-                    scrollChange() {
-                        this.start = Math.floor(
-                            this.$refs.listBox.scrollTop / this.innerHieght
-                        );
-                        this.end = this.start + this.number;
-                        this.$refs.listGroup.style.top =
-                            this.start * this.innerHieght + "px";
-                    },
-                },
+                .virtual-list {
+                    height: 500px;
+                }
             `,
+            code2: `
+                <dd-virtualized-list
+                    :date="list"
+                    :date-key="'id'"
+                    :type="'grid'"
+                    :config-obj="{
+                        displayCount: 32,
+                        innerHieght: 60,
+                        gridTemplateColumns: 4,
+                    }"
+                    class="virtual-list"
+                >
+                    <template #default="{ item }">
+                        <div>{{ item.name }}</div>
+                    </template>
+                </dd-virtualized-list>
+            `,
+            Attributes: [
+                {
+                    parameter: "date",
+                    explain: "要在表中渲染的数据数组",
+                    type: "array",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "date-key",
+                    explain: "每行的 key 值，如果不提供，将使用索引 index 代替",
+                    type: "string",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "type",
+                    explain: "列表类型",
+                    type: "string",
+                    optional: "list/grid",
+                    default: "list",
+                },
+                {
+                    parameter: "config-obj",
+                    explain: "配置项",
+                    type: "object",
+                    optional:
+                        "displayCount:示数量,innerHieght:个li的高度,gridTemplateColumns:当type为grid时有效，表示每行几个",
+                    default: "{displayCount: 20,innerHieght: 60,}",
+                },
+            ],
             list: [],
-            innerHieght: 50,
-            number: 10,
-            start: 0,
-            end: 10,
         };
-    },
-    computed: {
-        lists() {
-            return this.list.slice(this.start, this.end);
-        },
     },
     mounted() {
         for (let i = 0; i < 100000; i++) {
-            this.list.push("列表" + i);
+            this.list.push({ name: "列表" + i, id: i });
         }
-
-        this.$refs.listBox.style.height = this.number * this.innerHieght + "px";
-        this.$refs.scrollBox.style.height =
-            this.list.length * this.innerHieght + "px";
-    },
-    methods: {
-        scrollChange() {
-            this.start = Math.floor(
-                this.$refs.listBox.scrollTop / this.innerHieght
-            );
-            this.end = this.start + this.number;
-            this.$refs.listGroup.style.top =
-                this.start * this.innerHieght + "px";
-        },
     },
 };
 </script>
 
 <style lang="less" scoped>
-.list-box {
-    position: relative;
-    border: 1px solid skyblue;
-    overflow-y: auto;
-    margin: 0 auto;
-}
-.list-group {
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-    background: #e8f3fe;
-    margin: 10px;
-    color: #7dbcfc;
+.virtual-list {
+    height: 500px;
 }
 </style>

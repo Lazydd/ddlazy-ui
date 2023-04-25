@@ -71,6 +71,7 @@ import ddImage from "./dd-image";
 import ddDatePicker from "./dd-date-picker";
 import ddMenu from "./dd-menu";
 import InfiniteScroll from "./dd-infinite-scroll";
+import ddVirtualizedList from "./dd-virtualized-list";
 import ddEcharts from "./dd-echarts";
 import ddUeditor from "./dd-ueditor";
 import ddMap from "./dd-map";
@@ -149,6 +150,7 @@ const components = [
     ddImage,
     ddDatePicker,
     ddMenu,
+    ddVirtualizedList,
     ddEcharts,
     ddUeditor,
     ddMap,
@@ -235,6 +237,7 @@ export {
     ddImage,
     ddDatePicker,
     ddMenu,
+    ddVirtualizedList,
     ddEcharts,
     ddUeditor,
     ddMap,
@@ -311,6 +314,7 @@ export default {
     ddImage,
     ddDatePicker,
     ddMenu,
+    ddVirtualizedList,
     ddEcharts,
     ddUeditor,
     ddMap,
