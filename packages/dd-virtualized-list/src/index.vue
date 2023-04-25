@@ -15,13 +15,14 @@
                 },1fr)`,
             }"
         >
-            <li
+            <component
+                :is="tag"
                 v-for="(item, index) in listData"
                 :key="dataKey ? item[dataKey] : index"
-                :style="{ height: config.innerHieght + 'px' }"
+                :style="{ height: config.innerHeight + 'px' }"
             >
                 <slot :item="item" />
-            </li>
+            </component>
         </div>
     </div>
 </template>
@@ -49,7 +50,7 @@ export default {
             default() {
                 return {
                     displayCount: 20,
-                    innerHieght: 60,
+                    innerHeight: 60,
                     gridTemplateColumns: 1,
                 };
             },
@@ -57,18 +58,18 @@ export default {
                 let keys = Object.keys(value);
                 return (
                     keys.includes("displayCount") &&
-                    keys.includes("innerHieght")
+                    keys.includes("innerHeight")
                 );
             },
+        },
+        tag: {
+            type: String,
+            default: "li",
         },
     },
     data() {
         return {
-            config: {
-                start: 0,
-                ...this.configObj,
-            },
-            positions: [],
+            config: { ...this.configObj, start: 0 },
         };
     },
     computed: {
@@ -93,33 +94,33 @@ export default {
             if (this.type == "grid") {
                 this.config.start =
                     Math.floor(
-                        this.virtualListRef.scrollTop / this.config.innerHieght
+                        this.virtualListRef.scrollTop / this.config.innerHeight
                     ) * (this.config.gridTemplateColumns || 1);
                 this.listGroupRef.style.top =
                     (this.config.start /
                         (this.config.gridTemplateColumns || 1)) *
-                        this.config.innerHieght +
+                        this.config.innerHeight +
                     "px";
             } else {
                 this.config.start = Math.floor(
-                    this.virtualListRef.scrollTop / this.config.innerHieght
+                    this.virtualListRef.scrollTop / this.config.innerHeight
                 );
                 this.listGroupRef.style.top =
-                    this.config.start * this.config.innerHieght + "px";
+                    this.config.start * this.config.innerHeight + "px";
             }
         },
     },
     mounted() {
         this.virtualListRef.style.top =
-            this.config.start * this.config.innerHieght + "px";
+            this.config.start * this.config.innerHeight + "px";
         if (this.type == "grid") {
             this.scrollBoxRef.style.height =
                 (this.data.length / (this.config.gridTemplateColumns || 1)) *
-                    this.config.innerHieght +
+                    this.config.innerHeight +
                 "px";
         } else {
             this.scrollBoxRef.style.height =
-                this.data.length * this.config.innerHieght + "px";
+                this.data.length * this.config.innerHeight + "px";
         }
     },
     watch: {
@@ -129,11 +130,11 @@ export default {
                     this.scrollBoxRef.style.height =
                         (this.data.length /
                             (this.config.gridTemplateColumns || 1)) *
-                            this.config.innerHieght +
+                            this.config.innerHeight +
                         "px";
                 } else {
                     this.scrollBoxRef.style.height =
-                        this.data.length * this.config.innerHieght + "px";
+                        this.data.length * this.config.innerHeight + "px";
                 }
                 // this.virtualListRef.scrollTo(0, 0);
                 // this.listGroupRef.style.top = 0;

@@ -11,7 +11,7 @@
                     :data-key="'id'"
                     :config-obj="{
                         displayCount: 20,
-                        innerHieght: 60,
+                        innerHeight: 60,
                     }"
                     class="virtual-list"
                 >
@@ -21,7 +21,7 @@
                 </dd-virtualized-list>
             </template>
         </dd-block>
-        <dd-block title="grid" :code="code2">
+        <!-- <dd-block title="grid" :code="code2">
             <template #source>
                 <dd-virtualized-list
                     :data="list"
@@ -29,7 +29,7 @@
                     :type="'grid'"
                     :config-obj="{
                         displayCount: 32,
-                        innerHieght: 60,
+                        innerHeight: 60,
                         gridTemplateColumns: 4,
                     }"
                     class="virtual-list2"
@@ -39,7 +39,7 @@
                     </template>
                 </dd-virtualized-list>
             </template>
-        </dd-block>
+        </dd-block> -->
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
         <dd-footer
             left="InfiniteScroll 无限滚动"
@@ -59,7 +59,7 @@ export default {
                     :data-key="'id'"
                     :config-obj="{
                         displayCount: 20,
-                        innerHieght: 60,
+                        innerHeight: 60,
                     }"
                     class="virtual-list"
                 >
@@ -98,7 +98,7 @@ export default {
                     :type="'grid'"
                     :config-obj="{
                         displayCount: 32,
-                        innerHieght: 60,
+                        innerHeight: 60,
                         gridTemplateColumns: 4,
                     }"
                     class="virtual-list"
@@ -151,8 +151,8 @@ export default {
                     explain: "配置项",
                     type: "object",
                     optional:
-                        "displayCount:示数量,innerHieght:个li的高度,gridTemplateColumns:当type为grid时有效，表示每行几个",
-                    default: "{displayCount: 20,innerHieght: 60,}",
+                        "displayCount:示数量,innerHeight:个li的高度,gridTemplateColumns:当type为grid时有效，表示每行几个",
+                    default: "{displayCount: 20,innerHeight: 60,}",
                 },
             ],
             list: [],
