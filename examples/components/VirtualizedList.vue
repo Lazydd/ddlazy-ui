@@ -7,8 +7,8 @@
         <dd-block title="基础用法" :code="code1">
             <template #source>
                 <dd-virtualized-list
-                    :date="list"
-                    :date-key="'id'"
+                    :data="list"
+                    :data-key="'id'"
                     :config-obj="{
                         displayCount: 20,
                         innerHieght: 60,
@@ -21,18 +21,18 @@
                 </dd-virtualized-list>
             </template>
         </dd-block>
-        <dd-block title="类型grid" :code="code2">
+        <dd-block title="grid" :code="code2">
             <template #source>
                 <dd-virtualized-list
-                    :date="list"
-                    :date-key="'id'"
+                    :data="list"
+                    :data-key="'id'"
                     :type="'grid'"
                     :config-obj="{
                         displayCount: 32,
                         innerHieght: 60,
                         gridTemplateColumns: 4,
                     }"
-                    class="virtual-list"
+                    class="virtual-list2"
                 >
                     <template #default="{ item }">
                         <div>{{ item.name }}</div>
@@ -55,8 +55,8 @@ export default {
         return {
             code1: `
                 <dd-virtualized-list
-                    :date="list"
-                    :date-key="'id'"
+                    :data="list"
+                    :data-key="'id'"
                     :config-obj="{
                         displayCount: 20,
                         innerHieght: 60,
@@ -76,12 +76,25 @@ export default {
 
                 .virtual-list {
                     height: 500px;
+                    border: 1px solid skyblue;
+                    margin: 0 auto;
+                    :deep(li) {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: #e8f3fe;
+                        margin: 0 10px;
+                        color: #7dbcfc;
+                        & + li {
+                            margin-top: 10px;
+                        }
+                    }
                 }
             `,
             code2: `
                 <dd-virtualized-list
-                    :date="list"
-                    :date-key="'id'"
+                    :data="list"
+                    :data-key="'id'"
                     :type="'grid'"
                     :config-obj="{
                         displayCount: 32,
@@ -94,17 +107,33 @@ export default {
                         <div>{{ item.name }}</div>
                     </template>
                 </dd-virtualized-list>
+
+                .virtual-list2 {
+                    height: 500px;
+                    border: 1px solid skyblue;
+                    margin: 0 auto;
+                    :deep(li) {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: #e8f3fe;
+                        color: #7dbcfc;
+                    }
+                    :deep(.list-group) {
+                        gap: 10px;
+                    }
+                }
             `,
             Attributes: [
                 {
-                    parameter: "date",
+                    parameter: "data",
                     explain: "要在表中渲染的数据数组",
                     type: "array",
                     optional: "—",
                     default: "—",
                 },
                 {
-                    parameter: "date-key",
+                    parameter: "data-key",
                     explain: "每行的 key 值，如果不提供，将使用索引 index 代替",
                     type: "string",
                     optional: "—",
@@ -140,5 +169,34 @@ export default {
 <style lang="less" scoped>
 .virtual-list {
     height: 500px;
+    border: 1px solid skyblue;
+    margin: 0 auto;
+    :deep(li) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e8f3fe;
+        margin: 0 10px;
+        color: #7dbcfc;
+        & + li {
+            margin-top: 10px;
+        }
+    }
+}
+
+.virtual-list2 {
+    height: 500px;
+    border: 1px solid skyblue;
+    margin: 0 auto;
+    :deep(li) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e8f3fe;
+        color: #7dbcfc;
+    }
+    :deep(.list-group) {
+        gap: 10px;
+    }
 }
 </style>

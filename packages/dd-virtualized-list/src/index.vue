@@ -16,8 +16,9 @@
             }"
         >
             <li
-                v-for="(item, index) in listDate"
-                :key="dateKey ? item[dateKey] : index"
+                v-for="(item, index) in listData"
+                :key="dataKey ? item[dataKey] : index"
+                :style="{ height: config.innerHieght + 'px' }"
             >
                 <slot :item="item" />
             </li>
@@ -29,13 +30,13 @@
 export default {
     name: "ddVirtualizedList",
     props: {
-        date: {
+        data: {
             type: Array,
             default: () => {
                 return [];
             },
         },
-        dateKey: {
+        dataKey: {
             type: String,
         },
         type: {
@@ -67,11 +68,12 @@ export default {
                 start: 0,
                 ...this.configObj,
             },
+            positions: [],
         };
     },
     computed: {
-        listDate() {
-            return this.date.slice(
+        listData() {
+            return this.data.slice(
                 this.config.start,
                 this.config.displayCount + this.config.start
             );
@@ -112,26 +114,26 @@ export default {
             this.config.start * this.config.innerHieght + "px";
         if (this.type == "grid") {
             this.scrollBoxRef.style.height =
-                (this.date.length / (this.config.gridTemplateColumns || 1)) *
+                (this.data.length / (this.config.gridTemplateColumns || 1)) *
                     this.config.innerHieght +
                 "px";
         } else {
             this.scrollBoxRef.style.height =
-                this.date.length * this.config.innerHieght + "px";
+                this.data.length * this.config.innerHieght + "px";
         }
     },
     watch: {
-        date(val) {
+        data(val) {
             if (val.length > 0) {
                 if (this.type == "grid") {
                     this.scrollBoxRef.style.height =
-                        (this.date.length /
+                        (this.data.length /
                             (this.config.gridTemplateColumns || 1)) *
                             this.config.innerHieght +
                         "px";
                 } else {
                     this.scrollBoxRef.style.height =
-                        this.date.length * this.config.innerHieght + "px";
+                        this.data.length * this.config.innerHieght + "px";
                 }
                 // this.virtualListRef.scrollTo(0, 0);
                 // this.listGroupRef.style.top = 0;
@@ -144,24 +146,17 @@ export default {
 <style lang="less" scoped>
 .dd-virtualized-list {
     position: relative;
-    border: 1px solid skyblue;
+    width: 100%;
     overflow-y: auto;
-    margin: 0 auto;
 }
 .list-group {
     position: absolute;
     top: 0;
     width: 100%;
+    content-visibility: auto;
+    contain-intrinsic-size: 50px;
 }
-li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50px;
-    background: #e8f3fe;
-    margin: 10px;
-    color: #7dbcfc;
-}
+
 .grid {
     display: grid;
     width: 100%;
