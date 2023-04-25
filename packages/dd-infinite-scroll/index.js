@@ -54,7 +54,7 @@ Vue.directive("infinite-scroll", {
         })
     },
     unbind: (el, bingding) => {
-        el.removeEventListener(time)
-        document.removeEventListener(timer)
+        el.removeEventListener('scroll', time)
+        clearTimeout(timer)
     }
 });
