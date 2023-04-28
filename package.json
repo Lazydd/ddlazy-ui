@@ -25,6 +25,7 @@
     "core-js": "^3.6.5",
     "echarts": "^5.3.2",
     "esri-loader": "^3.5.0",
+    "faker": "^6.6.6",
     "less-loader": "^6.2.0",
     "moment": "^2.29.3",
     "nprogress": "^0.2.0",

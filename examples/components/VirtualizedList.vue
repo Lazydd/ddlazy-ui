@@ -7,16 +7,15 @@
         <dd-block title="基础用法" :code="code1">
             <template #source>
                 <dd-virtualized-list
+                    class="virtual-list"
                     :data="list"
                     :data-key="'id'"
-                    :config-obj="{
-                        displayCount: 20,
-                        innerHeight: 60,
-                    }"
-                    class="virtual-list"
+                    :estimatedItemSize="100"
+                    :bufferScale="2"
+                    height="500px"
                 >
                     <template #default="{ item }">
-                        <div>{{ item.name }}</div>
+                        <div>{{ item.value }}</div>
                     </template>
                 </dd-virtualized-list>
             </template>
@@ -33,9 +32,12 @@
                         gridTemplateColumns: 4,
                     }"
                     class="virtual-list2"
+                    :estimatedItemSize="100"
+                    :bufferScale="2"
+                    height="500px"
                 >
                     <template #default="{ item }">
-                        <div>{{ item.name }}</div>
+                        <div>{{ item.value }}</div>
                     </template>
                 </dd-virtualized-list>
             </template>
@@ -49,29 +51,38 @@
 </template>
 
 <script>
+import faker from "faker";
+
 export default {
     name: "VirtualizedList",
     data() {
         return {
             code1: `
                 <dd-virtualized-list
+                    class="virtual-list"
                     :data="list"
                     :data-key="'id'"
-                    :config-obj="{
-                        displayCount: 20,
-                        innerHeight: 60,
-                    }"
-                    class="virtual-list"
+                    :estimatedItemSize="100"
+                    :bufferScale="2"
+                    height="500px"
                 >
                     <template #default="{ item }">
-                        <div>{{ item.name }}</div>
+                        <div>{{ item.value }}</div>
                     </template>
                 </dd-virtualized-list>
 
-                mounted() {
-                    for (let i = 0; i < 100000; i++) {
-                        this.list.push({ name: "列表" + i, id: i });
-                    }
+                methods: {
+                    init() {
+                        for (let i = 0; i < 500; i++) {
+                            this.list.push({
+                                value: faker.lorem.sentences(),
+                                id: i,
+                            });
+                        }
+                    },
+                },
+                created() {
+                    this.init();
                 },
 
                 .virtual-list {
@@ -84,6 +95,7 @@ export default {
                         justify-content: center;
                         background: #e8f3fe;
                         margin: 0 10px;
+                        padding: 5px;
                         color: #7dbcfc;
                         & + li {
                             margin-top: 10px;
@@ -143,26 +155,49 @@ export default {
                     parameter: "type",
                     explain: "列表类型",
                     type: "string",
-                    optional: "list/grid",
+                    optional: "list",
                     default: "list",
                 },
                 {
-                    parameter: "config-obj",
-                    explain: "配置项",
-                    type: "object",
-                    optional:
-                        "displayCount:示数量,innerHeight:个li的高度,gridTemplateColumns:当type为grid时有效，表示每行几个",
-                    default: "{displayCount: 20,innerHeight: 60,}",
+                    parameter: "estimatedItemSize",
+                    explain: "预估高度",
+                    type: "number",
+                    optional: "—",
+                    default: "—",
+                },
+                {
+                    parameter: "bufferScale",
+                    explain: "缓冲区比例",
+                    type: "number",
+                    optional: "—",
+                    default: "1",
+                },
+                {
+                    parameter: "height",
+                    explain: "容器高度",
+                    type: "number",
+                    optional: "—",
+                    default: "100%",
                 },
             ],
             list: [],
+            str: "abacdefghjklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789",
         };
     },
-    mounted() {
-        for (let i = 0; i < 100000; i++) {
-            this.list.push({ name: "列表" + i, id: i });
-        }
+    methods: {
+        init() {
+            for (let i = 0; i < 500; i++) {
+                this.list.push({
+                    value: faker.lorem.sentences(),
+                    id: i,
+                });
+            }
+        },
     },
+    created() {
+        this.init();
+    },
+    mounted() {},
 };
 </script>
 
@@ -177,6 +212,7 @@ export default {
         justify-content: center;
         background: #e8f3fe;
         margin: 0 10px;
+        padding: 5px;
         color: #7dbcfc;
         & + li {
             margin-top: 10px;
@@ -193,10 +229,13 @@ export default {
         align-items: center;
         justify-content: center;
         background: #e8f3fe;
+        padding: 5px;
         color: #7dbcfc;
     }
     :deep(.list-group) {
+        display: grid;
         gap: 10px;
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 </style>
