@@ -7,7 +7,8 @@
                         :indeterminate="isIndeterminateLeft"
                         v-model="checkleftTot"
                         @change="handleCheckLeftChange"
-                        >{{ titles[0] }}
+                    >
+                        {{ titles[0] }}
                     </dd-checkbox>
                     <span class="dd-checkbox_label">
                         {{ checkedLeft.length }}/{{ checkedLeftList.length }}
@@ -26,7 +27,8 @@
                             :label="item[props.label]"
                             :key="item[props.key]"
                             :disabled="item[props.disabled]"
-                            >{{ item.label }}
+                        >
+                            {{ item.label }}
                         </dd-checkbox>
                     </dd-checkbox-group>
                 </div>
@@ -38,14 +40,16 @@
                 type="primary"
                 @click="checkdLeftClick"
                 :disabled="checkedRight.length == 0 ? true : false"
-                >{{ buttonTexts[0] }}
+            >
+                {{ buttonTexts[0] }}
             </dd-button>
             <dd-button
                 type="primary"
                 style="margin-left: 10px"
                 @click="checkdRighttClick"
                 :disabled="checkedLeft.length == 0 ? true : false"
-                >{{ buttonTexts[1] }}<dd-icon icon="icon-arrow-right"></dd-icon>
+            >
+                {{ buttonTexts[1] }}<dd-icon icon="icon-arrow-right" />
             </dd-button>
         </div>
         <div class="dd-transfer-panel">
@@ -55,7 +59,8 @@
                         :indeterminate="isIndeterminateRight"
                         v-model="checkrightTot"
                         @change="handleCheckRightChange"
-                        >{{ titles[1] }}
+                    >
+                        {{ titles[1] }}
                     </dd-checkbox>
                     <span class="dd-checkbox_label">
                         {{ checkedRight.length }}/{{ checkedRightList.length }}
@@ -74,7 +79,8 @@
                             :label="item[props.label]"
                             :key="item[props.key]"
                             :disabled="item[props.disabled]"
-                            >{{ item.label }}
+                        >
+                            {{ item.label }}
                         </dd-checkbox>
                     </dd-checkbox-group>
                 </div>

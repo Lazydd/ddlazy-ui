@@ -15,7 +15,7 @@
                             :xlink:href="`#${
                                 spinner ? spinner : 'icon-loading'
                             }`"
-                        ></use>
+                        />
                     </svg>
                 </div>
                 <p class="dd-loading-text">{{ text }}</p>

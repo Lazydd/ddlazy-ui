@@ -372,9 +372,7 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
-            -moz-user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
+            user-select: none;
             &:hover {
                 background-color: rgba(31, 45, 61, 0.23);
             }

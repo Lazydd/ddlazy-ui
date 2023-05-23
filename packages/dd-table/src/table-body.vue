@@ -15,8 +15,7 @@
                     :row="row"
                     :column="column"
                     :index="rowIndex"
-                >
-                </table-td>
+                />
             </tr>
         </template>
     </tbody>

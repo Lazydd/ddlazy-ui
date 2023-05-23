@@ -21,7 +21,7 @@
                 </dd-virtualized-list>
             </template>
         </dd-block>
-        <!-- <dd-block title="grid" :code="code2">
+        <dd-block title="grid" :code="code2">
             <template #source>
                 <dd-virtualized-list
                     :data="list"
@@ -39,7 +39,7 @@
                     </template>
                 </dd-virtualized-list>
             </template>
-        </dd-block> -->
+        </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
         <dd-footer
             left="InfiniteScroll 无限滚动"

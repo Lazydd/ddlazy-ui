@@ -1,49 +1,43 @@
 <template>
     <div class="imagePreview" :style="`z-index:${zIndex}`" @wheel="handleWheel">
-        <div class="dd-image-viewer_mask"></div>
+        <div class="dd-image-viewer_mask" />
         <div class="dd-image-viewer_btn dd-image-viewer_close" @click="onClose">
-            <dd-icon icon="icon-close"></dd-icon>
+            <dd-icon icon="icon-close" />
         </div>
         <div
             class="dd-image-viewer_btn dd-image-viewer_prev"
             @click="ddImageAction('prev')"
         >
-            <dd-icon icon="icon-arrow-left"></dd-icon>
+            <dd-icon icon="icon-arrow-left" />
         </div>
         <div
             class="dd-image-viewer_btn dd-image-viewer_next"
             @click="ddImageAction('next')"
         >
-            <dd-icon icon="icon-arrow-right"></dd-icon>
+            <dd-icon icon="icon-arrow-right" />
         </div>
         <div class="dd-image-viewer_btn dd-image-viewer_actions">
             <div class="dd-image-viewer_actions_inner">
-                <dd-icon
-                    icon="icon-viewlarger"
-                    @click="ddImageAction('out')"
-                ></dd-icon>
-                <dd-icon
-                    icon="icon-suoxiao"
-                    @click="ddImageAction('in')"
-                ></dd-icon>
+                <dd-icon icon="icon-viewlarger" @click="ddImageAction('out')" />
+                <dd-icon icon="icon-suoxiao" @click="ddImageAction('in')" />
                 <dd-icon
                     v-if="!options.screen"
                     icon="icon-fullscreen"
                     @click="ddImageAction('screenTrue')"
-                ></dd-icon>
+                />
                 <dd-icon
                     v-if="options.screen"
                     icon="icon-fullscreen-exit"
                     @click="ddImageAction('screenFalse')"
-                ></dd-icon>
+                />
                 <dd-icon
                     icon="icon-xiangzuoxuanzhuan"
                     @click="ddImageAction('leftRotate')"
-                ></dd-icon>
+                />
                 <dd-icon
                     icon="icon-xiangyouxuanzhuan"
                     @click="ddImageAction('rightRotate')"
-                ></dd-icon>
+                />
             </div>
         </div>
         <div class="dd-image-viewer_canvas">

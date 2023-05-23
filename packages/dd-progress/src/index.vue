@@ -23,25 +23,24 @@
                     </div>
                 </div>
             </div>
-
             <dd-icon
                 v-if="status === 'success' && !textInside"
                 icon="icon-success"
                 :style="{ 'font-size': fz + 'px' }"
                 :class="['dd-progress_text', status, fz < 12 ? 'mf' : '']"
-            ></dd-icon>
+            />
             <dd-icon
                 v-else-if="status === 'warning' && !textInside"
                 icon="icon-prompt"
                 :style="{ 'font-size': fz + 'px' }"
                 :class="['dd-progress_text', status, fz < 12 ? 'mf' : '']"
-            ></dd-icon>
+            />
             <dd-icon
                 v-else-if="status === 'exception' && !textInside"
                 icon="icon-reeor"
                 :style="{ 'font-size': fz + 'px' }"
                 :class="['dd-progress_text', status, fz < 12 ? 'mf' : '']"
-            ></dd-icon>
+            />
             <div
                 v-if="!status && !format && !textInside"
                 class="dd-progress_text"
@@ -60,27 +59,27 @@
         <template v-if="type === 'circle'">
             <div class="dd-progress-circle">
                 <div class="circle-left" :class="`circle-bgColor-${status}`">
-                    <div ref="leftcontent"></div>
+                    <div ref="leftcontent" />
                 </div>
                 <div class="circle-right" :class="`circle-bgColor-${status}`">
-                    <div ref="rightcontent"></div>
+                    <div ref="rightcontent" />
                 </div>
                 <div v-if="!status" class="dd-circle-icon">{{ percent }} %</div>
                 <dd-icon
                     v-if="status === 'success'"
                     icon="icon-success"
                     :class="['dd-circle-icon', status]"
-                ></dd-icon>
+                />
                 <dd-icon
                     v-if="status === 'warning'"
                     icon="icon-prompt"
                     :class="['dd-circle-icon', status]"
-                ></dd-icon>
+                />
                 <dd-icon
                     v-if="status === 'exception'"
                     icon="icon-reeor"
                     :class="['dd-circle-icon', status]"
-                ></dd-icon>
+                />
             </div>
         </template>
     </div>

@@ -18,7 +18,7 @@
                         ? 'radio_origina'
                         : null,
                 ]"
-            ></span>
+            />
         </span>
         <span
             :class="[
@@ -103,9 +103,7 @@ export default {
     font-weight: 500;
     line-height: 1;
     margin-right: 30px;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
+    user-select: none;
     &:last-child {
         margin-right: 0;
     }

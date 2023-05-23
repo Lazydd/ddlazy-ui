@@ -1,6 +1,6 @@
 <template>
     <div :class="['dd-color-picker', size]" ref="dd-color_dropdown">
-        <div :class="{ 'dd-color-picker_mask': disabled }"></div>
+        <div :class="{ 'dd-color-picker_mask': disabled }" />
         <div
             :class="['color-picker_trigger']"
             @click="!disabled ? dd_color_pickerClick() : null"
@@ -16,47 +16,43 @@
                 <div
                     class="color-picker_color"
                     :style="`background-color: ${isHex ? hex : RGB}`"
-                ></div>
+                />
             </div>
         </div>
         <transition name="dd-zoom-top">
             <div class="dd-color_dropdown dd-color-picker_pannel" v-if="isShow">
-                <color-sv-picker
-                    v-model="sv"
-                    :hex="noChangeHEX"
-                ></color-sv-picker
-                ><color-hue-slider
-                    v-model="h"
-                    style="margin: 8px 0"
-                ></color-hue-slider>
+                <color-sv-picker v-model="sv" :hex="noChangeHEX" />
+                <color-hue-slider v-model="h" style="margin: 8px 0" />
                 <color-alpha-slider
                     v-if="showAlpha"
                     v-model="a"
                     style="margin: 8px 0"
                     :rgb="rgb"
-                ></color-alpha-slider>
+                />
                 <div class="dd-color_control">
                     <div>
-                        <dd-input v-model="hex" size="mini"></dd-input
-                        ><dd-input
+                        <dd-input v-model="hex" size="mini" />
+                        <dd-input
                             v-model="RGB"
                             size="mini"
                             style="margin-top: 8px"
-                        ></dd-input>
+                        />
                     </div>
                     <div>
                         <dd-button
                             size="mini"
                             class="dd-color_clear"
                             @click="dd_color_clear"
-                            >清空</dd-button
                         >
+                            清空
+                        </dd-button>
                         <dd-button
                             size="mini"
                             @click="dd_color_determine"
                             style="margin-top: 8px"
-                            >确定</dd-button
                         >
+                            确定
+                        </dd-button>
                     </div>
                 </div>
             </div>
@@ -68,7 +64,6 @@
 import ColorHueSlider from "./color-hue-slider.vue";
 import ColorSvPicker from "./color-sv-picker.vue";
 import colorAlphaSlider from "./color-alpha-slider.vue";
-let newOptions = {};
 export default {
     name: "ddColorPicker",
     props: {
@@ -139,37 +134,6 @@ export default {
                 g: Math.round(g * 255),
                 b: Math.round(b * 255),
             };
-        },
-        _changeBg(top, h) {
-            // 侧栏一共分为六个区域，每块区域的长度
-            this.top = top;
-            let total = h / 6;
-            let rgb = [];
-            if (top <= (h * 1) / 6) {
-                let g = this._getValue(top, total, 0);
-                rgb = [255, g, 0];
-            } else if (top <= (h * 2) / 6) {
-                let r = this._getValue(top, total, 1);
-                rgb = [255 - r, 255, 0];
-            } else if (top <= (h * 3) / 6) {
-                let b = this._getValue(top, total, 2);
-                rgb = [0, 255, b];
-            } else if (top <= (h * 4) / 6) {
-                let g = this._getValue(top, total, 3);
-                rgb = [0, 255 - g, 255];
-            } else if (top < (h * 5) / 6) {
-                let r = this._getValue(top, total, 4);
-                rgb = [r, 0, 255];
-            } else if (top <= (h * 6) / 6) {
-                let b = this._getValue(top, total, 5);
-                rgb = [255, 0, 255 - b];
-            }
-            const bgColor = {
-                r: rgb[0],
-                g: rgb[1],
-                b: rgb[2],
-            };
-            this.$emit("input", bgColor);
         },
         rgb2hsv(r, g, b, a) {
             (r /= 255), (g /= 255), (b /= 255);

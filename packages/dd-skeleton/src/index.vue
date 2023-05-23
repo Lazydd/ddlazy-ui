@@ -11,12 +11,12 @@
             ]"
             v-for="(item, i) in rows"
             :key="`${i}skeletonItem`"
-        ></div>
+        />
         <div
             v-if="variant === 'image' && loadings"
             :class="['dd-skeleton_img', animated ? 'is_animated_img' : '']"
         >
-            <dd-icon class="dd-skeleton-icon" icon="icon-pic"></dd-icon>
+            <dd-icon class="dd-skeleton-icon" icon="icon-pic" />
         </div>
         <div v-if="!loadings">
             <slot v-if="$slots.default" />

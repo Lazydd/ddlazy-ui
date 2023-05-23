@@ -7,13 +7,13 @@
             @mouseup="pickerUp"
             @mousedown="mousedownIn"
         >
-            <div class="dd-white picker_blak"></div>
-            <div class="dd-black picker_blak"></div>
+            <div class="dd-white picker_blak" />
+            <div class="dd-black picker_blak" />
             <div
                 class="picker_cursor"
                 @mousedown="mousedownOut"
                 :style="{ left: left + 'px', top: top + 'px' }"
-            ></div>
+            />
         </div>
     </div>
 </template>

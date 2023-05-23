@@ -8,13 +8,9 @@
             :loading="loading"
             @click="$emit('click')"
         >
-            <dd-icon
-                v-if="loading"
-                icon="icon-loading"
-                class="loading"
-            ></dd-icon>
-            <dd-icon v-if="icon" :icon="icon"></dd-icon>
-            <span :class="['des',icon ? 'ml5' : '']" v-if="$slots.default">
+            <dd-icon v-if="loading" icon="icon-loading" class="loading" />
+            <dd-icon v-if="icon" :icon="icon" />
+            <span :class="['des', icon ? 'ml5' : '']" v-if="$slots.default">
                 <slot />
             </span>
         </button>
@@ -91,9 +87,7 @@ export default {
         margin: 0;
         transition: 0.1s;
         font-weight: 500;
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
+        user-select: none;
         padding: 12px 20px;
         font-size: 14px;
         border-radius: 4px;

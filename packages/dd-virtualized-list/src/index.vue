@@ -4,7 +4,7 @@
         ref="ddvirtualListRef"
         @scroll="scrollChange"
     >
-        <div class="scroll-box" ref="ddscrollBoxRef"></div>
+        <div class="scroll-box" ref="ddscrollBoxRef" />
         <div
             class="list-group"
             ref="ddlistGroupRef"

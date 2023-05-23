@@ -8,8 +8,8 @@
             :underline="underline"
         >
             <span>
-                <dd-icon v-if="icon" :icon="icon"></dd-icon>
-                <slot  v-if="$slots.default" />
+                <dd-icon v-if="icon" :icon="icon" />
+                <slot v-if="$slots.default" />
             </span>
         </a>
     </div>

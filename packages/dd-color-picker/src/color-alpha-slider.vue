@@ -11,7 +11,7 @@
                 class="dd-color-alpha-slider_thumb"
                 @mousedown="mousedownOut"
                 :style="{ left: left + 'px' }"
-            ></div>
+            />
         </div>
     </div>
 </template>

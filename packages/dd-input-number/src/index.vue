@@ -21,7 +21,7 @@
                 "
             >
                 <svg class="icon" aria-hidden="true">
-                    <use :xlink:href="`#icon-sami-select`"></use>
+                    <use :xlink:href="`#icon-sami-select`" />
                 </svg>
             </div>
             <input
@@ -49,7 +49,7 @@
                 "
             >
                 <svg class="icon" aria-hidden="true">
-                    <use :xlink:href="`#icon-add-select`"></use>
+                    <use :xlink:href="`#icon-add-select`" />
                 </svg>
             </div>
             <div
@@ -67,7 +67,7 @@
                 ]"
             >
                 <svg class="icon" aria-hidden="true">
-                    <use :xlink:href="`#icon-arrow-down`"></use>
+                    <use :xlink:href="`#icon-arrow-down`" />
                 </svg>
             </div>
             <div
@@ -85,7 +85,7 @@
                 ]"
             >
                 <svg class="icon" aria-hidden="true">
-                    <use :xlink:href="`#icon-arrow-up`"></use>
+                    <use :xlink:href="`#icon-arrow-up`" />
                 </svg>
             </div>
         </div>

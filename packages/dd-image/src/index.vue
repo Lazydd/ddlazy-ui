@@ -39,8 +39,8 @@
                     :url-list="previewSrcList"
                     :init-index="initIndex"
                     v-on="$listeners"
-                ></image-preview
-            ></transition>
+                />
+            </transition>
         </template>
     </div>
 </template>

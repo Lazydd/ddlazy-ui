@@ -5,7 +5,7 @@
     >
         <div :class="['dd-input_group']">
             <div class="dd-input_prepend" v-if="$slots.prepend">
-                <slot name="prepend"></slot>
+                <slot name="prepend" />
             </div>
             <div class="dd-textarea" v-if="type === 'textarea'">
                 <textarea
@@ -14,7 +14,7 @@
                     :class="[disabled ? 'is-disabled' : '']"
                     @input="changInput"
                     v-model="input_value"
-                ></textarea>
+                />
             </div>
             <input
                 v-else
@@ -37,7 +37,7 @@
                 ]"
             />
             <div class="dd-input_append" v-if="$slots.append">
-                <slot name="append"></slot>
+                <slot name="append" />
             </div>
         </div>
         <span class="dd-input__prefix">
@@ -47,7 +47,7 @@
                 aria-hidden="true"
                 style="color: #c0c4cc"
             >
-                <use :xlink:href="`#${prefixIcon}`"></use>
+                <use :xlink:href="`#${prefixIcon}`" />
             </svg>
         </span>
         <span class="dd-input__suffix">
@@ -58,7 +58,7 @@
                 aria-hidden="true"
                 style="color: #c0c4cc"
             >
-                <use :xlink:href="`#icon-reeor`"></use>
+                <use :xlink:href="`#icon-reeor`" />
             </svg>
             <svg
                 v-if="showPassword && isFocus"
@@ -67,7 +67,7 @@
                 aria-hidden="true"
                 style="color: #c0c4cc"
             >
-                <use :xlink:href="`#icon-password-visible`"></use>
+                <use :xlink:href="`#icon-password-visible`" />
             </svg>
             <svg
                 v-if="suffixIcon"
@@ -75,7 +75,7 @@
                 aria-hidden="true"
                 style="color: #c0c4cc"
             >
-                <use :xlink:href="`#${suffixIcon}`"></use>
+                <use :xlink:href="`#${suffixIcon}`" />
             </svg>
         </span>
     </div>

@@ -39,27 +39,7 @@ export default {
             timeList2.push(i);
             timeList3.push(i);
         }
-        let exceptList = [];
-        let newMinTime;
-
         this.activeTime = this.value || "";
-
-        // for (let i = 0; i < stepS; i++) {
-        //     let time = this.getHMS(
-        //         this.getSecond(start) + this.getSecond(step) * i
-        //     );
-        //     timeList.push({
-        //         time,
-        //         disabled: false,
-        //     });
-        // }
-        // timeList.map((item) => {
-        //     exceptList.map((items) => {
-        //         if (item.time == items) {
-        //             item.disabled = true;
-        //         }
-        //     });
-        // });
         return h(
             "div",
             {
@@ -80,9 +60,6 @@ export default {
                         value: _this.activeTime,
                     },
                     on: {
-                        // input(e) {
-                        //     _this.aa = e.target.value;
-                        // },
                         click(e) {
                             _this.isShow_dropdown = !_this.isShow_dropdown;
                         },

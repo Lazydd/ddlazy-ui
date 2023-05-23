@@ -1,5 +1,5 @@
 <template>
-    <div class="dd-timeline-item"></div>
+    <div class="dd-timeline-item" />
 </template>
 
 <script>

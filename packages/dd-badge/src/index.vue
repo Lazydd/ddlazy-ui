@@ -9,8 +9,9 @@
                 type,
                 isDot ? 'is-dot' : '',
             ]"
-            >{{ max ? (value >= max ? max + "+" : value) : value }}</sup
         >
+            {{ max ? (value >= max ? max + "+" : value) : value }}
+        </sup>
     </div>
 </template>
 

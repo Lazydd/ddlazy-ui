@@ -1,5 +1,5 @@
 <template>
-    <div class="dd-echarts" v-if="chartsId" :ref="chartsId"></div>
+    <div class="dd-echarts" v-if="chartsId" :ref="chartsId" />
 </template>
 
 <script>

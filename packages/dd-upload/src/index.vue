@@ -21,7 +21,7 @@
                         <dd-icon
                             icon="icon-viewlarger"
                             @click="ddUploadControl('amplify', item)"
-                        ></dd-icon>
+                        />
                         <!-- <dd-icon
                             icon="icon-download"
                             @click="ddUploadControl('downLoad', item)"
@@ -29,7 +29,7 @@
                         <dd-icon
                             icon="icon-ashbin"
                             @click="ddUploadControl('delete', item)"
-                        ></dd-icon>
+                        />
                     </div>
                 </transition>
             </li>

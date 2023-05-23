@@ -1,5 +1,5 @@
 <template>
-    <div class="dd-option"></div>
+    <div class="dd-option" />
 </template>
 
 <script>

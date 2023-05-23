@@ -25,7 +25,7 @@
                                                 item.children.length
                                             "
                                             icon="icon-arrow-right"
-                                        ></dd-icon>
+                                        />
                                     </span>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                             v-if="isActive"
                             :options="options[index].children"
                             :node="options[index]"
-                        ></cascader-list>
+                        />
                     </div>
                 </div>
             </div>

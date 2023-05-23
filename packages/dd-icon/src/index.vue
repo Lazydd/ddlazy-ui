@@ -1,7 +1,7 @@
 <template>
     <div class="dd-icon" @click="$emit('click')">
         <svg class="icon" aria-hidden="true" :style="{ fill: color }">
-            <use :xlink:href="`#${icon}`"></use>
+            <use :xlink:href="`#${icon}`" />
         </svg>
     </div>
 </template>

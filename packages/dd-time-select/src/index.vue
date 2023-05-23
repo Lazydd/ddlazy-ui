@@ -96,9 +96,6 @@ export default {
                         placeholder: _this.placeholder,
                     },
                     on: {
-                        // input(e) {
-                        //     _this.aa = e.target.value;
-                        // },
                         click(e) {
                             _this.isShow_dropdown = !_this.isShow_dropdown;
                         },

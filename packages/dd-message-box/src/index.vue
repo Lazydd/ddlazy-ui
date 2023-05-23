@@ -41,7 +41,7 @@
                                 "
                             >
                                 <svg class="icon" aria-hidden="true">
-                                    <use :xlink:href="`#${icon}`"></use>
+                                    <use :xlink:href="`#${icon}`" />
                                 </svg>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                         @click="dd_message_box_closeBtn"
                     >
                         <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-close"></use>
+                            <use xlink:href="#icon-close" />
                         </svg>
                     </div>
                 </div>
@@ -69,13 +69,13 @@
                     >
                         <div style="display: inline-block; margin-right: 10px">
                             <svg class="icon" aria-hidden="true">
-                                <use :xlink:href="`#${icon}`"></use>
+                                <use :xlink:href="`#${icon}`" />
                             </svg>
                         </div>
                     </div>
                     <div class="dd-message-box_container">
                         <p v-if="!dangerouslyUseHTMLString">{{ container }}</p>
-                        <p v-else v-html="container"></p>
+                        <p v-else v-html="container" />
                     </div>
                 </div>
                 <div

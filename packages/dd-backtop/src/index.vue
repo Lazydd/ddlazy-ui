@@ -8,7 +8,7 @@
         <slot v-if="$slots.default" />
         <div v-else class="dd-icon">
             <svg class="icon" aria-hidden="true">
-                <use :xlink:href="`#${icon}`"></use>
+                <use :xlink:href="`#${icon}`" />
             </svg>
         </div>
     </div>

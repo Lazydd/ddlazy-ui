@@ -2,17 +2,17 @@
     <div class="dd-footer">
         <div class="dd-icon">
             <svg class="icon" v-if="left" aria-hidden="true">
-                <use xlink:href="#icon-arrow-left"></use>
+                <use xlink:href="#icon-arrow-left" />
             </svg>
             <span>{{ left }}</span>
         </div>
         <div class="dd-icon">
             <span>{{ right }}</span>
             <svg class="icon" v-if="right" aria-hidden="true">
-                <use xlink:href="#icon-arrow-right"></use>
+                <use xlink:href="#icon-arrow-right" />
             </svg>
         </div>
-        <dd-backtop target=".main-box"></dd-backtop>
+        <dd-backtop target=".main-box" />
     </div>
 </template>
 

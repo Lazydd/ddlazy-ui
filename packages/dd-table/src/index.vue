@@ -21,11 +21,7 @@
                     </th>
                 </tr>
             </thead>
-            <table-body
-                :data="data"
-                :stripe="stripe"
-                :border="border"
-            ></table-body>
+            <table-body :data="data" :stripe="stripe" :border="border" />
         </table>
     </div>
 </template>

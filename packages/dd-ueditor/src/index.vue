@@ -5,7 +5,7 @@
             v-model="value"
             :init="init"
             :disabled="disabled"
-        ></editor>
+        />
     </div>
 </template>
 

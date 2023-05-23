@@ -29,7 +29,7 @@
                 :disabled="disabled ? disabled : disabledPre || pageCounts == 1"
             >
                 <svg class="icon" aria-hidden="true">
-                    <use :xlink:href="`#icon-arrow-left`"></use>
+                    <use :xlink:href="`#icon-arrow-left`" />
                 </svg>
             </div>
             <ul class="pager" :disabled="disabled" v-if="isShow.pager">
@@ -75,7 +75,7 @@
                 "
             >
                 <svg class="icon" aria-hidden="true">
-                    <use :xlink:href="`#icon-arrow-right`"></use>
+                    <use :xlink:href="`#icon-arrow-right`" />
                 </svg>
             </div>
             <div class="dd-pagination__jump" v-if="isShow.jumper">

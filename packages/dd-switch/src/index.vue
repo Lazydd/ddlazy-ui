@@ -4,8 +4,9 @@
             class="dd-switch_label"
             :style="{ color: !value ? '#409eff' : '' }"
             @click="!disabled ? switch_click() : null"
-            >{{ activeText }}</span
         >
+            {{ activeText }}
+        </span>
         <div
             :class="['dd-switch']"
             :disabled="disabled"
@@ -16,15 +17,16 @@
                 'margin-left': activeText ? '10px' : '',
             }"
             @click="!disabled ? switch_click() : null"
-        ></div>
+        />
         <span
             class="dd-switch_label"
             :style="{
                 color: value ? '#409eff' : '',
             }"
             @click="!disabled ? switch_click() : null"
-            >{{ inactiveText }}</span
         >
+            {{ inactiveText }}
+        </span>
     </div>
 </template>
 

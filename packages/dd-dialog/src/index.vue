@@ -12,7 +12,7 @@
                     </span>
                     <div class="dd-dialog_headerbtn" @click="dialog_headerbtn">
                         <svg class="icon" aria-hidden="true">
-                            <use xlink:href="#icon-close"></use>
+                            <use xlink:href="#icon-close" />
                         </svg>
                     </div>
                 </div>

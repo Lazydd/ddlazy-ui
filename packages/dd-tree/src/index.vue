@@ -15,7 +15,7 @@
                     :style="!item.children ? `color:transparent` : ''"
                 >
                     <svg class="icon" aria-hidden="true">
-                        <use :xlink:href="`#icon-triangle-right-fill`"></use>
+                        <use :xlink:href="`#icon-triangle-right-fill`" />
                     </svg>
                 </span>
                 {{ item.label }}
@@ -32,7 +32,7 @@
                         :props="props"
                         :node="item"
                         :level="level + 1"
-                    ></dd-tree>
+                    />
                 </dd-transition>
             </div>
         </div>
@@ -66,7 +66,7 @@ export default {
         node: {
             type: Object,
             default: () => ({}),
-        }, 
+        },
         load: {
             type: Function,
         },

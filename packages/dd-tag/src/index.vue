@@ -2,13 +2,13 @@
     <transition name="list">
         <div class="dd-tag" @click="$emit('click')">
             <span :class="[type, size]">
-                <slot  v-if="$slots.default" />
+                <slot v-if="$slots.default" />
                 <dd-icon
                     v-if="closable"
                     @click="dd_tag_close"
                     class="dd-tag_close dd-icon_close"
                     icon="icon-close"
-                ></dd-icon>
+                />
             </span>
         </div>
     </transition>

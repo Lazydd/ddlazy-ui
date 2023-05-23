@@ -14,7 +14,7 @@
         </div>
         <transition name="dd-fade">
             <div class="dd-popover" v-if="isShowPopconfirm">
-                <div class="dd-popconfirm-s"></div>
+                <div class="dd-popconfirm-s" />
                 <p class="dd-popconfirm__main">
                     <svg
                         v-if="!hideIcon"
@@ -22,7 +22,7 @@
                         aria-hidden="true"
                         :style="`color:${iconColor}`"
                     >
-                        <use :xlink:href="`#${icon}`"></use>
+                        <use :xlink:href="`#${icon}`" />
                     </svg>
                     {{ title }}
                 </p>

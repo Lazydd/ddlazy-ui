@@ -7,17 +7,14 @@
             @mousedown="mousedownIn"
             @mouseup="runwayUp"
         >
-            <div
-                class="dd-slider__button-wrapper"
-                :style="`width:${left}%`"
-            ></div>
+            <div class="dd-slider__button-wrapper" :style="`width:${left}%`" />
             <div
                 class="dd-slider_button-wrapper"
                 ref="button_wrapper"
                 @mousedown="!disabled ? mousedownOut() : null"
                 :style="{ left: left + '%' }"
             >
-                <div class="dd-tooltip dd-slider_button"></div>
+                <div class="dd-tooltip dd-slider_button" />
             </div>
         </div>
     </div>

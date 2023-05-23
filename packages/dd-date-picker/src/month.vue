@@ -183,9 +183,7 @@ export default {
 .dd-picker-header {
     margin: 12px;
     text-align: center;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
+    user-select: none;
     .dd-picker-panel-icon {
         font-size: 16px;
         color: #303133;

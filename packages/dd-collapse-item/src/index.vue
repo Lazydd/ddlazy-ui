@@ -21,7 +21,7 @@
             </template>
             <div class="dd-collapse-item__arrow">
                 <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-arrow-right"></use>
+                    <use xlink:href="#icon-arrow-right" />
                 </svg>
             </div>
         </div>

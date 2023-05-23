@@ -23,8 +23,8 @@
                     'checkbox_input',
                 ]"
             >
-                <dd-icon v-if="!indeterminate" icon="icon-seleted"></dd-icon>
-                <dd-icon v-if="indeterminate" icon="icon-sami-select"></dd-icon>
+                <dd-icon v-if="!indeterminate" icon="icon-seleted" />
+                <dd-icon v-if="indeterminate" icon="icon-sami-select" />
             </span>
         </span>
         <span class="checkbox__label">
@@ -135,9 +135,7 @@ export default {
     line-height: 1;
     margin-right: 30px;
     cursor: pointer;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
+    user-select: none;
     &:last-child {
         margin-right: 0;
     }

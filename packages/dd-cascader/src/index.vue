@@ -8,7 +8,7 @@
             readonly="readonly"
             :class="['dd-cascader_label']"
         />
-        <dd-cascader-list v-bind="$attrs"></dd-cascader-list>
+        <dd-cascader-list v-bind="$attrs" />
     </div>
 </template>
 

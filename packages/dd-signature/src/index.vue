@@ -6,7 +6,7 @@
                 @mousedown="pcStart"
                 @mousemove="pcMove"
                 @mouseup="pcEnd"
-            ></canvas>
+            />
         </div>
     </div>
 </template>

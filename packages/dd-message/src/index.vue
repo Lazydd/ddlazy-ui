@@ -8,14 +8,14 @@
         <div class="dd-message_main">
             <div style="display: inline-block; margin-right: 10px">
                 <svg class="icon" aria-hidden="true">
-                    <use :xlink:href="`#${icon}`"></use>
+                    <use :xlink:href="`#${icon}`" />
                 </svg>
             </div>
             {{ message }}
         </div>
         <div class="dd-message_closeBtn" @click="ddMessage_closeBtn">
             <svg class="icon" aria-hidden="true">
-                <use :xlink:href="'#icon-close'"></use>
+                <use :xlink:href="'#icon-close'" />
             </svg>
         </div>
     </div>

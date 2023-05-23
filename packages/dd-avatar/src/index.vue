@@ -20,7 +20,7 @@
         />
         <div class="dd-icon" v-if="!src && icon">
             <svg class="icon" aria-hidden="true">
-                <use :xlink:href="`#${icon}`"></use>
+                <use :xlink:href="`#${icon}`" />
             </svg>
         </div>
         <template v-if="$slots.default || ($slots.default && !Error)">

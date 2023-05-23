@@ -4,7 +4,7 @@
         <div class="box" ref="meta">
             <div class="dd-block">
                 <div class="source">
-                    <slot name="source"></slot>
+                    <slot name="source" />
                 </div>
             </div>
             <dd-transition>
@@ -17,9 +17,7 @@
                 @click="show"
                 ref="control"
             >
-                <dd-icon
-                    :icon="isShow ? 'icon-arrow-up' : 'icon-arrow-down'"
-                ></dd-icon>
+                <dd-icon :icon="isShow ? 'icon-arrow-up' : 'icon-arrow-down'" />
                 <span>
                     {{ isShow ? "影藏代码" : "显示代码" }}
                 </span>
@@ -170,9 +168,7 @@ export default {
             0 2px 4px 0 rgba(232, 237, 250, 0.5);
         transition: all 0.3s;
         .control {
-            -moz-user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
+            user-select: none;
             color: #d3dce6;
             .dd-icon,
             span {

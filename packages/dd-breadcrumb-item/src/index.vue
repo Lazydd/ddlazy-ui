@@ -15,7 +15,7 @@
         <span class="dd-breadcrumb_separator" v-if="separatorClass">
             <div class="dd-icon">
                 <svg class="icon" aria-hidden="true">
-                    <use :xlink:href="`#${separatorClass}`"></use>
+                    <use :xlink:href="`#${separatorClass}`" />
                 </svg>
             </div>
         </span>
