@@ -13,7 +13,7 @@
                 </div>
             </dd-transition>
             <div
-                :class="['control', fixedControl ? 'is-fixed' : '']"
+                :class="['control', { 'is-fixed': fixedControl }]"
                 @click="show"
                 ref="control"
             >

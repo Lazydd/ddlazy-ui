@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="hideOnSinglePage ? total / pageSize > 1 : true"
-        :class="['dd-pagination', background ? 'is-background' : '']"
+        :class="['dd-pagination', { 'is-background': background }]"
     >
         <div :small="small">
             <div v-if="isShow.total" class="dd-pagination_total">
@@ -18,8 +18,7 @@
                         :key="item"
                         :label="`${item}条/页`"
                         :value="item"
-                    >
-                    </dd-option>
+                    />
                 </dd-select>
             </div>
             <div

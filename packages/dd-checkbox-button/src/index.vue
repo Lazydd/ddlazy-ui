@@ -2,7 +2,7 @@
     <div
         :class="[
             'dd-checkbox-button',
-            !isDisabled && (group ? isActive : value) ? 'is_checked' : '',
+            { is_checked: !isDisabled && (group ? isActive : value) },
         ]"
         :disabled="isDisabled ? isDisabled : disabled"
         @click="(isDisabled ? isDisabled : disabled) ? null : updateCheckbox()"
@@ -10,8 +10,8 @@
         <span
             :class="[
                 'checkbox_inner',
-                (group ? isActive : value) ? 'is_checked' : '',
-                !isDisabled ? 'checkbox_inner_hover' : '',
+                { is_checked: group ? isActive : value },
+                { checkbox_inner_hover: !isDisabled },
                 size,
             ]"
         >
@@ -182,7 +182,6 @@ export default {
             background-image: none !important;
             span {
                 background-color: #f5f7fa !important;
-                
             }
         }
     }

@@ -36,31 +36,32 @@ export default {
             {
                 class: [
                     "dd-tabs-top",
-                    _this.type == "card" ? "cardStyel" : "",
-                    _this.type == "border-card" ? "dd-tabs-border-card" : "",
-                    _this.type == "segmented" ? "segmented" : "",
+                    { cardStyel: _this.type == "card" },
+                    { "dd-tabs-border-card": _this.type == "border-card" },
+                    { segmented: _this.type == "segmented" },
                 ],
             },
             [
                 h(
                     "div",
                     {
-                        class: ["dd-tabs"],
+                        class: "dd-tabs",
                     },
                     [
                         h(
                             "div",
                             {
                                 class: [
-                                    _this.type == "card" ? "dd-tabs_nav" : "",
-                                    _this.type == "border-card"
-                                        ? "dd-tabs_nav-border"
-                                        : "",
+                                    { "dd-tabs_nav": _this.type == "card" },
+                                    {
+                                        "dd-tabs_nav-border":
+                                            _this.type == "border-card",
+                                    },
                                 ],
                             },
                             [
                                 h("div", {
-                                    class: ["dd-tabs__active-bar"],
+                                    class: "dd-tabs__active-bar",
                                     style: {
                                         width: `${_this.width}px`,
                                         transform: `translateX(${_this.left}px)`,
@@ -76,9 +77,11 @@ export default {
                                         {
                                             class: [
                                                 "dd-tabs__item",
-                                                vnode[i].name == _this.activeTab
-                                                    ? "is-active"
-                                                    : "",
+                                                {
+                                                    "is-active":
+                                                        vnode[i].name ==
+                                                        _this.activeTab,
+                                                },
                                                 !_this.type
                                                     ? i == 0
                                                         ? "ml0"
@@ -93,9 +96,10 @@ export default {
                                                 _this.tabIndex == i
                                                     ? "dd-tabs_item-border"
                                                     : "",
-                                                vnode[i].disabled
-                                                    ? "dd-tabs_item-disabled"
-                                                    : "",
+                                                {
+                                                    "dd-tabs_item-disabled":
+                                                        vnode[i].disabled,
+                                                },
                                             ],
                                             style: {
                                                 "border-left":
@@ -124,7 +128,7 @@ export default {
                                         },
                                         [
                                             h("div", {
-                                                class: ["dd-icon"],
+                                                class: "dd-icon",
                                                 style: {
                                                     display: !vnode[i].icon
                                                         ? "none"
@@ -145,7 +149,7 @@ export default {
                 h(
                     "div",
                     {
-                        class: ["dd-tabs-main"],
+                        class: "dd-tabs-main",
                     },
                     [
                         vnodeObj[this.value].componentOptions.children.map(

@@ -1,8 +1,6 @@
 <template>
     <div class="dd-form">
-        <div>
-            <slot v-if="$slots.default" />
-        </div>
+        <slot v-if="$slots.default" />
     </div>
 </template>
 

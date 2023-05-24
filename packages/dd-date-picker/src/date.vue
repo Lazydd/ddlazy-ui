@@ -19,7 +19,7 @@ export default {
     },
     render: function (h) {
         let _this = this;
-        return h("div", { class: ["dd-picker-body"] }, [
+        return h("div", { class: "dd-picker-body" }, [
             h(
                 "div",
                 {
@@ -39,7 +39,6 @@ export default {
                         },
                         [
                             h("dd-icon", {
-                                class: [],
                                 props: {
                                     icon: "icon-double-arrow-left",
                                 },
@@ -92,7 +91,6 @@ export default {
                         },
                         [
                             h("dd-icon", {
-                                class: [],
                                 props: {
                                     icon: "icon-double-arrow-right",
                                 },
@@ -120,7 +118,6 @@ export default {
                         },
                         [
                             h("dd-icon", {
-                                class: [],
                                 props: {
                                     icon: "icon-arrow-right",
                                 },
@@ -180,36 +177,40 @@ export default {
                                                 {
                                                     class: [
                                                         "dd-picker-content_day",
-                                                        item.pre
-                                                            ? "notNowMonth"
-                                                            : "",
-                                                        item.nex
-                                                            ? "notNowMonth"
-                                                            : "",
-                                                        _this.nowDate ==
-                                                        item.y +
-                                                            "-" +
-                                                            (item.m < 10
-                                                                ? `0${item.m}`
-                                                                : item.m) +
-                                                            "-" +
-                                                            (item.d < 10
-                                                                ? `0${item.d}`
-                                                                : item.d)
-                                                            ? "nowDate"
-                                                            : "",
-                                                        _this.activeDate ==
-                                                        item.y +
-                                                            "-" +
-                                                            (item.m < 10
-                                                                ? `0${item.m}`
-                                                                : item.m) +
-                                                            "-" +
-                                                            (item.d < 10
-                                                                ? `0${item.d}`
-                                                                : item.d)
-                                                            ? "activeDate"
-                                                            : "",
+                                                        {
+                                                            notNowMonth:
+                                                                item.pre,
+                                                        },
+                                                        {
+                                                            notNowMonth:
+                                                                item.nex,
+                                                        },
+                                                        {
+                                                            nowDate:
+                                                                _this.nowDate ==
+                                                                item.y +
+                                                                    "-" +
+                                                                    (item.m < 10
+                                                                        ? `0${item.m}`
+                                                                        : item.m) +
+                                                                    "-" +
+                                                                    (item.d < 10
+                                                                        ? `0${item.d}`
+                                                                        : item.d),
+                                                        },
+                                                        {
+                                                            activeDate:
+                                                                _this.activeDate ==
+                                                                item.y +
+                                                                    "-" +
+                                                                    (item.m < 10
+                                                                        ? `0${item.m}`
+                                                                        : item.m) +
+                                                                    "-" +
+                                                                    (item.d < 10
+                                                                        ? `0${item.d}`
+                                                                        : item.d),
+                                                        },
                                                     ],
                                                     on: {
                                                         click(e) {

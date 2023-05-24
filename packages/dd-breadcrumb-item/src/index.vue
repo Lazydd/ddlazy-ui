@@ -8,7 +8,7 @@
                         : $router.replace(to)
                     : null
             "
-            :class="['dd-breadcrumb_inner', to ? 'is-link' : '']"
+            :class="['dd-breadcrumb_inner', { 'is-link': to }]"
         >
             <slot v-if="$slots.default" />
         </span>

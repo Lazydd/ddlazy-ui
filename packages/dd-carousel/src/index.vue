@@ -69,8 +69,8 @@ export default {
             {
                 class: [
                     "dd-carousel",
-                    _this.arrow === "hover" ? "isAHover" : "",
-                    _this.arrow === "never" ? "isNever" : "",
+                    { isAHover: _this.arrow === "hover" },
+                    { isNever: _this.arrow === "never" },
                 ],
                 style: {
                     height:
@@ -83,7 +83,7 @@ export default {
                 h(
                     "div",
                     {
-                        class: ["dd-carousel_box"],
+                        class: "dd-carousel_box",
                         ref: "dd-carousel_box",
                         style: {
                             height: this.height ? this.height + "px" : "",
@@ -146,7 +146,7 @@ export default {
                         h(
                             "div",
                             {
-                                class: ["dd-carousel_container"],
+                                class: "dd-carousel_container",
                                 ref: "dd-carousel_container",
                                 style: _this.style,
                             },
@@ -163,9 +163,10 @@ export default {
                     {
                         class: [
                             "dd-carousel_indicators",
-                            _this.direction === "vertical"
-                                ? "dd-carousel_indicators_vertical"
-                                : "",
+                            {
+                                "dd-carousel_indicators_vertical":
+                                    _this.direction === "vertical",
+                            },
                         ],
                     },
                     [
@@ -242,7 +243,7 @@ export default {
     },
     methods: {
         getWidth() {
-            this.width = this.$el.offsetWidth/this.showNumber;
+            this.width = this.$el.offsetWidth / this.showNumber;
         },
         _controlNavClick(page) {
             this.duration2 = 1000;

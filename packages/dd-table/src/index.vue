@@ -1,5 +1,5 @@
 <template>
-    <div :class="['dd-table', border ? 'dd-table_border' : '']">
+    <div :class="['dd-table', { 'dd-table_border': border }]">
         <div style="display: none">
             <slot />
         </div>
@@ -9,7 +9,7 @@
                     <th
                         v-for="(item, i) in vnode"
                         :key="i"
-                        :class="[border ? 'dd-table_th-border' : '']"
+                        :class="{ 'dd-table_th-border': border }"
                         :style="`width:${
                             item.width ? item.width + 'px' : ''
                         };text-align:${item.headerAlign};min-width:${

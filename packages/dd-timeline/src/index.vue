@@ -21,18 +21,18 @@ export default {
         return h(
             "ul",
             {
-                class: ["dd-timeline"],
+                class: "dd-timeline",
             },
             [
                 vnode.map((item, i) => {
                     return h(
                         "li",
                         {
-                            class: ["dd-timeline-item"],
+                            class: "dd-timeline-item",
                         },
                         [
                             h("div", {
-                                class: ["dd-timeline-item_tail"],
+                                class: "dd-timeline-item_tail",
                                 style: {
                                     display:
                                         vnode.length - 1 == i
@@ -60,7 +60,7 @@ export default {
                                 [
                                     vnodeArr[i]?.icon
                                         ? h("dd-icon", {
-                                              class: ["dd-timeline-item_icon"],
+                                              class: "dd-timeline-item_icon",
                                               props: {
                                                   icon: vnodeArr[i]?.icon,
                                               },
@@ -71,7 +71,7 @@ export default {
                             h(
                                 "div",
                                 {
-                                    class: ["dd-timeline-item_wrapper"],
+                                    class: "dd-timeline-item_wrapper",
                                 },
                                 [
                                     vnodeArr[i].placement === "top"
@@ -89,7 +89,7 @@ export default {
                                     h(
                                         "div",
                                         {
-                                            class: ["dd-timeline-item_content"],
+                                            class: "dd-timeline-item_content",
                                         },
                                         [
                                             _this.$slots.default[
@@ -195,7 +195,7 @@ export default {
                 margin-bottom: 8px;
                 padding-top: 4px;
             }
-            .is-bottom{
+            .is-bottom {
                 margin-top: 8px;
             }
         }

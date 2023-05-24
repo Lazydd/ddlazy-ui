@@ -11,7 +11,7 @@
                 <textarea
                     :style="{ 'min-height': '33px', resize: resize }"
                     :rows="rows"
-                    :class="[disabled ? 'is-disabled' : '']"
+                    :class="{ 'is-disabled': disabled }"
                     @input="changInput"
                     v-model="input_value"
                 />
@@ -28,11 +28,11 @@
                 :value="input_value"
                 :class="[
                     'dd-input_inner',
-                    isInput__suffix ? 'dd-input_sufinner' : '',
-                    isInput__prefix ? 'dd-input_preinner' : '',
-                    $slots.prepend ? 'dd-input_Left' : '',
-                    $slots.append ? 'dd-input_Right' : '',
-                    disabled ? 'is-disabled' : '',
+                    { 'dd-input_sufinner': isInput__suffix },
+                    { 'dd-input_preinner': isInput__prefix },
+                    { 'dd-input_Left': $slots.prepend },
+                    { 'dd-input_Right': $slots.append },
+                    { 'is-disabled': disabled },
                     size,
                 ]"
             />

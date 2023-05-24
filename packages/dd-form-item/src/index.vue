@@ -1,7 +1,7 @@
 <template>
     <div class="dd-form-item">
         <div
-            :class="['dd-form_label', prop ? 'dd-form_prop' : '']"
+            :class="['dd-form_label', { 'dd-form_prop': prop }]"
             :style="`width:${
                 labelWidth
                     ? labelWidth

@@ -172,6 +172,9 @@ export default {
             this.$emit("change", val); //通过$listeners传递
         },
     },
+    components: {
+        ddIcon,
+    },
 };
 </script>
 

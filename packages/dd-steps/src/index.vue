@@ -39,7 +39,7 @@ export default {
                 class: [
                     "dd-steps ",
                     `dd-steps-${this.direction}`,
-                    this.simple ? "dd-steps-simple" : "",
+                    { "dd-steps-simple": this.simple },
                 ],
             },
             [
@@ -56,9 +56,10 @@ export default {
                                         ? ""
                                         : "is-flex"
                                     : "",
-                                this.direction === "vertical"
-                                    ? "is-vertical"
-                                    : "",
+                                {
+                                    "is-vertical":
+                                        this.direction === "vertical",
+                                },
                             ],
                             style: {
                                 "flex-basis": this.space
@@ -79,10 +80,8 @@ export default {
                                         this.active > i + 1
                                             ? `is-${this.finishStatus}`
                                             : "is-wait",
-                                        this.active == i + 1
-                                            ? "is-process"
-                                            : "",
-                                        this.alignCenter ? "is-center" : "",
+                                        { "is-process": this.active == i + 1 },
+                                        { "is-center": this.alignCenter },
                                     ],
                                 },
                                 [
@@ -103,7 +102,7 @@ export default {
                                         {
                                             class: [
                                                 "dd-step_icon",
-                                                !vnode[i].icon ? "is-text" : "",
+                                                { "is-text": !vnode[i].icon },
                                             ],
                                         },
                                         [
@@ -111,9 +110,10 @@ export default {
                                                 class: [
                                                     "dd-step_icon-inner",
                                                     "dd-icon",
-                                                    vnode[i].icon
-                                                        ? "vnode-icon"
-                                                        : "",
+                                                    {
+                                                        "vnode-icon":
+                                                            vnode[i].icon,
+                                                    },
                                                 ],
                                                 domProps: {
                                                     innerHTML: vnode[i].icon
@@ -132,7 +132,7 @@ export default {
                                 {
                                     class: [
                                         "dd-step_main",
-                                        this.alignCenter ? "is-center" : "",
+                                        { "is-center": this.alignCenter },
                                     ],
                                 },
                                 [
@@ -142,9 +142,10 @@ export default {
                                             this.active > i + 1
                                                 ? `is-${this.finishStatus}`
                                                 : "is-wait",
-                                            this.active == i + 1
-                                                ? "is-process"
-                                                : "",
+                                            {
+                                                "is-process":
+                                                    this.active == i + 1,
+                                            },
                                         ],
                                         domProps: {
                                             innerHTML: vnode[i].title,

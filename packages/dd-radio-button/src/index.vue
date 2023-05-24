@@ -7,8 +7,8 @@
         <span
             :class="[
                 'radio__label',
-                (group ? groupActive : value) == label ? 'radio_origina' : null,
-                !isDisabled ? 'radio_inner_hover' : '',
+                { radio_origina: (group ? groupActive : value) == label },
+                { radio_inner_hover: !isDisabled },
                 size,
             ]"
         >
@@ -94,7 +94,7 @@ export default {
         color: #fff !important;
         background-color: #409eff !important;
         border-color: #409eff !important;
-        transition: all .3s;
+        transition: all 0.3s;
     }
     .radio_inner_hover {
         &:hover {
@@ -115,7 +115,7 @@ export default {
         box-sizing: border-box;
         padding: 12px 20px;
         font-size: 14px;
-        transition: all .3s;
+        transition: all 0.3s;
     }
     &:first-child .radio__label {
         border-left: 1px solid #dcdfe6;

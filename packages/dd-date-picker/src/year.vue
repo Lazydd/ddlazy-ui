@@ -43,7 +43,6 @@ export default {
                             },
                             [
                                 h("dd-icon", {
-                                    class: [],
                                     props: {
                                         icon: "icon-double-arrow-left",
                                     },
@@ -71,7 +70,6 @@ export default {
                             },
                             [
                                 h("dd-icon", {
-                                    class: [],
                                     props: {
                                         icon: "icon-double-arrow-right",
                                     },
@@ -108,12 +106,15 @@ export default {
                                         {
                                             class: [
                                                 "dd-picker-content_year",
-                                                _this.nowYear == item
-                                                    ? "nowYear"
-                                                    : "",
-                                                _this.activeYear == item
-                                                    ? "activeYear"
-                                                    : "",
+                                                {
+                                                    nowYear:
+                                                        _this.nowYear == item,
+                                                },
+                                                {
+                                                    activeYear:
+                                                        _this.activeYear ==
+                                                        item,
+                                                },
                                             ],
                                             on: {
                                                 click(e) {

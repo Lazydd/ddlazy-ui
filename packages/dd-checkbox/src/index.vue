@@ -2,7 +2,7 @@
     <div
         :class="[
             'dd-checkbox',
-            !isDisabled && (group ? isActive : value) ? 'is_checked' : '',
+            { is_checked: !isDisabled && (group ? isActive : value) },
         ]"
         :disabled="isDisabled ? isDisabled : disabled"
         @click="(isDisabled ? isDisabled : disabled) ? null : updateCheckbox()"
@@ -10,16 +10,17 @@
         <span
             :class="[
                 'checkbox_inner',
-                !isDisabled && (group ? isActive : value) ? 'is_checked' : '',
-                /*   !isDisabled && (group ? groupActive : value) != label */
-                !disabled ? 'checkbox_inner_hover' : '',
-                indeterminate ? 'is_checked' : '',
+                { is_checked: !isDisabled && (group ? isActive : value) },
+                { checkbox_inner_hover: !disabled },
+                { is_checked: indeterminate },
             ]"
         >
             <span
                 :class="[
-                    (group ? isActive : value) ? 'checkbox_origina' : null,
-                    indeterminate ? 'checkbox_origina' : null,
+                    {
+                        checkbox_origina:
+                            (group ? isActive : value) || indeterminate,
+                    },
                     'checkbox_input',
                 ]"
             >

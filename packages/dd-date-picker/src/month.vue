@@ -44,7 +44,6 @@ export default {
                             },
                             [
                                 h("dd-icon", {
-                                    class: [],
                                     props: {
                                         icon: "icon-double-arrow-left",
                                     },
@@ -76,7 +75,6 @@ export default {
                             },
                             [
                                 h("dd-icon", {
-                                    class: [],
                                     props: {
                                         icon: "icon-double-arrow-right",
                                     },
@@ -113,26 +111,28 @@ export default {
                                         {
                                             class: [
                                                 "dd-picker-content_month",
-                                                _this.nowMonth ==
-                                                moment(item.y + "").format(
-                                                    "YYYY"
-                                                ) +
-                                                    "-" +
-                                                    moment(item.m + "").format(
-                                                        "MM"
-                                                    )
-                                                    ? "nowMonth"
-                                                    : "",
-                                                _this.activeMonth ==
-                                                moment(item.y + "").format(
-                                                    "YYYY"
-                                                ) +
-                                                    "-" +
-                                                    moment(item.m + "").format(
-                                                        "MM"
-                                                    )
-                                                    ? "activeMonth"
-                                                    : "",
+                                                {
+                                                    nowMonth:
+                                                        _this.nowMonth ==
+                                                        moment(
+                                                            item.y + ""
+                                                        ).format("YYYY") +
+                                                            "-" +
+                                                            moment(
+                                                                item.m + ""
+                                                            ).format("MM"),
+                                                },
+                                                {
+                                                    activeMonth:
+                                                        _this.activeMonth ==
+                                                        moment(
+                                                            item.y + ""
+                                                        ).format("YYYY") +
+                                                            "-" +
+                                                            moment(
+                                                                item.m + ""
+                                                            ).format("MM"),
+                                                },
                                             ],
                                             on: {
                                                 click(e) {

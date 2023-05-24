@@ -1,5 +1,3 @@
-<template></template>
-
 <script>
 export default {
     name: "ddDropdownItem",
@@ -14,5 +12,3 @@ export default {
     },
 };
 </script>
-
-<style lang="less" scoped></style>

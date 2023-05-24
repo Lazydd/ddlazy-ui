@@ -105,9 +105,6 @@ export default {
             }
         },
     },
-    mounted() {
-        // this.initNode();
-    },
 };
 </script>
 

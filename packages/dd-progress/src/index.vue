@@ -27,19 +27,19 @@
                 v-if="status === 'success' && !textInside"
                 icon="icon-success"
                 :style="{ 'font-size': fz + 'px' }"
-                :class="['dd-progress_text', status, fz < 12 ? 'mf' : '']"
+                :class="['dd-progress_text', status, { mf: fz < 12 }]"
             />
             <dd-icon
                 v-else-if="status === 'warning' && !textInside"
                 icon="icon-prompt"
                 :style="{ 'font-size': fz + 'px' }"
-                :class="['dd-progress_text', status, fz < 12 ? 'mf' : '']"
+                :class="['dd-progress_text', status, { mf: fz < 12 }]"
             />
             <dd-icon
                 v-else-if="status === 'exception' && !textInside"
                 icon="icon-reeor"
                 :style="{ 'font-size': fz + 'px' }"
-                :class="['dd-progress_text', status, fz < 12 ? 'mf' : '']"
+                :class="['dd-progress_text', status, { mf: fz < 12 }]"
             />
             <div
                 v-if="!status && !format && !textInside"

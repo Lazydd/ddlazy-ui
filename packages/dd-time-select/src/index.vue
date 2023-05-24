@@ -76,12 +76,12 @@ export default {
         return h(
             "div",
             {
-                class: ["dd-time-select"],
+                class: "dd-time-select",
                 ref: "dd-time-select",
             },
             [
                 h("dd-icon", {
-                    class: ["dd-input_prefix"],
+                    class: "dd-input_prefix",
                     props: {
                         icon: "icon-ontimeshipment",
                     },
@@ -109,7 +109,7 @@ export default {
                 }),
                 _this.activeTime
                     ? h("dd-icon", {
-                          class: ["dd-input_suffix"],
+                          class: "dd-input_suffix",
                           props: {
                               icon: "icon-reeor",
                           },
@@ -135,59 +135,52 @@ export default {
                             ? h(
                                   "div",
                                   {
-                                      class: ["dd-time-select-dropdown"],
+                                      class: "dd-time-select-dropdown",
                                   },
                                   [
                                       h("div", {
-                                          class: ["dd-time-select-dropdown-s"],
+                                          class: "dd-time-select-dropdown-s",
                                       }),
-                                      h("dd-scroll", {}, [
-                                          h(
-                                              "ul",
-                                              {
-                                                  class: [""],
-                                              },
-                                              [
-                                                  timeList.map((item, i) => {
-                                                      return h("li", {
-                                                          class: [
-                                                              _this.activeTime ==
-                                                              item.time
-                                                                  ? "activeTime"
-                                                                  : "",
-                                                              item.disabled
-                                                                  ? "disabled"
-                                                                  : "",
-                                                          ],
-                                                          domProps: {
-                                                              innerHTML:
+                                      h("dd-scroll", [
+                                          h("ul", [
+                                              timeList.map((item, i) => {
+                                                  return h("li", {
+                                                      class: [
+                                                          {
+                                                              activeTime:
+                                                                  _this.activeTime ==
                                                                   item.time,
                                                           },
-                                                          on: {
-                                                              click(e) {
-                                                                  if (
-                                                                      item.disabled
-                                                                  )
-                                                                      return;
-                                                                  _this.activeIndex =
-                                                                      i;
-                                                                  _this.activeTime =
-                                                                      item;
-                                                                  _this.isShow_dropdown = false;
-                                                                  _this.$emit(
-                                                                      "input",
-                                                                      item.time
-                                                                  );
-                                                                  _this.$emit(
-                                                                      "change",
-                                                                      item.time
-                                                                  );
-                                                              },
+                                                          {
+                                                              disabled:
+                                                                  item.disabled,
                                                           },
-                                                      });
-                                                  }),
-                                              ]
-                                          ),
+                                                      ],
+                                                      domProps: {
+                                                          innerHTML: item.time,
+                                                      },
+                                                      on: {
+                                                          click(e) {
+                                                              if (item.disabled)
+                                                                  return;
+                                                              _this.activeIndex =
+                                                                  i;
+                                                              _this.activeTime =
+                                                                  item;
+                                                              _this.isShow_dropdown = false;
+                                                              _this.$emit(
+                                                                  "input",
+                                                                  item.time
+                                                              );
+                                                              _this.$emit(
+                                                                  "change",
+                                                                  item.time
+                                                              );
+                                                          },
+                                                      },
+                                                  });
+                                              }),
+                                          ]),
                                       ]),
                                   ]
                               )

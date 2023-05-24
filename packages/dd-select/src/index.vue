@@ -46,14 +46,14 @@ export default {
         return h(
             "div",
             {
-                class: ["dd-select"],
+                class: "dd-select",
                 ref: "dd-select",
             },
             [
                 h("input", {
                     class: [
                         "dd-select_inner",
-                        _this.disabled ? "is-disabled" : "",
+                        { "is-disabled": _this.disabled },
                         _this.size,
                     ],
                     domProps: {
@@ -79,7 +79,7 @@ export default {
                 h(
                     "span",
                     {
-                        class: ["dd-input_suffix"],
+                        class: "dd-input_suffix",
                     },
                     [
                         h("dd-icon", {
@@ -124,11 +124,11 @@ export default {
                             ? h(
                                   "div",
                                   {
-                                      class: ["dd-select-dropdown"],
+                                      class: "dd-select-dropdown",
                                   },
                                   [
                                       h("div", {
-                                          class: ["dd-select-dropdown-s"],
+                                          class: "dd-select-dropdown-s",
                                       }),
                                       h(
                                           "dd-scroll",
@@ -140,15 +140,17 @@ export default {
                                                   vnode.map((item, i) => {
                                                       return h("li", {
                                                           class: [
-                                                              _this.activeSelect ==
-                                                                  item.label ||
-                                                              _this.activeSelect ==
-                                                                  item.value
-                                                                  ? "activeSelect"
-                                                                  : "",
-                                                              item.disabled
-                                                                  ? "disabled"
-                                                                  : "",
+                                                              {
+                                                                  activeSelect:
+                                                                      _this.activeSelect ==
+                                                                          item.label ||
+                                                                      _this.activeSelect ==
+                                                                          item.value,
+                                                              },
+                                                              {
+                                                                  disabled:
+                                                                      item.disabled,
+                                                              },
                                                           ],
                                                           domProps: {
                                                               innerHTML:

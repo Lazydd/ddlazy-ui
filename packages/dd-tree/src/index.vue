@@ -10,7 +10,7 @@
                 <span
                     :class="[
                         'dd-tree-node_icon',
-                        item.isActive ? 'dd-tree-node_icon_active' : '',
+                        { 'dd-tree-node_icon_active': item.isActive },
                     ]"
                     :style="!item.children ? `color:transparent` : ''"
                 >

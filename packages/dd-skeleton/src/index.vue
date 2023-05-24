@@ -5,16 +5,16 @@
             :class="[
                 'dd-skeleton__item',
                 'dd-skeleton__paragraph',
-                i == 0 ? 'is_first' : '',
-                i == rows - 1 ? 'is_last' : '',
-                animated ? 'is_animated' : '',
+                { is_first: i == 0 },
+                { is_last: i == rows - 1 },
+                { is_animated: animated },
             ]"
-            v-for="(item, i) in rows"
+            v-for="(_, i) in rows"
             :key="`${i}skeletonItem`"
         />
         <div
             v-if="variant === 'image' && loadings"
-            :class="['dd-skeleton_img', animated ? 'is_animated_img' : '']"
+            :class="['dd-skeleton_img', { is_animated: animated }]"
         >
             <dd-icon class="dd-skeleton-icon" icon="icon-pic" />
         </div>
@@ -82,12 +82,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@keyframes loading {
+@keyframes skeleton-loading {
     0% {
-        left: -100%;
+        background-position: 100% 50%;
     }
     100% {
-        left: 100%;
+        background-position: 0 50%;
     }
 }
 @keyframes loadingImg {
@@ -131,42 +131,16 @@ export default {
             font-size: 80px;
         }
     }
+
     .is_animated {
-        position: relative;
-        overflow: hidden;
-        &::before {
-            position: absolute;
-            animation: loading 2.4s ease infinite;
-            content: "";
-            display: inline-block;
-            height: 16px;
-            width: 100%;
-            background: linear-gradient(
-                90deg,
-                #f2f2f2 25%,
-                #e6e6e6 37%,
-                #f2f2f2 63%
-            );
-        }
-    }
-    .is_animated_img {
-        position: relative;
-        overflow: hidden;
-        &::before {
-            position: absolute;
-            animation: loadingImg 1.4s ease infinite;
-            content: "";
-            display: inline-block;
-            height: 100%;
-            width: 50%;
-            background: linear-gradient(
-                90deg,
-                #f2f2f2 25%,
-                #e6e6e6 37%,
-                #f2f2f2 63%
-            );
-            opacity: 0.5;
-        }
+        background: linear-gradient(
+            90deg,
+            #f2f2f2 25%,
+            #e6e6e6 37%,
+            #f2f2f2 63%
+        );
+        background-size: 400% 100%;
+        animation: skeleton-loading 2.4s ease infinite;
     }
 }
 </style>

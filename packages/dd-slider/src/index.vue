@@ -1,5 +1,5 @@
 <template>
-    <div :class="['dd-slider', disabled ? 'disabled' : '']" @mouseup="mouseup">
+    <div :class="['dd-slider', { disabled }]" @mouseup="mouseup">
         {{ radio }}
         <div
             class="dd-slider_runway"

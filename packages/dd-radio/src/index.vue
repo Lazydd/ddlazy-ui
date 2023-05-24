@@ -7,27 +7,27 @@
         <span
             :class="[
                 'radio_inner',
-                !isDisabled && (group ? groupActive : value) != label
-                    ? 'radio_inner_hover'
-                    : '',
+                {
+                    radio_inner_hover:
+                        !isDisabled && (group ? groupActive : value) != label,
+                },
             ]"
         >
             <span
-                :class="[
-                    (group ? groupActive : value) == label
-                        ? 'radio_origina'
-                        : null,
-                ]"
+                :class="{
+                    radio_origina: (group ? groupActive : value) == label,
+                }"
             />
         </span>
         <span
             :class="[
                 'radio__label',
-                !isDisabled &&
-                (group ? groupActive : value) == label &&
-                !disabled
-                    ? 'radio_origina_text'
-                    : '',
+                {
+                    radio_origina_text:
+                        !isDisabled &&
+                        (group ? groupActive : value) == label &&
+                        !disabled,
+                },
             ]"
         >
             <slot v-if="$slots.default" />

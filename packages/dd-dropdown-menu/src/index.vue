@@ -24,7 +24,7 @@ export default {
         return h(
             "ul",
             {
-                class: ["dd-dropdown-menu"],
+                class: "dd-dropdown-menu",
                 ref: "dd-dropdown-menu",
                 style: {
                     zIndex,
@@ -33,7 +33,7 @@ export default {
             },
             [
                 h("div", {
-                    class: ["dd-dropdown-s"],
+                    class: "dd-dropdown-s",
                 }),
                 vnodeArr.map((item, i) => {
                     return h(
@@ -41,9 +41,10 @@ export default {
                         {
                             class: [
                                 "dd-dropdown-item",
-                                vnodeArr[i].disabled
-                                    ? "dd-dropdown-disabled"
-                                    : "",
+                                {
+                                    "dd-dropdown-disabled":
+                                        vnodeArr[i].disabled,
+                                },
                             ],
                             on: {
                                 click(e) {

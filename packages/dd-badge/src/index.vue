@@ -3,12 +3,7 @@
         <slot v-if="$slots.default" />
         <sup
             v-if="!hidden"
-            :class="[
-                'dd-badge_content',
-                'is-fixed',
-                type,
-                isDot ? 'is-dot' : '',
-            ]"
+            :class="['dd-badge_content', 'is-fixed', type, { 'is-dot': isDot }]"
         >
             {{ max ? (value >= max ? max + "+" : value) : value }}
         </sup>

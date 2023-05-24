@@ -78,7 +78,6 @@ export default {
     > img {
         display: block;
         height: 100%;
-        vertical-align: middle;
     }
     .dd-icon {
         display: inline-block;

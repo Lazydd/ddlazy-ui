@@ -61,7 +61,7 @@ export default {
                 h("input", {
                     class: [
                         "dd-date-picker_inner",
-                        _this.disabled ? "is-disabled" : "",
+                        { "is-disabled": _this.disabled },
                         _this.size,
                     ],
                     domProps: {
@@ -87,7 +87,7 @@ export default {
                 h(
                     "span",
                     {
-                        class: ["dd-input_suffix"],
+                        class: "dd-input_suffix",
                     },
                     [
                         h("dd-icon", {
@@ -101,7 +101,7 @@ export default {
                     ? h(
                           "span",
                           {
-                              class: ["dd-input_suffix_clear"],
+                              class: "dd-input_suffix_clear",
                           },
                           [
                               h("dd-icon", {

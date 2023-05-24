@@ -6,7 +6,7 @@
             :placeholder="placeholder"
             :value="cascader_label"
             readonly="readonly"
-            :class="['dd-cascader_label']"
+            class="dd-cascader_label"
         />
         <dd-cascader-list v-bind="$attrs" />
     </div>

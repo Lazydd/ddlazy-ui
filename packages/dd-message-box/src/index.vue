@@ -11,20 +11,20 @@
             <div
                 :class="[
                     'dd-message-box_spinner',
-                    center ? 'dd-message-box_center-spinner' : '',
+                    { 'dd-message-box_center-spinner': center },
                 ]"
                 ref="dd-message-box_spinner"
             >
                 <div
                     :class="[
                         'dd-message-box_header',
-                        center ? 'dd-message-box_center' : '',
+                        { 'dd-message-box_center': center },
                     ]"
                 >
                     <div
                         :class="[
                             'dd-message-box_title',
-                            center ? 'dd-message-box_center-title' : '',
+                            { 'dd-message-box_center-title': center },
                         ]"
                     >
                         <div
@@ -60,7 +60,7 @@
                 <div
                     :class="[
                         'dd-message-box_content',
-                        center ? 'dd-message-box_center-content' : '',
+                        { 'dd-message-box_center-content': center },
                     ]"
                 >
                     <div
@@ -81,7 +81,7 @@
                 <div
                     :class="[
                         'dd-message-box_btns',
-                        center ? 'dd-message-box_center-btns' : '',
+                        { 'dd-message-box_center-btns': center },
                     ]"
                 >
                     <dd-button

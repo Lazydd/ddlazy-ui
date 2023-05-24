@@ -1,18 +1,14 @@
 <template>
     <div :class="['dd-input-number']">
         <div
-            :class="[
-                'dd-input_NumberGroup',
-                disabled ? 'is-disabled' : '',
-                size,
-            ]"
+            :class="['dd-input_NumberGroup', { 'is-disabled': disabled }, size]"
         >
             <div
                 v-if="controlsPosition !== 'right'"
                 :class="[
                     'dd-control',
                     'dd-input_Numberprepend',
-                    input_value <= min ? 'is-disabled' : '',
+                    { 'is-disabled': input_value <= min },
                 ]"
                 @click="
                     !disabled && input_value > min
@@ -33,14 +29,14 @@
                 :placeholder="placeholder"
                 :disabled="disabled"
                 :value="input_value"
-                :class="['dd-input_inner', disabled ? 'is-disabled' : '']"
+                :class="['dd-input_inner', { 'is-disabled': disabled }]"
             />
             <div
                 v-if="controlsPosition !== 'right'"
                 :class="[
                     'dd-control',
                     'dd-input_Numberappend',
-                    input_value >= max ? 'is-disabled' : '',
+                    { 'is-disabled': input_value >= max },
                 ]"
                 @click="
                     !disabled && input_value < max
@@ -63,7 +59,7 @@
                     'dd-control',
                     'is-controls-decrement',
                     'is-controls-right',
-                    input_value <= min ? 'is-disabled' : '',
+                    { 'is-disabled': input_value <= min },
                 ]"
             >
                 <svg class="icon" aria-hidden="true">
@@ -81,7 +77,7 @@
                     'dd-control',
                     'is-controls-increment',
                     'is-controls-right',
-                    input_value >= max ? 'is-disabled' : '',
+                    { 'is-disabled': input_value >= max },
                 ]"
             >
                 <svg class="icon" aria-hidden="true">

@@ -1,13 +1,9 @@
 <template>
     <div
-        :class="[
-            'dd-collapse-item',
-            isActive === true ? 'is-active' : '',
-            arrayActive ? 'is-active' : '',
-        ]"
+        :class="['dd-collapse-item', { 'is-active': isActive || arrayActive }]"
     >
         <div
-            :class="['dd-collapse-item__header', disabled ? 'is-disabled' : '']"
+            :class="['dd-collapse-item__header', { 'is-disabled': disabled }]"
             @click="!disabled ? sollapseChange() : null"
             :style="
                 (!isArray ? !isActive : !arrayActive)

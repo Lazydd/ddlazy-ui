@@ -1,10 +1,5 @@
 <template>
-    <div
-        class="dd-popover__reference-wrapper"
-        v-bind="$attrs"
-        v-model="isShowPopconfirm"
-        trigger="click"
-    >
+    <div class="dd-popover__reference-wrapper" v-bind="$attrs" trigger="click">
         <div
             @click="popconfirm_control"
             v-if="$slots.reference"

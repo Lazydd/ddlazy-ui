@@ -2,9 +2,9 @@
     <div
         :class="[
             'dd-card',
-            shadow === 'always' ? 'is-always-shadow' : '',
-            shadow === 'hover' ? 'is-hover-shadow' : '',
-            shadow === 'never' ? 'is-never-shadow' : '',
+            { 'is-always-shadow': shadow === 'always' },
+            { 'is-hover-shadow': shadow === 'hover' },
+            { 'is-never-shadow': shadow === 'never' },
         ]"
     >
         <div class="card_header" v-if="$slots.header">

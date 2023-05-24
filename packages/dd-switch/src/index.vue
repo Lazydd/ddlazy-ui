@@ -1,5 +1,5 @@
 <template>
-    <div :style="'display: inline-block'" :class="[value ? 'is-checked' : '']">
+    <div :style="'display: inline-block'" :class="{ 'is-checked': value }">
         <span
             class="dd-switch_label"
             :style="{ color: !value ? '#409eff' : '' }"
@@ -8,7 +8,7 @@
             {{ activeText }}
         </span>
         <div
-            :class="['dd-switch']"
+            class="dd-switch"
             :disabled="disabled"
             :switch_value="!switch_value && disabled"
             :style="{

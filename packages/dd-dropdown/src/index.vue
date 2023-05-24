@@ -31,7 +31,7 @@ export default {
         return h(
             "div",
             {
-                class: ["dd-dropdown"],
+                class: "dd-dropdown",
             },
             [
                 h(

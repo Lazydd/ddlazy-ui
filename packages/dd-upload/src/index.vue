@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="['dd-upload', listType === 'picture-card' ? 'des' : '']"
+        :class="['dd-upload', { des: listType === 'picture-card' }]"
         ref="dd-upload"
         @dragover.prevent="handleDragOver"
         @drop.prevent="handleDrag"
@@ -36,9 +36,9 @@
         </ul>
         <div
             :class="[
-                listType == 'picture-card' ? 'avatar-uploader' : '',
-                drag && listType != 'picture-card' ? 'dd-upload-dragger' : '',
-                isDrogAcitve ? 'is-drogover' : '',
+                { 'avatar-uploader': listType == 'picture-card' },
+                { 'dd-upload-dragger': drag && listType != 'picture-card' },
+                { 'is-drogover': isDrogAcitve },
             ]"
             @click="dd_upload"
         >
@@ -65,7 +65,7 @@
                     @click="onPreview(item)"
                     v-if="listType === 'text'"
                 >
-                    <dd-icon icon="icon-shangchuanbeiandanzheng"></dd-icon>
+                    <dd-icon icon="icon-shangchuanbeiandanzheng" />
                     {{ item.name }}
                 </a>
                 <dd-icon

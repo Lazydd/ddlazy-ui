@@ -43,12 +43,12 @@ export default {
         return h(
             "div",
             {
-                class: ["dd-time-select"],
+                class: "dd-time-select",
                 ref: "dd-time-select",
             },
             [
                 h("dd-icon", {
-                    class: ["dd-input_prefix"],
+                    class: "dd-input_prefix",
                     props: {
                         icon: "icon-ontimeshipment",
                     },
@@ -73,7 +73,7 @@ export default {
                 }),
                 _this.activeTime
                     ? h("dd-icon", {
-                          class: ["dd-input_suffix"],
+                          class: "dd-input_suffix",
                           props: {
                               icon: "icon-reeor",
                           },
@@ -99,7 +99,7 @@ export default {
                             ? h(
                                   "div",
                                   {
-                                      class: ["dd-time-select-dropdown"],
+                                      class: "dd-time-select-dropdown",
                                   },
                                   [
                                       h(
@@ -111,16 +111,12 @@ export default {
                                           },
                                           [
                                               h("div", {
-                                                  class: [
-                                                      "dd-time-select-dropdown-s",
-                                                  ],
+                                                  class: "dd-time-select-dropdown-s",
                                               }),
                                               h(
                                                   "div",
                                                   {
-                                                      class: [
-                                                          "time-picker_box",
-                                                      ],
+                                                      class: "time-picker_box",
                                                   },
                                                   [
                                                       h(
@@ -202,12 +198,11 @@ export default {
                                                                               return h(
                                                                                   "li",
                                                                                   {
-                                                                                      class: [
-                                                                                          _this.activeMinute ==
-                                                                                          item
-                                                                                              ? "activeTime"
-                                                                                              : "",
-                                                                                      ],
+                                                                                      class: {
+                                                                                          activeTime:
+                                                                                              _this.activeMinute ==
+                                                                                              item,
+                                                                                      },
                                                                                       domProps:
                                                                                           {
                                                                                               innerHTML:
@@ -254,12 +249,11 @@ export default {
                                                                               return h(
                                                                                   "li",
                                                                                   {
-                                                                                      class: [
-                                                                                          _this.activeSecond ==
-                                                                                          item
-                                                                                              ? "activeTime"
-                                                                                              : "",
-                                                                                      ],
+                                                                                      class: {
+                                                                                          activeTime:
+                                                                                              _this.activeSecond ==
+                                                                                              item,
+                                                                                      },
                                                                                       domProps:
                                                                                           {
                                                                                               innerHTML:
@@ -288,15 +282,11 @@ export default {
                                               h(
                                                   "div",
                                                   {
-                                                      class: [
-                                                          "dd-time-panel_footer",
-                                                      ],
+                                                      class: "dd-time-panel_footer",
                                                   },
                                                   [
                                                       h("button", {
-                                                          class: [
-                                                              "dd-time-panel_btn",
-                                                          ],
+                                                          class: "dd-time-panel_btn",
                                                           domProps: {
                                                               innerHTML: "取消",
                                                           },
