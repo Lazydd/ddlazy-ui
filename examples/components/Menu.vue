@@ -2,14 +2,9 @@
     <div class="page-box">
         <h2 class="_title">NavMenu 导航菜单</h2>
         <p class="_descript">为网站提供导航功能的菜单。</p>
-        {{ d }}
         <dd-block title="侧栏" :code="code1">
             <template #source>
-                <dd-menu
-                    :data="menuData"
-                    default-active="4"
-                    @change="abc"
-                ></dd-menu>
+                <dd-menu v-model="activeKey" :data="menuData" />
             </template>
         </dd-block>
         <dd-describe title="Attributes" :data="Attributes"></dd-describe>
@@ -43,7 +38,7 @@ export default {
                 },
                 {
                     title: "导航二",
-                    key: "2-1",
+                    key: "2",
                     icon: "icon-gift",
                     children: [
                         {
@@ -79,53 +74,34 @@ export default {
                     icon: "icon-atm",
                 },
             ],
-            d: "",
+            activeKey: "4",
             code1: `
 
             `,
             Attributes: [
                 {
-                    parameter: "type",
-                    explain: "类型",
-                    type: "string",
-                    optional: "primary / success / warning / danger / info",
-                    default: "default",
-                },
-                {
-                    parameter: "underline",
-                    explain: "是否下划线",
-                    type: "boolean",
+                    parameter: "value / v-model",
+                    explain: "绑定值",
+                    type: "string / number",
                     optional: "—",
-                    default: "true",
+                    default: "—",
                 },
                 {
-                    parameter: "disabled",
-                    explain: "是否禁用状态",
-                    type: "boolean",
+                    parameter: "data",
+                    explain: "展示数据",
+                    type: "array",
                     optional: "—",
-                    default: "false",
+                    default: "—",
                 },
                 {
-                    parameter: "href",
-                    explain: "原生 href 属性",
-                    type: "boolean",
-                    optional: "string",
-                    default: "-",
-                },
-                {
-                    parameter: "icon",
-                    explain: "图标类名",
-                    type: "boolean",
-                    optional: "string",
-                    default: "-",
+                    parameter: "props",
+                    explain: "配置选项，具体看下表",
+                    type: "object",
+                    optional: "—",
+                    default: "—",
                 },
             ],
         };
-    },
-    methods: {
-        abc(item) {
-            this.d = item;
-        },
     },
 };
 </script>

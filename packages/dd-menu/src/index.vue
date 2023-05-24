@@ -1,22 +1,16 @@
 <template>
     <div class="dd-menu dd-menu-vertical">
-        <div
-            class="dd-tree"
-            v-for="(item, i) in myTree"
-            :key="item.key"
-        >
+        <div class="dd-tree" v-for="(item, i) in myTree" :key="item.key">
             <div
+                v-if="item.title"
                 class="dd-menu_title"
                 :style="`padding-left:${node.nodeLevel * 18}px`"
-                v-if="item.title"
                 @click="tree_header(item, i)"
             >
-                <div
-                    :class="{ 'dd-menu-item_active': activeMenu === item.keys }"
-                >
-                    <span v-if="item.icon" class="dd-menu_logo">
+                <div :class="{ 'dd-menu-item_active': item.keys == value }">
+                    <span class="dd-menu_logo">
                         <svg class="icon" aria-hidden="true">
-                            <use :xlink:href="`#${item.icon}`"></use>
+                            <use :xlink:href="`#${item.icon}`" />
                         </svg>
                     </span>
                     {{ item.title }}
@@ -24,12 +18,12 @@
                 <span
                     :class="[
                         'dd-menu_icon',
-                        item.isActive ? 'dd-menu_icon_active' : '',
+                        { 'dd-menu_icon_active': item.keys == value },
                     ]"
                     :style="!item.children ? `color:transparent` : ''"
                 >
                     <svg class="icon" aria-hidden="true">
-                        <use :xlink:href="`#icon-arrow-down`"></use>
+                        <use :xlink:href="`#icon-arrow-down`" />
                     </svg>
                 </span>
             </div>
@@ -40,12 +34,15 @@
                 <dd-transition>
                     <dd-menu
                         v-if="item.isActive"
+                        v-bind="$attrs"
                         :data="item.children"
                         :props="props"
                         :node="item"
-                        :level="level + 1"
-                        @click="abc"
-                    ></dd-menu>
+                        :value="value"
+                        :parentKey="item.keys"
+                        @change="(value) => $emit('change', value)"
+                        @input="(value) => $emit('input', value)"
+                    />
                 </dd-transition>
             </div>
         </div>
@@ -59,7 +56,9 @@ export default {
         data: {
             type: Array,
         },
-        defaultActive: {},
+        value: {
+            type: [Array, String, Number],
+        },
         props: {
             type: Object,
             default() {
@@ -73,20 +72,19 @@ export default {
                 return keys.includes("title") && keys.includes("children");
             },
         },
-        level: {
-            type: Number,
-            default: 0,
-        },
         node: {
             type: Object,
             default: () => ({}),
         },
+        parentKey: {
+            type: String,
+        },
     },
     data() {
         return {
-            nodeLevel: 1,
             isActive: false,
-            activeMenu: this.defaultActive || null,
+            activeMenu: null,
+            nodeLevel: 1,
             myTree: this.data?.map((item) => {
                 return {
                     title: item[this.props.title],
@@ -108,20 +106,20 @@ export default {
             } else {
                 this.$set(this.node, "nodeLevel", 1);
             }
+            this.$set(this.node, "parentKey", this.parentKey || null);
         },
         tree_header(item, i) {
             this.$emit("menu-click", item, this.$vnode, this);
             this.$emit("click", item);
-            item.isActive = !item.isActive;
+
             if (item.href) this.$router.push(item.href);
             if (!item.children) {
                 this.activeMenu = item.keys || item.title;
+                item.isActive = true;
                 this.$emit("change", this.activeMenu);
-            }
-        },
-        abc(item) {
-            if (!item.children) {
-                this.activeMenu = item.keys || item.title;
+                this.$emit("input", this.activeMenu);
+            } else {
+                item.isActive = !item.isActive;
             }
         },
     },
@@ -139,7 +137,7 @@ export default {
 <style lang="less" scoped>
 .dd-menu-vertical {
     width: 240px;
-    // min-height: 400px;
+    box-sizing: content-box;
 }
 
 .dd-menu {
@@ -150,6 +148,11 @@ export default {
     cursor: default;
     background: #fff;
     color: #606266;
+    .dd-menu_children {
+        .dd-menu {
+            border: none;
+        }
+    }
     .dd-tree {
         white-space: nowrap;
         outline: none;
