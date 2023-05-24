@@ -69,8 +69,10 @@ export default {
             {
                 class: [
                     "dd-carousel",
-                    { isAHover: _this.arrow === "hover" },
-                    { isNever: _this.arrow === "never" },
+                    {
+                        isAHover: _this.arrow === "hover",
+                        isNever: _this.arrow === "never",
+                    },
                 ],
                 style: {
                     height:

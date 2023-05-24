@@ -127,52 +127,43 @@ export default {
                                                               },
                                                           },
                                                           [
-                                                              h(
-                                                                  "ul",
-                                                                  {
-                                                                      class: [
-                                                                          "",
-                                                                      ],
-                                                                  },
-                                                                  [
-                                                                      timeList1.map(
-                                                                          (
-                                                                              item
-                                                                          ) => {
-                                                                              return h(
-                                                                                  "li",
-                                                                                  {
-                                                                                      class: [
+                                                              h("ul", [
+                                                                  timeList1.map(
+                                                                      (
+                                                                          item
+                                                                      ) => {
+                                                                          return h(
+                                                                              "li",
+                                                                              {
+                                                                                  class: {
+                                                                                      activeTime:
                                                                                           _this.activeHour ==
-                                                                                          item
-                                                                                              ? "activeTime"
-                                                                                              : "",
-                                                                                      ],
-                                                                                      domProps:
-                                                                                          {
-                                                                                              innerHTML:
-                                                                                                  item <
-                                                                                                  10
-                                                                                                      ? "0" +
-                                                                                                        item
-                                                                                                      : item,
-                                                                                          },
-                                                                                      on: {
-                                                                                          click() {
-                                                                                              _this.activeHour =
-                                                                                                  item;
-                                                                                              _this.$emit(
-                                                                                                  "change",
-                                                                                                  item
-                                                                                              );
-                                                                                          },
+                                                                                          item,
+                                                                                  },
+                                                                                  domProps:
+                                                                                      {
+                                                                                          innerHTML:
+                                                                                              item <
+                                                                                              10
+                                                                                                  ? "0" +
+                                                                                                    item
+                                                                                                  : item,
                                                                                       },
-                                                                                  }
-                                                                              );
-                                                                          }
-                                                                      ),
-                                                                  ]
-                                                              ),
+                                                                                  on: {
+                                                                                      click() {
+                                                                                          _this.activeHour =
+                                                                                              item;
+                                                                                          _this.$emit(
+                                                                                              "change",
+                                                                                              item
+                                                                                          );
+                                                                                      },
+                                                                                  },
+                                                                              }
+                                                                          );
+                                                                      }
+                                                                  ),
+                                                              ]),
                                                           ]
                                                       ),
                                                       h(
@@ -183,47 +174,39 @@ export default {
                                                               },
                                                           },
                                                           [
-                                                              h(
-                                                                  "ul",
-                                                                  {
-                                                                      class: [
-                                                                          "",
-                                                                      ],
-                                                                  },
-                                                                  [
-                                                                      timeList2.map(
-                                                                          (
-                                                                              item
-                                                                          ) => {
-                                                                              return h(
-                                                                                  "li",
-                                                                                  {
-                                                                                      class: {
-                                                                                          activeTime:
-                                                                                              _this.activeMinute ==
-                                                                                              item,
+                                                              h("ul", [
+                                                                  timeList2.map(
+                                                                      (
+                                                                          item
+                                                                      ) => {
+                                                                          return h(
+                                                                              "li",
+                                                                              {
+                                                                                  class: {
+                                                                                      activeTime:
+                                                                                          _this.activeMinute ==
+                                                                                          item,
+                                                                                  },
+                                                                                  domProps:
+                                                                                      {
+                                                                                          innerHTML:
+                                                                                              item <
+                                                                                              10
+                                                                                                  ? "0" +
+                                                                                                    item
+                                                                                                  : item,
                                                                                       },
-                                                                                      domProps:
-                                                                                          {
-                                                                                              innerHTML:
-                                                                                                  item <
-                                                                                                  10
-                                                                                                      ? "0" +
-                                                                                                        item
-                                                                                                      : item,
-                                                                                          },
-                                                                                      on: {
-                                                                                          click() {
-                                                                                              _this.activeMinute =
-                                                                                                  item;
-                                                                                          },
+                                                                                  on: {
+                                                                                      click() {
+                                                                                          _this.activeMinute =
+                                                                                              item;
                                                                                       },
-                                                                                  }
-                                                                              );
-                                                                          }
-                                                                      ),
-                                                                  ]
-                                                              ),
+                                                                                  },
+                                                                              }
+                                                                          );
+                                                                      }
+                                                                  ),
+                                                              ]),
                                                           ]
                                                       ),
                                                       h(
@@ -234,47 +217,39 @@ export default {
                                                               },
                                                           },
                                                           [
-                                                              h(
-                                                                  "ul",
-                                                                  {
-                                                                      class: [
-                                                                          "",
-                                                                      ],
-                                                                  },
-                                                                  [
-                                                                      timeList3.map(
-                                                                          (
-                                                                              item
-                                                                          ) => {
-                                                                              return h(
-                                                                                  "li",
-                                                                                  {
-                                                                                      class: {
-                                                                                          activeTime:
-                                                                                              _this.activeSecond ==
-                                                                                              item,
+                                                              h("ul", [
+                                                                  timeList3.map(
+                                                                      (
+                                                                          item
+                                                                      ) => {
+                                                                          return h(
+                                                                              "li",
+                                                                              {
+                                                                                  class: {
+                                                                                      activeTime:
+                                                                                          _this.activeSecond ==
+                                                                                          item,
+                                                                                  },
+                                                                                  domProps:
+                                                                                      {
+                                                                                          innerHTML:
+                                                                                              item <
+                                                                                              10
+                                                                                                  ? "0" +
+                                                                                                    item
+                                                                                                  : item,
                                                                                       },
-                                                                                      domProps:
-                                                                                          {
-                                                                                              innerHTML:
-                                                                                                  item <
-                                                                                                  10
-                                                                                                      ? "0" +
-                                                                                                        item
-                                                                                                      : item,
-                                                                                          },
-                                                                                      on: {
-                                                                                          click() {
-                                                                                              _this.activeSecond =
-                                                                                                  item;
-                                                                                          },
+                                                                                  on: {
+                                                                                      click() {
+                                                                                          _this.activeSecond =
+                                                                                              item;
                                                                                       },
-                                                                                  }
-                                                                              );
-                                                                          }
-                                                                      ),
-                                                                  ]
-                                                              ),
+                                                                                  },
+                                                                              }
+                                                                          );
+                                                                      }
+                                                                  ),
+                                                              ]),
                                                           ]
                                                       ),
                                                   ]

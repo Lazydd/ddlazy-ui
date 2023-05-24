@@ -63,7 +63,6 @@ export default {
                         },
                         [
                             h("dd-icon", {
-                                class: [],
                                 props: {
                                     icon: "icon-arrow-left",
                                 },
@@ -180,12 +179,8 @@ export default {
                                                         {
                                                             notNowMonth:
                                                                 item.pre,
-                                                        },
-                                                        {
                                                             notNowMonth:
                                                                 item.nex,
-                                                        },
-                                                        {
                                                             nowDate:
                                                                 _this.nowDate ==
                                                                 item.y +
@@ -197,8 +192,6 @@ export default {
                                                                     (item.d < 10
                                                                         ? `0${item.d}`
                                                                         : item.d),
-                                                        },
-                                                        {
                                                             activeDate:
                                                                 _this.activeDate ==
                                                                 item.y +

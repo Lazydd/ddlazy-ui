@@ -36,9 +36,11 @@
         </ul>
         <div
             :class="[
-                { 'avatar-uploader': listType == 'picture-card' },
-                { 'dd-upload-dragger': drag && listType != 'picture-card' },
-                { 'is-drogover': isDrogAcitve },
+                {
+                    'avatar-uploader': listType == 'picture-card',
+                    'dd-upload-dragger': drag && listType != 'picture-card',
+                    'is-drogover': isDrogAcitve,
+                },
             ]"
             @click="dd_upload"
         >

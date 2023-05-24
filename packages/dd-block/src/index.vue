@@ -9,7 +9,7 @@
             </div>
             <dd-transition>
                 <div v-if="isShow" class="code" ref="codeWidth">
-                    <pre v-highlightjs="code"><code class="html"></code></pre>
+                    <pre v-highlightjs="code"><code class="html" /></pre>
                 </div>
             </dd-transition>
             <div

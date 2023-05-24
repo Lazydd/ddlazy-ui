@@ -10,9 +10,11 @@
         <span
             :class="[
                 'checkbox_inner',
-                { is_checked: !isDisabled && (group ? isActive : value) },
-                { checkbox_inner_hover: !disabled },
-                { is_checked: indeterminate },
+                {
+                    is_checked: !isDisabled && (group ? isActive : value),
+                    checkbox_inner_hover: !disabled,
+                    is_checked: indeterminate,
+                },
             ]"
         >
             <span

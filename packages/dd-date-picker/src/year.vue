@@ -109,8 +109,6 @@ export default {
                                                 {
                                                     nowYear:
                                                         _this.nowYear == item,
-                                                },
-                                                {
                                                     activeYear:
                                                         _this.activeYear ==
                                                         item,

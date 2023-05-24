@@ -36,9 +36,11 @@ export default {
             {
                 class: [
                     "dd-tabs-top",
-                    { cardStyel: _this.type == "card" },
-                    { "dd-tabs-border-card": _this.type == "border-card" },
-                    { segmented: _this.type == "segmented" },
+                    {
+                        cardStyel: _this.type == "card",
+                        "dd-tabs-border-card": _this.type == "border-card",
+                        segmented: _this.type == "segmented",
+                    },
                 ],
             },
             [
@@ -52,8 +54,8 @@ export default {
                             "div",
                             {
                                 class: [
-                                    { "dd-tabs_nav": _this.type == "card" },
                                     {
+                                        "dd-tabs_nav": _this.type == "card",
                                         "dd-tabs_nav-border":
                                             _this.type == "border-card",
                                     },
@@ -81,6 +83,8 @@ export default {
                                                     "is-active":
                                                         vnode[i].name ==
                                                         _this.activeTab,
+                                                    "dd-tabs_item-disabled":
+                                                        vnode[i].disabled,
                                                 },
                                                 !_this.type
                                                     ? i == 0
@@ -96,10 +100,6 @@ export default {
                                                 _this.tabIndex == i
                                                     ? "dd-tabs_item-border"
                                                     : "",
-                                                {
-                                                    "dd-tabs_item-disabled":
-                                                        vnode[i].disabled,
-                                                },
                                             ],
                                             style: {
                                                 "border-left":

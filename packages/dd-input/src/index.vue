@@ -3,7 +3,7 @@
         class="dd-input"
         :style="$slots.prepend || $slots.append ? 'width:100%' : ''"
     >
-        <div :class="['dd-input_group']">
+        <div class="dd-input_group">
             <div class="dd-input_prepend" v-if="$slots.prepend">
                 <slot name="prepend" />
             </div>
@@ -28,11 +28,13 @@
                 :value="input_value"
                 :class="[
                     'dd-input_inner',
-                    { 'dd-input_sufinner': isInput__suffix },
-                    { 'dd-input_preinner': isInput__prefix },
-                    { 'dd-input_Left': $slots.prepend },
-                    { 'dd-input_Right': $slots.append },
-                    { 'is-disabled': disabled },
+                    {
+                        'dd-input_sufinner': isInput__suffix,
+                        'dd-input_preinner': isInput__prefix,
+                        'dd-input_Left': $slots.prepend,
+                        'dd-input_Right': $slots.append,
+                        'is-disabled': disabled,
+                    },
                     size,
                 ]"
             />

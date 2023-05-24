@@ -5,9 +5,11 @@
             :class="[
                 'dd-skeleton__item',
                 'dd-skeleton__paragraph',
-                { is_first: i == 0 },
-                { is_last: i == rows - 1 },
-                { is_animated: animated },
+                {
+                    is_first: i == 0,
+                    is_last: i == rows - 1,
+                    is_animated: animated,
+                },
             ]"
             v-for="(_, i) in rows"
             :key="`${i}skeletonItem`"

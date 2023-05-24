@@ -6,7 +6,7 @@
             :style="`background-color: ${
                 background ? background : 'rgba(0, 0, 0, 0.7)'
             }`"
-            :class="['dd-loading', 'is-fullscreen']"
+            class="dd-loading is-fullscreen"
         >
             <div class="dd-loading-spinner">
                 <div class="dd-icon" style="display: inline-block">

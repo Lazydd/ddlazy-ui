@@ -146,8 +146,6 @@ export default {
                                                                           item.label ||
                                                                       _this.activeSelect ==
                                                                           item.value,
-                                                              },
-                                                              {
                                                                   disabled:
                                                                       item.disabled,
                                                               },

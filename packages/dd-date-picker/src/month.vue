@@ -121,8 +121,6 @@ export default {
                                                             moment(
                                                                 item.m + ""
                                                             ).format("MM"),
-                                                },
-                                                {
                                                     activeMonth:
                                                         _this.activeMonth ==
                                                         moment(

@@ -80,8 +80,10 @@ export default {
                                         this.active > i + 1
                                             ? `is-${this.finishStatus}`
                                             : "is-wait",
-                                        { "is-process": this.active == i + 1 },
-                                        { "is-center": this.alignCenter },
+                                        {
+                                            "is-process": this.active == i + 1,
+                                            "is-center": this.alignCenter,
+                                        },
                                     ],
                                 },
                                 [
@@ -169,7 +171,7 @@ export default {
                                         },
                                     }),
                                     h("div", {
-                                        class: ["dd-step_arrow"],
+                                        class: "dd-step_arrow",
                                         style: {
                                             display:
                                                 vnode.length == i + 1

@@ -10,8 +10,10 @@
         <span
             :class="[
                 'checkbox_inner',
-                { is_checked: group ? isActive : value },
-                { checkbox_inner_hover: !isDisabled },
+                {
+                    is_checked: group ? isActive : value,
+                    checkbox_inner_hover: !isDisabled,
+                },
                 size,
             ]"
         >

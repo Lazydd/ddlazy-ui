@@ -7,8 +7,10 @@
         <span
             :class="[
                 'radio__label',
-                { radio_origina: (group ? groupActive : value) == label },
-                { radio_inner_hover: !isDisabled },
+                {
+                    radio_origina: (group ? groupActive : value) == label,
+                    radio_inner_hover: !isDisabled,
+                },
                 size,
             ]"
         >

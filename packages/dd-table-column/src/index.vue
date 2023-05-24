@@ -1,5 +1,3 @@
-<template></template>
-
 <script>
 export default {
     name: "ddTableColumn",
@@ -58,7 +56,6 @@ export default {
                     attrs: {
                         type: "checkbox",
                     },
-                    class: ["abc"],
                     on: {
                         click(e) {
                             console.log(e);
