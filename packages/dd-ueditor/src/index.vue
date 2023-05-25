@@ -61,6 +61,10 @@ export default {
                     process.env.BASE_URL + "static/tinymce/langs/zh_CN.js",
                 language: "zh_CN",
                 skin_url: process.env.BASE_URL + "static/skins/ui/oxide", //编辑器需要一个skin才能正常工作，所以要设置一个skin_url指向之前复制出来的skin文件
+                content_css:
+                    process.env.BASE_URL +
+                    "static/skins/content/default/content.min.css",
+                icons_url: process.env.BASE_URL + "static/icons/icons.min.js",
                 height: this.tinymceHeight,
                 plugins:
                     "link lists image code table wordcount media fullscreen preview contextmenu textcolor print hr", //引入插件

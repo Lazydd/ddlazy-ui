@@ -88,15 +88,15 @@ export default {
             fileList: [
                 {
                     name: "test1.png",
-                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
+                    url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
                 },
                 {
                     name: "test2.gif",
-                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
+                    url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
                 },
                 {
                     name: "test3.gif",
-                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
+                    url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
                 },
             ],
             code1: `
@@ -117,15 +117,15 @@ export default {
                 fileList: [
                     {
                     name: "test1.png",
-                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
+                    url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
                     },
                     {
                         name: "test2.gif",
-                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
+                        url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
                     },
                     {
                         name: "test3.gif",
-                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
+                        url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
                     },
                 ],
 
@@ -154,15 +154,15 @@ export default {
                 fileList: [
                     {
                     name: "test1.png",
-                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
+                    url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
                     },
                     {
                         name: "test2.gif",
-                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
+                        url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
                     },
                     {
                         name: "test3.gif",
-                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
+                        url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
                     },
                 ],
             `,
@@ -186,15 +186,15 @@ export default {
                 fileList: [
                     {
                     name: "test1.png",
-                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
+                    url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
                     },
                     {
                         name: "test2.gif",
-                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
+                        url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
                     },
                     {
                         name: "test3.gif",
-                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
+                        url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
                     },
                 ],
 
@@ -230,15 +230,15 @@ export default {
                 fileList: [
                     {
                     name: "test1.png",
-                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
+                    url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/113810242/ddlazy.png",
                     },
                     {
                         name: "test2.gif",
-                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
+                        url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif",
                     },
                     {
                         name: "test3.gif",
-                        url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
+                        url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/114004047/code.gif",
                     },
                 ],
             `,

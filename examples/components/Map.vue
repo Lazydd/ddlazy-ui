@@ -160,19 +160,19 @@ export default {
             ],
             markSymbol: {
                 type: "picture-marker",
-                url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114525043/BlackStarLargeB.png", //点位图片
+                url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/114525043/BlackStarLargeB.png", //点位图片
                 width: "64px",
                 height: "64px",
             },
             markTopSymbol: {
                 type: "picture-marker",
-                url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114418233/title-bg.png", //点位图片
+                url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/114418233/title-bg.png", //点位图片
                 width: "201px",
                 height: "49px",
             },
             pointSymbol: {
                 type: "picture-marker",
-                url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114812934/address.png", //点位图片
+                url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/114812934/address.png", //点位图片
                 width: "30px",
                 height: "30px",
                 yoffset: "15px",
@@ -181,7 +181,7 @@ export default {
                 type: "picture-fill", //‘simple-fill', 'picture-fill', 'picture-marker', 'simple-line', 'simple-marker', 'text', 'label-3d', 'line-3d', 'mesh-3d', 'point-3d', 'polygon-3d', 'web-style', 'cim'
                 // style: "solid", // 内部样式 //dolid、vertical、none、horizontal、forward-diagonal、diagonal-cross、cross、backward-diagonal
                 // color: "blue", //内部填充颜色
-                url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114525043/BlackStarLargeB.png",
+                url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/114525043/BlackStarLargeB.png",
                 width: "24px",
                 height: "24px",
                 outline: {
@@ -275,7 +275,7 @@ export default {
                     type: "picture-fill", //‘simple-fill', 'picture-fill', 'picture-marker', 'simple-line', 'simple-marker', 'text', 'label-3d', 'line-3d', 'mesh-3d', 'point-3d', 'polygon-3d', 'web-style', 'cim'
                     // style: "solid", // 内部样式 //dolid、vertical、none、horizontal、forward-diagonal、diagonal-cross、cross、backward-diagonal
                     // color: "blue", //内部填充颜色
-                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114525043/BlackStarLargeB.png",
+                    url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/114525043/BlackStarLargeB.png",
                     width: "24px",
                     height: "24px",
                     outline: {

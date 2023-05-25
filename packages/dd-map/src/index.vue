@@ -11,7 +11,7 @@
             v-if="toggle && basemap"
         >
             <img
-                src="http://cdn.ddlazy.cn/fastboot/2022/08/31/114712633/portrait.png"
+                src="https://cdn.ddlazy.cn/fastboot/2022/08/31/114712633/portrait.png"
             />
             {{ currentMapType === 1 ? "影像图" : "矢量图" }}
         </div>
@@ -97,7 +97,7 @@ export default {
             default() {
                 return {
                     type: "picture-marker",
-                    url: "http://cdn.ddlazy.cn/fastboot/2022/08/31/114812934/address.png", //点位图片
+                    url: "https://cdn.ddlazy.cn/fastboot/2022/08/31/114812934/address.png", //点位图片
                     width: "30px",
                     height: "30px",
                     yoffset: "15px",

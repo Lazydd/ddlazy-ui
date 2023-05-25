@@ -5,7 +5,7 @@
             v-if="src && Error"
             :src="
                 lazy
-                    ? 'http://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif'
+                    ? 'https://cdn.ddlazy.cn/fastboot/2022/08/31/095140875/loading.gif'
                     : src
             "
             :data-src="lazy ? src : ''"
