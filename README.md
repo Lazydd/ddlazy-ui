@@ -15,6 +15,7 @@ npm install ddLazy-ui
 ```
 import Vue from 'vue'
 import ddlazyui from 'ddlazy-ui'
+import 'ddlazy-ui/lib/ddlazy-ui.css'
 
 Vue.use(ddlazyui)
 
