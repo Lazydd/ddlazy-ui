@@ -1,7 +1,7 @@
 <template>
     <div class="page-box">
         <h2 class="_title">Map 地图</h2>
-        <p class="_descript">基于ArcGis的地图组件</p>
+        <p class="_descript">基于ArcGis的地图组件（https://developers.arcgis.com/javascript/latest/api-reference/）</p>
         <dd-block title="基础用法" :code="code1">
             <template #source>
                 <div class="map-box">
