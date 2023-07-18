@@ -7,6 +7,7 @@ import 'nprogress/nprogress.css'
 const Home = () => import("../views/Home.vue");
 const Index = () => import("../views/Index.vue");
 const Guides = () => import("../views/Guides.vue");
+const NotFound = () => import("../views/NotFound.vue");
 import components from "./components";
 
 NProgress.inc(0.2)
@@ -34,6 +35,10 @@ const routes = [
             },
         ],
     },
+    {
+        path: '*',
+        component: NotFound,
+    }
 ];
 
 const router = new VueRouter({
