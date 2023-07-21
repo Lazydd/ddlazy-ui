@@ -1,5 +1,5 @@
 <script>
-import moment from "moment";
+import dayjs from "dayjs";
 export default {
     props: {
         value: {},
@@ -8,10 +8,10 @@ export default {
         return {
             yearArr: [],
             activeYear: this.value
-                ? moment(this.value + "").format("YYYY")
+                ? dayjs(this.value + "").format("YYYY")
                 : null,
-            nowYear: moment().format("YYYY"),
-            showYear: moment(this.value ? this.value + "" : new Date()).format(
+            nowYear: dayjs().format("YYYY"),
+            showYear: dayjs(this.value ? this.value + "" : new Date()).format(
                 "YYYY"
             ),
         };
@@ -48,18 +48,18 @@ export default {
                                     },
                                     on: {
                                         click(e) {
-                                            _this.showYear = moment(
+                                            _this.showYear = dayjs(
                                                 _this.showYear
                                             ).subtract("12", "year");
                                             _this.getYear(
-                                                moment(_this.showYear)
+                                                dayjs(_this.showYear)
                                             );
                                         },
                                     },
                                 }),
                             ]
                         ),
-                        h("span", moment(_this.showYear).format("YYYY") + "年"),
+                        h("span", dayjs(_this.showYear).format("YYYY") + "年"),
                         h(
                             "div",
                             {
@@ -75,11 +75,11 @@ export default {
                                     },
                                     on: {
                                         click(e) {
-                                            _this.showYear = moment(
+                                            _this.showYear = dayjs(
                                                 _this.showYear
                                             ).add("12", "year");
                                             _this.getYear(
-                                                moment(_this.showYear)
+                                                dayjs(_this.showYear)
                                             );
                                         },
                                     },

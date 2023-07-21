@@ -1,5 +1,5 @@
 <script>
-import moment from "moment";
+import dayjs from "dayjs";
 export default {
     props: {
         value: {},
@@ -9,12 +9,10 @@ export default {
             dateArr: [],
             title: ["日", "一", "二", "三", "四", "五", "六"],
             activeDate: this.value
-                ? moment(this.value + "").format("YYYY-MM-DD")
+                ? dayjs(this.value + "").format("YYYY-MM-DD")
                 : null,
-            nowDate: moment().format("YYYY-MM-DD"),
-            showDate: moment(this.value ? this.value : new Date()).format(
-                "YYYY-MM-DD"
-            ),
+            nowDate: dayjs().format("YYYY-MM-DD"),
+            showDate: dayjs(this.value).format("YYYY-MM-DD"),
         };
     },
     render: function (h) {
@@ -44,10 +42,10 @@ export default {
                                 },
                                 on: {
                                     click(e) {
-                                        _this.showDate = moment(
+                                        _this.showDate = dayjs(
                                             _this.showDate
                                         ).subtract("1", "year");
-                                        _this.getData(moment(_this.showDate));
+                                        _this.getData(dayjs(_this.showDate));
                                     },
                                 },
                             }),
@@ -68,18 +66,18 @@ export default {
                                 },
                                 on: {
                                     click(e) {
-                                        _this.showDate = moment(
+                                        _this.showDate = dayjs(
                                             _this.showDate
                                         ).subtract("1", "months");
-                                        _this.getData(moment(_this.showDate));
+                                        _this.getData(dayjs(_this.showDate));
                                     },
                                 },
                             }),
                         ]
                     ),
-                    h("span", moment(_this.showDate).format("YYYY") + "年"),
-                    h("span", moment(_this.showDate).format("MM") + "月"),
-                    h("span", moment(_this.showDate).format("DD") + "日"),
+                    h("span", dayjs(_this.showDate).format("YYYY") + "年"),
+                    h("span", dayjs(_this.showDate).format("MM") + "月"),
+                    h("span", dayjs(_this.showDate).format("DD") + "日"),
                     h(
                         "div",
                         {
@@ -95,10 +93,10 @@ export default {
                                 },
                                 on: {
                                     click(e) {
-                                        _this.showDate = moment(
+                                        _this.showDate = dayjs(
                                             _this.showDate
                                         ).add("1", "year");
-                                        _this.getData(moment(_this.showDate));
+                                        _this.getData(dayjs(_this.showDate));
                                     },
                                 },
                             }),
@@ -122,10 +120,10 @@ export default {
                                 },
                                 on: {
                                     click(e) {
-                                        _this.showDate = moment(
+                                        _this.showDate = dayjs(
                                             _this.showDate
                                         ).add("1", "months");
-                                        _this.getData(moment(_this.showDate));
+                                        _this.getData(dayjs(_this.showDate));
                                     },
                                 },
                             }),

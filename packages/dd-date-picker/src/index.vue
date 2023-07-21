@@ -1,6 +1,6 @@
 <script>
 import mixin from "../../dd-mixins/mixin";
-import moment from "moment";
+import dayjs from "dayjs";
 import year from "./year.vue";
 import month from "./month.vue";
 import date from "./date.vue";
@@ -163,13 +163,13 @@ export default {
         initData() {
             if (this.value) {
                 if (this.type === "date") {
-                    this.activeDate = moment(this.value + "").format(
+                    this.activeDate = dayjs(this.value + "").format(
                         "YYYY-MM-DD"
                     );
                 } else if (this.type === "year") {
-                    this.activeDate = moment(this.value + "").format("YYYY");
+                    this.activeDate = dayjs(this.value + "").format("YYYY");
                 } else if (this.type === "month") {
-                    this.activeDate = moment(this.value + "").format("YYYY-MM");
+                    this.activeDate = dayjs(this.value + "").format("YYYY-MM");
                 }
             }
         },

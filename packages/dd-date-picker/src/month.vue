@@ -1,5 +1,5 @@
 <script>
-import moment from "moment";
+import dayjs from "dayjs";
 export default {
     props: {
         value: {},
@@ -8,11 +8,11 @@ export default {
         return {
             monthArr: [],
             activeMonth: this.value
-                ? moment(this.value + "").format("YYYY-MM")
+                ? dayjs(this.value + "").format("YYYY-MM")
                 : null,
-            nowMonth: moment().format("YYYY-MM"),
-            nowYear: moment().format("YYYY"),
-            showMonth: moment(this.value ? this.value + "" : new Date()).format(
+            nowMonth: dayjs().format("YYYY-MM"),
+            nowYear: dayjs().format("YYYY"),
+            showMonth: dayjs(this.value ? this.value + "" : new Date()).format(
                 "YYYY-MM"
             ),
         };
@@ -49,11 +49,11 @@ export default {
                                     },
                                     on: {
                                         click(e) {
-                                            _this.showMonth = moment(
+                                            _this.showMonth = dayjs(
                                                 _this.showMonth
                                             ).subtract("1", "year");
                                             _this.getMonth(
-                                                moment(_this.showMonth)
+                                                dayjs(_this.showMonth)
                                             );
                                         },
                                     },
@@ -62,9 +62,9 @@ export default {
                         ),
                         h(
                             "span",
-                            moment(_this.showMonth).format("YYYY") + "年"
+                            dayjs(_this.showMonth).format("YYYY") + "年"
                         ),
-                        h("span", moment(_this.showMonth).format("MM") + "月"),
+                        h("span", dayjs(_this.showMonth).format("MM") + "月"),
                         h(
                             "div",
                             {
@@ -80,11 +80,11 @@ export default {
                                     },
                                     on: {
                                         click(e) {
-                                            _this.showMonth = moment(
+                                            _this.showMonth = dayjs(
                                                 _this.showMonth
                                             ).add("1", "year");
                                             _this.getMonth(
-                                                moment(_this.showMonth)
+                                                dayjs(_this.showMonth)
                                             );
                                         },
                                     },
@@ -114,20 +114,20 @@ export default {
                                                 {
                                                     nowMonth:
                                                         _this.nowMonth ==
-                                                        moment(
+                                                        dayjs(
                                                             item.y + ""
                                                         ).format("YYYY") +
                                                             "-" +
-                                                            moment(
+                                                            dayjs(
                                                                 item.m + ""
                                                             ).format("MM"),
                                                     activeMonth:
                                                         _this.activeMonth ==
-                                                        moment(
+                                                        dayjs(
                                                             item.y + ""
                                                         ).format("YYYY") +
                                                             "-" +
-                                                            moment(
+                                                            dayjs(
                                                                 item.m + ""
                                                             ).format("MM"),
                                                 },
@@ -135,11 +135,11 @@ export default {
                                             on: {
                                                 click(e) {
                                                     _this.activeMonth =
-                                                        moment(
+                                                        dayjs(
                                                             item.y + ""
                                                         ).format("YYYY") +
                                                         "-" +
-                                                        moment(
+                                                        dayjs(
                                                             item.m + ""
                                                         ).format("MM");
                                                     _this.$emit(

@@ -76,13 +76,6 @@ module.exports = {
                 // 修改它的选项...
                 return options;
             });
-        //删除 moment 语言包
-        config
-            .plugin("ignore")
-            .use(
-                new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn$/)
-            );
-
         return config;
     },
     publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
