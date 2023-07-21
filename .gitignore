@@ -13,6 +13,11 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# lock files
+yarn.lock
+package-lock.json
+*.lock
+
 # Editor directories and files
 .idea
 .vscode
@@ -21,3 +26,10 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+#rar
+*.rar
+*.zip
+*.tar
+*.gz
+*.7z
